@@ -1,0 +1,24 @@
+{
+  "name": "spring",
+  "version": "0.0.1",
+  "description": "APIs ",
+  "main": "app.js",
+  "dependencies": {
+    "request": "*",
+    "mysql": "*",
+    "express": "*",
+    "q": "*",
+    "uuid": "*",
+    "multer": "*"
+  },
+  "devDependencies": {
+
+  },
+  "author": {
+    "name": "Rahul Kashyap",
+    "email": "kashyaprahul94@gmail.com"
+  },
+  "scripts": {
+   
+  }
+}
