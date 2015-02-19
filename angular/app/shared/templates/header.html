@@ -1,0 +1,27 @@
+
+	<header id="header">
+		<nav class="header navbar navbar-default navbar-fixed-top" ng-class="{'slimHeader': slimHeader}">
+			<div class="navbar-inner">
+			  	<section class="container full">
+				  	<div class="navbar-header">
+				  		<a class="navbar-brand logo" href="" ui-sref="base.home">
+				  			<img ng-src="{{appConfig.appLogo}}" alt="logo" />
+				  		</a>
+					  	<button type="button" class="navbar-toggle" ng-click="navbarCollapsed =! navbarCollapsed">
+						  	<span class="sr-only">Menu</span>
+						  	<span class="icon-bar"></span>
+						  	<span class="icon-bar"></span>
+						  	<span class="icon-bar"></span>
+					  	</button>
+				  	</div>
+				  	<div class="navbar-collapse" ng-class="{'collapse': navbarCollapsed}">
+					  	<ul class="nav navbar-nav pull-right nofloat-sm" >
+					  		<li ng-repeat="menu in menuItems" ng-class="{'active': menu.active}">
+						  		<a href="" ui-sref="{{menu.state}}" ng-bind="menu.text"></a>
+					  		</li>
+					  	</ul>
+				  	</div>		  	
+			  	</section>
+			</div>
+		</nav>
+	</header>

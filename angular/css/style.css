@@ -1,0 +1,328 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
+
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	margin-bottom: 60px;
+}
+
+html,
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333;
+	cursor: default;
+	overflow-x: hidden;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+body * {	
+	font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+}
+
+img {
+	width: 100%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+textarea {
+	resize: none;
+	min-height: 100px;
+}
+
+a,
+a:hover,
+a:active {	
+	color: #009de0;
+	text-decoration: none !important;
+	outline: 0;
+}
+
+a:hover {
+	color: #428BCA;
+}
+
+
+
+
+
+/*-------------------------- Common Changes ----------------------------*/
+
+
+#header {
+}
+
+.navbar.header {
+	padding: 15px 0;
+	border-bottom: 1px solid #e1e1e1;
+	box-shadow: 0px 0px 3px 1px #ddd;
+	background: rgba(255, 255, 255, 0.9);
+}
+
+.navbar.header.slimHeader {
+	padding-top: 2px !important;
+	padding-bottom: 0 !important;
+}
+
+.navbar-brand.logo {
+	max-width: 180px;
+	height: 80px;
+	max-height: 100%;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.header .logo img {
+	width: 100%;
+	height: 100%;
+}
+
+.nav.navbar-nav {
+	
+}
+
+.navbar-nav > li > a {
+	font-size: 12px;
+	border-bottom: 3px solid transparent;
+	transition: all ease 0.3s;
+}
+
+.navbar-nav > li > a:hover {
+	border-bottom: 3px solid #00C582;
+	transition: all ease 0.3s;
+}
+
+.navbar-nav > li.active > a {
+	border-bottom: 3px solid #00C582;
+	background-color: transparent !important;
+}
+
+
+
+#footer {
+	z-index: 999;
+	position: absolute;
+	width: 100%;
+	height: 60px;
+	bottom: 0;
+	background: #222;
+	color: #eee;
+	padding: 20px 0;
+	font-size: 12px;
+	border-top: 1px solid #111;
+}
+
+.main {
+	position: relative;	
+	margin-top: 170px;
+	margin-bottom: 100px;
+}
+
+
+/*-------------------------- Page Wise Changes ----------------------------*/
+
+
+.dashboard-tiles {
+	margin: 0;
+	position: relative;
+}
+
+.dashboard-tiles .tile-item {
+	margin-top: 10px;
+	background: #fff;
+	text-align: center;
+	cursor: pointer;
+}
+
+.dashboard-tiles a.tile-item {
+	display: block;
+	color: inherit;
+	position: relative;
+	word-break: break-word;
+}
+
+.dashboard-tiles .tile-item:hover {
+	opacity: 0.7;
+}
+
+.dashboard-tiles .tile-item .tile-thumb {
+	padding: 20px;
+}
+
+.dashboard-tiles .tile-item .tile-title {
+	padding: 20px;
+}
+
+.dashboard-tiles .tile-item .tile-head,
+.dashboard-tiles .tile-item .tile-body {
+	padding: 20px;
+}
+
+
+
+h3.title {	
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+	margin-bottom: 30px;
+}
+
+
+
+
+
+.jobs-list {
+	margin: 20px auto;
+}
+
+.jobs-list .job-wrapper {
+	margin: 10px 0;
+}
+
+.job-details p i.fa,
+.recruiter-details p i.fa {
+	margin-right: 5px;
+}
+
+
+
+
+
+
+.footer-social {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	list-style: none;
+	margin-bottom: 10px;
+}
+
+.footer-social li {
+	list-style: none;
+	display: inline;
+	margin-right: 10px;
+}
+
+.footer-social li a {
+	color: #eee;
+}
+
+.footer-social li a:hover {
+	opacity: 0.7;
+}
+
+/*-------------------------- Bootstrap Changes ----------------------------*/
+
+.container.full {
+	width: 90% !important;
+	max-width: 90% !important;
+}
+
+.panel {
+
+}
+
+.panel-default {
+	box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.panel-gray {
+	border-color: #ddd;
+}
+
+.alert {
+	position: relative;
+	top: 120px;
+	width: 100%;
+	z-index: 99;
+}
+
+.bg-info,
+.alert-info {
+	background-color: #00CCDD;
+}
+
+.bg-warning,
+.alert-warning {
+	background-color: #FFD600;
+}
+
+.bg-danger,
+.alert-danger {
+	color: #fff;
+	background-color: #EA5900;
+}
+
+.bg-success,
+.alert-success {
+	color: #fff;
+	background-color: #20D36D;
+}
+
+/*-------------------------- Utilitis Changes ----------------------------*/
+
+.fa {
+	font-family: "FontAwesome" !important;
+}
+
+.fa-round {
+	border-radius: 100%;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.col-primary {
+	color: #00C582;
+}
+
+.bg-white {
+	background: #fff;
+}
+
+.bg-gray {
+	background-color: #585B5E;
+	color: #fff;
+}
+
+.ellipses {	
+	display: block;
+	width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+
+@media (max-width : 768px) {
+
+	#footer {
+		height: 100px;
+	}
+
+	body {
+		margin-bottom: 100px;
+	}
+
+  	.center-sm {
+		float: none !important;
+		display: block;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.nofloat-sm {
+		float: none !important;
+	}
+
+	.text-center-sm {
+		text-align: center;
+	}
+}

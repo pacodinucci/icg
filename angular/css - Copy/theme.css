@@ -1,0 +1,64 @@
+/* ---------------------------- Primitive Styles ---------------------------- */
+html,
+body {
+  color: #333333;
+}
+body {
+  background-color: #f1f1f1;
+}
+a,
+a:hover,
+a:active {
+  color: #009de0;
+}
+a:hover {
+  color: #428bca;
+}
+/* ---------------------------- Element Styles ---------------------------- */
+.navbar.header {
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+}
+.navbar-nav > li > a:hover {
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  border-color: #00c582;
+}
+.navbar-nav > li.active > a {
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  border-color: #00c582;
+}
+/*-------------------------- Bootstrap Changes ----------------------------*/
+.panel {
+  -webkit-box-shadow: 0 0 3px 1px #e7e7e6;
+  -moz-box-shadow: 0 0 3px 1px #e7e7e6;
+  box-shadow: 0 0 3px 1px #e7e7e6;
+}
+/*-------------------------- Page Wise Changes ----------------------------*/
+.dashboard-tiles .tile-item {
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+  -webkit-box-shadow: 0 0 3px 1px #dddddd;
+  -moz-box-shadow: 0 0 3px 1px #dddddd;
+  box-shadow: 0 0 3px 1px #dddddd;
+}
+.dashboard-tiles .tile-item:hover {
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+}
+/* ---------------------------- Utilitis Styles ---------------------------- */
+.fa-round {
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+}
+.col-primary {
+  color: #00c582;
+}
+/*# sourceMappingURL=theme.css.map */
