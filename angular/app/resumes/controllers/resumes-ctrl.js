@@ -140,14 +140,15 @@
 	    }
 	}]);
 
-	angular.module('icg.resumes').controller('myCtrl', ['$scope', 'fileUpload', function($scope, fileUpload){
-	    
-	    $scope.uploadFile = function(){
+	angular.module('icg.resumes').controller('myCtrl', ['$scope', 'fileUpload','$injector', function($scope, fileUpload ,$injector){
+	    var Utilities = $injector.get('Utilities');
+	    $scope.uploadFile = function(){		
 	        var file = $scope.myFile;
 			var resumeTitle = $scope.resumeTitle;
 			var resumeType = $scope.resumeType;
 		    console.log('file is ' + JSON.stringify(file));
-	        var uploadUrl = "http://localhost:8090/user/resumes";
+	        //var uploadUrl = "http://localhost:8090/user/resumes";
+			var uploadUrl = Utilities.getMyResumesUrl();
 	        fileUpload.uploadFileToUrl(file,resumeTitle, resumeType,uploadUrl);
 	    };
 	    
