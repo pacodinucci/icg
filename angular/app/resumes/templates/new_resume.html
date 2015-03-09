@@ -5,25 +5,22 @@
 		</button>
 		<h4 class="modal-title">Add New Resume</h4>
 	</div>
-
-	<div class="modal-body">
-		<form name="resumeForm">
-			<div class="form-group" ng-class="{ 'has-error' : newResume.resumeTitle.$invalid && !newResume.resumeTitle.$pristine }">
-				<div class="control-label">Resume Title</div>
-				<input type="text" class="form-control" placeholder="Resume Title" ng-model="newResume.resumeTitle" ng-required="true" />
+	<div ng-controller = "myCtrl">
+		<div class="modal-body">
+				<div class="form-group" >
+						<div class="control-label">Resume Title</div>
+						<input type="text" class="form-control" placeholder="Resume Title" ng-model="resumeTitle" ng-required="true" />
+				</div>
+				<div class="form-group" >
+						<div class="control-label">Resume Type</div>
+						<input type="text" class="form-control" placeholder="Resume Type" ng-model="resumeType" ng-required="true" />
+				</div>
+					<div class="form-group">
+						<div class="control-label">Resume File</div>
+						<input type="file" class="form-control" placeholder="Resume File" file-model="myFile" />				
+					</div> 		
 			</div>
-			<div class="form-group" ng-class="{ 'has-error' : newResume.resumeType.$invalid && !newResume.resumeType.$pristine }">
-				<div class="control-label">Resume Type</div>
-				<input type="text" class="form-control" placeholder="Resume Title" ng-model="newResume.resumeType" ng-required="true" />
-			</div><!-- 
-			<div class="form-group" ng-class="{ 'has-error' : newResume.resumeFile.$invalid && !newResume.resumeFile.$pristine }">
-				<div class="control-label">Resume File</div>
-				<input type="file" class="form-control" placeholder="Resume Title" ng-model="newResume.resumeFile" ng-required="true" />
-			</div> -->
-		</form>
+		<div class="modal-footer clearfix">
+			<button type="button" class="btn btn-primary btn-block" ng-click="uploadFile()">Save Resume</button>
+		</div>  
 	</div>
-
-	<div class="modal-footer clearfix">
-		<button type="button" class="btn btn-primary btn-block" ng-disabled="resumeForm.$invalid" ng-click="addResume(resumeForm, newResume)">Save Resume</button>
-	</div>  
-

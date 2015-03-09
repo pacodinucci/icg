@@ -101,3 +101,54 @@
 				$scope.init();           
 	        }
 	    ]);
+
+	
+	
+
+	angular.module('icg.resumes').directive('fileModel', ['$parse', function ($parse) {
+	    return {
+	        restrict: 'A',
+	        link: function(scope, element, attrs) {
+	            var model = $parse(attrs.fileModel);
+	            var modelSetter = model.assign;
+	            
+	            element.bind('change', function(){
+	                scope.$apply(function(){
+	                    modelSetter(scope, element[0].files[0]);
+	                });
+	            });
+	        }
+	    };
+	}]);
+
+	angular.module('icg.resumes').service('fileUpload', ['$http', function ($http) {
+	    this.uploadFileToUrl = function(file, resumeTitle, resumeType,uploadUrl){
+	        var fd = new FormData();
+	        fd.append('file', file);
+			fd.append('resumeTitle',resumeTitle);
+			fd.append('resumeType',resumeType);
+	        $http.post(uploadUrl, fd, {
+	            transformRequest: angular.identity,
+	            headers: {'Content-Type': undefined}
+	        })
+	        .success(function(data, status, headers, config) {
+				console.debug(data+'  '+status+' ' +headers+'  '+config);
+			})
+	        .error(function(data, status, headers, config) {
+					console.debug(data+'  '+status+' ' +headers+'  '+config);
+			});
+	    }
+	}]);
+
+	angular.module('icg.resumes').controller('myCtrl', ['$scope', 'fileUpload', function($scope, fileUpload){
+	    
+	    $scope.uploadFile = function(){
+	        var file = $scope.myFile;
+			var resumeTitle = $scope.resumeTitle;
+			var resumeType = $scope.resumeType;
+		    console.log('file is ' + JSON.stringify(file));
+	        var uploadUrl = "http://localhost:8090/user/resumes";
+	        fileUpload.uploadFileToUrl(file,resumeTitle, resumeType,uploadUrl);
+	    };
+	    
+	}]);
