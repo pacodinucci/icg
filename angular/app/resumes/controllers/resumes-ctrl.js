@@ -133,6 +133,7 @@
 	        })
 	        .success(function(data, status, headers, config) {
 				console.debug(data+'  '+status+' ' +headers+'  '+config);
+				$("#saveMessage").html(" Resume Saved sucessfully");
 			})
 	        .error(function(data, status, headers, config) {
 					console.debug(data+'  '+status+' ' +headers+'  '+config);

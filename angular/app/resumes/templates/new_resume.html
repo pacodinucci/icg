@@ -5,7 +5,9 @@
 		</button>
 		<h4 class="modal-title">Add New Resume</h4>
 	</div>
+	<div id="saveMessage"></div>
 	<div ng-controller = "myCtrl">
+	
 		<div class="modal-body">
 				<div class="form-group" >
 						<div class="control-label">Resume Title</div>
@@ -17,10 +19,11 @@
 				</div>
 					<div class="form-group">
 						<div class="control-label">Resume File</div>
-						<input type="file" class="form-control" placeholder="Resume File" file-model="myFile" />				
+						<input type="file" class="form-control" placeholder="Resume File" file-model="myFile"  accept=".doc"/>				
 					</div> 		
 			</div>
 		<div class="modal-footer clearfix">
+			
 			<button type="button" class="btn btn-primary btn-block" ng-click="uploadFile()">Save Resume</button>
 		</div>  
 	</div>
