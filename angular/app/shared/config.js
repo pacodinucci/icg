@@ -11,8 +11,13 @@
                 authorization: 'Authorization'
             },
        
-       		//baseUrl: 'http://localhost:8080',
-		baseUrl: 'http://itcontractorsgroup.com:8080',
+            // dev
+            //baseUrl: 'http://localhost:8080',
+            //baseUrl: 'http://localhost:8090',
+        
+            // prod
+            baseUrl: 'http://itcontractorsgroup.com:8080',
+            
 
             apis: {
 
