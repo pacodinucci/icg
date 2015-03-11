@@ -26,17 +26,11 @@
 
                         RestConfig.doLogin(url, loginModel).then(
                             
-                            function(userResponse) {
-
-                                TokenSvc.saveToken(userResponse.token, 10800, userResponse).then(
-
-                                    function(tokenResponse) {
-
-                                        if ( tokenResponse ) {                                        
-                                            defered.resolve(userResponse);
-                                        }
-                                    }
-                                );                         
+                            function(response) {
+                                TokenSvc.saveToken(response.sessionId, 10800, response.user, response.id).then(function () {
+                                    defered.resolve();
+                                });
+                                
                             },
 
                             function (response) {
@@ -51,6 +45,11 @@
                         var url = Utilities.getRegisterUrl();
                         return RestConfig.doRegister(url, registerModel);
             		},
+                    
+                    doActivate: function(key) {
+                        var url = Utilities.getActivationUrl();
+                        return RestConfig.doActivate(url, key);
+            		},
 
                     doLogout: function () {
 
@@ -58,35 +57,29 @@
 
                         var url = Utilities.getLogoutUrl();
 
-                        AccountSvc.getUser().then(
+                        var token = TokenSvc.getAccessToken();
 
-                            function (userData) {
-
-                                RestConfig.doLogout(url, userData).then(
-
-                                    function(logoutResponse) {
-
-                                        TokenSvc.removeToken().then(
-
-                                            function(tokenResponse) {
-
-                                                defered.resolve(true);
-                                            }
-                                        );                            
+                        RestConfig.doLogout(url, {token: token}).then(
+                            function(logoutResponse) {
+                                TokenSvc.removeToken().then(
+                                    function(tokenResponse) {
+                                        defered.resolve(true);
                                     }
                                 );
                             }
-                        );                        
+                        );
 
                         return defered.promise;
                     },
 
                     forgotPassword: function(userModel) {
                         var url = Utilities.getForgotPasswordUrl();
-                        //return RestConfig.forgotPassword(url, userModel);
-                        var defered = $q.defer();
-                        defered.resolve(true);
-                        return defered.promise;
+                        return RestConfig.forgotPassword(url, userModel);
+                    },
+                    
+                    reactivate: function(userModel) {
+                        var url = Utilities.getReactivateUrl();
+                        return RestConfig.reactivate(url, userModel);
                     },
 
                     getForgotPasswordModal: function (scope) {
@@ -94,6 +87,18 @@
                         var modalOpts = {
                             templateUrl: './app/auth/templates/forgot_password.html',
                             controller: 'forgotPasswordCtrl',
+                            size: 'sm',
+                            scope: scope
+                        };
+
+                        return $modal.open(modalOpts);
+                    },
+                    
+                    getReactivateModal: function (scope) {
+
+                        var modalOpts = {
+                            templateUrl: './app/auth/templates/reactivate.html',
+                            controller: 'reactivateCtrl',
                             size: 'sm',
                             scope: scope
                         };

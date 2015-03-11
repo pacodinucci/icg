@@ -49,15 +49,17 @@
 
                         AuthSvc.doLogin(loginModel).then(
 
-                        	function (loginData) {
-
-                        		if ( loginData ) {
-                                    Utilities.gotoProfilePage();
-                            	} 
+                        	function () {
+                                Utilities.gotoHomePage();
     	                    }, 
 
     	                    function (response) {
-                                $rootScope.addAlert(Utilities.getAlerts(response.status));
+                                if (response.status === 403) {
+                                    $scope.showReactivate = true;
+                                    $rootScope.addAlert(Utilities.getAlerts('notActivated'));
+                                } else {
+                                    $rootScope.addAlert(Utilities.getAlerts(response.status));
+                                }
     	                    }
     	                );
                     } 
@@ -87,6 +89,10 @@
                 };
 
 
+                $scope.showReactivateModal = function () {
+                    $scope.modalInstance = AuthSvc.getReactivateModal($scope);
+                };
+                
                 $scope.showForgotPasswordModal = function () {
                     $scope.modalInstance = AuthSvc.getForgotPasswordModal($scope);
                 };
@@ -103,13 +109,43 @@
 
                     $scope.forgotPassword = function (userModel, userForm) {
 
-                        if ( userForm.$valid ) {                       
+                        if ( userForm.$valid ) {
 
                             AuthSvc.forgotPassword(userModel.userName).then(
 
                                 function (userData) {
                                     $scope.closeForgotPasswordModal();
                                     $rootScope.addAlert(Utilities.getAlerts('forgotPasswordSuccess'));
+                                },
+
+                                function (response) {
+                                    $rootScope.addAlert(Utilities.getAlerts(response.status));
+                                }
+                            ); 
+                        }
+                    };
+                };
+                
+                $scope.reactivateCtrl = function ($scope) {
+
+                    $scope.closeReactivateModal = function () {
+                        $scope.modalInstance.close();
+                    };
+
+                    $scope.user = {
+                        userName: ''
+                    };
+
+                    $scope.reactivate = function (userModel, userForm) {
+
+                        if ( userForm.$valid ) {
+
+                            AuthSvc.reactivate(userModel.userName).then(
+
+                                function (userData) {
+                                    $scope.closeReactivateModal();
+                                    $scope.showReactivate = false;
+                                    $rootScope.addAlert(Utilities.getAlerts('reactivateSuccess'));
                                 },
 
                                 function (response) {

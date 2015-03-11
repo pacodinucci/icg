@@ -206,6 +206,15 @@
                         }
                     }
                 })
+            
+                .state('base.activate', {
+                    url: '/activate',
+                    views: {
+                        'main@': {
+                            controller: 'ActivateCtrl'
+                        }
+                    }
+                })
 
                 .state('base.logout', {
                     url: '/logout',

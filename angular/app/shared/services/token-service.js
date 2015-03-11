@@ -74,9 +74,9 @@
                         return new Token(null, null, null);
                     },
 
-                    saveToken: function(accessToken, expiresIn, user) {
+                    saveToken: function(accessToken, expiresIn, user, sessionId) {
                         var defered = $q.defer();
-                        var token = new Token( accessToken, user.userId, user.userRole, user.email, user.firstName, user.sessionId);
+                        var token = new Token( accessToken, user.id, user.userRole, user.email, user.firstName, sessionId);
                         ipCookie(Configs.accessCookie, JSON.stringify(token), {expirationUnit: 'seconds', expires: expiresIn ? expiresIn : defaultExpirySeconds});
                         $rootScope.$broadcast('token:changed', true);
                         defered.resolve(true);
@@ -85,15 +85,11 @@
 
                     removeToken: function () {
                         var defered = $q.defer();
-                        ipCookie.remove(Configs.accessCookie);                        
+                        ipCookie.remove(Configs.accessCookie);
                         $rootScope.$broadcast('token:changed', false);
                         defered.resolve(false);
                         return defered.promise;
-                    },
-
-                    getAccessToken: function() {
-
-                    },                
+                    }
                     
                 };
 

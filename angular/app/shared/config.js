@@ -11,13 +11,18 @@
                 authorization: 'Authorization'
             },
        
-       		baseUrl: 'http://localhost:3000',
+       		//baseUrl: 'http://localhost:8080',
+		baseUrl: 'http://itcontractorsgroup.com:8080',
 
             apis: {
 
             	register: {
             		url: '/auth/signup'
             	},
+              
+                activate: {
+                    url: '/auth/activate'
+                },
 
             	login: {
             		url: '/auth/login'
@@ -28,11 +33,15 @@
                 },
 
                 forgotPassword: {
-                    url: '/auth/forgotPassword'                
+                    url: '/auth/forgotPassword'
+                },
+                
+                reactivate: {
+                    url: '/auth/reactivate'
                 },
 
                 changePassword: {
-                    url: '/auth/changePassword'                
+                    url: '/auth/changePassword'
                 },
 
                 myResumes: {
@@ -42,5 +51,5 @@
                 trackResume: {
                     url: '/user/trackResume'
                 }
-        	}        
+        	}
         });

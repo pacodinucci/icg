@@ -24,9 +24,9 @@
 
                             var user = {
 
-                                userId: token.getUserId(),
+                                id: token.getUserId(),
                                 userRole: token.getUserRole(),
-                                userEmail: token.getUserEmail(),
+                                email: token.getUserEmail(),
                                 firstName: token.getFirstName(),
                                 sessionId: token.getSessionId()
                             };

@@ -14,11 +14,22 @@
 					doRegister: function (url, registationData) {
 						return RESTSvc.post(url, registationData);
 					},
+                    
+                    doActivate: function (url, key) {
+						return RESTSvc.get(url + '?key=' + key);
+					},
 
 					doLogout: function (url, userData) {
 						return RESTSvc.post(url, userData);
 					},
 					
+					forgotPassword: function (url, email) {
+						return RESTSvc.post(url, email);
+					},
+                    
+                    reactivate: function (url, email) {
+						return RESTSvc.post(url, email);
+					},
 
 
 					getUser: function () {

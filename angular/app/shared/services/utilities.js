@@ -22,9 +22,17 @@
 						type: 'success',
 						message: 'An activation link has been successfully sent to the registered E-mail ID. Please activate your account to continue with the Registration Process.',
 					},
+					activateSuccess: {
+						type: 'success',
+						message: 'Your account have been activated.',
+					},
 					forgotPasswordSuccess: {
 						type: 'warning',
 						message: 'A password reset link has been successfully sent to the registered E-mail ID.',
+					},
+                    reactivateSuccess: {
+						type: 'warning',
+						message: 'An activation link has been successfully sent to the registered E-mail',
 					},
 					resumeAddedSuccess: {
 						type: 'success',
@@ -46,6 +54,10 @@
 						type: 'success',
 						message: 'Operation performed successfully.',
 					},
+					notActivated: {
+						type: 'warning',
+						message: 'Your account has not been activated yet. Have you got activation link?'
+					}
 				};
 
 				var Utilities = {
@@ -95,6 +107,10 @@
 					getRegisterUrl: function () {
 						return Configs.baseUrl + Configs.apis.register.url;
 					},
+                    
+                    getActivationUrl: function () {
+						return Configs.baseUrl + Configs.apis.activate.url;
+					},
 
 					getLogoutUrl: function () {
 						return Configs.baseUrl + Configs.apis.logout.url;
@@ -102,6 +118,10 @@
 
 					getForgotPasswordUrl: function () {
 						return Configs.baseUrl + Configs.apis.forgotPassword.url;						
+					},
+                    
+                    getReactivateUrl: function () {
+						return Configs.baseUrl + Configs.apis.reactivate.url;						
 					},
 
 					getChangePasswordUrl: function () {
