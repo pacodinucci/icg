@@ -12,20 +12,51 @@
 
                     getMyResumes: function (userId) {
 
-                        var url = Utilities.getMyResumesUrl() + '/' + userId;
+                        var url = Utilities.getMyResumesUrl() + userId;
                         return RestConfig.getMyResumes(url);
                     },
 
                     saveMyResume: function (userResumeOb) {
 
-                        var url = Utilities.getMyResumesUrl();
+                        var url = Utilities.getSaveResumesUrl();
                         return RestConfig.saveMyResume(url, userResumeOb);                        
+                    },
+                    deleteMyResume: function (id) {
+
+                        var url = Utilities.geDeleteResumesUrl();
+                        return RestConfig.deleteMyResume(url, id);                        
+                    },
+                    
+                    findMyResume: function (id) {
+
+                    	var url = Utilities.getFindResumeUrl() + id;
+                        return RestConfig.findMyResumes(url);                        
                     },
 
                     getNewResumeModal: function (scope, ctrlName) {
 
                         var modalOpts = {
                             templateUrl: './app/resumes/templates/new_resume.html',
+                            controller: ctrlName,
+                            scope: scope
+                        };
+
+                        return $injector.get('$modal').open(modalOpts);
+                    },
+                    getEditResumeModal: function (scope, ctrlName) {
+
+                        var modalOpts = {
+                            templateUrl: './app/resumes/templates/edit_resume.html',
+                            controller: ctrlName,
+                            scope: scope
+                        };
+
+                        return $injector.get('$modal').open(modalOpts);
+                    },
+                    getDeleteResumeModal: function (scope, ctrlName) {
+
+                        var modalOpts = {
+                            templateUrl: './app/resumes/templates/delete_resume.html',
                             controller: ctrlName,
                             scope: scope
                         };

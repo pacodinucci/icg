@@ -10,7 +10,7 @@
 					<h2 class="text-center">My Resumes</h2>
 					<div class="clearfix">
 						<div class="pull-right">
-							<button class="btn btn-primary" ng-click="addNewResume()">
+							<button class="btn btn-primary" ng-click="addNewResumeModel()">
 								<i class="fa fa-plus"></i>
 								<span>Add</span>
 							</button>
@@ -37,6 +37,8 @@
 									</div>
 								</div>									
 							</a>
+							<a href="" class="fa fa-pencil" ng-click="openEditResumeModel(resume.id)">Edit    </a>
+							<a href="" class="fa fa-times" ng-click="openDeleteResumeModel(resume.id)">Delete </a>
 						</div>
 
 					</div>

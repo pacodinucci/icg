@@ -60,11 +60,19 @@
 					getMyResumes: function (url) {
 						return RESTSvc.get(url);
 					},
+					
+					findMyResumes: function (url) {
+						return RESTSvc.get(url);
+					},
 
 					saveMyResume: function (url, resumeOb) {
 						return RESTSvc.post(url, resumeOb);
 					},
-
+					
+					deleteMyResume: function (url, id) {
+						return RESTSvc.delete(url, id);
+					},
+					
 					saveResumeTrackRequest: function (url, requestOb) {
 						return RESTSvc.post(url, requestOb);
 					}

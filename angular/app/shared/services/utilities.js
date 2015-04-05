@@ -38,9 +38,25 @@
 						type: 'success',
 						message: 'Resume has been added successfully.',
 					},
+					resumeEditSuccess: {
+						type: 'success',
+						message: 'Resume has been Edited successfully.',
+					},
+					resumeSaveTitleDuplicatedError: {
+						type: 'danger',
+						message: 'This Resume Title is duplicated !',
+					},
+					resumeSaveTypeDuplicatedError: {
+						type: 'danger',
+						message: 'This Resume Type is duplicated !',
+					},
 					resumeTrackRequestSuccess: {
 						type: 'success',
 						message: 'Your request has been saved.',						
+					},
+					deleteResumeuccess: {
+						type: 'success',
+						message: 'Resume has been deleted successfully.',						
 					},
 					defaultError: {
 						type: 'danger',
@@ -132,12 +148,21 @@
 						return Configs.baseUrl + Configs.apis.myResumes.url;						
 					},
 					
+					getSaveResumesUrl: function () {
+						return Configs.baseUrl + Configs.apis.saveResume.url;						
+					},
+					
+					geDeleteResumesUrl: function(){
+						return Configs.baseUrl + Configs.apis.deleteResume.url;
+					},
+					
+					getFindResumeUrl: function () {
+						return Configs.baseUrl + Configs.apis.findResume.url;						
+					},
+					
 					getTrackResumeUrl: function () {
 						return Configs.baseUrl + Configs.apis.trackResume.url;						
 					},
-
-
-
 
 					gotoHomePage: function () {
 						$state.go('base.home');

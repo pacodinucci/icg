@@ -13,10 +13,10 @@
        
             // dev
             //baseUrl: 'http://localhost:8080',
-            //baseUrl: 'http://localhost:8090',
+            baseUrl: 'http://localhost:8090',
         
             // prod
-            baseUrl: 'http://itcontractorsgroup.com:8080',
+            //baseUrl: 'http://itcontractorsgroup.com:8080',
             
 
             apis: {
@@ -50,7 +50,19 @@
                 },
 
                 myResumes: {
-                    url: '/user/resumes'
+                	url: '/user/resumesList?userId='
+                },
+                
+                saveResume: {
+                	url: '/user/saveResume'
+                },
+                
+                deleteResume: {
+                	url: '/user/deleteResume'
+                },
+                
+                findResume: {
+                	url: '/user/findResume?id='
                 },
 
                 trackResume: {
