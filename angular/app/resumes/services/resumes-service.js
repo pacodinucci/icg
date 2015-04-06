@@ -32,6 +32,12 @@
                     	var url = Utilities.getFindResumeUrl() + id;
                         return RestConfig.findMyResumes(url);                        
                     },
+                    
+                    downloadMyResume: function (id) {
+
+                    	var url = Utilities.getDownloadResumeUrl() + id;
+    					location.href = url;        
+                    },
 
                     getNewResumeModal: function (scope, ctrlName) {
 
@@ -53,10 +59,10 @@
 
                         return $injector.get('$modal').open(modalOpts);
                     },
-                    getDeleteResumeModal: function (scope, ctrlName) {
+                    getWarningModal: function (scope, ctrlName) {
 
                         var modalOpts = {
-                            templateUrl: './app/resumes/templates/delete_resume.html',
+                            templateUrl: './app/resumes/templates/warning.html',
                             controller: ctrlName,
                             scope: scope
                         };

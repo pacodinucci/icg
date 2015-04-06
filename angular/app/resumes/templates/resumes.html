@@ -26,7 +26,7 @@
 					<div class="dashboard-tiles">
 
 						<div class="col-md-3 col-sm-4" ng-repeat="resume in user.myResumes">
-							<a href="{{resume.resumeFile}}" class="tile-item">
+							<a ng-click="openDownloadResumeModel(resume.id);" class="tile-item">
 								<div class="tile-body">
 									<div class="tile-title">
 										<h3 ng-bind="resume.resumeTitle"></h3>

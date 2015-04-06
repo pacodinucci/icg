@@ -73,6 +73,26 @@
 					notActivated: {
 						type: 'warning',
 						message: 'Your account has not been activated yet. Have you got activation link?'
+					},
+					deleteModelTitle:{
+						type: '',
+						message: 'Delete Resume'
+					},
+					deleteModelMessage:{
+						type: '',
+						message: 'Are you sure you want to delete this Resume?'
+					},
+					downloadModelTitle:{
+						type: '',
+						message: 'Download Resume'
+					},
+					downloadModelMessage:{
+						type: '',
+						message: 'Are you sure you want to download this Resume?'
+					},
+					resumeDownloadSuccess: {
+						type: 'success',
+						message: 'Resume have been downloaded successfully.',
 					}
 				};
 
@@ -158,6 +178,10 @@
 					
 					getFindResumeUrl: function () {
 						return Configs.baseUrl + Configs.apis.findResume.url;						
+					},
+					
+					getDownloadResumeUrl: function () {
+						return Configs.baseUrl + Configs.apis.downloadResume.url;						
 					},
 					
 					getTrackResumeUrl: function () {

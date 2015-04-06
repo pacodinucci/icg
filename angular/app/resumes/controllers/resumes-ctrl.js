@@ -68,8 +68,22 @@
 				///////////////////////////////////////////////////////////////////////////////////////
 				//Open Delete Resume Model Function
 				$scope.openDeleteResumeModel = function (resumeId) {
-					$scope.resumeModal = ResumesSvc.getDeleteResumeModal($scope, 'ResumeCtrl');
+					$scope.resumeModal = ResumesSvc.getWarningModal($scope, 'ResumeCtrl');
 					$scope.id=resumeId;
+					$scope.modelType='Delete';
+					//Setting the title and message
+					$scope.modelTitle = Utilities.getAlerts('deleteModelTitle').message;
+					$scope.modelMessage = Utilities.getAlerts('deleteModelMessage').message;
+				};
+				//////////////////////////////////////////////////////////////////////////////////////
+				//Open Download Resume Model Function
+				$scope.openDownloadResumeModel = function (resumeId) {
+					$scope.resumeModal = ResumesSvc.getWarningModal($scope, 'ResumeCtrl');
+					$scope.id=resumeId;
+					$scope.modelType='Download';
+					//Setting the title and message
+					$scope.modelTitle = Utilities.getAlerts('downloadModelTitle').message;
+					$scope.modelMessage = Utilities.getAlerts('downloadModelMessage').message;
 				};
 				//////////////////////////////////////////////////////////////////////////////////////
 				/*
@@ -91,9 +105,15 @@
 					    	$("#saveMessage").html("Please,Select the resume file!");
 					    }
 					};
-					$scope.deleteResume = function () {
-						var id = $scope.id;
-						$scope.deleteMyResume(id);
+					
+					
+					$scope.modelFunction = function () {
+						if($scope.modelType=='Delete'){
+							$scope.deleteMyResume();
+						}
+						if($scope.modelType=='Download'){
+							$scope.downloadMyResume();
+						}
 					};
 				};
 				//Close the resume model function
@@ -173,7 +193,8 @@
 				};
 				
 				//Delete Resume Function
-				$scope.deleteMyResume = function (id) {
+				$scope.deleteMyResume = function () {
+					var id = $scope.id;
 //					ResumesSvc.deleteMyResume(id)
 					//This must be changed to call the service layer
 					var url = Utilities.geDeleteResumesUrl()+"?id="+id;
@@ -196,6 +217,13 @@
 			        	$rootScope.addAlert(Utilities.getAlerts('defaultError'));
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 					});
+				};
+				//Download Resume Function
+				$scope.downloadMyResume = function () {
+					var id = $scope.id;
+					ResumesSvc.downloadMyResume(id);
+					$scope.closeModal();
+					$rootScope.addAlert(Utilities.getAlerts('resumeDownloadSuccess'));
 				};
 				////////////////////////////////////////////////////////////////////////////
 				$scope.init = function () {

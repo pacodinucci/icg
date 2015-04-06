@@ -13,10 +13,10 @@
        
             // dev
             //baseUrl: 'http://localhost:8080',
-            baseUrl: 'http://localhost:8090',
+            //baseUrl: 'http://localhost:8090',
         
             // prod
-            //baseUrl: 'http://itcontractorsgroup.com:8080',
+            baseUrl: 'http://itcontractorsgroup.com:8080',
             
 
             apis: {
@@ -67,6 +67,10 @@
 
                 trackResume: {
                     url: '/user/trackResume'
+                },
+                
+                downloadResume: {
+                    url: '/user/downloadResume?id='
                 }
         	}
         });
