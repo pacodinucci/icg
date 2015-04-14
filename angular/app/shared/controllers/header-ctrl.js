@@ -34,12 +34,14 @@
                     text: 'Profile',
                     state: 'base.account',
                     active: false
-                }, {
-
-                    text: 'Jobs',
-                    state: 'base.jobs',
-                    active: false
-                }, {
+                }
+//                , {
+//
+//                    text: 'Jobs',
+//                    state: 'base.jobs',
+//                    active: false
+//                }
+                , {
 
                     text: 'My Resumes',
                     state: 'base.resumes',

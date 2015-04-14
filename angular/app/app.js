@@ -25,7 +25,7 @@
                     document.body.style.cursor = 'wait';
 
                     if ( config.url.indexOf('login') < 0 && config.url.indexOf('signup') < 0 ) {
-                        config.headers[ Configs.headers.authorization ] = $injector.get('TokenSvc').getToken().getSessionId();                                    
+                        config.headers[ Configs.headers.authorization ] = $injector.get('TokenSvc').getToken().getAccessToken();                                    
                     }
 
                     return config || $q.when(config);                   

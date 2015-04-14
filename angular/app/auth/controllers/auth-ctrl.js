@@ -54,7 +54,7 @@
     	                    }, 
 
     	                    function (response) {
-                                if (response.status === 403) {
+                                if (response.response.message == 'notActivated') {
                                     $scope.showReactivate = true;
                                     $rootScope.addAlert(Utilities.getAlerts('notActivated'));
                                 } else {
