@@ -27,9 +27,16 @@
                         RestConfig.doLogin(url, loginModel).then(
                             
                             function(response) {
-                                TokenSvc.saveToken(response.sessionId, 10800, response.user, response.id).then(function () {
+                            	if(loginModel.rememberme){
+                            		TokenSvc.saveTokenNotExpired(response.sessionId, response.user, response.id).then(function () {
+                                        defered.resolve();
+                                    });
+                            	}
+                            	else{
+                                TokenSvc.saveToken(response.sessionId, 7200, response.user, response.id).then(function () {
                                     defered.resolve();
                                 });
+                            	}
                                 
                             },
 

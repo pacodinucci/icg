@@ -24,7 +24,8 @@
 
                     login: {
                         email: '',
-                        password: ''
+                        password: '',
+                        rememberme: ''
                     }
                 };
 

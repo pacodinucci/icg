@@ -82,6 +82,15 @@
                         defered.resolve(true);
                         return defered.promise;
                     },
+                    
+                    saveTokenNotExpired: function(accessToken, user, sessionId) {
+                        var defered = $q.defer();
+                        var token = new Token( accessToken, user.id, user.userRole, user.email, user.firstName, sessionId);
+                        ipCookie(Configs.accessCookie, JSON.stringify(token));
+                        $rootScope.$broadcast('token:changed', true);
+                        defered.resolve(true);
+                        return defered.promise;
+                    },
 
                     removeToken: function () {
                         var defered = $q.defer();

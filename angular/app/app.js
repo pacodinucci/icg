@@ -77,6 +77,7 @@
 
             $httpProvider.interceptors.push('interceptor');
             $httpProvider.defaults.useXDomain = true;
+            $httpProvider.defaults.withCredentials = true;
         }
     ])
 
