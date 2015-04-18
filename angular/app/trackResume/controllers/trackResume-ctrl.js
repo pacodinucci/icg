@@ -15,13 +15,14 @@
 				};
 
 				$scope.trackResume = {
-					from: '',
-					to: '',
+					toRecruiter: '',
 					recruiter: '',
 					agency: '',
 					subject: '',
 					content: '',
-					resume: ''
+					notes  : '',
+					resumeId: '',
+					userId: ''
 				};
 
 				$scope.getUserDetails = function () {
@@ -45,7 +46,7 @@
 
 					$scope.user.myResumes = [];
 						
-					ResumesSvc.getMyResumes($scope.user.userId).then(
+					ResumesSvc.getMyResumes($scope.user.id).then(
 
 						function (resumesData) {
 							$scope.user.myResumes = resumesData;
@@ -58,7 +59,7 @@
 
 					if ( requestForm.$valid ) {
 
-						requestModel.userId = $scope.user.userId;
+						requestModel.userId = $scope.user.id;
 
 						TrackResumeSvc.saveResumeTrackRequest(requestModel).then(
 

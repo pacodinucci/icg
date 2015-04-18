@@ -66,7 +66,7 @@
                 },
 
                 trackResume: {
-                    url: '/user/trackResume'
+                    url: '/user/saveMyNote'
                 },
                 
                 downloadResume: {

@@ -21,14 +21,9 @@
 
 							<form name="trackResumeForm">
 
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.from.$invalid && !trackResume.from.$pristine }">
-									<div class="control-label">From</div>
-									<input type="email" class="form-control" placeholder="From" ng-model="trackResume.from" ng-required="true" />
-								</div>
-
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.to.$invalid && !trackResume.to.$pristine }">
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.toRecruiter.$invalid && !trackResume.toRecruiter.$pristine }">
 									<div class="control-label">To</div>
-									<input type="email" class="form-control" placeholder="To" ng-model="trackResume.to" ng-required="true" />
+									<input type="email" class="form-control" placeholder="To" ng-model="trackResume.toRecruiter" ng-required="true" />
 								</div>
 
 								<div class="form-group" ng-class="{ 'has-error' : trackResume.recruiter.$invalid && !trackResume.recruiter.$pristine }">
@@ -50,16 +45,21 @@
 									<div class="control-label">Content</div>
 									<textarea class="form-control" placeholder="Content" ng-model="trackResume.content" ng-required="true"></textarea>
 								</div>
+								
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.notes.$invalid && !trackResume.notes.$pristine }">
+									<div class="control-label">Notes</div>
+									<textarea class="form-control" placeholder="Content" ng-model="trackResume.notes" ng-required="true"></textarea>
+								</div>
 
 								<div class="form-group" ng-class="{ 'has-error' : trackResume.resume.$invalid && !trackResume.resume.$pristine }">
 									<div class="control-label">Resume</div>
 									<select
 										class="form-control" 
 										data-placeholder="Resume Title" 
-										ng-model="trackResume.resume" 
+										ng-model="trackResume.resumeId" 
 										ng-required="true">
 										<option value=""></option>
-										<option ng-repeat="resume in user.myResumes" value="{{resume.resumeFile}}">{{resume.resumeTitle}}</option>
+										<option ng-repeat="resume in user.myResumes" value="{{resume.id}}">{{resume.resumeTitle}}</option>
 									</select>
 								</div>
 
