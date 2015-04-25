@@ -93,6 +93,14 @@
 					resumeDownloadSuccess: {
 						type: 'success',
 						message: 'Resume have been downloaded successfully.',
+					},
+					resumeSaveLimitError: {
+						type: '',
+						message: 'You have reached the number of resumes'
+					},
+					resumeSaveLeastError: {
+						type: '',
+						message: 'You have at least one resume'
 					}
 				};
 

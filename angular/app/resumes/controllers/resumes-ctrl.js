@@ -185,6 +185,9 @@
 			        	else if(data.message=='resumeSaveTypeDuplicatedError'){
 			        		$rootScope.addAlert(Utilities.getAlerts('resumeSaveTypeDuplicatedError'));
 			        	}
+			        	else if(data.message=='resumeSaveLimitError'){
+			        		$rootScope.addAlert(Utilities.getAlerts('resumeSaveLimitError'));
+			        	}			   
 			        	else{
 			        		$rootScope.addAlert(Utilities.getAlerts('defaultError'));
 			        	}
@@ -214,8 +217,12 @@
 					})
 			        .error(function(data, status, headers, config) {
 			        	$scope.closeModal();
-			        	$rootScope.addAlert(Utilities.getAlerts('defaultError'));
-						console.debug(data+'  '+status+' ' +headers+'  '+config);
+			        	if(data.message=='resumeSaveLeastError'){
+			        		$rootScope.addAlert(Utilities.getAlerts('resumeSaveLeastError'));
+			        	}
+			        	else{
+			        		$rootScope.addAlert(Utilities.getAlerts('defaultError'));
+			        	}
 					});
 				};
 				//Download Resume Function
