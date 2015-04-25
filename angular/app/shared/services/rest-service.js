@@ -2,9 +2,9 @@
 	
 	angular.module('icg.shared')
 
-		.factory('RESTSvc', ['$rootScope', '$q', '$http', 
+		.factory('RESTSvc', ['$rootScope', '$q', '$http', '$injector', 
 
-			function($rootScope, $q, $http) {
+			function($rootScope, $q, $http, $injector) {
 
 				return {
 
@@ -88,10 +88,13 @@
 							deferred.reject({
 								response: response,
 								status: status
-							});
+							});	
 						});
 						
 						return deferred.promise;
+					},
+					download: function( url) {
+						location.href = url+'&Authorization='+$injector.get('TokenSvc').getToken().getAccessToken();  
 					}
 				};
 			}

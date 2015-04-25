@@ -75,6 +75,9 @@
 					
 					saveResumeTrackRequest: function (url, requestOb) {
 						return RESTSvc.post(url, requestOb);
+					},
+					downloadMyResume: function (url) {
+						return RESTSvc.download(url);
 					}
 				};
 

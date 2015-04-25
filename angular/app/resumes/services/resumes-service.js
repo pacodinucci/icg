@@ -36,7 +36,7 @@
                     downloadMyResume: function (id) {
 
                     	var url = Utilities.getDownloadResumeUrl() + id;
-    					location.href = url;        
+                    	return RestConfig.downloadMyResume(url);           
                     },
 
                     getNewResumeModal: function (scope, ctrlName) {
