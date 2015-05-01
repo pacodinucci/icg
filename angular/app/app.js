@@ -10,6 +10,7 @@
         'icg.auth',
         'icg.account',
         'icg.resumes',
+        'icg.notifications',
         'icg.trackResume',
         'icg.jobs'
     ])
@@ -194,6 +195,16 @@
                         'main@': {
                             templateUrl: 'app/trackResume/templates/trackResume.html',
                             controller: 'TrackResumeCtrl'
+                        }
+                    }
+                })
+                
+                .state('base.notifications', {
+                    url: '/notifications',
+                    views: {
+                        'main@': {
+                            templateUrl: 'app/notifications/templates/notifications.html',
+                            controller: 'NotificationsCtrl'
                         }
                     }
                 })

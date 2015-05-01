@@ -40,6 +40,10 @@
 				$scope.trackResume = function () {
 					Utilities.gotoTrackResumePage();
 				};
+				
+				$scope.notifications = function () {
+					Utilities.gotoNotificationsPage();
+				};
 
 				$scope.init = function () {
 					$scope.getUserDetails();

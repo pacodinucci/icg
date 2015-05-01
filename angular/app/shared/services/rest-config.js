@@ -78,6 +78,9 @@
 					},
 					downloadMyResume: function (url) {
 						return RESTSvc.download(url);
+					},
+					getMyNotifications: function (url) {
+						return RESTSvc.get(url);
 					}
 				};
 

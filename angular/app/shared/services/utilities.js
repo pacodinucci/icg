@@ -195,7 +195,11 @@
 					getTrackResumeUrl: function () {
 						return Configs.baseUrl + Configs.apis.trackResume.url;						
 					},
-
+					
+					getMyNotificationsUrl: function () {
+						return Configs.baseUrl + Configs.apis.notifications.url;						
+					},
+					
 					gotoHomePage: function () {
 						$state.go('base.home');
 					},
@@ -214,6 +218,9 @@
 
 					gotoTrackResumePage: function () {
 						$state.go('base.trackResume');
+					},
+					gotoNotificationsPage: function () {
+						$state.go('base.notifications');
 					},
 
 				};
