@@ -1,0 +1,38 @@
+
+
+
+	<section id="notifications">	
+
+		<div class="container full">	
+
+			<div class="row form-group">
+				<div class="col-sm-12">
+					<h2 class="text-center">My Notifications</h2>
+				</div>
+			</div>			
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Recruiter</th>
+                  <th>Agency</th>
+                  <th>Event Type</th>
+                  <th>Event Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="notifications in user.myNotifications">
+                  <td ng-bind="notifications.id"></td>
+                  <td ng-bind="notifications.recruiter"></td>
+                  <td ng-bind="notifications.agency"></td>
+                  <td ng-bind="notifications.eventType"></td>
+                  <td ng-bind="notifications.eventTime"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+		</div>
+
+	</section>
