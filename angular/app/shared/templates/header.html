@@ -1,27 +1,83 @@
+<header class="main-header">
+	<nav class="navbar navbar-fixed-top" role="navigation">
+		<a class="navbar-brand logo" href="" ui-sref="base.home"> <img
+			ng-src="{{appConfig.appLogo}}" alt="logo" />
+		</a>
+		<div class="navbar-custom-menu" ng-if="authenticated">
+			<ul class="nav navbar-nav">
 
-	<header id="header">
-		<nav class="header navbar navbar-default navbar-fixed-top" ng-class="{'slimHeader': slimHeader}">
-			<div class="navbar-inner">
-			  	<section class="container full">
-				  	<div class="navbar-header">
-				  		<a class="navbar-brand logo" href="" ui-sref="base.home">
-				  			<img ng-src="{{appConfig.appLogo}}" alt="logo" />
-				  		</a>
-					  	<button type="button" class="navbar-toggle" ng-click="navbarCollapsed =! navbarCollapsed">
-						  	<span class="sr-only">Menu</span>
-						  	<span class="icon-bar"></span>
-						  	<span class="icon-bar"></span>
-						  	<span class="icon-bar"></span>
-					  	</button>
-				  	</div>
-				  	<div class="navbar-collapse" ng-class="{'collapse': navbarCollapsed}">
-					  	<ul class="nav navbar-nav pull-right nofloat-sm" >
-					  		<li ng-repeat="menu in menuItems" ng-class="{'active': menu.active}">
-						  		<a href="" ui-sref="{{menu.state}}" ng-bind="menu.text"></a>
-					  		</li>
-					  	</ul>
-				  	</div>		  	
-			  	</section>
-			</div>
-		</nav>
-	</header>
+				<li><a href="#" ng-class="{'active': menu.active}"
+					ui-sref="base.home">Home</a></li>
+
+				<li><a href="#" ng-class="{'active': menu.active}"
+					ui-sref="base.trackResume">Track Resume</a></li>
+
+				<!-- Notifications: style can be found in dropdown.less -->
+				<li class="dropdown notifications-menu"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown"> <i
+						class="fa fa-bell-o"></i> <span>Notifications</span><span
+						class="label label-warning">3</span>
+				</a>
+					<ul class="dropdown-menu">
+						<li class="header">You have 3 notifications</li>
+						<li>
+							<!-- inner menu: contains the actual data -->
+							<ul class="menu">
+								<li><a href="#"> <i class="fa fa-users text-aqua"></i>
+										Notification 1
+								</a></li>
+								<li><a href="#"> <i class="fa fa-users text-aqua"></i>
+										Notification 2
+								</a></li>
+								<li><a href="#"> <i class="fa fa-users text-aqua"></i>
+										Notification 3
+								</a></li>
+							</ul>
+						</li>
+						<li class="footer"><a href="#">View all</a></li>
+					</ul></li>
+
+				<li class="dropdown user user-menu"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown"> <img
+						src="img/avatar5.png" class="user-image" alt="User Image" /> <span
+						class="hidden-xs" ng-bind="user.firstName"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<li class="user-header"><img src="img/avatar5.png"
+							class="img-circle" alt="User Image" />
+							<p ng-bind="user.firstName" class="bold"></p></li>
+						<li class="user-body">
+							<div class="col-xs-4 text-center">
+								<a href="#" ui-sref="base.resumes">Resumes</a>
+							</div>
+							<div class="col-xs-4 text-center">
+								<a href="#" ui-sref="base.jobs">Jobs</a>
+							</div>
+							<div class="col-xs-4 text-center">
+								<a href="#" ui-sref="base.notifications">Notifications</a>
+							</div>
+						</li>
+						<!-- Menu Footer-->
+						<li class="user-footer">
+							<div class="pull-left">
+								<a href="#" ui-sref="base.account"
+									class="btn btn-default btn-flat">Profile</a>
+							</div>
+							<div class="pull-right">
+								<a href="#" class="btn btn-default btn-flat"
+									ui-sref="base.logout">Logout</a>
+							</div>
+						</li>
+					</ul></li>
+			</ul>
+		</div>
+		<div class="navbar-custom-menu" ng-if="!authenticated">
+			<ul class="nav navbar-nav">
+				<li><a href="#" ng-class="{'active': menu.active}"
+					ui-sref="base.home">Home</a></li>
+				<li><a href="#" ng-class="{'active': menu.active}"
+					ui-sref="base.auth">Login / Register</a></li>
+			</ul>
+		</div>
+	</nav>
+</header>

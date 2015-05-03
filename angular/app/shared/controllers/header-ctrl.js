@@ -8,8 +8,26 @@
 
             	var $state = $injector.get('$state');
                 var AuthSvc = $injector.get('AuthSvc');
+                var AccountSvc = $injector.get('AccountSvc');
 
                 $scope.menuItems = [];
+                $scope.authenticated = true;
+                $scope.user = null;
+                
+				$scope.getUserDetails = function () {
+
+					AccountSvc.getUser().then(
+
+						function (userData) {
+
+							$scope.user = userData;
+						},
+
+						function (response) {
+							$rootScope.addAlert(Utilities.getAlerts(response.status));
+						}
+					);
+				};
 
             	$scope.menuItemsForGuestsUser = [{
 
@@ -51,7 +69,15 @@
                     text: 'Track Resume',
                     state: 'base.trackResume',
                     active: false
-                }, {
+                },
+                {
+
+                    text: 'Notifications',
+                    state: 'base.notifications',
+                    active: false,
+                    notificationsList: []
+                },
+                {
 
                     text: 'Logout',
                     state: 'base.logout',
@@ -93,9 +119,13 @@
                 $scope.init = function () {
 
                     if ( AuthSvc.isAuthenticated() ) {
+                    	$scope.authenticated = true;
                         $scope.menuItems = $scope.menuItemsForLoggedInUser;
+                        $scope.getUserDetails();
                     } else {
+                    	$scope.authenticated = false;
                         $scope.menuItems = $scope.menuItemsForGuestsUser;
+                        $scope.user = null;
                     }
 
                     $scope.menuItems.forEach(function(menuItem) {

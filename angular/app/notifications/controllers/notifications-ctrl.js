@@ -23,7 +23,7 @@
 					function (notificationsData) {
 
 						notificationsData.forEach(function (notifications) {
-							notifications.eventTime = Utilities.getFormattedDate(notifications.eventTime);
+							notifications.lastTrackedTime = Utilities.getFormattedDate(notifications.lastTrackedTime);
 							$scope.user.myNotifications.push(notifications);
 						});
 					}
