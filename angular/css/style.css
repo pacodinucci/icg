@@ -71,16 +71,14 @@ a:hover {
 }
 
 .navbar-brand.logo {
-	max-width: 180px;
-	height: 80px;
-	max-height: 100%;
+	
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
 .header .logo img {
-	width: 100%;
-	height: 100%;
+	width: 152px;
+	height: 53px;
 }
 
 .nav.navbar-nav {
@@ -328,9 +326,8 @@ h3.title {
 }
 
 
-//Made By H.Mounir
-//Created Date: 3-5-2015
-/*
+/* Made By H.Mounir
+ * Created Date: 3-5-2015
  * Component: Main Header
  * ----------------------
  */
@@ -714,4 +711,12 @@ h3.title {
 }
 .social-auth-links {
   margin: 10px 0;
+}
+
+/*
+Added By H.Mounir
+Date Created: 29-05-2015
+*/
+#alertModel{
+	top : 5px;
 }
