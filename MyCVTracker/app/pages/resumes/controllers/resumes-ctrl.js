@@ -268,7 +268,7 @@
 	                scope.$apply(function(){
 	                    modelSetter(scope, element[0].files[0]);
 						var file = scope.myFile;
-						var validExts = new Array("application/pdf", "application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+						var validExts = ["application/pdf", "application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
 						var fileExt = file.type;
 						var input = $("#fileUpload");
 						if (validExts.indexOf(fileExt) < 0) {
