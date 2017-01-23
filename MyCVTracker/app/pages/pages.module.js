@@ -40,7 +40,7 @@
             var publicPages = ['/jobs'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
             if (restrictedPage && token==null) {
-                window.location.href = Utilities.baseUrl()+ "auth.html";
+                window.location.href = Utilities.baseUrl() + "/auth.html";
             }
         });
     }
