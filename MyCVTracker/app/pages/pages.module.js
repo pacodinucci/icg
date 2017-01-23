@@ -24,7 +24,18 @@
     /** @ngInject */
     function routeConfig($urlRouterProvider, baSidebarServiceProvider,$locationProvider) {
         // use the HTML5 History API
-        // $urlRouterProvider.otherwise('/account');
+        var cookieValue = null;
+        var name= 'MyCVTracker.user.auth';
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) cookieValue =  c.substring(nameEQ.length,c.length);
+        }
+        if(cookieValue!=null && cookieValue!=''){
+            $urlRouterProvider.otherwise('/account');
+        }
         $locationProvider.html5Mode(true);
     }
 
@@ -45,8 +56,6 @@
             }
             else if (restrictedPage && token == null) {
                 window.location.href = Utilities.baseUrl() + "/auth.html";
-            }else{
-                $location.path('account');
             }
         });
     }
