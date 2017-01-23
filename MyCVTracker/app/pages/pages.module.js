@@ -24,7 +24,7 @@
     /** @ngInject */
     function routeConfig($urlRouterProvider, baSidebarServiceProvider,$locationProvider) {
         // use the HTML5 History API
-        //$urlRouterProvider.otherwise('/account');
+        $urlRouterProvider.otherwise('/account');
         $locationProvider.html5Mode(true);
     }
 
