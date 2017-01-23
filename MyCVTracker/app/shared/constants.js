@@ -17,7 +17,7 @@
             // baseUrl: 'http://localhost:20000',
 
             // prod
-            baseUrl: 'http://212.71.235.116:20000',
+            baseUrl: 'https:mycvtracker.com:8080',
 
             websocket:{
                 reconnect: 5000,
