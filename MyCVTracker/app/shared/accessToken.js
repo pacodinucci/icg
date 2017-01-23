@@ -74,7 +74,7 @@
                             return new Token(tokenCookie.accessToken, tokenCookie.userId, tokenCookie.userRole, tokenCookie.userEmail, tokenCookie.firstName,tokenCookie.lastName,tokenCookie.sessionId);
                         }
 
-                        return new Token(null, null, null);
+                        return null;
                     },
 
                     saveToken: function(accessToken,expiresIn, userId, userRole, userEmail, firstName,lastName) {

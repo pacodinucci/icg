@@ -31,9 +31,9 @@
 
     function run(Constants,AccessToken,$rootScope, $http, $location,Utilities) {
         // keep user logged in after page refresh
-        var token = AccessToken.getToken().getAccessToken();
+        var token = AccessToken.getToken();
         if(token!=null)
-            $http.defaults.headers.common[Constants.headers.authorization] = token.authorization;
+            $http.defaults.headers.common[Constants.headers.authorization] = token.getAccessToken().authorization;
 
         // redirect to login page if not logged in and trying to access a restricted page
         $rootScope.$on('$locationChangeStart', function (event, next, current) {

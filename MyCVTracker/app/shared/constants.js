@@ -5,7 +5,7 @@
         .constant('Constants', {
 
         	contentType: 'application/json',
-            accessCookie: 'BlurAdmin.user.auth',
+            accessCookie: 'MyCVTracker.user.auth',
 
             appName:'MyCVTracker',
 
