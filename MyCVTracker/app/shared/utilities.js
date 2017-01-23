@@ -548,7 +548,7 @@
                     baseUrl: function(){
 						var pathparts = location.pathname.split('/');
 						if (location.host.indexOf('localhost') !== -1) {
-							var url = location.origin+'/'+pathparts[1].trim('/')+'/';
+							var url = location.origin+'/'+'/';
 						}else{
 							var url = location.origin;
 						}
