@@ -13,7 +13,7 @@
                 authorization: 'Authorization'
             },
 
-            baseUrl: 'https://mycvtracker.com:8080',
+            baseUrl: 'https://www.mycvtracker.com:8080',
 
             websocket:{
                 reconnect: 5000,
