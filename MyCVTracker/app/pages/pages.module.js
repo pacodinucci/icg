@@ -24,7 +24,7 @@
     /** @ngInject */
     function routeConfig($urlRouterProvider, baSidebarServiceProvider,$locationProvider) {
         // use the HTML5 History API
-        $urlRouterProvider.otherwise('/account');
+        //$urlRouterProvider.otherwise('/account');
         $locationProvider.html5Mode(true);
     }
 
@@ -39,7 +39,11 @@
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             var publicPages = ['/jobs'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
-            if (restrictedPage && token==null) {
+            var frontPage = next.endsWith("/") || next.endsWith(".com");
+            if (frontPage) {
+                window.location.href = Utilities.baseUrl() + "/front.html";
+            }
+            else if (restrictedPage && token == null) {
                 window.location.href = Utilities.baseUrl() + "/auth.html";
             }
         });
