@@ -1,0 +1,52 @@
+
+	<section id="CampaignNotifications">
+
+		<div class="container full">
+
+            <div>
+                <form name="myForm">
+                    <label for="repeatSelect"> Select Campaigns: </label>
+                    <select name="repeatSelect" id="repeatSelect" ng-model="user.currentCampaign">
+                        <option ng-repeat="mycampaign in user.myCampaigns" value="{{mycampaign.id}}">{{mycampaign.campaign}}</option>
+                    </select>
+                </form>
+                <hr>
+            </div>
+
+            <div class="row form-group">
+				<div class="col-sm-12">
+					<h2 class="text-center">My Notifications</h2>
+				</div>
+			</div>
+
+            <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Recruiter</th>
+                  <th>Recruiter Email</th>
+                  <th>Agency</th>
+                  <th>Event Type</th>
+                  <th>Notifications Count</th>
+                  <th>Last Tracked Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-ng-repeat="notifications in user.myNotifications | filter : {campaignId:user.currentCampaign}">
+                  <td data-ng-bind="notifications.recruiter"></td>
+                  <td data-ng-bind="notifications.recruiterEmail"></td>
+                  <td data-ng-bind="notifications.agency"></td>
+                  <td data-ng-bind="notifications.eventType"></td>
+                    <td data-ng-bind="notifications.notificationsCount"></td>
+                  <td data-ng-bind="notifications.lastTrackedTime"></td>
+                  <td><button data-ng-click="deleteNotification(notifications.id, $index)" class="btn btn-primary">Delete</button></td>
+                    <td><button data-ng-click="viewFullNotifications(notifications.id, $index)" class="btn btn-primary">Details</button></td>
+                   </tr>
+              </tbody>
+            </table>
+          </div>
+
+		</div>
+
+	</section>
+      
