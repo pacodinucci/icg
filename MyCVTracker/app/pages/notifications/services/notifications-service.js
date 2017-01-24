@@ -23,6 +23,7 @@
 						var modalOpts = {
 							templateUrl: 'app/pages/notifications/templates/view_notifications.html',
 							controller: ctrlName,
+                            size: 'lg',
 							scope: scope
 						};
 

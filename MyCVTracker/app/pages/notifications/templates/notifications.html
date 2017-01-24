@@ -1,45 +1,39 @@
 
 	<section id="notifications"  ng-controller="NotificationsCtrl">
-
-		<div class="container full">	
-
-			<div class="row form-group">
-				<div class="col-sm-12">
-					<h2 class="text-center">My Notifications</h2>
-				</div>
-			</div>			
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Recruiter</th>
-                  <th>Recruiter Email</th>
-                  <th>Agency</th>
-                  <th>City</th>
-                  <th>Country</th>
-                  <th>Event Type</th>
-                  <th>Notifications Count</th>
-                  <th>Last Tracked Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr data-ng-repeat="notifications in user.myNotifications">
-                  <td data-ng-bind="notifications.recruiter"></td>
-                  <td data-ng-bind="notifications.recruiterEmail"></td>
-                  <td data-ng-bind="notifications.agency"></td>
-                  <td data-ng-bind="notifications.city"></td>
-                  <td data-ng-bind="notifications.country"></td>
-                  <td data-ng-bind="notifications.eventType"></td>
-                    <td data-ng-bind="notifications.notificationsCount"></td>
-                  <td data-ng-bind="notifications.lastTrackedTime"></td>
-                  <td><button data-ng-click="deleteNotification(notifications.id, $index)" class="btn btn-primary">Delete</button></td>
-                    <td><button data-ng-click="viewFullNotifications(notifications.id, $index)" class="btn btn-primary">Details</button></td>
-                   </tr>
-              </tbody>
-            </table>
-          </div>
-
-		</div>
-
-	</section>
+        <div class="row">
+            <div class="col-md-12">
+                <div ba-panel ba-panel-class="with-scroll">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tr>
+                            <td>Recruiter</td>
+                            <td>Recruiter Email</td>
+                            <td>Agency</td>
+                            <td>City</td>
+                            <td>Country</td>
+                            <td>Event Type</td>
+                            <td>Notifications Count</td>
+                            <td>Last Tracked Time</td>
+                            <td>Actions</td>
+                        </tr>
+                        <tr data-ng-repeat="notifications in user.myNotifications">
+                            <td data-ng-bind="notifications.recruiter"></td>
+                            <td data-ng-bind="notifications.recruiterEmail"></td>
+                            <td data-ng-bind="notifications.agency"></td>
+                            <td data-ng-bind="notifications.city"></td>
+                            <td data-ng-bind="notifications.country"></td>
+                            <td data-ng-bind="notifications.eventType"></td>
+                            <td data-ng-bind="notifications.notificationsCount"></td>
+                            <td data-ng-bind="notifications.lastTrackedTime"></td>
+                            <td>
+                                <div class="buttons">
+                                    <button data-ng-click="deleteNotification(notifications.id, $index)" class="btn btn-danger editable-table-button btn-xs">Delete</button>
+                                    <button data-ng-click="viewFullNotifications(notifications.id, $index)" class="btn btn-primary editable-table-button btn-xs">Details</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+</section>
       
