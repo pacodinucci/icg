@@ -20,6 +20,14 @@
                         var defered = $q.defer();
 
                         $http.get(url, {headers : headers}).success(function(response) {
+                            var userData = {
+                                userId:response.principal.id,
+                                userRole:response.authorities[0].authority,
+                                userEmail:response.principal.email,
+                                firstName:response.principal.firstName,
+                                lastName:response.principal.lastName
+                            };
+                            $rootScope.authenticatedUser = userData;
                             $rootScope.authenticated = true;
                             if(credentials.rememberme){
                                 AccessToken.saveTokenNotExpired(headers,response.principal.id,response.authorities[0].authority,response.principal.email,response.principal.firstName,response.principal.lastName).then(function () {

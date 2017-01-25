@@ -65,38 +65,7 @@
 
 						}
 					);
-					//$scope.resumeModal = AccountSvc.openUnsubscribeModal($scope, 'AccountCtrl');
-					//$scope.modelType='Confirm';
-					//if(currentUrl.indexOf("accountFromTrackingMail") > -1){
-					//	$scope.id='tracking';
-					//	$scope.modelTitle = Utilities.getAlerts('unsubscribeeModelTrackingTitle').message;
-					//	$scope.modelMessage = Utilities.getAlerts('unsubscribeModelTrackingMessage').message;
-					//}else{
-					//	$scope.id='notification`';
-					//	$scope.modelTitle = Utilities.getAlerts('unsubscribeeModelNotificationTitle').message;
-					//	$scope.modelMessage = Utilities.getAlerts('unsubscribeModelNotificationMessage').message;
-					//}
 				};
-
-				//$scope.AccountCtrl = function ($scope) {
-				//	$scope.modelFunction = function () {
-				//
-				//		AccountSvc.unSubscribeMail().then(
-				//			function () {
-				//
-				//				toastr.error(Utilities.getAlerts('unsubscribeSucess'));
-				//			},
-				//			function (response) {
-				//				toastr.error(Utilities.getAlerts(response.status));
-				//
-				//			}
-				//		);
-				//	};
-				//};
-				//$scope.closeModal = function () {
-				//	alert('fdbdfbdfgdfgdfgdgfd');
-				//	$scope.resumeModal.dismiss();
-				//};
 
 				$scope.getUserDetails = function () {
 
@@ -104,31 +73,6 @@
 
 						function (userData) {
 							$scope.user = userData;
-							if($scope.user.userRole == 'ADMIN'){
-								$scope.adminFeatures = [{
-									background: 'tile-thumb bg-info',
-									icon: 'fa fa-paper-plane-o fa-2x',
-									title: 'CV Marketing Notes',
-									action: 'cvMarketingNotes'
-								}, {
-									background: 'tile-thumb bg-info',
-									icon: 'fa fa-paper-plane-o fa-2x',
-									title: 'CV Marketing',
-									action: 'cvMarketing'
-								}, {
-									background: 'tile-thumb bg-info',
-									icon: 'fa fa-paper-plane-o fa-2x',
-									title: 'CV Marketing Notifications',
-									action: 'cvMarketingNotifications'
-								}, {
-									background: 'tile-thumb bg-gray',
-									icon: 'fa fa-cog fa-2x',
-									title: 'Settings',
-									action: 'settingsPage'
-								}];
-							}else{
-								$scope.adminFeatures = [];
-							}
 						},
 
 						function (response) {

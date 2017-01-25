@@ -21,7 +21,13 @@
 @include svg-icon-class('money', 80, 80);
 @include svg-icon-class('person', 80, 80);
 @include svg-icon-class('refresh', 80, 80);
-
+@include svg-icon-class('notes', 80, 80);
+@include svg-icon-class('jobs', 80, 80);
+@include svg-icon-class('resume', 80, 80);
+@include svg-icon-class('trackResume', 80, 80);
+@include svg-icon-class('notification', 80, 80);
+@include svg-icon-class('marketing', 80, 80);
+@include svg-icon-class('settings', 80, 80);
 
 @mixin png-icon($url, $width, $height) {
   display: inline-block;

@@ -23,7 +23,7 @@ angular.module('BlurAdmin.front.login')
             $scope.login = function () {
 
                 LoginSvc.doLogin($scope.user.login).then(
-                    function () {
+                    function (response) {
                         $("#btn-login").html('Signing In ...');
                         $rootScope.showSuccessMsg("Login is Successful,Please wait for the Home Page to open");
                         var baseURL = Utilities.baseUrl()+'?fromLogin';

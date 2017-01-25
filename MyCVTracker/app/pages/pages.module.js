@@ -7,7 +7,6 @@
 
     angular.module('BlurAdmin.pages', [
         'ui.router',
-        // 'BlurAdmin.pages.dashboard',
         'BlurAdmin.pages.account',
         'BlurAdmin.pages.notes',
         'BlurAdmin.pages.jobs',
