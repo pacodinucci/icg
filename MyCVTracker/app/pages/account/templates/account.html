@@ -4,112 +4,19 @@
 		<h3 class="text-center">Available Tick: <strong ng-bind="userTick"></strong></h3>
 	</div>
 	<br/>
-	<menus></menus>
+	<div class="row pie-charts">
+		<div class="pie-chart-item-container" ng-repeat="chart in charts">
+			<a ng-href="{{chart.link}}" ng-show="{{chart.showMenu}}">
+				<div ba-panel>
+					<div class="pie-chart-item">
+						<div class="description">
+							<div>{{ ::chart.description }}</div>
+							<div class="description-stats">{{ ::chart.stats }}</div>
+						</div>
+						<i class="chart-icon i-{{ ::chart.icon }}"></i>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
 </section>
-
-	<!--<section id="account" ng-controller="AccountCtrl">-->
-
-		<!--<div class="container full" data-ng-init="getUserTick()">-->
-
-			<!--<div class="row form-group">-->
-				<!--<div class="col-sm-12">-->
-					<!--<h2 class="text-center">Welcome <strong ng-bind="user.firstName + ' !'">!</strong></h2>-->
-					<!--<h3 class="text-center">Available Tick: <strong ng-bind="userTick"></strong></h3>-->
-				<!--</div>-->
-			<!--</div>-->
-
-			<!--<div class="row">-->
-
-				<!--<div class="col-sm-12">-->
-
-					<!--<div class="dashboard-tiles">-->
-
-						<!--&lt;!&ndash;-->
-						<!--<div class="col-md-3 col-sm-4">-->
-							<!--<div class="tile-item" ng-click="searchJob()">-->
-								<!--<div class="tile-thumb bg-primary">-->
-									<!--<i class="fa fa-search fa-2x"></i>-->
-								<!--</div>-->
-								<!--<div class="tile-title">-->
-									<!--<h3>Search for Job</h3>-->
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
- 						<!--&ndash;&gt;-->
-						<!--<div class="col-md-3 col-sm-4">-->
-							<!--<div class="tile-item" ng-click="notes()">-->
-								<!--<div class="tile-thumb bg-warning">-->
-									<!--<i class="fa fa-pencil fa-2x"></i>-->
-								<!--</div>-->
-								<!--<div class="tile-title profile-box">-->
-									<!--<h3>My Notes</h3>-->
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
-
-						<!--<div class="col-md-3 col-sm-4">-->
-							<!--<div class="tile-item" ng-click="jobs()">-->
-								<!--<div class="tile-thumb bg-success">-->
-									<!--<i class="fa fa-list fa-2x"></i>-->
-								<!--</div>-->
-								<!--<div class="tile-title profile-box">-->
-									<!--<h3>Jobs</h3>-->
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
-
-						<!--<div class="col-md-3 col-sm-4">-->
-							<!--<div class="tile-item" ng-click="myResumes()">-->
-								<!--<div class="tile-thumb bg-success">-->
-									<!--<i class="fa fa-book fa-2x"></i>-->
-								<!--</div>-->
-								<!--<div class="tile-title profile-box">-->
-									<!--<h3>Resume Management</h3>-->
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
-
-						<!--<div class="col-md-3 col-sm-4">-->
-							<!--<div class="tile-item" ng-click="trackResume()">-->
-								<!--<div class="tile-thumb bg-danger">-->
-									<!--<i class="fa fa-location-arrow fa-2x"></i>-->
-								<!--</div>-->
-								<!--<div class="tile-title profile-box">-->
-									<!--<h3>Track Resume</h3>-->
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
-
-						<!--<div class="col-md-3 col-sm-4">-->
-							<!--<div class="tile-item" ng-click="notifications()">-->
-								<!--<div class="tile-thumb bg-info">-->
-									<!--<i class="fa fa-bell-o fa-2x"></i>-->
-								<!--</div>-->
-								<!--<div class="tile-title profile-box">-->
-									<!--<h3>Notifications</h3>-->
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
-
-						<!--<div ng-repeat="link in adminFeatures">-->
-
-							<!--<div class="col-md-3 col-sm-4">-->
-								<!--<div class="tile-item" ng-click="menuClick(link.action);">-->
-									<!--<div class="{{link.background}}">-->
-										<!--<i class="{{link.icon}}"></i>-->
-									<!--</div>-->
-									<!--<div class="tile-title profile-box">-->
-										<!--<h3>{{link.title}}</h3>-->
-									<!--</div>-->
-								<!--</div>-->
-							<!--</div>-->
-
-						<!--</div>-->
-
-				<!--</div>-->
-
-			<!--</div>-->
-
-		<!--</div>-->
-
-	<!--</section>-->

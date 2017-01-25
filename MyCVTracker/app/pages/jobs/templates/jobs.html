@@ -1,139 +1,58 @@
-<style>
-	.main {
-		margin-top: 85px;
-		margin-bottom: 0px;
-	}
-</style>
+<div ng-controller="JobsCtrl" data-ng-init="init()">
 
-
-	<section id="jobs" ng-controller="JobsCtrl">
-		<!-- body-content -->
-		<div class="body-content clearfix">
-
-			<div class="bg-color2">
-				<div class="container full" data-ng-init="init()">
-					<div class="row" style="margin-top: 30px;">
-						<div class="col-md-8">
-							<!-- form search -->
-							<form class="form-search-list">
-								<div class="row">
-									<div class="col-sm-5 col-xs-6 ">
-										<div class="form-group">
-											<label class="color-black">What</label>
-											<input class="form-control" placeholder="job title, keywords or company name" ng-model="searchText">
-										</div>
-									</div>
-									<div class="col-sm-2 col-xs-12 ">
-										<div class="form-group">
-											<label class="hidden-xs">&nbsp;</label>
-											<button class="btn btn-block btn-theme  btn-success" ng-click="searchForJobs();">Search</button>
-										</div>
-									</div>
-								</div>
-								<!--<p class="text-middle"><a href="#" ng-click="openAdvancedSearchModel();" class="link-black">Advanced Search</a></p>-->
-							</form>  <!-- form search -->
-						</div>
+	<div class="row">
+		<div class="col-md-9">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="jobSearch" class="col-sm-2 control-label">Search Jobs</label>
+					<div class="col-sm-5">
+						<input class="form-control" id="jobSearch" placeholder="job title, keywords or company name" ng-model="searchText"/>
 					</div>
-					<div class="row">
-						<div class="col-md-9">
-
-							<!-- box listing -->
-							<div class="block-section-sm box-list-area">
-
-								<!-- desc top -->
-								<div class="row hidden-xs">
-									<div class="col-sm-6  ">
-									</div>
-									<div class="col-sm-6">
-										<p class="text-right">
-											{{totalJobs}} Jobs
-										</p>
-									</div>
-								</div><!-- end desc top -->
-
-								<div class="row">
-									<div class="col-md-12" dir-paginate="job in allJobs | filter:q | itemsPerPage: pageSize" current-page="currentPage" total-items="totalJobs">
-										<div class="panel-group">
-											<div class="panel panel-default bootstrap-panel">
-												<div class="panel-body">
-													<h3 class="no-margin-top"><a href="/viewJob" ng-click="viewJobsDetailsModel(job, $index);" class="">{{job.jobTitle}}<i class="fa fa-link color-white-mute font-1x"></i></a></h3>
-													<h5><span class="color-black"><span class="color-black bold">Agency: </span>{{job.agency}}</span></h5>
-													<div>
-														<span class="color-white-mute">{{job.createdDate}}</span>
-														<span class="color-white-mute pull-right" ng-show="isAdmin">{{getJobStatus(job.jobStatus)}}</span>
-													</div>
-													<span class="color-black pull-right"><span class="color-black bold">Recruiter: </span>{{job.recruiter}}</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- pagination -->
-								<nav>
-									<dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)"
-															 template-url="app/pages/jobs/templates/dirPagination.tpl.html"></dir-pagination-controls>
-								</nav><!-- pagination -->
-
-								<!-- form get alert -->
-								<!--<div class="get_alert">
-									<h4>Get email updates for the latest jobs in United Kingdom</span></h4>
-									<form>
-										<div class="row">
-											<div class="col-md-9">
-												<div class="form-group">
-													<label>My Email</label>
-													<input class="form-control" placeholder="Enter Email">
-												</div>
-											</div>
-											<div class="col-md-3">
-												<div class="form-group">
-													<label class="hidden-sm hidden-xs ">&nbsp;</label>
-													<button class="btn btn-theme btn-success btn-block">Activate</button>
-												</div>
-											</div>
-										</div>
-										<small>You can cancel email alerts at any time.</small>
-									</form>
-								</div>--><!-- end form get alert -->
-
-							</div><!-- end box listing -->
-
-
-						</div>
-						<div class="col-md-3">
-							<div class="block-section-sm side-right">
-								<div class="row">
-									<div class="col-xs-3">
-										<p><strong>Sort by: </strong></p>
-									</div>
-									<div class="col-xs-9">
-										<p class="text-right">
-											<select name="sortJobs" id="sortJobs" ng-model="JobsSearch.sortyBy" ng-change="updateSortedJobs()" class="form-control">
-												<option ng-repeat="option in jobsSearchCriteriaSortDropDown" value="{{option.id}}">{{option.name}}</option>
-											</select>
-										</p>
-									</div>
-								</div>
-								<accordion>
-									<accordion-group ng-repeat="jobCriteria in jobCriteriaList" is-open="jobCriteria.open">
-										<accordion-heading>
-											{{jobCriteria.name}}
-										</accordion-heading>
-										<div ng-repeat="jobCriteriaDetails in jobCriteria.jobCriteriaDetailsList">
-											<ul class="list-unstyled">
-												<li>
-													<a href="#" class="color-black" ng-click="filterJobs(jobCriteriaDetails,jobCriteria)">{{jobCriteriaDetails.name}}</a>
-												</li>
-											</ul>
-										</div>
-									</accordion-group>
-								</accordion>
-							</div>
-						</div>
+					<div class="col-sm-5">
+						<button class="btn  btn-info" ng-click="searchForJobs();">Search</button>
 					</div>
 				</div>
+			</form>
+			<div class="row hidden-xs">
+				<div class="col-sm-12">
+					<p class="text-right">{{totalJobs}} Jobs</p>
+				</div>
 			</div>
-		</div><!--end body-content -->
-
-	</section>
+			<div ba-panel ba-panel-title="Jobs List" ba-panel-class="with-scroll">
+						<div class="row">
+							<div class="col-sm-12" dir-paginate="job in allJobs | filter:q | itemsPerPage: pageSize" current-page="currentPage" total-items="totalJobs">
+								<div class="panel-group">
+									<div class="panel panel-default bootstrap-panel">
+										<div class="panel-body">
+											<h3 class="no-margin-top"><a href="/viewJob" ng-click="viewJobsDetailsModel(job, $index);" class="">{{job.jobTitle}}<i class="fa fa-link color-white-mute font-1x"></i></a></h3>
+											<h5><span class="color-black"><span class="color-black bold">Agency: </span>{{job.agency}}</span></h5>
+											<div>
+												<span class="color-white-mute">{{job.createdDate}}</span>
+												<span class="color-white-mute pull-right" ng-show="isAdmin">{{getJobStatus(job.jobStatus)}}</span>
+											</div>
+											<span class="color-black pull-right"><span class="color-black bold">Recruiter: </span>{{job.recruiter}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- pagination -->
+						<nav><dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)" template-url="app/pages/jobs/templates/dirPagination.tpl.html">
+						</dir-pagination-controls></nav>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div ba-panel ba-panel-class="with-scroll lists-widget" ba-panel-title="Jobs Criteria">
+				<div class="section-block">
+					<div class="form-group">
+							<label for="sortJobs">Sort by</label>
+							<select name="sortJobs" id="sortJobs" ng-model="JobsSearch.sortyBy" ng-change="updateSortedJobs()" class="form-control">
+								<option ng-repeat="option in jobsSearchCriteriaSortDropDown" value="{{option.id}}">{{option.name}}</option>
+							</select>
+					</div>
+					<div js-tree="basicConfig" ng-model="dragData" tree="basicTree" tree-events="select_node:selectNode;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

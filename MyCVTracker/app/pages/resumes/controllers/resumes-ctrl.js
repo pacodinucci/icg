@@ -52,7 +52,7 @@
 				/////////////////////////////////////////////////////////////////////////////////////
 				//open new Resume Model Function
 				$scope.addNewResumeModel = function () {
-					$scope.clearAlerts();
+
 					$scope.resumeModal = ResumesSvc.getNewResumeModal($scope, 'ResumeCtrl');
 					$scope.myFile=null;
 					$scope.id=null;
@@ -62,7 +62,7 @@
 				//////////////////////////////////////////////////////////////////////////////////////
 				//Open Edit Resume Model Function
 				$scope.openEditResumeModel = function (resumeId) {
-					$scope.clearAlerts();
+
 					$scope.findMyResume(resumeId);
 					$scope.resumeModal = ResumesSvc.getEditResumeModal($scope, 'ResumeCtrl');
 					$scope.id=resumeId;
@@ -244,15 +244,8 @@
 				$scope.formProcessing = false;
 				var $timeout = $injector.get('$timeout');
 
-				$scope.clearAlerts = function () {
-					$scope.alerts = [];
-					$scope.formProcessing = false;
-				};
-
 				$scope.addAlert = function (alertOb) {
 					$scope.alerts.push(alertOb);
-					$scope.formProcessing = false;
-					$timeout( $scope.clearAlerts, ( 3 * 1000 ) );
 				};
 	    }
 	]);

@@ -19,7 +19,7 @@
 				/////////////////////////////////////////////////////////////////////////////////////
 				//open edit Notes Model Function
 				$scope.editNotesModel = function (note) {
-					$scope.clearAlerts();
+
 					$scope.note = note;
 					$scope.notesModal = NotesSvc.getEditNotesModal($scope, 'CampaignNotesCtrl');
 				};

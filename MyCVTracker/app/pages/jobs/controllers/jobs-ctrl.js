@@ -11,11 +11,29 @@
 				var AccountSvc = $injector.get('AccountSvc');
 				var Utilities = $injector.get('Utilities');
 
-
-
 				$scope.user = {
 
 				};
+
+                $scope.dragData = [];
+
+                $scope.basicConfig = {
+                    core: {
+                        multiple: false,
+                        check_callback: true,
+                        worker: true
+                    },
+                    'types': {
+                        'folder': {
+                            'icon': 'ion-navicon-round'
+                        },
+                        'default': {
+                            'icon': 'ion-ios-minus-empty'
+                        }
+                    },
+                    'plugins': ['types'],
+                    'version': 1
+                };
 
 				$scope.disableEditor = true;
 
@@ -112,9 +130,30 @@
                     JobsSvc.getJobCriteriaList().then(
 
                         function (response) {
-                            response.forEach(function (obj) {
-								obj.open = true;
-                                $scope.jobCriteriaList.push(obj);
+                            response.forEach(function (jobCriteriaResponseObj) {
+                                // obj.open = true;
+                                // $scope.jobCriteriaList.push(obj);
+                                var jobCriteriaObj = {
+                                    "id": jobCriteriaResponseObj.id,
+                                    "parent": "#",
+                                    "type": "folder",
+                                    "text": jobCriteriaResponseObj.name,
+                                    "state": {
+                                        "opened": true
+                                    }
+                                };
+                                $scope.dragData.push(jobCriteriaObj);
+                                jobCriteriaResponseObj.jobCriteriaDetailsList.forEach(function (jobCriteriaDetailsResponseObj) {
+                                    var jobCriteriaDetailsObj = {
+                                        "id": jobCriteriaDetailsResponseObj.id,
+                                        "parent": jobCriteriaResponseObj.id,
+                                        "text": jobCriteriaDetailsResponseObj.name,
+                                        "state": {
+                                            "opened": true
+                                        }
+                                    };
+                                    $scope.dragData.push(jobCriteriaDetailsObj);
+                                });
                             });
                         }
                     );
@@ -125,6 +164,18 @@
 					$scope.JobsSearch.pageSize= $scope.pageSize;
 					$scope.getAllJobs();
 				};
+
+                $scope.selectNode = function(event,selected) {
+                    console.log(selected);
+                	if(selected.node.parent != '#'){
+                			var jobCriteriaDetails = {
+                				id:selected.node.id,
+								name:selected.node.text
+							};
+                			var jobCriteria = {id:selected.node.parent};
+                        $scope.filterJobs(jobCriteriaDetails,jobCriteria);
+					}
+                }
 
 				$scope.filterJobs = function (jobCriteriaDetails,jobCriteria) {
 					$scope.JobsSearch.pageNumber=  0;

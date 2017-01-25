@@ -1,9 +1,67 @@
 
 	angular.module('BlurAdmin.pages.account')
 
-	    .controller('AccountCtrl', ['toastr', '$scope', '$injector','$location',
+	    .controller('AccountCtrl', ['toastr', '$scope', '$injector','$location', 'baConfig', 'baUtil','AccessToken',
 
-	        function (toastr, $scope, $injector,$location) {
+	        function (toastr, $scope, $injector,$location, baConfig, baUtil,AccessToken) {
+
+                var pieColor = baUtil.hexToRGB(baConfig.colors.defaultText, 0.2);
+                $scope.charts = [{
+                    color: pieColor,
+                    description: 'My Notes',
+                    link:'notes',
+                    icon: 'notes',
+                    showMenu:true
+                }, {
+                    color: pieColor,
+                    description: 'Jobs',
+                    link:'jobs',
+                    icon: 'jobs',
+                    showMenu:true
+                }, {
+                    color: pieColor,
+                    description: 'Resume Management',
+                    link:'resumes',
+                    icon: 'resume',
+                    showMenu:true
+                }, {
+                    color: pieColor,
+                    description: 'Track Resume',
+                    link:'trackResume',
+                    icon: 'trackResume',
+                    showMenu:true
+                }, {
+                    color: pieColor,
+                    description: 'Notifications',
+                    link:'notifications',
+                    icon: 'notification',
+                    showMenu:true
+                }, {
+                    color: pieColor,
+                    description: 'CV Marketing Notes',
+                    link:'CampaignNotes',
+                    icon: 'notes',
+                    showMenu:AccessToken.getToken().userRole == 'ADMIN'
+                }, {
+                    color: pieColor,
+                    description: 'CV Marketing',
+                    link:'CvMarketing',
+                    icon: 'marketing',
+                    showMenu:AccessToken.getToken().userRole == 'ADMIN'
+                }, {
+                    color: pieColor,
+                    description: 'CV Marketing Notifications',
+                    link:'CampaignNotifications',
+                    icon: 'notification',
+                    showMenu:AccessToken.getToken().userRole == 'ADMIN'
+                }, {
+                    color: pieColor,
+                    description: 'Settings',
+                    link:'settings',
+                    icon: 'settings',
+                    showMenu:AccessToken.getToken().userRole == 'ADMIN'
+                }
+                ];
 
 				var AuthSvc = $injector.get('AuthSvc');
 				var Utilities = $injector.get('Utilities');

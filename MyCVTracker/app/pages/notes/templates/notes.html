@@ -1,157 +1,64 @@
 <section id="account" ng-controller="NotesCtrl">
-
-    <div class="container full">
-
-
-        <!--<div class="row form-group">-->
-            <!--<div class="col-sm-12">-->
-                <!--<h2 class="text-center">Add Notes</h2>-->
-                <!--<div class="clearfix">-->
-                    <!--<div class="pull-right">-->
-                        <!--<button class="btn btn-primary" ng-click="addNewNotesModel()">-->
-                            <!--<i class="fa fa-plus"></i>-->
-                            <!--<span>Add</span>-->
-                        <!--</button>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <div class="row">
-
-            <div class="col-sm-12">
-
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div ba-panel ba-panel-title="Recruiter Note Details" ba-panel-class="with-scroll" ng-repeat="note in user.myNotes">
                 <div class="row">
-
-                    <div class="col-sm-8 col-sm-offset-2">
-
-                        <div class="notes-list">
-
-                            <div class="panel panel-default notes-item" ng-repeat="note in user.myNotes">
-
-                                <div class="panel-body">
-
-                                    <div class="row">
-
-                                        <div class="col-sm-6">
-
-                                            <div class="form-group">
-
-                                                <legend>
-                                                    <div class="text-center">
-                                                        <strong>
-                                                            <span>Recruiter Note Details</span>
-                                                        </strong>
-                                                    </div>
-                                                </legend>
-
-                                            </div>
-
-                                            <div class="row-group">
-
-                                                <div class="icon">
-                                                    <span class="fa fa-fw fa-user-md"></span>
-                                                    <p>Recruiter Name:</p>
-                                                </div>
-
-                                                    <p>
-                                                        <strong>
-                                                            <span ng-bind="note.recruiter"></span>
-                                                        </strong>
-                                                    </p>
-
-
-                                            </div>
-
-                                            <div class="row-group">
-
-                                                <div class="icon">
-                                                    <span class="fa fa-fw fa-user-md"></span>
-                                                    <p>Recruiter Email:</p>
-                                                </div>
-
-                                                <p>
-                                                    <strong>
-                                                        <span ng-bind="note.toRecruiter"></span>
-                                                    </strong>
-                                                </p>
-
-
-                                            </div>
-
-                                            <div class="row-group">
-
-                                                <div class="group-wrapper">
-
-                                                    <div class="icon">
-                                                        <span class="fa fa-fw fa-user-md"></span>
-
-                                                        <p>Agency Name:</p>
-                                                    </div>
-                                                    <p>
-                                                        <strong>
-                                                            <span ng-bind="note.agency"></span>
-                                                        </strong>
-                                                    </p>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row-group">
-
-                                                <div class="group-wrapper">
-
-                                                    <div class="text">
-                                                        Created Date:
-                                                    </div>
-
-                                                    <div class="icon">
-                                                        <span class="fa fa-fw fa-calendar"></span>
-                                                    </div>
-                                                    <p>
-                                                        <strong>
-                                                            <span ng-bind="note.createdDate"></span>
-                                                        </strong>
-                                                    </p>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row-group">
-
-                                                <div class="group-wrapper">
-
-                                                    <div class="text">
-                                                        Notes:
-                                                    </div>
-                                                    <p>
-                                                        <strong>
-                                                            <span ng-bind="note.notes"></span>
-                                                        </strong>
-                                                    </p>
-
-                                                </div>
-                                            </div>
-
-                                            <button data-ng-click="deleteNotes(note.id, $index)" class="btn btn-primary">Delete</button>
-                                            <button data-ng-click="editNotesModel(note, $index)" class="btn btn-primary">Edit</button>
-                                            <button data-ng-click="viewNotesModel(note.id, $index)" class="btn btn-primary">Full Details</button>
-                                            <button data-ng-click="sendTrackedApplicaion(note, $index)" class="btn btn-primary">Send Tracked Application</button>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="RecruiterName"><span class="fa fa-fw fa-user-md"></span> Recruiter Name</label>
+                            <strong>
+                                <span ng-bind="note.recruiter" class="form-control" id="RecruiterName"></span>
+                            </strong>
                         </div>
-
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="RecruiterEmail"><span class="fa fa-fw fa-user-md"></span> Recruiter Email</label>
+                            <strong>
+                                <span ng-bind="note.toRecruiter"class="form-control" id="RecruiterEmail"></span>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="AgencyName"><span class="fa fa-fw fa-user-md"></span> Agency Name</label>
+                            <strong>
+                                <span ng-bind="note.agency"class="form-control" id="AgencyName"></span>
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="CreatedDate"><span class="fa fa-fw fa-calendar"></span> Created Date</label>
+                            <strong>
+                                <span ng-bind="note.createdDate"class="form-control" id="CreatedDate"></span>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="notes"><span class="fa fa-fw fa-sticky-note"></span> Notes</label>
+                            <strong>
+                                <span ng-bind="note.notes"class="form-control" id="notes"></span>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <button data-ng-click="deleteNotes(note.id, $index)" class="btn btn-danger">Delete</button>
+                            <button data-ng-click="editNotesModel(note, $index)" class="btn btn-primary">Edit</button>
+                            <button data-ng-click="viewNotesModel(note.id, $index)" class="btn btn-default">Full Details</button>
+                            <button data-ng-click="sendTrackedApplicaion(note, $index)" class="btn btn-default">Send Tracked Application</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>

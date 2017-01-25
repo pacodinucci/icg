@@ -32,7 +32,7 @@
 				/////////////////////////////////////////////////////////////////////////////////////
 				//open edit Notes Model Function
 				$scope.editNotesModel = function (note) {
-					$scope.clearAlerts();
+
 					$scope.selectedNote =  {
 						id : note.id,
 						toRecruiter : note.toRecruiter,

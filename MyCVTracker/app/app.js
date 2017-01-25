@@ -16,6 +16,7 @@ angular.module('BlurAdmin', [
   'BlurAdmin.theme',
   'BlurAdmin.pages'
 ]).factory('interceptor', ['$q',
-]).run(['$http','Constants','AccessToken','$rootScope', function($http,Constants,AccessToken,$rootScope) {
+]).run(['$http','Constants','AccessToken','$rootScope','editableOptions', function($http,Constants,AccessToken,$rootScope,editableOptions) {
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
     $rootScope.Constants = Constants;
 }]);
