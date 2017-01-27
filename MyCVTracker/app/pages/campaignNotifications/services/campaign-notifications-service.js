@@ -25,8 +25,9 @@
 					getViewNotificationsModal: function (scope, ctrlName) {
 
 						var modalOpts = {
-							templateUrl: '/app/pagescampaignNotifications/templates/campaign_view_notifications.html',
+							templateUrl: '/app/pages/campaignNotifications/templates/campaign_view_notifications.html',
 							controller: ctrlName,
+                            size: 'lg',
 							scope: scope
 						};
 

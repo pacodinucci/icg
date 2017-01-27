@@ -1,18 +1,18 @@
 <div ng-controller="JobsCtrl" data-ng-init="init()">
 
 	<div class="row">
+		<div class="col-md-6">
+			<div class="input-group">
+				<input type="text" class="form-control" id="jobSearch" placeholder="job title, keywords or company name" ng-model="searchText" autocomplete="off" ng-keydown="$event.which === 13 && searchText!='' && searchForJobs()"/>
+				<span class="input-group-btn">
+          			<button type="submit" class="btn btn-default" ng-click="searchForJobs();" ng-disabled="searchText==''"><i class="fa fa-search" aria-hidden="true"/></i> Search</button>
+        		</span>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<button class="btn  btn-danger pull-right" ng-click="resetJobSearch();" ng-show="searchMode"><i class="fa fa-share" aria-hidden="true"></i> Reset</button>
+		</div>
 		<div class="col-md-9">
-			<form class="form-horizontal">
-				<div class="form-group">
-					<label for="jobSearch" class="col-sm-2 control-label">Search Jobs</label>
-					<div class="col-sm-5">
-						<input class="form-control" id="jobSearch" placeholder="job title, keywords or company name" ng-model="searchText"/>
-					</div>
-					<div class="col-sm-5">
-						<button class="btn  btn-info" ng-click="searchForJobs();">Search</button>
-					</div>
-				</div>
-			</form>
 			<div class="row hidden-xs">
 				<div class="col-sm-12">
 					<p class="text-right">{{totalJobs}} Jobs</p>

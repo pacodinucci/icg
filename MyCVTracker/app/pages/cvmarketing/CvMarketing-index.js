@@ -11,6 +11,7 @@
                 url: '/CvMarketing',
                 templateUrl: 'app/pages/cvmarketing/templates/CVMarketing.html',
                 title: 'CV Marketing',
+                controller: 'CvMarketingCtrl',
                 sidebarMeta: {
                     icon:'fa fa-paper-plane-o',
                     order: 9

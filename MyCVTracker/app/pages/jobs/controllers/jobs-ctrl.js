@@ -41,6 +41,8 @@
 
 				$scope.isAdmin = false;
 
+                $scope.searchMode = false;
+
 				$scope.isFromMail = false;
 
 				$scope.selectedJob = JobsSvc.getViewJobData();
@@ -90,7 +92,10 @@
 								jobOb.createdDate = $filter('date')(new Date(jobOb.createdDate), 'EEE,MMM dd yyyy HH:mm:ss');
 								$scope.allJobs.push(jobOb);
 							});
-						}
+						},
+                        function (response) {
+                            toastr.error(Utilities.getAlerts(response.status));
+                        }
 					);
 				};
 
@@ -106,6 +111,7 @@
 				};
 
 				$scope.searchForJobs = function () {
+                    $scope.searchMode = true;
 					$scope.JobsSearch.pageNumber=  0;
 					$scope.JobsSearch.pageSize= $scope.pageSize;
 					$scope.JobsSearch.criteriaDetails= $scope.searchText;
@@ -155,6 +161,9 @@
                                     $scope.dragData.push(jobCriteriaDetailsObj);
                                 });
                             });
+                        },
+                        function (response) {
+                            toastr.error(Utilities.getAlerts(response.status));
                         }
                     );
                 };
@@ -166,8 +175,8 @@
 				};
 
                 $scope.selectNode = function(event,selected) {
-                    console.log(selected);
                 	if(selected.node.parent != '#'){
+                        $scope.searchMode = true;
                 			var jobCriteriaDetails = {
                 				id:selected.node.id,
 								name:selected.node.text
@@ -230,12 +239,28 @@
 				};
 
 				$scope.init = function () {
+					$scope.searchMode = false;
 					$scope.getUserDetails();
 					$scope.JobsSearch.pageNumber=  0;
 					$scope.JobsSearch.pageSize= $scope.pageSize;
 					$scope.getAllJobs();
                     $scope.getJobCriteriaList();
 				};
+
+                $scope.resetJobSearch = function () {
+                    $scope.JobsSearch = {
+                        pageNumber :'',
+                        pageSize: '',
+                        criteriaDetails:'',
+                        criteriaType:'',
+                        sortyBy: 1
+                    };
+                    $scope.searchText = '';
+                    $scope.searchMode = false;
+                    $scope.JobsSearch.pageNumber=  0;
+                    $scope.JobsSearch.pageSize= $scope.pageSize;
+                    $scope.getAllJobs();
+                };
 
 				$scope.initJiewPage = function () {
 					$scope.selectedJob.jobLocation = parseInt($scope.selectedJob.jobLocation, 10);

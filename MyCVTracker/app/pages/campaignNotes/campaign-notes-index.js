@@ -11,6 +11,7 @@
           url: '/CampaignNotes',
           templateUrl: 'app/pages/campaignNotes/templates/notes.html',
           title: 'CV Marketing Notes',
+          controller: 'CampaignNotesCtrl',
           sidebarMeta: {
             icon:'fa fa-paper-plane-o',
             order: 8
