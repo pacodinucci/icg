@@ -50,6 +50,19 @@
                     forgotPassword: function(userModel) {
                         var url = Utilities.getForgotPasswordUrl();
                         return RestConfig.forgotPassword(url, userModel);
+                    },
+
+                    isAuthenticated: function () {
+                        var token = AccessToken.getToken();
+                        return token.getAccessToken() && token.getUserEmail();
+                    },
+                    doActivate: function(key) {
+                        var url = Utilities.getActivationUrl();
+                        return RestConfig.doActivate(url, key);
+                    },
+                    resetNewPassword: function(passwordModel) {
+                        var url = Utilities.resetNewPasswordUrl();
+                        return RestConfig.resetNewPassword(url, passwordModel);
                     }
             	};
 

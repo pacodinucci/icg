@@ -15,7 +15,7 @@ gulp.task('inject-reload', ['inject'], function () {
   browserSync.reload();
 });
 
-gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectReg'], function () {
+gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectReg','injectResetPassword'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.comipledCSS, '/main.css'),
     path.join('!' + conf.paths.comipledCSS, '/vendor.css')
@@ -71,6 +71,37 @@ gulp.task('injectAuth', ['stylesAuth'], function () {
       .pipe($.inject(injectScripts, injectOptions))
       .pipe(wiredep(_.extend({}, conf.wiredep)))
       .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
+});
+
+gulp.task('injectResetPassword', ['stylesAuth'], function () {
+    var injectStyles = gulp.src([
+        path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'),
+        path.join(conf.paths.tmp, '/serve/app/auth.css')
+    ], {read: false});
+
+    var injectScripts = gulp.src([
+        path.join(conf.paths.src, '/assets/js/**/*.js'),
+        path.join(conf.paths.src, '/app/front/login/**/*.module.js'),
+        path.join(conf.paths.src, '/app/front/login/**/*.js'),
+        path.join('!' + conf.paths.src, '/app/front/login/**/*.spec.js'),
+        path.join('!' + conf.paths.src, '/app/front/login/**/*.mock.js'),
+        path.join(conf.paths.src, '/app/shared/**/*.module.js'),
+        path.join(conf.paths.src, '/app/shared/**/*.js'),
+        path.join('!' + conf.paths.src, '/app/shared/**/*.spec.js'),
+        path.join('!' + conf.paths.src, '/app/shared/**/*.mock.js'),
+    ])
+        .on('error', conf.errorHandler('AngularFilesort'));
+
+    var injectOptions = {
+        ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
+        addRootSlash: false
+    };
+
+    return gulp.src(path.join(conf.paths.src, '/resetPassword.html'))
+        .pipe($.inject(injectStyles, injectOptions))
+        .pipe($.inject(injectScripts, injectOptions))
+        .pipe(wiredep(_.extend({}, conf.wiredep)))
+        .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
 });
 
 gulp.task('injectReg', ['stylesAuth'], function () {

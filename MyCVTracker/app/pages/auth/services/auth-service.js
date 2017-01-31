@@ -50,11 +50,6 @@
                         var url = Utilities.getRegisterUrl();
                         return RestConfig.doRegister(url, registerModel);
             		},
-
-                    resetNewPassword: function(passwordModel) {
-                        var url = Utilities.resetNewPasswordUrl();
-                        return RestConfig.resetNewPassword(url, passwordModel);
-                    },
                     
                     doActivate: function(key) {
                         var url = Utilities.getActivationUrl();

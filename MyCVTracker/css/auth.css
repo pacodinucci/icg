@@ -1305,6 +1305,33 @@ body {
   .auth-block .form-group {
     margin-bottom: 12px; }
 
+.reset-block {
+  width: 854px;
+  margin: 0 auto;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 32px; }
+  .reset-block h1 {
+    font-weight: 300;
+    margin-bottom: 28px;
+    text-align: center; }
+  .reset-block p {
+    font-size: 16px; }
+  .reset-block a {
+    text-decoration: none;
+    outline: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    color: #00abff; }
+    .reset-block a:hover {
+      color: #0091d9; }
+  .reset-block .control-label {
+    padding-top: 11px;
+    color: #ffffff; }
+  .reset-block .form-group {
+    margin-bottom: 12px; }
+
 .auth-input {
   width: 300px;
   margin-bottom: 24px; }
