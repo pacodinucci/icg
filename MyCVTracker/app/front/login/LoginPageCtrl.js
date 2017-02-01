@@ -83,7 +83,7 @@ angular.module('BlurAdmin.front.login')
 
             $scope.resetPassword = function ($pwd1, $pwd, resetForm) {
 
-                var activationKey = $location.url().split('?key=')[1];
+                var activationKey = Utilities.getParameters().key;
                 if (resetForm.$valid) {
                     if ($scope.user.resetPassword.newPwd1 == $scope.user.resetPassword.newPwd2) {
                         $scope.resetPassword = {
@@ -93,7 +93,8 @@ angular.module('BlurAdmin.front.login')
                         LoginSvc.resetNewPassword($scope.resetPassword).then(
                             function (data) {
                                 Utilities.showSuccessMsg(Utilities.getAlerts('resetPasswordSuccess').message);
-                                Utilities.gotoHomePage();
+                                var baseURL = Utilities.baseUrl()+'/auth.html';
+                                setTimeout(function(){location.href=baseURL} , 5000);
                             },
 
                             function (response) {
