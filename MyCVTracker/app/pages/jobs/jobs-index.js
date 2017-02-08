@@ -10,23 +10,23 @@
         $stateProvider
 
         // HOME STATES AND NESTED VIEWS ========================================
-        .state('jobs', {
-          url: '/jobs',
-          templateUrl: 'app/pages/jobs/templates/jobs.html',
-          title: 'Jobs',
-          sidebarMeta: {
-            icon: 'fa fa-list',
-            order: 4,
-          }
-        })
-
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('viewJob', {
-          url: '/viewJob',
-          templateUrl: 'app/pages/jobs/templates/view_job.html',
-          title: 'Job Details'
-        });
-
+        // .state('jobs', {
+        //   url: '/jobs',
+        //   templateUrl: 'app/pages/jobs/templates/jobs.html',
+        //   title: 'Jobs',
+        //   sidebarMeta: {
+        //     icon: 'fa fa-list',
+        //     order: 4,
+        //   }
+        // })
+        //
+        // // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+        // .state('viewJob', {
+        //   url: '/viewJob',
+        //   templateUrl: 'app/pages/jobs/templates/view_job.html',
+        //   title: 'Job Details'
+        // });
+        //
         $stateProvider
         .state('activateJob', {
           url: '/activateJob',
