@@ -38,7 +38,11 @@
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             var publicPages = ['/jobs'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
-            if (restrictedPage && token == null) {
+            var frontPage = next.endsWith("/") || next.endsWith(".com");
+            if (frontPage) {
+                $location.path("jobs");
+            }
+            else if (restrictedPage && token == null) {
                 window.location.href = Utilities.baseUrl() + "/auth.html";
             }
         });
