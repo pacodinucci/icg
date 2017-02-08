@@ -23,19 +23,8 @@
     /** @ngInject */
     function routeConfig($urlRouterProvider, baSidebarServiceProvider,$locationProvider) {
         // use the HTML5 History API
-        var cookieValue = null;
-        var name= 'MyCVTracker.user.auth';
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0) cookieValue =  c.substring(nameEQ.length,c.length);
-        }
-        if(cookieValue!=null && cookieValue!=''){
-            $urlRouterProvider.otherwise('/account');
-        }
         $locationProvider.html5Mode(true);
+        $urlRouterProvider.otherwise('/jobs');
     }
 
 
@@ -49,11 +38,7 @@
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             var publicPages = ['/jobs'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
-            var frontPage = next.endsWith("/") || next.endsWith(".com");
-            if (frontPage) {
-                window.location.href = Utilities.baseUrl() + "/front.html";
-            }
-            else if (restrictedPage && token == null) {
+            if (restrictedPage && token == null) {
                 window.location.href = Utilities.baseUrl() + "/auth.html";
             }
         });
