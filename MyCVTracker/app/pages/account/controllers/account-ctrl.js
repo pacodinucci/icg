@@ -12,13 +12,15 @@
                     link:'notes',
                     icon: 'notes',
                     showMenu:true
-                }, {
-                    color: pieColor,
-                    description: 'Jobs',
-                    link:'jobs',
-                    icon: 'jobs',
-                    showMenu:true
-                }, {
+                },
+                // {
+                //     color: pieColor,
+                //     description: 'Jobs',
+                //     link:'jobs',
+                //     icon: 'jobs',
+                //     showMenu:true
+                // },
+				{
                     color: pieColor,
                     description: 'Resume Management',
                     link:'resumes',
