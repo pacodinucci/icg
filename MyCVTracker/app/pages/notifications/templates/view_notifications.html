@@ -10,7 +10,8 @@
                     <th>Recruiter</th>
                     <th>Recruiter Email</th>
                     <th>Agency</th>
-                    <th>Event Type</th>
+                    <th>City</th>
+                    <th>Country</th>
                     <th>Last Tracked Time</th>
                 </tr>
                 </thead>
@@ -20,7 +21,8 @@
                     <td data-ng-bind="notifications.recruiter"></td>
                     <td data-ng-bind="notifications.recruiterEmail"></td>
                     <td data-ng-bind="notifications.agency"></td>
-                    <td data-ng-bind="notifications.eventType"></td>
+                  ` <td data-ng-bind="notifications.city"></td>
+                    <td data-ng-bind="notifications.country"></td>
                     <td data-ng-bind="notifications.lastTrackedTime"></td>
                 </tr>
                 </tbody>
@@ -29,5 +31,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-info" ng-click="$dismiss()">OK</button>
+        <button data-ng-click="viewFullNotifications(modalNotifications[1].id,false)" class="btn btn-info">Full Details</button>
     </div>
 </div>

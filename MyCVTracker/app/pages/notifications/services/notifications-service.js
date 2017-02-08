@@ -11,10 +11,10 @@
 						var url = Utilities.getMyNotificationsUrl();
 						return RestConfig.getMyNotifications(url);
 					},
-					viewFullNotifications: function (notificationId) {
+					viewFullNotifications: function (notificationId,isLimited) {
 						var Utilities = $injector.get('Utilities');
 
-						var url = Utilities.getViewNotificationsUrl()  + notificationId;
+						var url = Utilities.getViewNotificationsUrl()  + notificationId + '&isLimited=' + isLimited;
 						return RestConfig.viewFullNotifications(url);
 					},
 

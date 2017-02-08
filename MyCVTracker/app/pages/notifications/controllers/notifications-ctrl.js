@@ -32,11 +32,11 @@
 			};
 
 		   //Listing Notifications Function
-		   $scope.viewFullNotifications = function (notificationId, index) {
+		   $scope.viewFullNotifications = function (notificationId, isLimited) {
 
 			   $scope.user.viewNotifications = [];
 
-			   NotificationsSvc.viewFullNotifications(notificationId).then(
+			   NotificationsSvc.viewFullNotifications(notificationId,isLimited).then(
 
 				   function (notificationsData) {
 
