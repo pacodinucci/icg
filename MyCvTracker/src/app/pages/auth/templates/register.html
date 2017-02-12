@@ -1,0 +1,48 @@
+
+
+    <section id="register">
+
+        <div class="">     
+
+            <div class="row">
+
+                <div class="col-sm-12">
+
+                    <div class="register-box">
+
+                        <h3 class="title">Register</h3> 
+
+                        <form name="registerForm" ng-submit="register(user.register, registerForm)" autocomplete="off">
+
+                            <div class="form-group" ng-class="{ 'has-error' : user.register.firstName.$invalid && !user.register.firstName.$pristine }">
+                                <input type="text" class="form-control  " placeholder="First Name" ng-model="user.register.firstName" ng-required="true" />
+                            </div>
+
+                            <div class="form-group" ng-class="{ 'has-error' : user.register.lastName.$invalid && !user.register.lastName.$pristine }">
+                                <input type="text" class="form-control" placeholder="Last Name" ng-model="user.register.lastName" ng-required="true" />
+                            </div>
+
+                            <div class="form-group" ng-class="{ 'has-error' : user.register.email.$invalid && !user.register.email.$pristine }">
+                                <input type="email" class="form-control" placeholder="Email" ng-model="user.register.email" ng-required="true" />
+                            </div>
+
+                            <div class="form-group" ng-class="{ 'has-error' : user.register.password.$invalid && !user.register.password.$pristine }">
+                                <input type="password" class="form-control" placeholder="Password" ng-model="user.register.password" ng-required="true" />
+                            </div>
+
+                            <button ng-hide="formProcessing" type="submit" class="btn btn-primary btn-block btn-action" id="register-button" ng-disabled="registerForm.$invalid">Register</button>
+                             <input type="checkbox" checked="true">  You are agree to our<a href="" ui-sref="base.termsOfService" target="_blank"> T&C*</a> and <a target="_blank" href="" ui-sref="base.privacyPolicy"> P&P*</a>.
+                        </form>
+
+                    </div>
+
+                </div>  
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+

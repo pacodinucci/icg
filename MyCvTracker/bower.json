@@ -1,0 +1,16 @@
+{
+  "name": "MyCVTracker",
+  "version": "1.0.0",
+  "homepage": "https://wwww.mycvtracker.com",
+  "authors": [
+    "Hisham"
+  ],
+  "description": "MyCVTracker Website",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

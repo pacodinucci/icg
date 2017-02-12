@@ -1,0 +1,95 @@
+
+
+
+	<section id="TrackResume" ng-controller="TrackResumeCtrl">
+
+		<div class="container full" data-ng-init="validateUserTick()">
+
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<div class="row">
+
+						<div class="col-sm-6 col-sm-offset-3">
+
+							<form name="trackResumeForm">
+
+								<p>This Form will send tracking email to your registered email account.You need to open and verify that email and it will trigger open event in your
+								notification panel.You can forward that email to target Recruiter by removing first line and editing subject "Fw:" etc.</p>
+
+								<div class="form-group">
+									<div class="control-label bold">Available Tick:
+										<span ng-bind="userTick"></span>
+									</div>
+								</div>
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.toRecruiter.$invalid && !trackResume.toRecruiter.$pristine }">
+									<div class="control-label">To</div>
+									<input type="email" class="form-control" placeholder="Recruiter Email Address" ng-model="trackResume.toRecruiter" ng-required="true" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.recruiter.$invalid && !trackResume.recruiter.$pristine }">
+									<div class="control-label">Recruiter</div>
+									<input type="text" class="form-control" placeholder="Recruiter Name" ng-model="trackResume.recruiter" ng-required="true" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.agency.$invalid && !trackResume.agency.$pristine }">
+									<div class="control-label">Agency</div>
+									<input type="text" class="form-control" placeholder="Agency Name" ng-model="trackResume.agency" ng-required="true" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.subject.$invalid && !trackResume.subject.$pristine }">
+									<div class="control-label">Subject</div>
+									<input type="text" class="form-control" placeholder="Subject- Your email will use this subject" ng-model="trackResume.subject" ng-required="true" />
+								</div>
+
+								<!--<div class="form-group" ng-class="{ 'has-error' : trackResume.content.$invalid && !trackResume.content.$pristine }">-->
+									<!--<div class="form-group" text-angular="text-angular" name="trackResume.content" ng-model="trackResume.content"/>-->
+								<!--</div>-->
+
+
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.content.$invalid && !trackResume.content.$pristine }">
+									<div class="control-label">Content</div>
+									<ng-ckeditor
+											ng-model="trackResume.content"
+											remove-buttons="Image"
+											remove-plugins="iframe,flash,smiley" >
+									</ng-ckeditor>
+								</div>
+
+
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.notes.$invalid && !trackResume.notes.$pristine }">
+									<div class="control-label">Notes</div>
+									<textarea class="form-control" placeholder="Notes" ng-model="trackResume.notes" ng-required="true"></textarea>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : trackResume.resume.$invalid && !trackResume.resume.$pristine }">
+									<div class="control-label">Resume - Select One From the List</div>
+									<select
+										class="form-control" 
+										data-placeholder="Resume Title" 
+										ng-model="trackResume.resumeId" 
+										ng-required="true">
+										<option value=""></option>
+										<option ng-repeat="resume in user.myResumes" value="{{resume.id}}">{{resume.resumeTitle}} 	{{resume.resumeType}}</option>
+									</select>
+								</div>
+
+								<div class="form-group" style="margin-top: 40px;">
+									<button type="button" class="btn btn-primary btn-block" ng-disabled="trackResumeForm.$invalid" ng-click="
+									postRequest(trackResumeForm, trackResume)">Proceed</button>
+								</div>
+
+							</form>
+
+						</div>
+
+					</div>
+					
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>

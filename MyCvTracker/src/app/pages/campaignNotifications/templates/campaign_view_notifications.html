@@ -1,0 +1,33 @@
+<div class="modal-content" >
+    <div class="modal-header bg-info">
+        <i class="ion-information-circled modal-icon"></i><span>View Notifications</span>
+    </div>
+    <div class="modal-body text-center">
+        <div class="horizontal-scroll">
+            <table class="table table-hover">
+                <thead>
+                <tr class="black-muted-bg">
+                    <th>Recruiter</th>
+                    <th>Recruiter Email</th>
+                    <th>Agency</th>
+                    <th>Event Type</th>
+                    <th>Last Tracked Time</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr data-ng-repeat="notifications in modalNotifications" class="no-top-border">
+                    <td data-ng-bind="notifications.recruiter"></td>
+                    <td data-ng-bind="notifications.recruiterEmail"></td>
+                    <td data-ng-bind="notifications.agency"></td>
+                    <td data-ng-bind="notifications.eventType"></td>
+                    <td data-ng-bind="notifications.lastTrackedTime"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="$dismiss()">OK</button>
+    </div>
+</div>

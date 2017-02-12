@@ -1,0 +1,52 @@
+<section id="notifications"  ng-controller="CampaignNotificationsCtrl">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="repeatSelect" class="col-sm-2 control-label">Select Campaigns</label>
+                    <div class="col-sm-10">
+                        <select name="repeatSelect" id="repeatSelect" ng-model="user.currentCampaign" class="form-control">
+                            <option ng-repeat="mycampaign in user.myCampaigns" value="{{mycampaign.id}}">{{mycampaign.campaign}}</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-class="with-scroll">
+                <table class="table table-bordered table-hover table-condensed">
+                    <tr>
+                        <td><strong>Recruiter</strong></td>
+                        <td><strong>Recruiter Email</strong></td>
+                        <td><strong>Agency</strong></td>
+                        <td><strong>City</strong></td>
+                        <td><strong>Country</strong></td>
+                        <td><strong>Event Type</strong></td>
+                        <td><strong>Notifications Count</strong></td>
+                        <td><strong>Last Tracked Time</strong></td>
+                        <td><strong>Actions</strong></td>
+                    </tr>
+                    <tr data-ng-repeat="notifications in user.myNotifications | filter : {campaignId:user.currentCampaign}">
+                        <td data-ng-bind="notifications.recruiter"></td>
+                        <td data-ng-bind="notifications.recruiterEmail"></td>
+                        <td data-ng-bind="notifications.agency"></td>
+                        <td data-ng-bind="notifications.city"></td>
+                        <td data-ng-bind="notifications.country"></td>
+                        <td data-ng-bind="notifications.eventType"></td>
+                        <td data-ng-bind="notifications.notificationsCount"></td>
+                        <td data-ng-bind="notifications.lastTrackedTime"></td>
+                        <td>
+                            <div class="buttons">
+                                <button data-ng-click="deleteNotification(notifications.id, $index)" class="btn btn-danger editable-table-button btn-xs">Delete</button>
+                                <button data-ng-click="viewFullNotifications(notifications.id, $index)" class="btn btn-primary editable-table-button btn-xs">Details</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+      
