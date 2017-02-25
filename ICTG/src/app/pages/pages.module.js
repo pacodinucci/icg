@@ -9,10 +9,11 @@
         'ui.router',
         'ICTG.pages.jobs',
         'ICTG.pages.about',
+        'ICTG.pages.home',
     ]).config(routeConfig);
 
     /** @ngInject */
-    function routeConfig($urlRouterProvider, baSidebarServiceProvider,$locationProvider) {
+    function routeConfig($urlRouterProvider,$locationProvider) {
         $urlRouterProvider.otherwise('/jobs');
         $locationProvider.html5Mode(true);
     }

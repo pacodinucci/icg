@@ -7,12 +7,7 @@
 
   angular.module('ICTG.theme', [
       'toastr',
-      'chart.js',
-      'angular-chartist',
-      'angular.morris-chart',
-      'textAngular',
-      'ICTG.theme.components',
-      'ICTG.theme.inputs'
+      'ICTG.theme.components'
   ]);
 
 })();

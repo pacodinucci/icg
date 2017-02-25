@@ -25,7 +25,7 @@ exports.paths = {
     dist: 'release',
     devDist: 'dev-release',
     tmp: '.temp',
-    comipledCSS:'src/css',
+    comipledCSS:'src/assets/css',
     e2e: 'e2e'
 };
 
@@ -36,7 +36,7 @@ exports.paths = {
  */
 exports.wiredep = {
   exclude: [/\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/require\.js/],
-  directory: 'bower_components'
+  directory: 'src/libs'
 };
 
 /**

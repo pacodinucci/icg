@@ -20,28 +20,18 @@ gulp.task('styles', function () {
   return buildStyles();
 });
 
-gulp.task('stylesAuth', function () {
-  return buildSingleScss(path.join(conf.paths.src, '/sass/auth.scss'));
-});
-gulp.task('styles404', function () {
-  return buildSingleScss(path.join(conf.paths.src, '/sass/404.scss'));
-});
-
 var buildStyles = function () {
   var sassOptions = {
     style: 'expanded'
   };
 
   var injectFiles = gulp.src([
-    path.join(conf.paths.src, '/sass/**/_*.scss'),
-    '!' + path.join(conf.paths.src, '/sass/theme/conf/**/*.scss'),
-    '!' + path.join(conf.paths.src, '/sass/404.scss'),
-    '!' + path.join(conf.paths.src, '/sass/auth.scss')
+    path.join(conf.paths.src, '/assets/sass/**/_*.scss'),
   ], {read: false});
 
   var injectOptions = {
     transform: function (filePath) {
-      filePath = filePath.replace(conf.paths.src + '/sass/', '');
+      filePath = filePath.replace(conf.paths.src + '/assets/sass/', '');
       return '@import "' + filePath + '";';
     },
     starttag: '// injector',
@@ -50,7 +40,7 @@ var buildStyles = function () {
   };
 
   return gulp.src([
-    path.join(conf.paths.src, '/sass/main.scss')
+    path.join(conf.paths.src, '/assets/sass/material-kit.scss')
   ])
     .pipe($.inject(injectFiles, injectOptions))
     .pipe(wiredep(_.extend({}, conf.wiredep)))
