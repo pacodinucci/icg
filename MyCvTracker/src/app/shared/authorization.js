@@ -13,6 +13,10 @@
                             var token = AccessToken.getToken();
                             return token.getAccessToken() && token.getUserEmail();
                     },
+
+                    getUserRole : function () {
+                        return AccessToken.getToken().userRole;
+                    }
             	};
 
                 return authorization;

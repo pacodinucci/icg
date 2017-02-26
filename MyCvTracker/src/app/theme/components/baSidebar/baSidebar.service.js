@@ -25,14 +25,21 @@
             return item.level == 0;
           });
 
-          menuItems.forEach(function(item) {
+          menuItems.forEach(function(item,i) {
             var children = states.filter(function(child) {
               return child.level == 1 && child.name.indexOf(item.name) === 0;
             });
             item.subMenu = children.length ? children : null;
           });
 
-          return menuItems.concat(staticMenuItems);
+          var menus = menuItems.concat(staticMenuItems);
+          var newMenus = [];
+            menus.forEach(function(item) {
+                if(item.shown){
+                    newMenus.push(item);
+                }
+          });
+          return newMenus;
         };
 
         this.shouldMenuBeCollapsed = shouldMenuBeCollapsed;
@@ -77,6 +84,7 @@
                   order: meta.order,
                   icon: meta.icon,
                   stateRef: s.name,
+                  shown: s.shown!=null ? s.shown : true
                 };
               })
               .sort(function(a, b) {

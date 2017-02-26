@@ -6,12 +6,14 @@
 
   /** @ngInject */
   function routeConfig($stateProvider) {
+    var Authorization = angular.injector(['BlurAdmin.shared']).get('Authorization');
     $stateProvider
         .state('payment', {
           url: '/payment',
           templateUrl: 'app/pages/payment/templates/payment.html',
           title: 'Payment',
-          sidebarMeta: {
+          shown:Authorization.getUserRole() == 'ADMIN',
+            sidebarMeta: {
             icon: 'fa fa-money',
             order: 800,
           },

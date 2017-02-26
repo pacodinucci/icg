@@ -6,12 +6,14 @@
 
     /** @ngInject */
     function routeConfig($stateProvider) {
+        var Authorization = angular.injector(['BlurAdmin.shared']).get('Authorization');
         $stateProvider
             .state('CvMarketing', {
                 url: '/CvMarketing',
                 templateUrl: 'app/pages/cvmarketing/templates/CVMarketing.html',
                 title: 'CV Marketing',
                 controller: 'CvMarketingCtrl',
+                shown: Authorization.getUserRole() == 'ADMIN',
                 sidebarMeta: {
                     icon:'fa fa-paper-plane-o',
                     order: 9
