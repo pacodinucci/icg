@@ -15,7 +15,7 @@
                     },
 
                     getUserRole : function () {
-                        return AccessToken.getToken().userRole;
+                        return AccessToken.getToken()!=null ? AccessToken.getToken().userRole : 'USER';
                     }
             	};
 
