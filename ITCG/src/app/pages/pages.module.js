@@ -13,6 +13,7 @@
         'ITCG.pages.events',
         'ITCG.pages.sponsors',
         'ITCG.pages.register',
+        'ITCG.pages.login',
         'ITCG.pages.contact',
     ]).config(routeConfig);
 

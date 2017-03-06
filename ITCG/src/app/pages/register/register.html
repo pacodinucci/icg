@@ -1,1 +1,60 @@
-<h1>register</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <main class="auth-main">
+                <div class="auth-block" ng-controller="RegisterPageCtrl as vm">
+
+                    <form class="form-horizontal" name="registerForm" id="registerForm"  ng-submit="register(user.register, registerForm)">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">UserName</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" placeholder="user Name" autocomplete="off" ng-model="user.register.username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">E-mail</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="email" placeholder="E-mail" autocomplete="off" ng-model="user.register.email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedInUrl" class="col-sm-2 control-label">LinkedIn Profile URL</label>
+
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="linkedInUrl" placeholder="LinkedIn Profile URL" autocomplete="off" ng-model="user.register.linkedInUrl" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="skills" class="col-sm-2 control-label">Skills</label>
+
+                            <div class="col-sm-10">
+                                <input type="input" class="form-control" id="skills" placeholder="Ex: java,php,agile,graduate,project management etc " autocomplete="off" ng-model="user.register.skills" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">Password</label>
+
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off" ng-model="user.register.password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword" class="col-sm-2 control-label">Confirm Password</label>
+
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" autocomplete="off" ng-model="user.register.confirmPassword" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default btn-auth" ng-disabled="registerForm.$invalid">Sign up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
