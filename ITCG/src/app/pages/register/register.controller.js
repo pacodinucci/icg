@@ -20,6 +20,6 @@
 							console.log(response);
 							return response.data.token;
 						});
-					}
+				}
 	        }
 	    ]);
