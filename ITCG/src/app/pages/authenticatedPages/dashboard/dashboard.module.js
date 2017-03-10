@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ITCG.pages.login', [])
+    angular.module('ITCG.pages.dashboard', [])
         .config(routeConfig);
 
     /** @ngInject */
@@ -9,10 +9,10 @@
 
         $stateProvider
 
-            .state('login', {
-                url: '/login',
-                templateUrl: 'app/pages/login/login.html',
-                title: 'login',
+            .state('dashboard', {
+                url: '/dashboard',
+                templateUrl: 'app/pages/authenticatedPages/dashboard/dashboard.html',
+                title: 'dashboard',
                 sidebarMeta: {
                     icon: 'fa fa-info-circle',
                     order: 4,
@@ -21,4 +21,3 @@
     }
 
 })();
-

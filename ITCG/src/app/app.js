@@ -7,6 +7,7 @@ angular.module('ITCG', [
   'ITCG.theme',
   'ITCG.pages',
 ]).factory('interceptor', ['$q',
-]).run(['$http','Constants','AccessToken','$rootScope', function($http,Constants,AccessToken,$rootScope) {
+]).run(['$http','Constants','AccessToken','$rootScope','Authorization', function($http,Constants,AccessToken,$rootScope,Authorization) {
     $rootScope.Constants = Constants;
+    $rootScope.Authorization = Authorization;
 }]);

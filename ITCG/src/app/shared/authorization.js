@@ -1,17 +1,17 @@
 	
     angular.module('ITCG.shared')
 
-    	.factory('Authorization', ['$injector','$http',
+    	.factory('Authorization', ['$injector','$http','ipCookie','Constants',
 
-            function ($injector,$http) {
+            function ($injector,$http,ipCookie,Constants) {
 
                 var $q = $injector.get('$q');
                 var AccessToken = $injector.get('AccessToken');
                 
             	var authorization = {
                     isAuthenticated: function () {
-                            var token = AccessToken.getToken();
-                            return token.getAccessToken() && token.getUserEmail();
+                            var token = ipCookie(Constants.accessCookie);
+                            return token!=null;
                     },
 
                     getUserRole : function () {

@@ -79,15 +79,15 @@
             apis: {
 
             	register: {
-            		url: '/auth/signup'
+            		url: '/register'
             	},
 
                 activate: {
-                    url: '/auth/activate'
+                    url: '/activate'
                 },
 
             	login: {
-            		url: '/auth/login'
+            		url: '/login'
             	},
 
                 logout: {
@@ -107,7 +107,7 @@
                 },
 
                 jobsList: {
-                    url: '/user/jobsList',
+                    url: '/jobsList',
                 },
 
                 editJob: {

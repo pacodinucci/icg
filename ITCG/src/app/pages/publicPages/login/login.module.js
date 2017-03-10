@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ITCG.pages.home', [])
+    angular.module('ITCG.pages.login', [])
         .config(routeConfig);
 
     /** @ngInject */
@@ -9,10 +9,10 @@
 
         $stateProvider
 
-            .state('home', {
-                url: '/home',
-                templateUrl: 'app/pages/home/home.html',
-                title: 'Home',
+            .state('login', {
+                url: '/login',
+                templateUrl: 'app/pages/publicPages/login/login.html',
+                title: 'login',
                 sidebarMeta: {
                     icon: 'fa fa-info-circle',
                     order: 4,
@@ -21,3 +21,4 @@
     }
 
 })();
+

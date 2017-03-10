@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ITCG.pages.about', [])
+    angular.module('ITCG.pages.register', [])
         .config(routeConfig);
 
     /** @ngInject */
@@ -9,10 +9,10 @@
 
         $stateProvider
 
-            .state('about', {
-                url: '/about',
-                templateUrl: 'app/pages/about/about.html',
-                title: 'About us',
+            .state('register', {
+                url: '/register',
+                templateUrl: 'app/pages/publicPages/register/register.html',
+                title: 'register',
                 sidebarMeta: {
                     icon: 'fa fa-info-circle',
                     order: 4,
@@ -21,3 +21,4 @@
     }
 
 })();
+

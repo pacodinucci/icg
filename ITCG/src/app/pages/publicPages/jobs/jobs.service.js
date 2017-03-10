@@ -48,7 +48,7 @@
                     getViewJobDetailsModal: function (scope, ctrlName) {
 
                         var modalOpts = {
-                            templateUrl: '/app/pages/jobs/templates/view_job.html',
+                            templateUrl: '/app/pages/publicPages/jobs/templates/view_job.html',
                             controller: ctrlName,
                             scope: scope
                         };
@@ -66,7 +66,7 @@
                     getWarningModal: function (scope, ctrlName) {
 
                         var modalOpts = {
-                            templateUrl: '/app/pages/resumes/templates/warning.html',
+                            templateUrl: '/app/pages/publicPages/resumes/templates/warning.html',
                             controller: ctrlName,
                             scope: scope
                         };
@@ -83,7 +83,7 @@
                     getEditJobModal: function (scope, ctrlName) {
 
                         var modalOpts = {
-                            templateUrl: '/app/pages/jobs/templates/edit_job.html',
+                            templateUrl: '/app/pages/publicPages/jobs/templates/edit_job.html',
                             controller: ctrlName,
                             scope: scope
                         };
@@ -94,7 +94,7 @@
                     getAdvancedSearchModal: function (scope, ctrlName) {
 
                         var modalOpts = {
-                            templateUrl: '/app/pages/jobs/templates/advanced_search.html',
+                            templateUrl: '/app/pages/publicPages/jobs/templates/advanced_search.html',
                             controller: ctrlName,
                             scope: scope
                         };

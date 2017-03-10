@@ -15,6 +15,7 @@
         'ITCG.pages.register',
         'ITCG.pages.login',
         'ITCG.pages.contact',
+        'ITCG.pages.dashboard',
     ]).config(routeConfig);
 
     /** @ngInject */

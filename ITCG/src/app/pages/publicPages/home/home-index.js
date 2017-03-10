@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ITCG.pages.events', [])
+    angular.module('ITCG.pages.home', [])
         .config(routeConfig);
 
     /** @ngInject */
@@ -9,10 +9,10 @@
 
         $stateProvider
 
-            .state('events', {
-                url: '/events',
-                templateUrl: 'app/pages/events/events.html',
-                title: 'events',
+            .state('home', {
+                url: '/home',
+                templateUrl: 'app/pages/publicPages/home/home.html',
+                title: 'Home',
                 sidebarMeta: {
                     icon: 'fa fa-info-circle',
                     order: 4,
@@ -21,4 +21,3 @@
     }
 
 })();
-

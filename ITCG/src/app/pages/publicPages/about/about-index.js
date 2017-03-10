@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('ITCG.pages.sponsors', [])
+    angular.module('ITCG.pages.about', [])
         .config(routeConfig);
 
     /** @ngInject */
@@ -9,10 +9,10 @@
 
         $stateProvider
 
-            .state('sponsors', {
-                url: '/sponsors',
-                templateUrl: 'app/pages/sponsors/sponsors.html',
-                title: 'sponsors',
+            .state('about', {
+                url: '/about',
+                templateUrl: 'app/pages/publicPages/about/about.html',
+                title: 'About us',
                 sidebarMeta: {
                     icon: 'fa fa-info-circle',
                     order: 4,
@@ -21,4 +21,3 @@
     }
 
 })();
-

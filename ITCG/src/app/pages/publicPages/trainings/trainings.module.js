@@ -11,7 +11,7 @@
         //
         //     .state('trainings', {
         //         url: '/trainings',
-        //         templateUrl: 'app/pages/trainings/trainings.html',
+        //         templateUrl: 'app/pages/publicPages/trainings/trainings.html',
         //         title: 'trainings',
         //         sidebarMeta: {
         //             icon: 'fa fa-info-circle',
