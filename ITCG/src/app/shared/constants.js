@@ -13,7 +13,7 @@
                 authorization: 'Authorization'
             },
 
-            baseUrl: 'http://localhost:8080',
+            baseUrl: 'http://www.mycvtracker.com:20000',
 
             fileUpload: {
                 fileSizeLimitInByte : 2100100
