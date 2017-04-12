@@ -311,6 +311,10 @@
 						return Constants.baseUrl + Constants.apis.myResumes.url;
 					},
 
+                    getOtherResumesUrl: function () {
+                        return Constants.baseUrl + Constants.apis.otherResumes.url;
+                    },
+
 					getSaveResumesUrl: function () {
 						return Constants.baseUrl + Constants.apis.saveResume.url;
 					},
@@ -334,6 +338,18 @@
 					getCvMarketingUrl: function () {
 						return Constants.baseUrl + Constants.apis.CvMarketing.url;
 					},
+
+                    getCvMarketingEditUrl: function () {
+                        return Constants.baseUrl + Constants.apis.CvMarketingEdit.url;
+                    },
+
+                    getCvMarketingCloneUrl: function () {
+                        return Constants.baseUrl + Constants.apis.CvMarketingClone.url;
+                    },
+
+                    getCvMarketingDeleteUrl: function () {
+                        return Constants.baseUrl + Constants.apis.CvMarketingDelete.url;
+                    },
 
 					getMyNotificationsUrl: function () {
 						return Constants.baseUrl + Constants.apis.notifications.url;

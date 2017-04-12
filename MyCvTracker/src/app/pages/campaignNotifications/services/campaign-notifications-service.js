@@ -13,7 +13,7 @@
 					},
 					getMyCampaigns: function (userId) {
 						var url = Utilities.getMyCampaignsUrl();
-						return RestConfig.getMyNotifications(url);
+						return RestConfig.getMyCampaigns(url);
 					},
 					viewFullNotifications: function (notificationId) {
 						var Utilities = $injector.get('Utilities');

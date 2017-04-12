@@ -16,6 +16,12 @@
                         return RestConfig.getMyResumes(url);
                     },
 
+                    getOtherResumes: function (userId,userEmailAddress) {
+
+                        var url = Utilities.getOtherResumesUrl() + "?userEmailAddress="+ userEmailAddress ;
+                        return RestConfig.getMyResumes(url);
+                    },
+
                     saveMyResume: function (userResumeOb) {
 
                         var url = Utilities.getSaveResumesUrl();

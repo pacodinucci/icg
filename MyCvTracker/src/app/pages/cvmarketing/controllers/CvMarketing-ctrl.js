@@ -54,14 +54,13 @@
 
 						function (campaignsData) {
 
-							campaignsData.forEach(function (campaigns) {
-								$scope.user.myCampaigns.push(campaigns);
-							});
+							console.log("campaign Data" , campaignsData);
+								$scope.user.myCampaigns = campaignsData;
 						}
 					);
 				};
 
-				$scope.getMyResumes = function () {
+				 $scope.getMyResumes = function () {
 
 					$scope.user.myResumes = [];
 						
@@ -73,22 +72,109 @@
 					);
 				};
 
+				$scope.update = function (mycampaign,campaignData) {
+
+					console.log("campaign to update " , mycampaign);
+
+                    $scope.user.myCampaigns.forEach(function (campaign) {
+
+                    	console.log("please match ", campaign.id)
+                    	if(mycampaign == campaign.id){
+                    		console.log("matched ");
+                            $scope.CvMarketing = campaign;
+						}
+                    });
+
+                    $scope.user.myCampaigns = [];
+
+                    NotificationsSvc.getMyCampaigns().then(
+
+                        function (campaignsData) {
+
+                            console.log("campaign Data" , campaignsData);
+                            $scope.user.myCampaigns = campaignsData;
+
+                        }
+                    );
+
+                }
+
+                $scope.loadResume = function (resumeLookUp) {
+
+                    $scope.user.myResumes = [];
+
+                    ResumesSvc.getOtherResumes($scope.user.id,resumeLookUp).then(
+
+                        function (resumesData) {
+                            $scope.user.myResumes = resumesData;
+                        }
+                    );
+
+                }
+
 				$scope.postRequest = function (requestForm, requestModel) {
 
-					if ( requestForm.$valid ) {
+                    if ( requestForm.$valid ) {
 
-						requestModel.userId = $scope.user.id;
+                        requestModel.userId = $scope.user.id;
 
-						CvMarketingSvc.saveCvMarketingRequest(requestModel).then(
+                        CvMarketingSvc.saveCvMarketingRequest(requestModel).then(
 
-							function (CvMarketingRequestData) {
-								toastr.error(Utilities.getAlerts('CvMarketingRequestSuccess'));
-								Utilities.gotoProfilePage();
-							}
-						);
-				}
-				};
+                            function (CvMarketingRequestData) {
+                                toastr.error(Utilities.getAlerts('CvMarketingRequestSuccess'));
+                                Utilities.gotoProfilePage();
+                            }
+                        );
+                    }
+                };
 
+                $scope.editRequest = function (requestForm, requestModel) {
+
+                    if ( requestForm.$valid ) {
+
+                        requestModel.userId = $scope.user.id;
+
+                        CvMarketingSvc.editCvMarketingRequest(requestModel).then(
+
+                            function (CvMarketingRequestData) {
+                                toastr.error(Utilities.getAlerts('CvMarketingRequestSuccess'));
+                                Utilities.gotoProfilePage();
+                            }
+                        );
+                    }
+                };
+
+                $scope.cloneRequest = function (requestForm, requestModel) {
+
+                    if ( requestForm.$valid ) {
+
+                        requestModel.userId = $scope.user.id;
+
+                        CvMarketingSvc.cloneCvMarketingRequest(requestModel).then(
+
+                            function (CvMarketingRequestData) {
+                                toastr.error(Utilities.getAlerts('CvMarketingRequestSuccess'));
+                                Utilities.gotoProfilePage();
+                            }
+                        );
+                    }
+                };
+
+                $scope.deleteRequest = function (requestForm, requestModel) {
+
+                    if ( requestForm.$valid ) {
+
+                        requestModel.userId = $scope.user.id;
+
+                        CvMarketingSvc.deleteCvMarketingRequest(requestModel.id).then(
+
+                            function (CvMarketingRequestData) {
+                                toastr.error(Utilities.getAlerts('CvMarketingRequestSuccess'));
+                                Utilities.gotoProfilePage();
+                            }
+                        );
+                    }
+                };
 
 				$scope.init = function () {
 					$scope.getUserDetails();

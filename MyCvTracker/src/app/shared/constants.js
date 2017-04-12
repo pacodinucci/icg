@@ -118,6 +118,10 @@
                 	url: '/user/resumesList'
                 },
 
+                otherResumes: {
+                    url: '/user/otherResumesList'
+                },
+
                 saveResume: {
                 	url: '/user/saveResume'
                 },
@@ -136,6 +140,18 @@
 
                 CvMarketing: {
                     url: '/user/saveCVMarketingRequest'
+                },
+
+                CvMarketingEdit: {
+                    url: '/user/editCVMarketingRequest'
+                },
+
+                CvMarketingClone: {
+                    url: '/user/cloneCVMarketingRequest'
+                },
+
+                CvMarketingDelete: {
+                    url: '/user/deleteCVMarketingRequest'
                 },
 
                 CampaignNotes: {

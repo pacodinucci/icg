@@ -1,5 +1,4 @@
 
-
     angular.module('BlurAdmin.pages.CvMarketing')
 
     	.factory('CvMarketingSvc', ['toastr', 'RestConfig', '$injector',
@@ -14,6 +13,21 @@
 
                         var url = Utilities.getCvMarketingUrl();
                         return RestConfig.saveCvMarketingRequest(url, requestOb);
+                    },
+
+                    editCvMarketingRequest: function (requestOb) {
+                        var url = Utilities.getCvMarketingEditUrl();
+                        return RestConfig.editCvMarketingRequest(url, requestOb);
+                    },
+
+                    cloneCvMarketingRequest: function (requestOb) {
+                        var url = Utilities.getCvMarketingCloneUrl();
+                        return RestConfig.cloneCvMarketingRequest(url, requestOb);
+                    },
+
+                    deleteCvMarketingRequest: function (noteId) {
+                        var url = Utilities.getCvMarketingDeleteUrl()+"?id=" + noteId;;
+                        return RestConfig.deleteCvMarketingRequest(url);
                     },
 
                     collectCV: function (trackingId) {

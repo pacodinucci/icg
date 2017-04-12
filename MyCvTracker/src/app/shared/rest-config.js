@@ -53,6 +53,15 @@
 					saveCvMarketingRequest: function (url, requestOb) {
 						return RESTSvc.post(url, requestOb);
 					},
+
+                    editCvMarketingRequest: function (url, requestOb) {
+                        return RESTSvc.put(url, requestOb);
+                    },
+
+                    deleteCvMarketingRequest: function (url) {
+                        return RESTSvc.delete(url);
+                    },
+
 					downloadMyResume: function (url) {
 						return RESTSvc.download(url);
 					},
