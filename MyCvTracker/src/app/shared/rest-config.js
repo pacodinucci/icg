@@ -54,6 +54,10 @@
 						return RESTSvc.post(url, requestOb);
 					},
 
+                    cloneCvMarketingRequest: function (url, requestOb) {
+                        return RESTSvc.post(url, requestOb);
+                    },
+
                     editCvMarketingRequest: function (url, requestOb) {
                         return RESTSvc.put(url, requestOb);
                     },
