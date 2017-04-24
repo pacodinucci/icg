@@ -195,6 +195,28 @@
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 					});
 				};
+
+				$scope.checkUserRole = function () {
+
+                    if($scope.user.userRole == 'ADMIN'){
+                    	return false;
+                    }else {
+                    	return true;
+					}
+                }
+
+                $scope.loadResume = function (resumeLookUp) {
+
+                    $scope.user.myResumes = [];
+
+                    ResumesSvc.getOtherResumes($scope.user.id,resumeLookUp).then(
+
+                        function (resumesData) {
+                            $scope.user.myResumes = resumesData;
+                        }
+                    );
+
+                }
 				
 				//Delete Resume Function
 				$scope.deleteMyResume = function () {

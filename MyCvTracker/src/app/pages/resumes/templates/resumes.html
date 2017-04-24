@@ -13,6 +13,16 @@
 	</div>
 	<div class="row">
 
+
+		<div ng-hide="checkUserRole()">
+			<input type="text" class="form-control" placeholder="resumeLookUp" ng-model="resumeLookUp" ng-required="false" />
+			<button type="button" class="btn btn-primary btn-block" ng-click="loadResume(resumeLookUp)">Resume LookUp</button>
+			<br/>
+			<br/>
+		</div>
+
+
+
 		<div class="col-md-12 col-md-3" ng-repeat="resume in user.myResumes">
 			<a ng-click="openDownloadResumeModel(resume.id);" class="tile-item">
 				<div ba-panel ba-panel-class="xsmall-panel light-text">
