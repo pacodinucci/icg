@@ -1,11 +1,12 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.trackResume', ['ng.ckeditor'])
+  angular.module('BlurAdmin.pages.trackResume', ['ng.ckeditor', 'LocalStorageModule'])
       .config(routeConfig);
 
   /** @ngInject */
-  function routeConfig($stateProvider) {
+  function routeConfig($stateProvider,localStorageServiceProvider) {
+      localStorageServiceProvider.setPrefix('trackResumeForm');
     $stateProvider
         .state('trackResume', {
           url: '/trackResume',

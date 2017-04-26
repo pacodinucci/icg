@@ -14,7 +14,7 @@ angular.module('BlurAdmin', [
   'angular-progress-button-styles',
   'BlurAdmin.shared',
   'BlurAdmin.theme',
-  'BlurAdmin.pages'
+  'BlurAdmin.pages',
 ]).factory('interceptor', ['$q',
 ]).run(['$http','Constants','AccessToken','$rootScope','editableOptions', function($http,Constants,AccessToken,$rootScope,editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'

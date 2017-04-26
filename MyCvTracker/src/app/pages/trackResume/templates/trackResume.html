@@ -23,52 +23,52 @@
 										<span ng-bind="userTick"></span>
 									</div>
 								</div>
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.toRecruiter.$invalid && !trackResume.toRecruiter.$pristine }">
+								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.toRecruiter.$invalid && !trackResumeObj.toRecruiter.$pristine }">
 									<div class="control-label">To</div>
-									<input type="email" class="form-control" placeholder="Recruiter Email Address" ng-model="trackResume.toRecruiter" ng-required="true" />
+									<input type="email" class="form-control" placeholder="Recruiter Email Address" ng-model="trackResumeObj.toRecruiter" ng-required="true" ng-change="showNameChanged()"/>
 								</div>
 
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.recruiter.$invalid && !trackResume.recruiter.$pristine }">
+								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.recruiter.$invalid && !trackResumeObj.recruiter.$pristine }">
 									<div class="control-label">Recruiter</div>
-									<input type="text" class="form-control" placeholder="Recruiter Name" ng-model="trackResume.recruiter" ng-required="true" />
+									<input type="text" class="form-control" placeholder="Recruiter Name" ng-model="trackResumeObj.recruiter" ng-required="true" />
 								</div>
 
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.agency.$invalid && !trackResume.agency.$pristine }">
+								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.agency.$invalid && !trackResumeObj.agency.$pristine }">
 									<div class="control-label">Agency</div>
-									<input type="text" class="form-control" placeholder="Agency Name" ng-model="trackResume.agency" ng-required="true" />
+									<input type="text" class="form-control" placeholder="Agency Name" ng-model="trackResumeObj.agency" ng-required="true" />
 								</div>
 
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.subject.$invalid && !trackResume.subject.$pristine }">
+								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.subject.$invalid && !trackResumeObj.subject.$pristine }">
 									<div class="control-label">Subject</div>
-									<input type="text" class="form-control" placeholder="Subject- Your email will use this subject" ng-model="trackResume.subject" ng-required="true" />
+									<input type="text" class="form-control" placeholder="Subject- Your email will use this subject" ng-model="trackResumeObj.subject" ng-required="true" />
 								</div>
 
-								<!--<div class="form-group" ng-class="{ 'has-error' : trackResume.content.$invalid && !trackResume.content.$pristine }">-->
-									<!--<div class="form-group" text-angular="text-angular" name="trackResume.content" ng-model="trackResume.content"/>-->
+								<!--<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.content.$invalid && !trackResumeObj.content.$pristine }">-->
+									<!--<div class="form-group" text-angular="text-angular" name="trackResumeObj.content" ng-model="trackResumeObj.content"/>-->
 								<!--</div>-->
 
 
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.content.$invalid && !trackResume.content.$pristine }">
+								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.content.$invalid && !trackResumeObj.content.$pristine }">
 									<div class="control-label">Content</div>
 									<ng-ckeditor
-											ng-model="trackResume.content"
+											ng-model="trackResumeObj.content"
 											remove-buttons="Image"
 											remove-plugins="iframe,flash,smiley" >
 									</ng-ckeditor>
 								</div>
 
 
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.notes.$invalid && !trackResume.notes.$pristine }">
+								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.notes.$invalid && !trackResumeObj.notes.$pristine }">
 									<div class="control-label">Notes</div>
-									<textarea class="form-control" placeholder="Notes" ng-model="trackResume.notes" ng-required="true"></textarea>
+									<textarea class="form-control" placeholder="Notes" ng-model="trackResumeObj.notes" ng-required="true"></textarea>
 								</div>
 
-								<div class="form-group" ng-class="{ 'has-error' : trackResume.resume.$invalid && !trackResume.resume.$pristine }">
+								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.resume.$invalid && !trackResumeObj.resume.$pristine }">
 									<div class="control-label">Resume - Select One From the List</div>
 									<select
 										class="form-control" 
 										data-placeholder="Resume Title" 
-										ng-model="trackResume.resumeId" 
+										ng-model="trackResumeObj.resumeId"
 										ng-required="true">
 										<option value=""></option>
 										<option ng-repeat="resume in user.myResumes" value="{{resume.id}}">{{resume.resumeTitle}} 	{{resume.resumeType}}</option>
