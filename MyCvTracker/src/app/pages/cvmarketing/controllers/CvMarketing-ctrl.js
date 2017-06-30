@@ -20,7 +20,7 @@
 					subject: '',
 					content: '',
 					category: '',
-					notes  : '{"campaignType" : "eventBrite","campaignTemplate" : "eventpromo","campaignURL" : "https://javacourse.eventbrite.com/?aff=cvtracker","campaignTitle" : "Java Course"}',
+					notes  : 'campaignType:<emailBrite>,campaignTemplate:<eventpromo>,campaignURL:<https://javacourse.eventbrite.com/?aff=cvtracker>,campaignTitle:<Java Course>',
 					phoneNo : '',
 					resumeId: '',
 					userAccount: '',
