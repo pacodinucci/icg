@@ -24,6 +24,12 @@
                   ` <td data-ng-bind="notifications.city"></td>
                     <td data-ng-bind="notifications.country"></td>
                     <td data-ng-bind="notifications.lastTrackedTime"></td>
+
+                    <td>
+                        <div class="buttons">
+                            <button data-ng-click="deleteNotification(notifications.id, $index)" class="btn btn-danger editable-table-button btn-xs">Delete</button>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
