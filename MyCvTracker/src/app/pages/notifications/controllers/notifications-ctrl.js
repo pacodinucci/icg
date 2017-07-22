@@ -69,7 +69,10 @@
 				.success(function(data, status, headers, config) {
 					console.debug(data+'  '+status+' ' +headers+'  '+config);
 					toastr.success(Utilities.getAlerts('deleteNotificationSuccess'));
-					$scope.user.myNotifications.splice(index, 1);
+                    $scope.user.viewNotifications.splice(index, 1);
+                    $scope.refresh();
+
+
 					})
 					.error(function(data, status, headers, config) {
 						$scope.closeModal();
