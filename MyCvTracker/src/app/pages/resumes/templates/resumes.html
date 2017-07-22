@@ -27,16 +27,16 @@
 			<a ng-click="openDownloadResumeModel(resume.id);" class="tile-item">
 				<div ba-panel ba-panel-class="xsmall-panel light-text">
 					<div class="tile-title">
-						<h3 ng-bind="resume.resumeTitle"></h3>
+						<h3 ng-bind="resume.resumeName"></h3>
 					</div>
 					<div class="tile-text">
-						<h5 ng-bind="resume.resumeType"></h5>
+						<!--<h5 ng-bind="resume.resumeType"></h5>-->
 						<h5 ng-bind="resume.uploadedAt"></h5>
 					</div>
 				</div>
 			</a>
-			<a href="" class="fa fa-pencil" ng-click="openEditResumeModel(resume.id)">Edit    </a>
-			<a href="" class="fa fa-times" ng-click="openDeleteResumeModel(resume.id)">Delete </a>
-		</div>
+			<a href="" class="fa fa-pencil" ng-click="openEditResumeModel(resume.id)">Edit</a>
+			<a href="" class="fa fa-times" ng-click="openDeleteResumeModel(resume.id,resume.resumeName)">Delete </a>
+		</div>resumeName
 	</div>
 </section>

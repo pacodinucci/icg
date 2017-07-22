@@ -118,6 +118,10 @@
                 	url: '/user/resumesList'
                 },
 
+                allMyResumes: {
+                    url: '/user/allResumesList'
+                },
+
                 otherResumes: {
                     url: '/user/otherResumesList'
                 },

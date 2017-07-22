@@ -10,6 +10,11 @@
 
             	return  {
 
+                    getAllMyResumes: function (userId) {
+
+                        var url = Utilities.getAllMyResumesUrl();
+                        return RestConfig.getMyResumes(url);
+                    },
                     getMyResumes: function (userId) {
 
                         var url = Utilities.getMyResumesUrl();
@@ -27,10 +32,10 @@
                         var url = Utilities.getSaveResumesUrl();
                         return RestConfig.saveMyResume(url, userResumeOb);                        
                     },
-                    deleteMyResume: function (id) {
+                    deleteMyResume: function (requestObj) {
 
                         var url = Utilities.geDeleteResumesUrl();
-                        return RestConfig.deleteMyResume(url, id);                        
+                        return RestConfig.deleteMyResume(url, requestObj);
                     },
                     
                     findMyResume: function (id) {
@@ -45,6 +50,16 @@
                     	return RestConfig.downloadMyResume(url);           
                     },
 
+                    getQuickUploadResumeModal: function (scope, ctrlName) {
+
+                        var modalOpts = {
+                            templateUrl: 'app/pages/resumes/templates/quick_upload_resume.html',
+                            controller: ctrlName,
+                            scope: scope
+                        };
+
+                        return $injector.get('$uibModal').open(modalOpts);
+                    },
                     getNewResumeModal: function (scope, ctrlName) {
 
                         var modalOpts = {

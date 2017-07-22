@@ -59,6 +59,17 @@
 					$scope.resumeTitle=null;
 					$scope.resumeType=null;
 				};
+
+                /////////////////////////////////////////////////////////////////////////////////////
+                //open new Resume Model Function
+                $scope.addNewResumeModelFromTrackResumeModel = function () {
+
+                    $scope.resumeModal = ResumesSvc.getQuickUploadResumeModal($scope, 'ResumeCtrl');
+                    $scope.myFile=null;
+                    $scope.id=null;
+                    $scope.resumeTitle=null;
+                    $scope.resumeType="quickCV";
+                };
 				//////////////////////////////////////////////////////////////////////////////////////
 				//Open Edit Resume Model Function
 				$scope.openEditResumeModel = function (resumeId) {
@@ -69,9 +80,10 @@
 				};
 				///////////////////////////////////////////////////////////////////////////////////////
 				//Open Delete Resume Model Function
-				$scope.openDeleteResumeModel = function (resumeId) {
+				$scope.openDeleteResumeModel = function (resumeId,resumeName) {
 					$scope.resumeModal = ResumesSvc.getWarningModal($scope, 'ResumeCtrl');
 					$scope.id=resumeId;
+					$scope.resumeName=resumeName;
 					$scope.modelType='Delete';
 					//Setting the title and message
 					$scope.modelTitle = Utilities.getAlerts('deleteModelTitle').message;
@@ -165,7 +177,7 @@
 			        .success(function(data, status, headers, config) {
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 						$scope.closeModal();
-						toastr.error(Utilities.getAlerts(id==null ? 'resumeAddedSuccess' : 'resumeEditSuccess'));
+						toastr.success(Utilities.getAlerts(id==null ? 'resumeAddedSuccess' : 'resumeEditSuccess'));
 						data.uploadedAt = Utilities.getFormattedDate(data.uploadedAt);
 						if(id!=null){
 							angular.forEach($scope.user.myResumes, function(obj, i) {
@@ -180,6 +192,7 @@
 					})
 			        .error(function(data, status, headers, config) {
 			        	$scope.closeModal();
+
 			        	if(data.message=='resumeSaveTitleDuplicatedError'){
 			        		toastr.error(Utilities.getAlerts('resumeSaveTitleDuplicatedError'));
 			        	}
@@ -188,8 +201,11 @@
 			        	}
 			        	else if(data.message=='resumeSaveLimitError'){
 			        		toastr.error(Utilities.getAlerts('resumeSaveLimitError'));
-			        	}			   
-			        	else{
+			        	}
+                        else if(data.message=='resumeSaveNameDuplicatedError'){
+                            toastr.error(Utilities.getAlerts('resumeSaveNameDuplicatedError'));
+                        }
+                        else{
 			        		toastr.error(Utilities.getAlerts('defaultError'));
 			        	}
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
@@ -221,17 +237,19 @@
 				//Delete Resume Function
 				$scope.deleteMyResume = function () {
 					var id = $scope.id;
-//					ResumesSvc.deleteMyResume(id)
+					var resumeName = $scope.resumeName;
+
+					//ResumesSvc.deleteMyResume(fd)
 					//This must be changed to call the service layer
-					var url = Utilities.geDeleteResumesUrl()+"?id="+id;
-					$http.delete(url, {
+					var url = Utilities.geDeleteResumesUrl()+"?id="+id + "&resumeName="+ resumeName;
+					$http.delete(url,{
 			            transformRequest: angular.identity,
 			            headers: {'Content-Type': undefined}
 			        })
 			        .success(function(data, status, headers, config) {
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 						$scope.closeModal();
-						toastr.error(Utilities.getAlerts('deleteResumeuccess'));
+						toastr.success(Utilities.getAlerts('deleteResumeuccess'));
 						angular.forEach($scope.user.myResumes, function(obj, i) {
 								if(id==obj.id){
 									$scope.user.myResumes.splice(i, 1);    

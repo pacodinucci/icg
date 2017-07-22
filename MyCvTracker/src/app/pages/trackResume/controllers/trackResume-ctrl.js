@@ -161,14 +161,13 @@
 
 					$scope.user.myResumes = [];
 
-					ResumesSvc.getMyResumes($scope.user.id).then(
+					ResumesSvc.getAllMyResumes($scope.user.id).then(
 
 						function (resumesData) {
 							$scope.user.myResumes = resumesData;
 						}
 					);
 				};
-
 
 				$scope.postRequest = function (requestForm, requestModel) {
 

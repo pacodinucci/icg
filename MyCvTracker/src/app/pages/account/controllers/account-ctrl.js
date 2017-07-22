@@ -208,6 +208,12 @@
 					$scope.getUserDetails();
 				};
 
+				$scope.newSkill = function () {
+
+					$scope.skillLevel = 0;
+					$scope.skillType = "";
+                }
+
 				$scope.saveForm = function(model){
 
 					angular.forEach(model.emailSubscribes, function (state) {

@@ -25,6 +25,7 @@
 					resumeId: '',
 					userAccount: '',
 					userPassword: '',
+					trackingNotescreated: '0',
 					target: '',
 					userId: ''
 				};

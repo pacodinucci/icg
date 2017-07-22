@@ -96,6 +96,11 @@
 									<input type="text" class="form-control" placeholder="campaignStatus" ng-model="CvMarketing.campaignStatus" ng-required="false" />
 								</div>
 
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.trackingNotesCreated.$invalid && !CvMarketing.trackingNotesCreated.$pristine }">
+									<div class="control-label">TrackingNotesCreated</div>
+									<input type="text" class="form-control" placeholder="trackingNotesCreated" ng-model="CvMarketing.trackingNotesCreated" ng-required="false" />
+								</div>
+
 								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.paymentReceived.$invalid && !CvMarketing.paymentReceived.$pristine }">
 									<div class="control-label">paymentReceived</div>
 									<input type="text" class="form-control" placeholder="paymentReceived" ng-model="CvMarketing.paymentReceived" ng-required="false" />
