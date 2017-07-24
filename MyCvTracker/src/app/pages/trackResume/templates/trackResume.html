@@ -85,7 +85,7 @@
 										ng-model="trackResumeObj.resumeId"
 										ng-required="true">
 										<option value=""></option>
-										<option ng-repeat="resume in user.myResumes" value="{{resume.id}}">{{resume.resumeName}} <b>{{resume.resumeType}}</b></option>
+										<option ng-repeat="resume in user.myResumes" value="{{resume.id}}">{{resume.resumeName}} {{resume.resumeTitle}} {{resume.resumeType}}</option>
 									</select>
 								</div>
 
