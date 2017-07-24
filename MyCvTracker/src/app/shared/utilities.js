@@ -43,7 +43,7 @@ angular.module('BlurAdmin.shared')
                 },
                 resumeSaveNameDuplicatedError: {
                     type: 'danger',
-                    message: 'This Resume Name is duplicated !',
+                    message: 'Resume Name and Resume Reference already exists !',
                 },
                 resumeSaveTitleDuplicatedError: {
                     type: 'danger',
