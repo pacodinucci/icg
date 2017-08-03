@@ -12,7 +12,8 @@
 				var PaymentSvc = $injector.get('PaymentSvc');
 
 				$scope.user = {
-					myResumes: []
+					myResumes: [],
+                    myFavNotes : []
 				};
 
 				$scope.trackResumeObj = {
@@ -26,6 +27,9 @@
 					resumeId: '',
 					userId: ''
 				};
+
+                $scope.currentNotesType = '';
+
 				///////////////////////////////////Save Values on Refresh////////////////////////////////////////////
 				$scope.trackResumeObj.toRecruiter = localStorageService.get('trackResumeObj.toRecruiter');
 				$scope.trackResumeObj.from = localStorageService.get('trackResumeObj.from');
@@ -157,6 +161,31 @@
 					);
 				};
 
+                $scope.getMyFavNotes = function () {
+
+					TrackResumeSvc.getFavNotes().then(
+                    	function (favNotes) {
+                            $scope.user.myFavNotes = [];
+                    		favNotes.forEach(function (favNote) {
+								$scope.user.myFavNotes.push(favNote);
+                            });
+                        }
+
+					);
+
+                };
+
+                $scope.getMyFavNote = function (favNoteToMatch) {
+
+                    $scope.user.myFavNotes.forEach(function (favNote) {
+                        if(favNote == favNoteToMatch){
+							favNote.id = '';
+                            $scope.trackResumeObj = favNote;
+						}
+                    });
+                }
+
+
 				$scope.getMyResumes = function () {
 
 					$scope.user.myResumes = [];
@@ -174,16 +203,20 @@
 					if ( requestForm.$valid ) {
 
 						requestModel.userId = $scope.user.id;
+                        requestModel.notesType = $scope.currentNotesType;
 
 						TrackResumeSvc.saveResumeTrackRequest(requestModel).then(
 
 							function (resumeTrackRequestData) {
-								localStorageService.clearAll();
-								toastr.error(Utilities.getAlerts('resumeTrackRequestSuccess'));
-								Utilities.gotoProfilePage();
+								toastr.success(Utilities.getAlerts('resumeTrackRequestSuccess'));
+							},
+							function(data){
+								if(data.response.message=='favNotesSaveLimitError'){
+                                    toastr.error(Utilities.getAlerts('favNotesSaveLimitError'));
+                                }
 							}
 						);
-				}
+					}
 				};
 
 				$scope.getUserTick = function () {
@@ -212,7 +245,9 @@
 					$scope.getUserDetails();
 					$scope.getUserTick();
 					$scope.validateUserTick();
-				};
+                    $scope.getMyFavNotes();
+
+                };
 
 				$scope.init();
 	        }

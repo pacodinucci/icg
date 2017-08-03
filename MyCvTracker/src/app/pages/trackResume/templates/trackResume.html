@@ -5,6 +5,22 @@
 
 		<div class="container full" data-ng-init="validateUserTick()">
 
+		<div class="row">
+			<div class="col-md-6" ng-if="user.myFavNotes.length > 0">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="repeatSelect" class="col-sm-2 control-label">Select Fav Notes</label>
+						<div class="col-sm-10">
+							<select name="repeatSelect" id="repeatSelect" ng-model="myFavNote" class="form-control"
+									ng-change="getMyFavNote(myFavNote)"
+								ng-options="myFavNote as myFavNote.notesType for myFavNote in user.myFavNotes"></select>
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+
 			<div class="row">
 
 				<div class="col-sm-12">
@@ -23,6 +39,8 @@
 										<span ng-bind="userTick"></span>
 									</div>
 								</div>
+
+
 								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.toRecruiter.$invalid && !trackResumeObj.toRecruiter.$pristine }">
 									<div class="control-label">To</div>
 									<input type="text" class="form-control" placeholder="Recruiter Email Address" ng-model="trackResumeObj.toRecruiter" ng-required="true" />
@@ -59,7 +77,7 @@
 
 								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.notes.$invalid && !trackResumeObj.notes.$pristine }">
 									<div class="control-label">Notes</div>
-									<textarea class="form-control" placeholder="Notes" ng-model="trackResumeObj.notes" ng-required="true"></textarea>
+									<textarea class="form-control" placeholder="Notes" ng-model="trackResumeObj.notes" ng-required="false"></textarea>
 								</div>
 
 								<section id="resumes" ng-controller="ResumesCtrl">
@@ -89,6 +107,11 @@
 									</select>
 								</div>
 
+								<div class="form-group" ng-class="{ 'has-error' : currentNotesType.$invalid && !currentNotesType.$pristine }">
+									<div class="control-label">Save as Favorite - PM Role, Dev Role etc</div>
+									<input type="text" class="form-control" placeholder="Save as Favorite - PM Role, Dev Role etc" ng-model="currentNotesType" ng-required="false" />
+								</div>
+
 								<div class="form-group" style="margin-top: 40px;">
 									<button type="button" class="btn btn-primary btn-block" ng-disabled="trackResumeForm.$invalid" ng-click="
 									postRequest(trackResumeForm, trackResumeObj)">Proceed</button>
@@ -97,6 +120,7 @@
 							</form>
 
 						</div>
+
 
 					</div>
 					

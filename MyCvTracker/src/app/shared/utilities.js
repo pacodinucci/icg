@@ -57,6 +57,14 @@ angular.module('BlurAdmin.shared')
                     type: 'success',
                     message: 'Your request has been saved.',
                 },
+                favNotesSaveLimitError: {
+                    type: '',
+                    message: 'You have exceeded the limit for number of fav notes'
+                },
+                favNotesAlreadyExitsError: {
+                    type: '',
+                    message: 'Fav Notes is already exists, Please try some other name'
+                },
                 CvMarketingRequestSuccess: {
                     type: 'success',
                     message: 'Your request has been received and we will contact you soon.',
@@ -340,6 +348,10 @@ angular.module('BlurAdmin.shared')
 
                 getTrackResumeUrl: function () {
                     return Constants.baseUrl + Constants.apis.trackResume.url;
+                },
+
+                getFavNotesUrl: function () {
+                    return Constants.baseUrl + Constants.apis.favNotes.url;
                 },
 
                 getCvMarketingUrl: function () {
