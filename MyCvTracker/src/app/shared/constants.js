@@ -142,6 +142,10 @@
                     url: '/user/saveMyNote'
                 },
 
+                favNotes: {
+                    url: '/user/favNotes'
+                },
+
                 CvMarketing: {
                     url: '/user/saveCVMarketingRequest'
                 },
