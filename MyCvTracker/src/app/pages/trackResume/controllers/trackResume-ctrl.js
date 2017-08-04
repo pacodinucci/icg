@@ -209,6 +209,7 @@
 
 							function (resumeTrackRequestData) {
 								toastr.success(Utilities.getAlerts('resumeTrackRequestSuccess'));
+                                Utilities.gotoTrackResumePage();
 							},
 							function(data){
 								if(data.response.message=='favNotesSaveLimitError'){
