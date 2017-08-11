@@ -92,7 +92,7 @@
 						})
 							.success(function (data, status, headers, config) {
 								console.debug(data + '  ' + status + ' ' + headers + '  ' + config);
-								toastr.error(Utilities.getAlerts('deleteNotesSuccess'));
+								toastr.success(Utilities.getAlerts('deleteNotesSuccess'));
 								// new code edited
 								angular.forEach($scope.user.myNotes, function(obj, i) {
 									if(noteId==obj.id){
@@ -139,7 +139,7 @@
 
 					if (notesForm.$valid ) {
 
-						notesModel.userId = $scope.note.userId;
+						//notesModel.userId = $scope.note.userId;
 						notesModel.createdDate = new Date();
 
 						NotesSvc.saveMyNotes(notesModel).then(
