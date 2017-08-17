@@ -101,6 +101,11 @@
 									<input type="text" class="form-control" placeholder="campaignStatus" ng-model="CvMarketing.campaignStatus" ng-required="false" />
 								</div>
 
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.campaignType.$invalid && !CvMarketing.campaignType.$pristine }">
+									<div class="control-label">campaignType</div>
+									<input type="text" class="form-control" placeholder="campaignType" ng-model="CvMarketing.campaignType" ng-required="false" />
+								</div>
+
 								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.trackingNotesCreated.$invalid && !CvMarketing.trackingNotesCreated.$pristine }">
 									<div class="control-label">TrackingNotesCreated</div>
 									<input type="text" class="form-control" placeholder="trackingNotesCreated" ng-model="CvMarketing.trackingNotesCreated" ng-required="false" />
