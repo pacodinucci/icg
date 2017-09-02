@@ -19,6 +19,12 @@
                     getFavNotes: function () {
                         var url = Utilities.getFavNotesUrl();
                         return RestConfig.getMyFavNotes(url);
+                    },
+
+                    saveTrackBulkResumeRequest: function (requestOb) {
+
+                        var url = Utilities.getTrackBulkResumeUrl();
+                        return RestConfig.saveTrackBulkResumeRequest(url, requestOb);
                     }
             	};
             }

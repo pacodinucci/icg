@@ -14,6 +14,7 @@
             },
 
             baseUrl: 'https://mycvtracker.com:8080',
+            //baseUrl: 'http://localhost:20000',
 
             websocket:{
                 reconnect: 5000,
@@ -140,6 +141,10 @@
 
                 trackResume: {
                     url: '/user/saveMyNote'
+                },
+
+                trackBulkResume: {
+                    url: '/user/saveMyBulkNote'
                 },
 
                 favNotes: {
