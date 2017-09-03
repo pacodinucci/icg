@@ -40,21 +40,37 @@
 									</div>
 								</div>
 
-
+								<div class="form-group" style="background-color:black;color:white;padding:20px;">
+									<p>Fill This Section If You wish to send your CV to Single Recruiter/Recepient</p>
 								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.toRecruiter.$invalid && !trackResumeObj.toRecruiter.$pristine }">
 									<div class="control-label">To</div>
-									<input type="text" class="form-control" placeholder="Recruiter Email Address" ng-model="trackResumeObj.toRecruiter" ng-required="true" />
+									<input type="text" class="form-control" placeholder="Recruiter Email Address , e.g. john.hunter@jobs.com" ng-model="trackResumeObj.toRecruiter" ng-required="true" />
 								</div>
 
 								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.recruiter.$invalid && !trackResumeObj.recruiter.$pristine }">
 									<div class="control-label">Recruiter</div>
-									<input type="text" class="form-control" placeholder="Recruiter Name" ng-model="trackResumeObj.recruiter" ng-required="true" />
+									<input type="text" class="form-control" placeholder="Recruiter Name " ng-model="trackResumeObj.recruiter" ng-required="true" />
 								</div>
 
 								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.agency.$invalid && !trackResumeObj.agency.$pristine }">
 									<div class="control-label">Agency</div>
-									<input type="text" class="form-control" placeholder="Agency Name" ng-model="trackResumeObj.agency" ng-required="true" />
+									<input type="text" class="form-control" placeholder="Agency Name - Optional Field " ng-model="trackResumeObj.agency" ng-required="true" />
 								</div>
+								</div>
+								<br/>
+
+								<div class="form-group" style="background-color:grey;color:white;padding:20px;">
+									<p>Fill this section if you wish to send your CV to multiple recepients.
+										Target List - Put Each Target in New Line <br><br>
+										John,john.hunter@jobs.com <br>
+										alice@jobs4u.com
+
+									</p>
+								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.targetList.$invalid && !trackResumeObj.targetList.$pristine }">
+									<textarea class="form-control" placeholder="Please note you can send up to 10 recepients at a single time." ng-model="trackResumeObj.targetList" ng-required="false" ngMaxlength="2500"></textarea>
+								</div>
+								</div>
+								<br/>
 
 								<div class="form-group" ng-class="{ 'has-error' : trackResumeObj.subject.$invalid && !trackResumeObj.subject.$pristine }">
 									<div class="control-label">Subject</div>
@@ -129,5 +145,8 @@
 			</div>
 
 		</div>
+
+		</div>
+
 
 	</section>

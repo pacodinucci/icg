@@ -143,10 +143,6 @@
                     url: '/user/saveMyNote'
                 },
 
-                trackBulkResume: {
-                    url: '/user/saveMyBulkNote'
-                },
-
                 favNotes: {
                     url: '/user/favNotes'
                 },

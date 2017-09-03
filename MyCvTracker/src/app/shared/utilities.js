@@ -350,10 +350,6 @@ angular.module('BlurAdmin.shared')
                     return Constants.baseUrl + Constants.apis.trackResume.url;
                 },
 
-                getTrackBulkResumeUrl: function () {
-                    return Constants.baseUrl + Constants.apis.trackBulkResume.url;
-                },
-
                 getFavNotesUrl: function () {
                     return Constants.baseUrl + Constants.apis.favNotes.url;
                 },
@@ -555,9 +551,7 @@ angular.module('BlurAdmin.shared')
                 gotoTrackResumePage: function () {
                     $location.path('trackResume');
                 },
-                gotoTrackBulkResumePage: function () {
-                    $location.path('trackBulkResume');
-                },
+
                 gotoNotificationsPage: function () {
                     $location.path('notifications');
                 },

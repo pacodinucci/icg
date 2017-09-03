@@ -50,9 +50,6 @@
 					saveResumeTrackRequest: function (url, requestOb) {
 						return RESTSvc.post(url, requestOb);
 					},
-                    saveTrackBulkResumeRequest: function (url, requestOb) {
-                        return RESTSvc.post(url, requestOb);
-                    },
                     getMyFavNotes :function (url) {
 						return RESTSvc.get(url);
                     },

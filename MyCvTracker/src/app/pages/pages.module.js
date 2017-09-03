@@ -12,7 +12,6 @@
         'BlurAdmin.pages.jobs',
         'BlurAdmin.pages.resumes',
         'BlurAdmin.pages.trackResume',
-        'BlurAdmin.pages.trackBulkResume',
         'BlurAdmin.pages.payment',
         'BlurAdmin.pages.notifications',
         'BlurAdmin.pages.auth',

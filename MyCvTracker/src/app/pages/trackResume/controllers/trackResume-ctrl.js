@@ -19,8 +19,7 @@
 				$scope.trackResumeObj = {
 					toRecruiter: '',
 					from: '',
-					recruiter: '',
-					agency: '',
+                    targetList: '',
 					subject: '',
 					content: '',
 					notes  : '',
@@ -40,8 +39,10 @@
 				$scope.trackResumeObj.notes = localStorageService.get('trackResumeObj.notes');
 				$scope.trackResumeObj.resumeId = localStorageService.get('trackResumeObj.resumeId');
 				$scope.trackResumeObj.userId = localStorageService.get('trackResumeObj.userId');
+				$scope.trackResumeObj.targetList = localStorageService.get('trackResumeObj.targetList');
 
-				$scope.$watch(function(scope) { return scope.trackResumeObj.toRecruiter },
+
+                $scope.$watch(function(scope) { return scope.trackResumeObj.toRecruiter },
 					function(newValue, oldValue) {
 						localStorageService.set('trackResumeObj.toRecruiter',newValue);
 					}
@@ -142,6 +143,12 @@
 				}, function(value){
 					$scope.trackResumeObj.userId = value;
 				});
+
+                $scope.$watch(function(){
+                    return localStorageService.get('trackResumeObj.targetList');
+                }, function(value){
+                    $scope.trackResumeObj.targetList = value;
+                });
 				/////////////////////////////////////////////////////////////////////////////////////
 
 				$scope.getUserDetails = function () {
