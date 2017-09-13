@@ -398,6 +398,10 @@ angular.module('BlurAdmin.shared')
                     return Constants.baseUrl + Constants.apis.viewNotes.url;
                 },
 
+                referCandidatesUrl: function () {
+                    return Constants.baseUrl + Constants.apis.referCandidates.url;
+                },
+
                 getDeleteNotificationsUrl: function () {
                     return Constants.baseUrl + Constants.apis.deleteNotifications.url;
                 },

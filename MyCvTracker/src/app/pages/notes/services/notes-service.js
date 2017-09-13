@@ -57,8 +57,12 @@
 
 					},
 
-            		getMyNotes: function (userId) {
+					referCandidates: function(requestOb){
+                    	var url = Utilities.referCandidatesUrl();
+                    	return RestConfig.referCandidates(url,requestOb);
+					},
 
+            		getMyNotes: function (userId) {
             			var url = Utilities.getMyNotesUrl();
             			return  RestConfig.getMyNotes(url);
             		},

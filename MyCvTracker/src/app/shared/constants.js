@@ -181,6 +181,10 @@
                     url: '/user/viewNotes'
                 },
 
+                referCandidates: {
+                    url: '/user/referCandidates'
+                },
+
                 downloadResume: {
                     url: '/user/downloadResume?id='
                 },

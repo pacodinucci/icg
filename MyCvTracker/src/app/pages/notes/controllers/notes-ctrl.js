@@ -11,8 +11,25 @@
 				//$scope.notesModal = {};
 				//Used scopes
 				$scope.user = {
-					myNotes: []
+					myNotes: [],
+					role : ''
 				};
+
+                //Get User Details Function
+                $scope.getUserDetails = function () {
+
+                    AccountSvc.getUser().then(
+
+                        function (userData) {
+
+                            $scope.user.role = userData.userRole;
+                        },
+
+                        function (response) {
+                            toastr.error(Utilities.getAlerts(response.status));
+                        }
+                    );
+                };
 
 				$scope.getMyNotes = function () {
 
@@ -62,6 +79,17 @@
 					);
 				};
 
+                $scope.referCandidates = function (note,referGroup,index) {
+
+                	note.targetList = referGroup;
+                    note.createdDate = new Date();
+
+                    requestObj = note;
+
+                    NotesSvc.referCandidates(requestObj);
+
+                };
+
 				$scope.sendTrackedApplicaion = function (note, index) {
 
 					$scope.notesModal = NotesSvc.getSendTrackedApplicationModal($scope, 'NotesCtrl');
@@ -78,6 +106,14 @@
 					$scope.index = index;
 					$scope.deleteNotesModal = NotesSvc.getDeleteNotesModal($scope, $scope.NotesCtrl);
 				};
+
+                $scope.checkUserRole = function () {
+					if($scope.user.role == 'ADMIN'){
+                        return false;
+                    }else {
+                        return true;
+                    }
+                }
 
 				$scope.NotesCtrl = function () {
 
@@ -181,7 +217,10 @@
 				// edit Notes Function
 
 				$scope.init = function () {
+					$scope.referGroup = '';
+					$scope.getUserDetails();
 					$scope.getMyNotes();
+
 				};
 
 				$scope.init();

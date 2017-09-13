@@ -96,6 +96,9 @@
 					getMyNotes : function(url){
 						return RESTSvc.get(url);
 					},
+                    referCandidates : function(url,data){
+                        return RESTSvc.put(url,data);
+                    },
 					viewMyNotes : function(url){
 						return RESTSvc.get(url);
 					},
