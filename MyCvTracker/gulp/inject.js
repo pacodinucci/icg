@@ -15,10 +15,10 @@ gulp.task('inject-reload', ['inject'], function () {
   browserSync.reload();
 });
 
-gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectReg','injectResetPassword'], function () {
+gulp.task('inject', ['scripts', 'styles', 'injectFront', 'copyVendorImages'], function () {
   var injectStyles = gulp.src([
-    path.join(conf.paths.comipledCSS, '/main.css'),
-    path.join('!' + conf.paths.comipledCSS, '/vendor.css')
+    path.join(conf.paths.tmp, '/serve/app/main.css'),
+    path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
   ], {read: false});
 
   var injectScripts = gulp.src([
@@ -28,7 +28,7 @@ gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectReg','injectReset
     path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
     path.join('!' + conf.paths.src, '/app/**/*.mock.js'),
   ])
-  /*.pipe($.angularFilesort())*/.on('error', conf.errorHandler('AngularFilesort'));
+    /*.pipe($.angularFilesort())*/.on('error', conf.errorHandler('AngularFilesort'));
 
   var injectOptions = {
     ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
@@ -36,116 +36,23 @@ gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectReg','injectReset
   };
 
   return gulp.src(path.join(conf.paths.src, '/index.html'))
-      .pipe($.inject(injectStyles, injectOptions))
-      .pipe($.inject(injectScripts, injectOptions))
-      .pipe(wiredep(_.extend({}, conf.wiredep)))
-      .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
+    .pipe($.inject(injectStyles, injectOptions))
+    .pipe($.inject(injectScripts, injectOptions))
+    .pipe(wiredep(_.extend({}, conf.wiredep)))
+    .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
 });
 
-gulp.task('injectAuth', ['stylesAuth'], function () {
-  var injectStyles = gulp.src([
-    path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'),
-    path.join(conf.paths.tmp, '/serve/app/auth.css')
-  ], {read: false});
-
-  var injectScripts = gulp.src([
-    path.join(conf.paths.src, '/assets/js/**/*.js'),
-    path.join(conf.paths.src, '/app/front/login/**/*.module.js'),
-    path.join(conf.paths.src, '/app/front/login/**/*.js'),
-    path.join('!' + conf.paths.src, '/app/front/login/**/*.spec.js'),
-    path.join('!' + conf.paths.src, '/app/front/login/**/*.mock.js'),
-    path.join(conf.paths.src, '/app/shared/**/*.module.js'),
-    path.join(conf.paths.src, '/app/shared/**/*.js'),
-    path.join('!' + conf.paths.src, '/app/shared/**/*.spec.js'),
-    path.join('!' + conf.paths.src, '/app/shared/**/*.mock.js'),
-  ])
-      .on('error', conf.errorHandler('AngularFilesort'));
-
-  var injectOptions = {
-    ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
-    addRootSlash: false
-  };
-
-  return gulp.src(path.join(conf.paths.src, '/auth.html'))
-      .pipe($.inject(injectStyles, injectOptions))
-      .pipe($.inject(injectScripts, injectOptions))
-      .pipe(wiredep(_.extend({}, conf.wiredep)))
-      .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
-});
-
-gulp.task('injectResetPassword', ['stylesAuth'], function () {
-    var injectStyles = gulp.src([
-        path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'),
-        path.join(conf.paths.tmp, '/serve/app/auth.css')
-    ], {read: false});
-
-    var injectScripts = gulp.src([
-        path.join(conf.paths.src, '/assets/js/**/*.js'),
-        path.join(conf.paths.src, '/app/front/login/**/*.module.js'),
-        path.join(conf.paths.src, '/app/front/login/**/*.js'),
-        path.join('!' + conf.paths.src, '/app/front/login/**/*.spec.js'),
-        path.join('!' + conf.paths.src, '/app/front/login/**/*.mock.js'),
-        path.join(conf.paths.src, '/app/shared/**/*.module.js'),
-        path.join(conf.paths.src, '/app/shared/**/*.js'),
-        path.join('!' + conf.paths.src, '/app/shared/**/*.spec.js'),
-        path.join('!' + conf.paths.src, '/app/shared/**/*.mock.js'),
-    ])
-        .on('error', conf.errorHandler('AngularFilesort'));
-
-    var injectOptions = {
-        ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
-        addRootSlash: false
-    };
-
-    return gulp.src(path.join(conf.paths.src, '/resetPassword.html'))
-        .pipe($.inject(injectStyles, injectOptions))
-        .pipe($.inject(injectScripts, injectOptions))
-        .pipe(wiredep(_.extend({}, conf.wiredep)))
-        .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
-});
-
-gulp.task('injectReg', ['stylesAuth'], function () {
-    var injectStyles = gulp.src([
-        path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'),
-        path.join(conf.paths.tmp, '/serve/app/auth.css')
-    ], {read: false});
-
-    var injectScripts = gulp.src([
-        path.join(conf.paths.src, '/assets/js/**/*.js'),
-        path.join(conf.paths.src, '/app/front/register/**/*.module.js'),
-        path.join(conf.paths.src, '/app/front/register/**/*.js'),
-        path.join('!' + conf.paths.src, '/app/front/register/**/*.spec.js'),
-        path.join('!' + conf.paths.src, '/app/front/register/**/*.mock.js'),
-        path.join(conf.paths.src, '/app/shared/**/*.module.js'),
-        path.join(conf.paths.src, '/app/shared/**/*.js'),
-        path.join('!' + conf.paths.src, '/app/shared/**/*.spec.js'),
-        path.join('!' + conf.paths.src, '/app/shared/**/*.mock.js'),
-    ])
-        .on('error', conf.errorHandler('AngularFilesort'));
-
-    var injectOptions = {
-        ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
-        addRootSlash: false
-    };
-
-    return gulp.src(path.join(conf.paths.src, '/reg.html'))
-        .pipe($.inject(injectStyles, injectOptions))
-        .pipe($.inject(injectScripts, injectOptions))
-        .pipe(wiredep(_.extend({}, conf.wiredep)))
-        .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
-});
-
-gulp.task('inject404', ['styles404'], function () {
+gulp.task('injectFront', ['stylesFront'], function () {
   return injectAlone({
-    css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/404.css')],
-    paths: path.join(conf.paths.src, '/404.html')
+    css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
+    paths: [path.join(conf.paths.src, '/front.html'), path.join(conf.paths.src, '/reg.html')]
   })
 });
 
 var injectAlone = function (options) {
   var injectStyles = gulp.src(
-      options.css
-      , {read: false});
+    options.css
+    , {read: false});
 
   var injectOptions = {
     ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
@@ -153,7 +60,7 @@ var injectAlone = function (options) {
   };
 
   return gulp.src(options.paths)
-      .pipe($.inject(injectStyles, injectOptions))
-      .pipe(wiredep(_.extend({}, conf.wiredep)))
-      .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
+    .pipe($.inject(injectStyles, injectOptions))
+    .pipe(wiredep(_.extend({}, conf.wiredep)))
+    .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
 };

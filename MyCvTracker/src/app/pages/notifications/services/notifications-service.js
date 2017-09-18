@@ -1,6 +1,6 @@
 
 
-     angular.module('BlurAdmin.pages.notifications')
+     angular.module('MyCvTracker.pages.notifications')
 
     	.factory('NotificationsSvc', ['toastr', 'RestConfig', '$injector',
 

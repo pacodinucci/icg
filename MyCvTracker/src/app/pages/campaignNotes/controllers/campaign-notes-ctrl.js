@@ -1,5 +1,5 @@
 
-	angular.module('BlurAdmin.pages.CampaignNotes')
+	angular.module('MyCvTracker.pages.CampaignNotes')
 	  		.controller('CampaignNotesCtrl', ['toastr', '$scope', '$injector', '$http', '$filter','$window',
 
 			function (toastr, $scope, $injector, $http, $filter,$window) {

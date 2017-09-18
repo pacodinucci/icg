@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('BlurAdmin.theme.components')
+  angular.module('MyCvTracker.theme.components')
     .directive('baWizard', baWizard);
 
   /** @ngInject */

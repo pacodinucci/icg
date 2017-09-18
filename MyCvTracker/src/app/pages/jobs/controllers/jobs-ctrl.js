@@ -1,9 +1,9 @@
 
-	angular.module('BlurAdmin.pages.jobs')
+	angular.module('MyCvTracker.pages.jobs')
 
-		.controller('JobsCtrl', ['toastr', '$scope', '$injector','$http','$location','$filter','Constants',
+		.controller('JobsCtrl', ['toastr', '$scope', '$injector','$http','$location','$filter','Constants','$uibModal','$auth','$rootScope',
 
-			function (toastr, $scope, $injector,$http,$location,$filter,Constants) {
+			function (toastr, $scope, $injector,$http,$location,$filter,Constants,$uibModal,$auth,$rootScope) {
 
 				$scope.allJobs = [];
 
@@ -233,7 +233,14 @@
 						},
 
 						function (response) {
-							toastr.error(Utilities.getAlerts(response.status));
+                            $scope.isAdmin = false;
+                            $scope.disableEditor = true;
+                            $scope.viewJobEditor= {
+                                "height": "470",
+                                "removePlugins": "toolbar,resize",
+                                "readOnly" : "true"
+                            };
+							// toastr.error(Utilities.getAlerts(response.status));
 						}
 					);
 				};
@@ -336,11 +343,15 @@
 				};
 
 				$scope.openApplyJobModel = function () {
-					$scope.jobModal = JobsSvc.getWarningModal($scope, $scope.JobsCtrl);
-					$scope.id=$scope.selectedJob.id;
-					$scope.modelType='ApplyJob';
-					$scope.modelTitle = Utilities.getAlerts('applyJobTitle').message;
-					$scope.modelMessage = Utilities.getAlerts('applyJobMessage').message;
+                    if(!$auth.isAuthenticated()){
+                        $scope.openLoginModal();
+                    }else{
+						$scope.jobModal = JobsSvc.getWarningModal($scope, $scope.JobsCtrl);
+						$scope.id=$scope.selectedJob.id;
+						$scope.modelType='ApplyJob';
+						$scope.modelTitle = Utilities.getAlerts('applyJobTitle').message;
+						$scope.modelMessage = Utilities.getAlerts('applyJobMessage').message;
+                    }
 				};
 
 				$scope.openEditJobModel = function () {
@@ -374,6 +385,15 @@
 				$scope.closeModal = function () {
 					$scope.jobModal.dismiss();
 				};
+
+                $scope.openLoginModal = function () {
+                    $rootScope.loginModal = true;
+                    $scope.modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'app/pages/auth/templates/login.html',
+                        controller:'AuthCtrl'
+                    });
+                };
 
 				$scope.redirectToProfilePage = function () {
 

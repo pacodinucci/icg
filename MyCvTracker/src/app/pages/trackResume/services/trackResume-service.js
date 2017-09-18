@@ -1,6 +1,6 @@
 
 
-    angular.module('BlurAdmin.pages.trackResume')
+    angular.module('MyCvTracker.pages.trackResume')
 
     	.factory('TrackResumeSvc', ['toastr', 'RestConfig', '$injector',
 

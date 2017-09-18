@@ -1,5 +1,5 @@
 
-	angular.module('BlurAdmin.pages.notifications')
+	angular.module('MyCvTracker.pages.notifications')
 
 	    .controller('NotificationsCtrl', ['toastr', '$scope', '$injector', '$http', '$filter',
 
@@ -105,7 +105,7 @@
 			};
 		}]);
 
-	angular.module('BlurAdmin.pages.notifications').directive('fileModel', ['$parse', function ($parse) {
+	angular.module('MyCvTracker.pages.notifications').directive('fileModel', ['$parse', function ($parse) {
 	    return {
 	        restrict: 'A',
 	        link: function(scope, element, attrs) {

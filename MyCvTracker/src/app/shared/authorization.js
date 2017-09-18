@@ -1,21 +1,25 @@
 	
-    angular.module('BlurAdmin.shared')
+    angular.module('MyCvTracker.shared')
 
-    	.factory('Authorization', ['$injector','$http',
+    	.factory('Authorization', ['$injector','$http','$window',
 
-            function ($injector,$http) {
+            function ($injector,$http,$window) {
 
                 var $q = $injector.get('$q');
-                var AccessToken = $injector.get('AccessToken');
-                
+
             	var authorization = {
-                    isAuthenticated: function () {
-                            var token = AccessToken.getToken();
-                            return token.getAccessToken() && token.getUserEmail();
+
+                    getUserDetails : function () {
+                        if($window.sessionStorage.loggedInUser){
+                            return angular.fromJson($window.sessionStorage.loggedInUser);
+                        }else {
+                            return angular.fromJson($window.localStorage.loggedInUser);
+                        }
+                        return null;
                     },
 
                     getUserRole : function () {
-                        return AccessToken.getToken()!=null ? AccessToken.getToken().userRole : 'USER';
+                        return this.getUserDetails().userRole;
                     }
             	};
 

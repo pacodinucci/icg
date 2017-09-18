@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.shared', ['ipCookie'])
+  angular.module('MyCvTracker.shared', [])
       .config(routeConfig);
 
   /** @ngInject */

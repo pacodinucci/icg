@@ -5,14 +5,11 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.theme', [
+  angular.module('MyCvTracker.theme', [
       'toastr',
-      'chart.js',
-      'angular-chartist',
-      'angular.morris-chart',
       'textAngular',
-      'BlurAdmin.theme.components',
-      'BlurAdmin.theme.inputs'
+      'MyCvTracker.theme.components',
+      'MyCvTracker.theme.inputs'
   ]);
 
 })();

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.notifications', [])
+  angular.module('MyCvTracker.pages.notifications', [])
       .config(routeConfig);
 
   /** @ngInject */

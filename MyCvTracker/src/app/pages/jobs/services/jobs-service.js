@@ -1,5 +1,5 @@
 
-    angular.module('BlurAdmin.pages.jobs')
+    angular.module('MyCvTracker.pages.jobs')
 
         .factory('JobsSvc', ['toastr', 'RestConfig', '$injector','Utilities',
 
