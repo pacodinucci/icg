@@ -7,7 +7,6 @@
 
   angular.module('MyCvTracker.theme', [
       'toastr',
-      'textAngular',
       'MyCvTracker.theme.components',
       'MyCvTracker.theme.inputs'
   ]);
