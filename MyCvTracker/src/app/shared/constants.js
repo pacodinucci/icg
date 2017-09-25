@@ -185,6 +185,10 @@
                     url: '/user/referCandidates'
                 },
 
+                campaignCandidates: {
+                    url: '/user/campaignCandidates'
+                },
+
                 downloadResume: {
                     url: '/user/downloadResume?id='
                 },

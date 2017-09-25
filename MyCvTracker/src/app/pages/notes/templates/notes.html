@@ -1,66 +1,85 @@
 <section id="account" ng-controller="NotesCtrl">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-            <div ba-panel ba-panel-title="Recruiter Note Details" ba-panel-class="with-scroll" ng-repeat="note in user.myNotes">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="RecruiterName"><span class="fa fa-fw fa-user-md"></span> Recruiter Name</label>
-                            <strong>
-                                <span ng-bind="note.recruiter" class="form-control" id="RecruiterName"></span>
-                            </strong>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="RecruiterEmail"><span class="fa fa-fw fa-user-md"></span> Recruiter Email</label>
-                            <strong>
-                                <span ng-bind="note.toRecruiter"class="form-control" id="RecruiterEmail"></span>
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="AgencyName"><span class="fa fa-fw fa-user-md"></span> Agency Name</label>
-                            <strong>
-                                <span ng-bind="note.agency"class="form-control" id="AgencyName"></span>
-                            </strong>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="CreatedDate"><span class="fa fa-fw fa-calendar"></span> Created Date</label>
-                            <strong>
-                                <span ng-bind="note.createdDate"class="form-control" id="CreatedDate"></span>
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="notes"><span class="fa fa-fw fa-sticky-note"></span> Notes</label>
-                            <strong>
-                                <span ng-bind="note.notes"class="form-control" id="notes"></span>
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <button data-ng-click="deleteNotes(note.id, $index)" class="btn btn-danger">Delete</button>
-                            <button data-ng-click="editNotesModel(note, $index)" class="btn btn-primary">Edit</button>
-                            <button data-ng-click="viewNotesModel(note.id, $index)" class="btn btn-default">Full Details</button>
-                            <button data-ng-click="sendTrackedApplicaion(note, $index)" class="btn btn-default">Send Tracked Application</button>
-
-                            <div ng-hide="checkUserRole()">
-                                <input type="text" class="form-control" placeholder="referGroup" ng-model="referGroup" ng-required="false" />
-                                <button data-ng-click="referCandidates(note, referGroup, $index)" class="btn btn-default">Refer Candidates</button>
+            <div ba-panel ba-panel-title="Recruiter Note Details" ba-panel-class="with-scroll"
+                 ng-repeat="note in user.myNotes">
+                <div ng-style="checkNotesStyle(note)">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="RecruiterName"><span class="fa fa-fw fa-user-md"></span> Recruiter
+                                    Name</label>
+                                <strong>
+                                    <span ng-bind="note.recruiter" class="form-control" id="RecruiterName"></span>
+                                </strong>
                             </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="RecruiterEmail"><span class="fa fa-fw fa-user-md"></span> Recruiter
+                                    Email</label>
+                                <strong>
+                                    <span ng-bind="note.toRecruiter" class="form-control" id="RecruiterEmail"></span>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="AgencyName"><span class="fa fa-fw fa-user-md"></span> Agency Name</label>
+                                <strong>
+                                    <span ng-bind="note.agency" class="form-control" id="AgencyName"></span>
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="CreatedDate"><span class="fa fa-fw fa-calendar"></span> Created Date</label>
+                                <strong>
+                                    <span ng-bind="note.createdDate" class="form-control" id="CreatedDate"></span>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="notes"><span class="fa fa-fw fa-sticky-note"></span> Notes</label>
+                                <strong>
+                                    <span ng-bind="note.notes" class="form-control" id="notes"></span>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <button data-ng-click="deleteNotes(note.id, $index)" class="btn btn-danger">Delete
+                                </button>
+                                <button data-ng-click="editNotesModel(note, $index)" class="btn btn-primary">Edit
+                                </button>
+                                <button data-ng-click="viewNotesModel(note.id, $index)" class="btn btn-default">Full
+                                    Details
+                                </button>
+                                <button data-ng-click="sendTrackedApplicaion(note, $index)" class="btn btn-default">Send
+                                    Tracked Application
+                                </button>
 
+                                <div ng-hide="checkUserRole()">
+                                    <textarea class="form-control" placeholder="referGroup" ng-model="referGroup"
+                                              ng-required="false"/>
+                                    <textarea class="form-control" placeholder="referContent" ng-model="referContent"
+                                              ng-required="false"/>
+                                    <button data-ng-click="referCandidates(note, referGroup, referContent, $index)"
+                                            class="btn btn-default">Refer Candidates
+                                    </button>
+                                    <button data-ng-click="campaignCandidates(note, referGroup, referContent, $index)"
+                                            class="btn btn-default">Campaign Candidates
+                                    </button>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

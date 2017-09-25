@@ -79,14 +79,25 @@
 					);
 				};
 
-                $scope.referCandidates = function (note,referGroup,index) {
+                $scope.referCandidates = function (note,referGroup,referContent,index) {
 
                 	note.targetList = referGroup;
                     note.createdDate = new Date();
-
-                    requestObj = note;
+                    note.referContent = referContent;
+					requestObj = note;
 
                     NotesSvc.referCandidates(requestObj);
+
+                };
+
+                $scope.campaignCandidates = function (note,referGroup,referContent,index) {
+
+                    note.targetList = referGroup;
+                    note.createdDate = new Date();
+                    note.referContent = referContent;
+                    requestObj = note;
+
+                    NotesSvc.campaignCandidates(requestObj);
 
                 };
 
@@ -160,7 +171,6 @@
 					$scope.createdDate=null;
 					$scope.note=null;
 
-
 				};
 
 				//Close the resume model function
@@ -192,6 +202,13 @@
 						);
 					}
 				};
+
+				$scope.checkNotesStyle = function (note) {
+
+					if(note.tracked){
+						return "background-color:green;color:white;padding:20px;";
+					}
+                }
 
 				$scope.modelFunction = function () {
 					if($scope.modelType=='Delete'){

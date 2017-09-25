@@ -62,6 +62,11 @@
                     	return RestConfig.referCandidates(url,requestOb);
 					},
 
+                    campaignCandidates: function(requestOb){
+                        var url = Utilities.campaignCandidatesUrl();
+                        return RestConfig.campaignCandidates(url,requestOb);
+                    },
+
             		getMyNotes: function (userId) {
             			var url = Utilities.getMyNotesUrl();
             			return  RestConfig.getMyNotes(url);

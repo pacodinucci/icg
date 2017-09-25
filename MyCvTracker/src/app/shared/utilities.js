@@ -402,6 +402,10 @@ angular.module('BlurAdmin.shared')
                     return Constants.baseUrl + Constants.apis.referCandidates.url;
                 },
 
+                campaignCandidatesUrl: function () {
+                    return Constants.baseUrl + Constants.apis.campaignCandidates.url;
+                },
+
                 getDeleteNotificationsUrl: function () {
                     return Constants.baseUrl + Constants.apis.deleteNotifications.url;
                 },
