@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.jobs', ['angularUtils.directives.dirPagination','ng.ckeditor'])
+  angular.module('MyCvTracker.pages.jobs', [])
       .config(routeConfig);
 
   /** @ngInject */
@@ -10,22 +10,22 @@
         $stateProvider
 
         // HOME STATES AND NESTED VIEWS ========================================
-        // .state('jobs', {
-        //   url: '/jobs',
-        //   templateUrl: 'app/pages/jobs/templates/jobs.html',
-        //   title: 'Jobs',
-        //   sidebarMeta: {
-        //     icon: 'fa fa-list',
-        //     order: 4,
-        //   }
-        // })
+        .state('jobs', {
+          url: '/jobs',
+          templateUrl: 'app/pages/jobs/templates/jobs.html',
+          title: 'Jobs',
+          sidebarMeta: {
+            icon: 'fa fa-list',
+            order: 4,
+          }
+        })
         //
         // // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        // .state('viewJob', {
-        //   url: '/viewJob',
-        //   templateUrl: 'app/pages/jobs/templates/view_job.html',
-        //   title: 'Job Details'
-        // });
+        .state('viewJob', {
+          url: '/viewJob',
+          templateUrl: 'app/pages/jobs/templates/view_job.html',
+          title: 'Job Details'
+        });
         //
         $stateProvider
         .state('activateJob', {

@@ -1,18 +1,18 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.payment', [])
+  angular.module('MyCvTracker.pages.payment', [])
       .config(routeConfig);
 
   /** @ngInject */
   function routeConfig($stateProvider) {
-    var Authorization = angular.injector(['BlurAdmin.shared']).get('Authorization');
     $stateProvider
         .state('payment', {
           url: '/payment',
           templateUrl: 'app/pages/payment/templates/payment.html',
           title: 'Payment',
-          shown:Authorization.getUserRole() == 'ADMIN',
+          shown: false,
+          requiresPermission:true,
             sidebarMeta: {
             icon: 'fa fa-money',
             order: 800,

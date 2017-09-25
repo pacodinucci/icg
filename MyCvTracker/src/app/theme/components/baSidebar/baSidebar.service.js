@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('BlurAdmin.theme.components')
+  angular.module('MyCvTracker.theme.components')
       .provider('baSidebarService', baSidebarServiceProvider);
 
   /** @ngInject */
@@ -37,6 +37,19 @@
             menus.forEach(function(item) {
                 if(item.shown){
                     newMenus.push(item);
+                }
+                if(item.requiresPermission){
+                    var loggedInUser = null;
+                    if(sessionStorage.loggedInUser){
+                        loggedInUser =  angular.fromJson(sessionStorage.loggedInUser);
+                    }else {
+                        loggedInUser = angular.fromJson(localStorage.loggedInUser);
+                    }
+                    if(loggedInUser){
+                        if(loggedInUser.userRole == 'ADMIN'){
+                            newMenus.push(item);
+                        }
+                    }
                 }
           });
           return newMenus;
@@ -84,6 +97,7 @@
                   order: meta.order,
                   icon: meta.icon,
                   stateRef: s.name,
+                  requiresPermission:s.requiresPermission!=null ? s.requiresPermission : false,
                   shown: s.shown!=null ? s.shown : true
                 };
               })

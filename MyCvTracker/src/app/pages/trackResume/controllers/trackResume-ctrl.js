@@ -1,5 +1,5 @@
 
-	angular.module('BlurAdmin.pages.trackResume')
+	angular.module('MyCvTracker.pages.trackResume')
 
 	    .controller('TrackResumeCtrl', ['toastr', '$scope', '$injector','localStorageService',
 

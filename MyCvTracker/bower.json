@@ -12,5 +12,26 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "angular-route": "~1.5.8",
+    "angular-slimscroll": "~1.1.5",
+    "angular-toastr": "~2.1.1",
+    "angular-progress-button-styles": "~0.1.0",
+    "bootstrap": "~3.3.5",
+    "angular-ui-router": "~0.3.2",
+    "angular-animate": "~1.5.8",
+    "angular-xeditable": "~0.5.0",
+    "ng-js-tree": "~0.0.7",
+    "angularUtils-pagination": "angular-utils-pagination#^0.11.1"
+  },
+  "resolutions": {
+    "jquery": "~3.2.1"
+  },
+  "overrides": {
+    "angular-slimscroll": {
+      "dependencies": []
+    }
+  }
 }

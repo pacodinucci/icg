@@ -1,9 +1,9 @@
 
-	angular.module('BlurAdmin.pages.account')
+	angular.module('MyCvTracker.pages.account')
 
-	    .controller('AccountCtrl', ['toastr', '$scope', '$injector','$location', 'baConfig', 'baUtil','AccessToken',
+	    .controller('AccountCtrl', ['toastr', '$scope', '$injector','$location', 'baConfig', 'baUtil','Authorization',
 
-	        function (toastr, $scope, $injector,$location, baConfig, baUtil,AccessToken) {
+	        function (toastr, $scope, $injector,$location, baConfig, baUtil,Authorization) {
 
                 var pieColor = baUtil.hexToRGB(baConfig.colors.defaultText, 0.2);
                 $scope.charts = [{
@@ -43,25 +43,25 @@
                     description: 'CV Marketing Notes',
                     link:'CampaignNotes',
                     icon: 'notes',
-                    showMenu:AccessToken.getToken().userRole == 'ADMIN'
+                    showMenu:Authorization.getUserRole() == 'ADMIN'
                 }, {
                     color: pieColor,
                     description: 'CV Marketing',
                     link:'CvMarketing',
                     icon: 'marketing',
-                    showMenu:AccessToken.getToken().userRole == 'ADMIN'
+                    showMenu:Authorization.getUserRole() == 'ADMIN'
                 }, {
                     color: pieColor,
                     description: 'CV Marketing Notifications',
                     link:'CampaignNotifications',
                     icon: 'notification',
-                    showMenu:AccessToken.getToken().userRole == 'ADMIN'
+                    showMenu:Authorization.getUserRole() == 'ADMIN'
                 }, {
                     color: pieColor,
                     description: 'Settings',
                     link:'settings',
                     icon: 'settings',
-                    showMenu:AccessToken.getToken().userRole == 'ADMIN'
+                    showMenu:Authorization.getUserRole() == 'ADMIN'
                 }
                 ];
 
@@ -70,9 +70,7 @@
 				var AccountSvc = $injector.get('AccountSvc');
 				var PaymentSvc = $injector.get('PaymentSvc');
 
-				$scope.user = {
-
-				};
+				$scope.user = Authorization.getUserDetails();
 
 				$scope.adminFeatures = [];
 
@@ -123,20 +121,6 @@
 						function (response) {
 							toastr.error(Utilities.getAlerts(response.status));
 
-						}
-					);
-				};
-
-				$scope.getUserDetails = function () {
-
-					AccountSvc.getUser().then(
-
-						function (userData) {
-							$scope.user = userData;
-						},
-
-						function (response) {
-							toastr.error(Utilities.getAlerts(response.status));
 						}
 					);
 				};
@@ -204,10 +188,6 @@
 					);
 				};
 
-				$scope.init = function () {
-					$scope.getUserDetails();
-				};
-
 				$scope.newSkill = function () {
 
 					$scope.skillLevel = 0;
@@ -240,7 +220,5 @@
 				$scope.cancelForm = function(){
 					Utilities.gotoProfilePage();
 				};
-
-				$scope.init();
 	        }
 	    ]);

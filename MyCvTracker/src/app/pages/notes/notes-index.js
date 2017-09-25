@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.pages.notes', [])
+    angular.module('MyCvTracker.pages.notes', [])
         .config(routeConfig);
 
     /** @ngInject */

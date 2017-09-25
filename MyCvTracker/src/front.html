@@ -8,9 +8,20 @@
     <meta name="author" content="lolkittens" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,700' rel='stylesheet' type='text/css'/>
-    <link type='text/css' href='css/front.css' rel='stylesheet' media='screen' />
     <link href="assets/img/homepage/favicon.ico" rel="shortcut icon"/>
     <title>MYCVTracker</title>
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/auth.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
 </head>
 <body>
 <div class="banner">
@@ -29,8 +40,8 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/auth.html" target="_self"><strong>Login</strong></a></li>
-                            <li><a href="/reg.html"  target="_self" class="btn- btn-primary sign-up"><strong>Sign Up</strong></a></li>
+                            <li><a href="/login" target="_self"><strong>Login</strong></a></li>
+                            <li><a href="/register"  target="_self" class="btn- btn-primary sign-up"><strong>Sign Up</strong></a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->

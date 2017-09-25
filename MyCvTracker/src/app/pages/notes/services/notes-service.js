@@ -1,6 +1,6 @@
 
 
-    angular.module('BlurAdmin.pages.notes')
+    angular.module('MyCvTracker.pages.notes')
 
     	.factory('NotesSvc', ['toastr', 'RestConfig', '$injector',
 

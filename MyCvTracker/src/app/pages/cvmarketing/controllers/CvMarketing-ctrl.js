@@ -1,5 +1,5 @@
 
-	angular.module('BlurAdmin.pages.CvMarketing')
+	angular.module('MyCvTracker.pages.CvMarketing')
 
 	    .controller('CvMarketingCtrl', ['toastr', '$scope', '$injector','$location',
 

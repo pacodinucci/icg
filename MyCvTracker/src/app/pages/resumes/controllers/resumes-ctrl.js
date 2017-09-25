@@ -1,5 +1,5 @@
 
-	angular.module('BlurAdmin.pages.resumes')
+	angular.module('MyCvTracker.pages.resumes')
 
 	    .controller('ResumesCtrl', ['toastr', '$scope', '$injector','$http',
 
@@ -8,13 +8,13 @@
 				var Utilities = $injector.get('Utilities');
 				var AccountSvc = $injector.get('AccountSvc');
 				var ResumesSvc = $injector.get('ResumesSvc');
-				
+
 				//Used scopes
 				$scope.resumeModal = {};
 				$scope.user = {
 					myResumes: []
 				};
-				
+
 				//Get User Details Function
 				$scope.getUserDetails = function () {
 
@@ -289,7 +289,7 @@
 				};
 	    }
 	]);
-	angular.module('BlurAdmin.pages.resumes').directive('fileModel', ['$parse','$injector','Constants', function ($parse,$injector,Constants) {
+	angular.module('MyCvTracker.pages.resumes').directive('fileModel', ['$parse','$injector','Constants', function ($parse,$injector,Constants) {
 	    return {
 	        restrict: 'A',
 	        link: function(scope, element, attrs) {

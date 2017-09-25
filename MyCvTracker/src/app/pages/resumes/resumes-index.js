@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.resumes', [])
+  angular.module('MyCvTracker.pages.resumes', [])
       .config(routeConfig);
 
   /** @ngInject */

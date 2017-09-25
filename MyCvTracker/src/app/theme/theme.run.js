@@ -5,27 +5,19 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.theme')
+  angular.module('MyCvTracker.theme')
     .run(themeRun);
 
   /** @ngInject */
-  function themeRun($timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings,$injector) {
+  function themeRun($timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings,$injector,$auth) {
 
     
     var whatToWait = [
-      // preloader.loadAmCharts(),
       $timeout(3000)
     ];
 
-    var theme = themeLayoutSettings;
-    if (theme.blur) {
-      if (theme.mobile) {
-        whatToWait.unshift(preloader.loadImg(layoutPaths.images.root + 'blur-bg-mobile.jpg'));
-      } else {
-        whatToWait.unshift(preloader.loadImg(layoutPaths.images.root + 'blur-bg.jpg'));
-        whatToWait.unshift(preloader.loadImg(layoutPaths.images.root + 'blur-bg-blurred.jpg'));
-      }
-    }
+    baSidebarService.setMenuCollapsed(true);
+    $rootScope.$isAuthenticated = $auth.isAuthenticated();
 
     $q.all(whatToWait).then(function () {
       $rootScope.$pageFinishedLoading = true;

@@ -5,56 +5,53 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.pages', [
+    angular.module('MyCvTracker.pages', [
         'ui.router',
-        'BlurAdmin.pages.account',
-        'BlurAdmin.pages.notes',
-        'BlurAdmin.pages.jobs',
-        'BlurAdmin.pages.resumes',
-        'BlurAdmin.pages.trackResume',
-        'BlurAdmin.pages.payment',
-        'BlurAdmin.pages.notifications',
-        'BlurAdmin.pages.auth',
-        'BlurAdmin.pages.CampaignNotes',
-        'BlurAdmin.pages.CvMarketing',
-        'BlurAdmin.pages.campaignNotifications'
-    ]).run(run).config(routeConfig);
+        'MyCvTracker.pages.auth',
+        'MyCvTracker.pages.account',
+        'MyCvTracker.pages.notes',
+        'MyCvTracker.pages.jobs',
+        'MyCvTracker.pages.resumes',
+        'MyCvTracker.pages.trackResume',
+        'MyCvTracker.pages.payment',
+        'MyCvTracker.pages.notifications',
+        'MyCvTracker.pages.CampaignNotes',
+        'MyCvTracker.pages.CvMarketing',
+        'MyCvTracker.pages.campaignNotifications'
+    ]).run(run);
 
-    /** @ngInject */
-    function routeConfig($urlRouterProvider, baSidebarServiceProvider,$locationProvider) {
-        // use the HTML5 History API
-        var cookieValue = null;
-        var name= 'MyCVTracker.user.auth';
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
-            var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0) cookieValue =  c.substring(nameEQ.length,c.length);
-        }
-        if(cookieValue!=null && cookieValue!=''){
-            $urlRouterProvider.otherwise('/account');
-        }
-        $locationProvider.html5Mode(true);
-    }
-
-
-    function run(Constants,AccessToken,$rootScope, $http, $location,Utilities) {
+    function run(Constants, $rootScope, $http, $location, Utilities, $auth) {
         // keep user logged in after page refresh
-        var token = AccessToken.getToken();
-        if(token!=null)
-            $http.defaults.headers.common[Constants.headers.authorization] = token.getAccessToken().authorization;
+        // // redirect to login page if not logged in and trying to access a restricted page
+        if($auth.isAuthenticated()){
+            var loggedInUser = null;
+            if(sessionStorage.loggedInUser){
+                loggedInUser =  angular.fromJson(sessionStorage.loggedInUser);
+            }else {
+                loggedInUser = angular.fromJson(localStorage.loggedInUser);
+            }
+            $rootScope.loggedInUser = loggedInUser;
+        }
 
-        // redirect to login page if not logged in and trying to access a restricted page
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var publicPages = ['/jobs'];
+        $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
+            var publicPages = ['/jobs', '/viewJob','/login','/register'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
+            $rootScope.loginModal = false;
+            // console.log(event);
+            // console.log(next);
+            // console.log(current);
+            var authPages = ['/login','/register'];
+            // console.log($location.path());
+            var isAuthPages = authPages.indexOf($location.path()) !== -1;
+            // console.log(isAuthPages);
             var frontPage = next.endsWith("/") || next.endsWith(".com");
             if (frontPage) {
                 window.location.href = Utilities.baseUrl() + "/front.html";
             }
-            else if (restrictedPage && token == null) {
-                window.location.href = Utilities.baseUrl() + "/auth.html";
+            else if (restrictedPage && !$auth.isAuthenticated()) {
+                    $location.url("/login");
+            }else if(isAuthPages && $auth.isAuthenticated()){
+                $location.url("/account");
             }
         });
     }

@@ -1,7 +1,7 @@
 /**
  * Created by Hisham on 5/26/2015.
  */
-angular.module('BlurAdmin.pages.notifications')
+angular.module('MyCvTracker.pages.notifications')
     .factory("PushNotificationsSvc", ['$q', '$timeout', 'Constants','$injector', function ($q, $timeout, Constants,$injector) {
 
 

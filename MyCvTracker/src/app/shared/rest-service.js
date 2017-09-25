@@ -1,6 +1,6 @@
 
 
-	angular.module('BlurAdmin.shared')
+	angular.module('MyCvTracker.shared')
 
 		.factory('RESTSvc', ['$rootScope', '$q', '$http', '$injector',
 

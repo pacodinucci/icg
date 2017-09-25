@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.account', [])
+  angular.module('MyCvTracker.pages.account', [])
       .config(routeConfig);
 
   /** @ngInject */

@@ -1,43 +1,26 @@
 
 
-    angular.module('BlurAdmin.pages.account')
+    angular.module('MyCvTracker.pages.account')
 
     	.factory('AccountSvc', ['toastr', 'RestConfig', '$injector',
 
             function (toastr, RestConfig, $injector) {
 
                 var $q = $injector.get('$q');
-                var AccessToken = $injector.get('AccessToken');
+                var Authorization = $injector.get('Authorization');
                 var Utilities = $injector.get('Utilities');
-
-                //AccessToken.removeToken();
 
             	return  {
 
                     getUser: function () {
-
                         var defered = $q.defer();
-
-                        var token = AccessToken.getToken();
-
-                        if ( token ) {
-
-                            var user = {
-
-                                id: token.getUserId(),
-                                userRole: token.getUserRole(),
-                                email: token.getUserEmail(),
-                                firstName: token.getFirstName(),
-                                lastName: token.getLastName()
-                            };
-
+                        var user = Authorization.getUserDetails();
+                        if ( user ) {
                             defered.resolve(user);
                         }
-
                         else {
                             defered.reject({status: 401});
                         }
-
                         return defered.promise;
                     },
 

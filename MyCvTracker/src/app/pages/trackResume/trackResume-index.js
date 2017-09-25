@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('BlurAdmin.pages.trackResume', ['ng.ckeditor', 'LocalStorageModule'])
+  angular.module('MyCvTracker.pages.trackResume', ['ng.ckeditor', 'LocalStorageModule'])
       .config(routeConfig);
 
   /** @ngInject */

@@ -16,7 +16,6 @@ exports.paths = {
   dist: 'release',
   devDist: 'dev-release',
   tmp: '.tmp',
-  comipledCSS:'src/css',
   e2e: 'e2e'
 };
 

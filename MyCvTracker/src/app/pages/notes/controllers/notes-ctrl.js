@@ -1,5 +1,5 @@
 
-	angular.module('BlurAdmin.pages.notes')
+	angular.module('MyCvTracker.pages.notes')
 	  		.controller('NotesCtrl', ['toastr', '$scope', '$injector', '$http', '$filter','$window',
 
 			function (toastr, $scope, $injector, $http, $filter,$window) {

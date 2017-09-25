@@ -1,4 +1,4 @@
-angular.module('BlurAdmin.pages.payment')
+angular.module('MyCvTracker.pages.payment')
 
     .factory('PaymentSvc', ['toastr', 'RestConfig', '$injector',
 

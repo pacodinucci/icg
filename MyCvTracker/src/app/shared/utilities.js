@@ -1,4 +1,4 @@
-angular.module('BlurAdmin.shared')
+angular.module('MyCvTracker.shared')
 
     .factory('Utilities', ['Constants', '$injector', '$location', 'toastr',
 

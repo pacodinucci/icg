@@ -1,5 +1,5 @@
 
-    angular.module('BlurAdmin.pages.CvMarketing')
+    angular.module('MyCvTracker.pages.CvMarketing')
 
     	.factory('CvMarketingSvc', ['toastr', 'RestConfig', '$injector',
 
