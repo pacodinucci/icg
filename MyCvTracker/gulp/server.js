@@ -38,42 +38,9 @@ function browserSyncInit(baseDir, browser) {
   browserSync.instance = browserSync.init({
     startPath: '/',
     server: server,
-    browser: browser,
-    ghostMode: false
+    browser: browser
   });
 }
-
-function isOnlyChange(event) {
-    return event.type === 'changed';
-}
-
-gulp.task('watch', ['inject'], function () {
-
-    gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject-reload']);
-
-    gulp.watch([
-        path.join(conf.paths.src, '/styles/**/*.css'),
-        path.join(conf.paths.src, '/styles/**/*.scss')
-    ], function(event) {
-        if(isOnlyChange(event)) {
-            gulp.start('styles-reload');
-        } else {
-            gulp.start('inject-reload');
-        }
-    });
-
-    gulp.watch(path.join(conf.paths.src, '/app/**/*.js'), function(event) {
-        if(isOnlyChange(event)) {
-            gulp.start('scripts-reload');
-        } else {
-            gulp.start('inject-reload');
-        }
-    });
-
-    gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
-        browserSync.reload(event.path);
-    });
-});
 
 browserSync.use(browserSyncSpa({
   selector: '[ng-app]'// Only needed for angular apps

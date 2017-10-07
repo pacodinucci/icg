@@ -8,15 +8,16 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-gulp.task('partials', function () {
+gulp.task('partials', ['markups'], function () {
   return gulp.src([
     path.join(conf.paths.src, '/app/**/*.html'),
     path.join(conf.paths.tmp, '/serve/app/**/*.html')
   ])
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true
+    .pipe($.htmlmin({
+      removeEmptyAttributes: true,
+      removeAttributeQuotes: true,
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: 'MyCvTracker',
@@ -33,36 +34,33 @@ gulp.task('html', ['inject', 'partials'], function () {
     addRootSlash: false
   };
 
-  var htmlFilter = $.filter('*.html', { restore: true, dot:true});
-  var jsFilter = $.filter('**/*.js', { restore: true, dot:true});
-  var cssFilter = $.filter('**/*.css', { restore: true, dot:true});
-  var assets;
+  var htmlFilter = $.filter('*.html', { restore: true });
+  var jsFilter = $.filter('**/*.js', { restore: true });
+  var cssFilter = $.filter('**/*.css', { restore: true });
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
     .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-    .pipe(assets = $.useref.assets())
-    .pipe($.rev())
+    .pipe($.useref())
     .pipe(jsFilter)
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+    .pipe($.rev())
     .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
-    .pipe($.sourcemaps.init())
-    .pipe($.replace('../../bower_components/bootstrap-sass/assets/fonts/bootstrap/', '../fonts/'))
-    .pipe($.minifyCss({ processImport: false }))
-    .pipe($.sourcemaps.write('maps'))
+    // .pipe($.sourcemaps.init())
+    .pipe($.cssnano())
+    .pipe($.rev())
+    // .pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
-    .pipe(assets.restore())
-    .pipe($.useref())
     .pipe($.revReplace())
     .pipe(htmlFilter)
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true,
-      conditionals: true
+    .pipe($.htmlmin({
+      removeEmptyAttributes: true,
+      removeAttributeQuotes: true,
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true
     }))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
@@ -72,20 +70,20 @@ gulp.task('html', ['inject', 'partials'], function () {
 // Only applies for fonts from bower dependencies
 // Custom fonts are handled by the "other" task
 gulp.task('fonts', function () {
-  return gulp.src($.mainBowerFiles('**/*.{eot,svg,ttf,woff,woff2}'))
+  return gulp.src($.mainBowerFiles())
+    .pipe($.filter('**/*.{eot,otf,svg,ttf,woff,woff2}'))
     .pipe($.flatten())
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
 
-gulp.task('other', ['copyVendorImages'], function () {
+gulp.task('other', function () {
   var fileFilter = $.filter(function (file) {
     return file.stat.isFile();
   });
 
   return gulp.src([
     path.join(conf.paths.src, '/**/*'),
-    path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss,md}'),
-    path.join(conf.paths.tmp, '/serve/**/assets/img/theme/vendor/**/*')
+    path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss,haml}')
   ])
     .pipe(fileFilter)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
