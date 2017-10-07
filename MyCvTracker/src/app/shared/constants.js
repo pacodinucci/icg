@@ -13,7 +13,7 @@
                 authorization: 'Authorization'
             },
 
-            baseUrl: 'https://mycvtracker.com:8080',
+            baseUrl: 'http://ec2-18-221-201-185.us-east-2.compute.amazonaws.com:8080',
             // baseUrl: 'http://localhost:20000',
 
             websocket:{
