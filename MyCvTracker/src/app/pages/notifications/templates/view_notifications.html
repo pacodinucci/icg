@@ -2,6 +2,10 @@
     <div class="modal-header bg-info">
         <i class="ion-information-circled modal-icon"></i><span>View Notifications</span>
     </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="$dismiss()">Go Back</button>
+        <button data-ng-click="viewFullNotifications(modalNotifications[1].id,false)" class="btn btn-info">Full Details</button>
+    </div>
     <div class="modal-body text-center">
         <div class="horizontal-scroll">
             <table class="table table-hover">
@@ -34,9 +38,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-info" ng-click="$dismiss()">OK</button>
-        <button data-ng-click="viewFullNotifications(modalNotifications[1].id,false)" class="btn btn-info">Full Details</button>
     </div>
 </div>
