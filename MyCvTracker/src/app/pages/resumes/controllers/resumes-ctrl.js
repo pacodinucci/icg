@@ -1,9 +1,9 @@
 
 	angular.module('MyCvTracker.pages.resumes')
 
-	    .controller('ResumesCtrl', ['toastr', '$scope', '$injector','$http',
+	    .controller('ResumesCtrl', ['toastr','$rootScope', '$scope', '$injector','$http',
 
-	        function (toastr, $scope, $injector,$http) {
+	        function (toastr, $rootScope, $scope, $injector,$http) {
 	    		// Variables initialization 
 				var Utilities = $injector.get('Utilities');
 				var AccountSvc = $injector.get('AccountSvc');
@@ -177,7 +177,9 @@
 			        .success(function(data, status, headers, config) {
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 						$scope.closeModal();
+                        $rootScope.$broadcast('quickCV');
 						toastr.success(Utilities.getAlerts(id==null ? 'resumeAddedSuccess' : 'resumeEditSuccess'));
+
 						data.uploadedAt = Utilities.getFormattedDate(data.uploadedAt);
 						if(id!=null){
 							angular.forEach($scope.user.myResumes, function(obj, i) {

@@ -97,11 +97,9 @@
 									<div class="control-label">Resume - Select One From the List</div>
 									<select
 										class="form-control" 
-										data-placeholder="Resume Title" 
-										ng-model="trackResumeObj.resumeId"
+										data-placeholder="Resume Title"
 										ng-required="true">
-										<option value=""></option>
-										<option ng-repeat="resume in user.myResumes" value="{{resume.id}}">{{resume.resumeName}} {{resume.resumeTitle}} {{resume.resumeType}}</option>
+										<option ng-repeat="resume in user.myResumes | orderBy:'-uploadedAt'">{{resume.resumeName}} {{resume.resumeTitle}} {{resume.resumeType}}</option>
 									</select>
 								</div>
 

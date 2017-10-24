@@ -60,6 +60,11 @@
 					}
 				);
 
+				$scope.$on('quickCV', function () {
+					console.log('got the event');
+					$scope.getMyResumes();
+                });
+
 				$scope.$watch(function(scope) { return scope.trackResumeObj.subject },
 					function(newValue, oldValue) {
 						localStorageService.set('trackResumeObj.subject',newValue);
