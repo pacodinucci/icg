@@ -33,7 +33,7 @@
   <ba-sidebar ng-if="$isAuthenticated"></ba-sidebar>
   <page-top></page-top>
 
-  <div class="loading" data-loading>Loading&#8230;</div>
+  <div class="loading" data-loading ng-if="$rootScope.$state.current.name != 'notes'">Loading&#8230;</div>
 
   <div class="al-main">
     <div class="al-content">

@@ -15,6 +15,11 @@
 					role : ''
 				};
 
+                $scope.busy = false;
+                $scope.stopScroll = false;
+                var count = 5;
+                var page = 1;
+
                 //Get User Details Function
                 $scope.getUserDetails = function () {
 
@@ -32,19 +37,28 @@
                 };
 
 				$scope.getMyNotes = function () {
+                    if ($scope.busy) return;
+                    $scope.busy = true;
 
-					$scope.user.myNotes = [];
-
-					NotesSvc.getMyNotes().then(
+					NotesSvc.getMyNotes(page,count).then(
 
 						function (notesData) {
-							notesData.forEach(function (note) {
+							notesData.content.forEach(function (note) {
 								note.createdDate = $filter('date')(new Date(note.createdDate), 'EEE,MMM dd yyyy HH:mm:ss');
 								$scope.user.myNotes.push(note);
 							});
+                            $scope.total = notesData.totalElements;
+                            if(count*page>=$scope.total) $scope.stopScroll = true;
+                            page++;
+                            $scope.busy = false;
 						}
 					);
 				};
+
+                // SCROLL
+                $scope.addMoreItems = function() {
+                    $scope.getMyNotes();
+                };
 
 				/////////////////////////////////////////////////////////////////////////////////////
 				//open edit Notes Model Function
@@ -236,7 +250,6 @@
 				$scope.init = function () {
 					$scope.referGroup = '';
 					$scope.getUserDetails();
-					$scope.getMyNotes();
 
 				};
 

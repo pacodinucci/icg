@@ -9,7 +9,7 @@
     .run(themeRun);
 
   /** @ngInject */
-  function themeRun($timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings,$injector,$auth) {
+  function themeRun($timeout, $rootScope, layoutPaths, preloader, $q, baSidebarService, themeLayoutSettings,$injector,$auth,$state) {
 
     
     var whatToWait = [
@@ -30,6 +30,8 @@
     }, 7000);
 
     $rootScope.$baSidebarService = baSidebarService;
+
+      $rootScope.$state = $state;
   }
 
 })();

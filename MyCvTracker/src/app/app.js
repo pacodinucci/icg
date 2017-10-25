@@ -15,6 +15,7 @@ angular.module('MyCvTracker', [
     'angularUtils.directives.dirPagination', // for jobs
     'ng.ckeditor', // for jobs
     'satellizer',
+    'infinite-scroll',
     /////////////////////////
     'MyCvTracker.shared',
     'MyCvTracker.theme',

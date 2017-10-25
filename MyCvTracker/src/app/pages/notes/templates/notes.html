@@ -1,6 +1,7 @@
 <section id="account" ng-controller="NotesCtrl">
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8 col-sm-offset-2" infinite-scroll="addMoreItems()"
+             infinite-scroll-disabled="busy || stopScroll" infinite-scroll-distance="1">
             <div ba-panel ba-panel-title="Recruiter Note Details" ba-panel-class="with-scroll"
                  ng-repeat="note in user.myNotes">
                 <div ng-style="checkNotesStyle(note)">

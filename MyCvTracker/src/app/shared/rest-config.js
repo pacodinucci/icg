@@ -93,8 +93,8 @@
 					resetNewPassword : function(url,data){
 						return RESTSvc.post(url,data);
 					},
-					getMyNotes : function(url){
-						return RESTSvc.get(url);
+					getMyNotes : function(url,data){
+						return RESTSvc.get(url,data);
 					},
                     referCandidates : function(url,data){
                         return RESTSvc.put(url,data);

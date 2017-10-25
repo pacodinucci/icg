@@ -67,8 +67,8 @@
                         return RestConfig.campaignCandidates(url,requestOb);
                     },
 
-            		getMyNotes: function (userId) {
-            			var url = Utilities.getMyNotesUrl();
+            		getMyNotes: function (pageNumber,pageSize) {
+            			var url = Utilities.getMyNotesUrl()+"/"+pageNumber+"/"+pageSize;
             			return  RestConfig.getMyNotes(url);
             		},
 
