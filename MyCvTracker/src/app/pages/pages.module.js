@@ -34,7 +34,7 @@
         }
 
         $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
-            var publicPages = ['/jobs', '/viewJob','/login','/register'];
+            var publicPages = ['/login','/register'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
             $rootScope.loginModal = false;
             // console.log(event);

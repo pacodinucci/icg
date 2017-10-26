@@ -7,6 +7,12 @@
   /** @ngInject */
   function routeConfig($stateProvider) {
 
+          var loggedInUser = null;
+          if(sessionStorage.loggedInUser){
+              loggedInUser =  angular.fromJson(sessionStorage.loggedInUser);
+          }else {
+              loggedInUser = angular.fromJson(localStorage.loggedInUser);
+          }
         $stateProvider
 
         // HOME STATES AND NESTED VIEWS ========================================
@@ -14,6 +20,7 @@
           url: '/jobs',
           templateUrl: 'app/pages/jobs/templates/jobs.html',
           title: 'Jobs',
+          shown:loggedInUser.userRole == 'ADMIN' || loggedInUser.userRole == 'ITCG',
           sidebarMeta: {
             icon: 'fa fa-list',
             order: 4,
