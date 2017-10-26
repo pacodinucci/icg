@@ -13,6 +13,7 @@
           }else {
               loggedInUser = angular.fromJson(localStorage.loggedInUser);
           }
+          var canAccess = loggedInUser!=null ? loggedInUser.userRole == 'ADMIN' || loggedInUser.userRole == 'ITCG' : false;
         $stateProvider
 
         // HOME STATES AND NESTED VIEWS ========================================
@@ -20,7 +21,7 @@
           url: '/jobs',
           templateUrl: 'app/pages/jobs/templates/jobs.html',
           title: 'Jobs',
-          shown:loggedInUser.userRole == 'ADMIN' || loggedInUser.userRole == 'ITCG',
+          shown:canAccess,
           sidebarMeta: {
             icon: 'fa fa-list',
             order: 4,
