@@ -8,7 +8,6 @@ angular.module('MyCvTracker', [
     'ui.router',
     'ngTouch',
     'toastr',
-    'smart-table', //table
     "xeditable", // for jobs
     'ui.slimscroll', //scroll arrow
     'ngJsTree', // for jobs
