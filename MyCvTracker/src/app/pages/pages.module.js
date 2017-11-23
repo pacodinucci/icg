@@ -40,7 +40,7 @@
             // console.log(event);
             // console.log(next);
             // console.log(current);
-            var authPages = ['/login','/register','/activateAccount'];
+            var authPages = ['/login','/register','/activateAccount','resetPassword'];
             // console.log($location.path());
             var isAuthPages = authPages.indexOf($location.path()) !== -1;
             // console.log(isAuthPages);
