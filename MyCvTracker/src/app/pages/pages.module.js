@@ -34,13 +34,13 @@
         }
 
         $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
-            var publicPages = ['/login','/register','/activateAccount','resetPassword'];
+            var publicPages = ['/login','/register','/activateAccount','/resetPassword'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
             $rootScope.loginModal = false;
             // console.log(event);
             // console.log(next);
             // console.log(current);
-            var authPages = ['/login','/register','/activateAccount','resetPassword'];
+            var authPages = ['/login','/register','/activateAccount','/resetPassword'];
             // console.log($location.path());
             var isAuthPages = authPages.indexOf($location.path()) !== -1;
             // console.log(isAuthPages);
