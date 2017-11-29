@@ -113,14 +113,15 @@ a {
 }
 
 .al-share {
-  margin: -6px 0 0 12px;
+  margin: -6px 0 0 0;
   padding: 0;
   list-style: none;
   float: left;
+
   li {
     list-style: none;
     float: left;
-    margin-left: 16px;
+    margin: 0 8px;
     i {
       cursor: pointer;
       transition: all 0.1s ease;
@@ -141,6 +142,10 @@ a {
     i.fa-google-plus-square {
       color: $google-color;
     }
+  }
+
+  @media (min-width: $resXXS) {
+    margin-left: 12px;
   }
 }
 
