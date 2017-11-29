@@ -48,7 +48,7 @@ $text-color: #ffffff;
 }
 
 .auth-block {
-  width: 707px;
+  max-width: 707px;
   margin: 0 auto;
   border-radius: 5px;
   background: linear-gradient(to top, #485563, #29323c);
@@ -79,6 +79,14 @@ $text-color: #ffffff;
 
   .form-group {
     margin-bottom: 12px;
+  }
+
+  .custom-checkbox {
+    color: $text-color;
+
+    > span {
+      font-weight: 400;
+    }
   }
 }
 
@@ -131,6 +139,8 @@ $text-color: #ffffff;
 }
 
 a.forgot-pass {
+  padding: 7px 0;
+  
   display: block;
   text-align: right;
   margin-bottom: -20px;
