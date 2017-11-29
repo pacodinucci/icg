@@ -99,36 +99,7 @@
 					$scope.modelTitle = Utilities.getAlerts('downloadModelTitle').message;
 					$scope.modelMessage = Utilities.getAlerts('downloadModelMessage').message;
 				};
-				//////////////////////////////////////////////////////////////////////////////////////
-				/*
-				 * Shared Functions
-				 */
-				//Define the resume model controller
-				$scope.ResumeCtrl = function ($scope) {
-					$scope.saveResume = function () {
-						var file = $scope.myFile;
-						var id = $scope.id;
-				        var userId = $scope.user.id;
-						var resumeTitle = $scope.resumeTitle;
-						var resumeType = $scope.resumeType;
-					    if(file!=null){
-					    	$scope.saveMyResume(file,id,userId,resumeTitle, resumeType);
-					    }
-					    else{
-							$scope.addAlert(Utilities.getAlerts('InputFileInputRequiredValidation'));
-					    }
-					};
-					
-					
-					$scope.modelFunction = function () {
-						if($scope.modelType=='Delete'){
-							$scope.deleteMyResume();
-						}
-						if($scope.modelType=='Download'){
-							$scope.downloadMyResume();
-						}
-					};
-				};
+				
 				//Close the resume model function
 				$scope.closeModal = function () {
 					$scope.resumeModal.dismiss();
@@ -291,7 +262,40 @@
 				};
 	    }
 	]);
-	angular.module('MyCvTracker.pages.resumes').directive('fileModel', ['$parse','$injector','Constants', function ($parse,$injector,Constants) {
+
+	angular.module('MyCvTracker.pages.resumes')
+		.controller('ResumeCtrl', ['$scope', '$injector',
+			function ($scope, $injector) {
+				var Utilities = $injector.get('Utilities');
+
+				$scope.saveResume = function () {
+					var file = $scope.myFile;
+					var id = $scope.id;
+					var userId = $scope.user.id;
+					var resumeTitle = $scope.resumeTitle;
+					var resumeType = $scope.resumeType;
+					if (file != null) {
+						$scope.saveMyResume(file, id, userId, resumeTitle, resumeType);
+					}
+					else {
+						$scope.addAlert(Utilities.getAlerts('InputFileInputRequiredValidation'));
+					}
+				};
+
+
+				$scope.modelFunction = function () {
+					if ($scope.modelType == 'Delete') {
+						$scope.deleteMyResume();
+					}
+					if ($scope.modelType == 'Download') {
+						$scope.downloadMyResume();
+					}
+				};
+			}
+	]);
+
+	angular.module('MyCvTracker.pages.resumes')
+	.directive('fileModel', ['$parse','$injector','Constants', function ($parse,$injector,Constants) {
 	    return {
 	        restrict: 'A',
 	        link: function(scope, element, attrs) {
