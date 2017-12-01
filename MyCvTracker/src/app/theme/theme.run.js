@@ -16,7 +16,7 @@
       $timeout(3000)
     ];
 
-    baSidebarService.setMenuCollapsed(true);
+    baSidebarService.setMenuCollapsed(false);
     $rootScope.$isAuthenticated = $auth.isAuthenticated();
 
     $q.all(whatToWait).then(function () {
