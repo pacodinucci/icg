@@ -145,6 +145,39 @@
                                                 </div>
                                             </div>
 
+                                            <div class="row-group">
+
+                                                <div class="group-wrapper">
+
+                                                    <div class="text">
+                                                        Tracking:
+                                                    </div>
+                                                    <p>
+                                                        <strong>
+                                                            <span ng-bind="note.trackingId"></span>
+                                                        </strong>
+                                                    </p>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row-group">
+
+                                                <div class="group-wrapper">
+
+                                                    <div class="text">
+                                                        Tracking Status:
+                                                    </div>
+                                                    <p>
+                                                        <strong>
+                                                            <span ng-bind="note.tracked"></span>
+                                                        </strong>
+                                                    </p>
+
+                                                </div>
+                                            </div>
+
+
                                             <button data-ng-click="deleteNotes(note.id, $index)" class="btn btn-primary">Delete</button>
                                             <button data-ng-click="editNotesModel(note, $index)" class="btn btn-primary">Edit</button>
                                             <button data-ng-click="viewNotesModel(note.id, $index)" class="btn btn-primary">Full Details</button>
