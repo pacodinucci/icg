@@ -13,7 +13,7 @@
 					getEditNotesModal: function (scope, ctrlName) {
 
 						var modalOpts = {
-							templateUrl: '/app/pages/campaignNotes/templates/edit_note.html',
+							templateUrl: 'app/pages/campaignNotes/templates/edit_note.html',
 							controller: ctrlName,
 							scope: scope
 						};
@@ -25,7 +25,7 @@
 					getDeleteNotesModal: function (scope, ctrlName) {
 
 						var modalOpts = {
-							templateUrl: '/app/pages/campaignNotes/templates/delete_note.html',
+							templateUrl: 'app/pages/campaignNotes/templates/delete_note.html',
 							controller: ctrlName,
 							scope: scope
 						};
@@ -37,7 +37,7 @@
 					getViewNotesModal: function (scope, ctrlName) {
 
 						var modalOpts = {
-							templateUrl: '/app/pages/campaignNotes/templates/view_note.html',
+							templateUrl: 'app/pages/campaignNotes/templates/view_note.html',
 							controller: ctrlName,
 							scope: scope
 						};
