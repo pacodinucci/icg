@@ -122,7 +122,7 @@
                         CvMarketingSvc.saveCvMarketingRequest(requestModel).then(
 
                             function (CvMarketingRequestData) {
-                                toastr.error(Utilities.getAlerts('CvMarketingRequestSuccess'));
+                                toastr.success(Utilities.getAlerts('CvMarketingRequestSuccess'));
                                 Utilities.gotoProfilePage();
                             }
                         );
@@ -138,7 +138,7 @@
                         CvMarketingSvc.editCvMarketingRequest(requestModel).then(
 
                             function (CvMarketingRequestData) {
-                                toastr.error(Utilities.getAlerts('CvMarketingRequestSuccess'));
+                                toastr.success(Utilities.getAlerts('CvMarketingRequestSuccess'));
                                 Utilities.gotoProfilePage();
                             }
                         );
@@ -154,7 +154,7 @@
                         CvMarketingSvc.cloneCvMarketingRequest(requestModel).then(
 
                             function (CvMarketingRequestData) {
-                                toastr.error(Utilities.getAlerts('CvMarketingRequestSuccess'));
+                                toastr.success(Utilities.getAlerts('CvMarketingRequestSuccess'));
                                 Utilities.gotoProfilePage();
                             }
                         );
