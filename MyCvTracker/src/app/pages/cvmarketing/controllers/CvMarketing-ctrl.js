@@ -145,6 +145,22 @@
                     }
                 };
 
+                $scope.bulkUpdate = function (requestForm, requestModel) {
+
+                    if ( requestForm.$valid ) {
+
+                        requestModel.userId = $scope.user.id;
+
+                        CvMarketingSvc.bulkUpdateMarketingRequest(requestModel).then(
+
+                            function (CvMarketingRequestData) {
+                                toastr.success(Utilities.getAlerts('CvMarketingRequestSuccess'));
+                                Utilities.gotoProfilePage();
+                            }
+                        );
+                    }
+                };
+
                 $scope.cloneRequest = function (requestForm, requestModel) {
 
                     if ( requestForm.$valid ) {

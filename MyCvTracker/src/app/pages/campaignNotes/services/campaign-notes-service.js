@@ -58,6 +58,10 @@
 						return  RestConfig.getMyNotes(url);
 					},
 
+                    bulkUpdateNotes: function (requestOb) {
+                        var url = Utilities.bulkCampaignNotesUrl();
+                        return RestConfig.bulkUpdateNotes(url, requestOb);
+                    },
 
 					saveMyNotes: function (requestOb) {
 

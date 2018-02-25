@@ -381,6 +381,9 @@ angular.module('MyCvTracker.shared')
                 getMyCampaignsUrl: function () {
                     return Constants.baseUrl + Constants.apis.campaigns.url;
                 },
+                bulkCampaignNotesUrl: function () {
+                    return Constants.baseUrl + Constants.apis.bulkEditCampaignNotes.url;
+                },
                 getMyCampaignNotesUrl: function () {
                     return Constants.baseUrl + Constants.apis.CampaignNotes.url;
                 },

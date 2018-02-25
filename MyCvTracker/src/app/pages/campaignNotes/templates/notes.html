@@ -7,7 +7,7 @@
             <form name="myForm">
                 <label for="repeatSelect"> Select Campaigns: </label>
                 <select name="repeatSelect" id="repeatSelect" ng-model="user.currentCampaign">
-                    <option ng-repeat="mycampaign in user.myCampaigns" value="{{mycampaign.id}}">{{mycampaign.campaign}}</option>
+                    <option ng-repeat="mycampaign in user.myCampaigns" value="{{mycampaign.id}}">{{mycampaign.campaign}} {{mycampaign.id}}</option>
                 </select>
             </form>
             <hr>
