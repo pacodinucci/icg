@@ -16,6 +16,13 @@
 					myCampaigns : []
 				};
 
+                $scope.manualUpload = 1;
+
+                $scope.specialValue = {
+                    "id": "12345",
+                    "value": "green"
+                };
+
 				$scope.CvMarketing = {
 					subject: '',
 					content: '',
