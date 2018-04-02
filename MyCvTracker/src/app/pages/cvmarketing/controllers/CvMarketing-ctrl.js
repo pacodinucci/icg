@@ -16,7 +16,7 @@
 					myCampaigns : []
 				};
 
-                $scope.manualUpload = 1;
+                $scope.manualUpload = 0;
 
                 $scope.specialValue = {
                     "id": "12345",
