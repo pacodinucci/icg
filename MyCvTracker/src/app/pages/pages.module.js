@@ -34,7 +34,7 @@
         }
 
         $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
-            var publicPages = ['/login','/register','/activateAccount','/resetPassword','/forward','/activate','/forward.html','/activate.html'];
+            var publicPages = ['/login','/register','/activateAccount','/resetPassword'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
             $rootScope.loginModal = false;
             // console.log(event);
@@ -45,8 +45,16 @@
             var isAuthPages = authPages.indexOf($location.path()) !== -1;
             // console.log(isAuthPages);
             var frontPage = next.endsWith("/") || next.endsWith(".com");
+            var forwardPage = next.endsWith("/forward.html");
+            var activatePage = next.endsWith("/activate.html");
             if (frontPage) {
                 window.location.href = Utilities.baseUrl() + "/front.html";
+            }
+            if (forwardPage) {
+                window.location.href = Utilities.baseUrl() + "/forward.html";
+            }
+            if (activatePage) {
+                window.location.href = Utilities.baseUrl() + "/activate.html";
             }
             else if (restrictedPage && !$auth.isAuthenticated()) {
                     $location.url("/login");
