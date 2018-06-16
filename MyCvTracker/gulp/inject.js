@@ -15,7 +15,7 @@ gulp.task('inject-reload', ['inject'], function () {
   browserSync.reload();
 });
 
-gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectFront', 'copyVendorImages'], function () {
+gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectFront', 'copyVendorImages','injectForward','injectActivate'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/main.css'),
     path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
@@ -53,6 +53,20 @@ gulp.task('injectFront', ['stylesFront'], function () {
     return injectAlone({
         css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
         paths: path.join(conf.paths.src, '/front.html')
+    })
+});
+
+gulp.task('injectForward', ['stylesFront'], function () {
+    return injectAlone({
+        css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
+        paths: path.join(conf.paths.src, '/forward.html')
+    })
+});
+
+gulp.task('injectActivate', ['stylesFront'], function () {
+    return injectAlone({
+        css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
+        paths: path.join(conf.paths.src, '/activate.html')
     })
 });
 
