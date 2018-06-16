@@ -50,10 +50,10 @@
             if (frontPage) {
                 window.location.href = Utilities.baseUrl() + "/front.html";
             }
-            if (forwardPage) {
+            else if (forwardPage) {
                 window.location.href = Utilities.baseUrl() + "/forward.html";
             }
-            if (activatePage) {
+            else if (activatePage) {
                 window.location.href = Utilities.baseUrl() + "/activate.html";
             }
             else if (restrictedPage && !$auth.isAuthenticated()) {
