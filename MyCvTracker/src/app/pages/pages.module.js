@@ -47,6 +47,7 @@
             var frontPage = next.endsWith("/") || next.endsWith(".com");
             var forwardPage = next.endsWith("/forward.html");
             var activatePage = next.endsWith("/activate.html");
+            var selfcomposePage = next.endsWith("/selfcomposePage.html");
             if (frontPage) {
                 window.location.href = Utilities.baseUrl() + "/front.html";
             }
@@ -55,6 +56,9 @@
             }
             else if (activatePage) {
                 window.location.href = Utilities.baseUrl() + "/activate.html";
+            }
+            else if (selfcomposePage) {
+                window.location.href = Utilities.baseUrl() + "/selfcompose.html";
             }
             else if (restrictedPage && !$auth.isAuthenticated()) {
                     $location.url("/login");
