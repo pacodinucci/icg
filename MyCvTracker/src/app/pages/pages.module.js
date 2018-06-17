@@ -47,7 +47,8 @@
             var frontPage = next.endsWith("/") || next.endsWith(".com");
             var forwardPage = next.endsWith("/forward.html");
             var activatePage = next.endsWith("/activate.html");
-            var selfcomposePage = next.endsWith("/selfcomposePage.html");
+            var selfcomposePage = next.endsWith("/selfcompose.html");
+
             if (frontPage) {
                 window.location.href = Utilities.baseUrl() + "/front.html";
             }
