@@ -1,10 +1,11 @@
-'use strict';
+    'use strict';
 
 angular.module('MyCvTracker', [
     ///////3rd party libs////////
     'ngAnimate',
     'ui.bootstrap',
     'ui.sortable',
+    'ngSanitize',
     'ui.router',
     'ngTouch',
     'toastr',
