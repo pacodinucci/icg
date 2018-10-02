@@ -132,6 +132,11 @@
 									<input type="text" class="form-control" placeholder="paymentReceived" ng-model="CvMarketing.paymentReceived" ng-required="false" />
 								</div>
 
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.discountCode.$invalid && !CvMarketing.discountCode.$pristine }">
+									<div class="control-label">discountCode</div>
+									<input type="text" class="form-control" placeholder="discountCode" ng-model="CvMarketing.discountCode" ng-required="false" />
+								</div>
+
 
 								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.notes.$invalid && !CvMarketing.notes.$pristine }">
 									<div class="control-label">Notes</div>

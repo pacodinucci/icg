@@ -34,6 +34,7 @@
 					userPassword: '',
 					trackingNotescreated: '0',
 					target: '',
+                    discountCode: '',
 					userId: ''
 				};
 
