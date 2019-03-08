@@ -42,7 +42,11 @@
     "wiredep": "~4.0.0",
     "wrench": "~1.5.8"
   },
-  "browserslist": ["last 2 versions", "> 1%", "ie 11"],
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "ie 11"
+  ],
   "scripts": {
     "postinstall": "bower install"
   }
