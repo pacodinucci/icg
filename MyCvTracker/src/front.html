@@ -248,9 +248,9 @@
          <p>To get all the benefits from tracking please provide your email below and we will send through all notification.</p>
          <div class="img">
          	<form>
-         		<input type="email" name="" class="form-control" placeholder="Your email">
-         		<input type="text" name="" class="form-control" placeholder="Resume References (Monster job Board, Project Manager Apple etc.)">
-
+         		<input type="email" id="eCVemail" name="email" class="form-control" placeholder="Your email">
+         		<input type="text" name="file" id="CVinput" class="form-control" placeholder="Resume References (Monster job Board, Project Manager Apple etc.)">
+				<input  style="display: none" type="file" id="fileExplorer"/>
          		<input type="checkbox" name=""><p class="check-box">By uploading my CV,I agree to the Terms od use and I Acknowledge I have read the privacy policy.</p>
          	</form>
          </div>
@@ -413,6 +413,13 @@
     jQuery(function ($) {
 		setTimeout(function(){
 			$('#onload').modal('show');	
+		});
+		$("#fileExplorer").change(function(event){
+			$("#CVinput")[0].value = $("#fileExplorer")[0].files[0].name;
+		})
+		$("#CVinput").click(function(event){
+			$('#fileExplorer').trigger('click');
+			
 		});
         $('#basic-modal .basic').click(function (e) {
             $('#basic-modal-content').modal();
