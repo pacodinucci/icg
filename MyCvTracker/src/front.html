@@ -411,6 +411,9 @@
     });
 
     jQuery(function ($) {
+		setTimeout(function(){
+			$('#onload').modal('show');	
+		});
         $('#basic-modal .basic').click(function (e) {
             $('#basic-modal-content').modal();
 
