@@ -75,14 +75,8 @@ jQuery(function ($) {
     var holdCvResponse = null;
     var holdNameOfCV = null;
     
-    $("#fileExplorer").change(function (event) {
-        $("#CVinput")[0].value = $("#fileExplorer")[0].files[0].name;
-    })
-    $("#CVinput").click(function (event) {
-        $('#fileExplorer').trigger('click');
-    });
     $("#closeSuccess").click(function (event) {
-        $("loadSuccess").modal('hide');
+        $("#loadSuccess").modal('hide');
     });
     $("#downloadCV").click(function (event) {
         downloadFile(holdCvResponse,holdNameOfCV.split('.')[0]);
@@ -91,14 +85,14 @@ jQuery(function ($) {
         //make ajax and prepare request
         var userEmail = $("#eCVemail")[0].value;
         var file = $("#fileExplorer")[0].files[0];
-        var resumeTitle = $("#fileExplorer")[0].files[0].name;
-        var resumeType = $("#fileExplorer")[0].files[0].type;
+        var resumeTitle = $("#CVinput")[0].value;
+        var resumeType = "landingpage";
         holdNameOfCV = resumeTitle;
         var fd = new FormData();
         fd.append('userEmail', userEmail);
         fd.append('file', file);
         fd.append('resumeTitle', resumeTitle);
-        fd.append('resumeType', null);
+        fd.append('resumeType', resumeType);
         $.ajax({
             url: 'http://mycvtracker.com:20000/user/uploadQuickResume',
             type: 'POST',

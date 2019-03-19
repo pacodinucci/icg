@@ -359,7 +359,15 @@ img{
     font-size: 14px;
     font-family: 'museo_slab500';
     margin-bottom: 35px;
-	}
+  }
+  .modal-body input[type=file]{
+    min-height: 45px;
+      margin-top: 20px;
+      border: 2px solid #ccc;
+      font-size: 14px;
+      font-family: 'museo_slab500';
+      margin-bottom: 35px;
+    }
 	.modal-body input[type=checkbox]{
 		float: left;
     width: 20px;
