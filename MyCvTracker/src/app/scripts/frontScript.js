@@ -48,12 +48,25 @@ $('#next2').click(function () {
     $('#onload2').modal('hide');
 });
 
+function base64ToArrayBuffer(base64) {
+    var binaryString = window.atob(base64);
+    var binaryLen = binaryString.length;
+    var bytes = new Uint8Array(binaryLen);
+    for (var i = 0; i < binaryLen; i++) {
+       var ascii = binaryString.charCodeAt(i);
+       bytes[i] = ascii;
+    }
+    return bytes;
+ }
+
 function downloadFile(data, fileName, type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+
     // Create an invisible A element
     const a = document.createElement("a");
     a.style.display = "none";
     document.body.appendChild(a);
 
+    data = base64ToArrayBuffer(data);
     // Set the HREF to a Blob representation of the data to be downloaded
     a.href = window.URL.createObjectURL(
         new Blob([data], {
@@ -94,13 +107,14 @@ jQuery(function ($) {
         fd.append('resumeTitle', resumeTitle);
         fd.append('resumeType', resumeType);
         $.ajax({
-            url: 'http://mycvtracker.com:20000/user/uploadQuickResume',
+            url: 'http://127.0.0.1:8080/user/uploadQuickResume',
             type: 'POST',
             data: fd,
             processData: false, // tell jQuery not to process the data
             contentType: false, // tell jQuery not to set contentType
             success: function (data) {
-                holdCvResponse = data;
+
+                holdCvResponse = data.resumeFile;
                 $("#loadSuccess").modal('show');
             },
             error: function (err) {
