@@ -44,9 +44,6 @@ $('#next').click(function () {
     $('#onload2').modal('show');
 });
 
-$('#next2').click(function () {
-    $('#onload2').modal('hide');
-});
 
 function base64ToArrayBuffer(base64) {
     var binaryString = window.atob(base64);
@@ -59,7 +56,7 @@ function base64ToArrayBuffer(base64) {
     return bytes;
  }
 
-function downloadFile(data, fileName, type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+function downloadFile(data, fileName, type) {
 
     // Create an invisible A element
     const a = document.createElement("a");
@@ -87,12 +84,22 @@ function downloadFile(data, fileName, type = "application/vnd.openxmlformats-off
 jQuery(function ($) {
     var holdCvResponse = null;
     var holdNameOfCV = null;
-    
+    $("#sizeError").hide();
     $("#closeSuccess").click(function (event) {
         $("#loadSuccess").modal('hide');
     });
     $("#downloadCV").click(function (event) {
-        downloadFile(holdCvResponse,holdNameOfCV.split('.')[0]);
+        var type = '';
+        if($("#fileExplorer")[0].files[0].type === 'application/pdf'){
+            type = 'application/pdf';
+        }else {
+            type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        }
+        downloadFile(holdCvResponse,holdNameOfCV.split('.')[0], type);
+    })
+    $("#tryagain").click(function (event) {
+        $("#error").modal('hide');
+        $('#onload2').modal('show');
     })
     $("#next2").click(function (event) {
         //make ajax and prepare request
@@ -106,21 +113,28 @@ jQuery(function ($) {
         fd.append('file', file);
         fd.append('resumeTitle', resumeTitle);
         fd.append('resumeType', resumeType);
-        $.ajax({
-            url: 'http://127.0.0.1:8080/user/uploadQuickResume',
-            type: 'POST',
-            data: fd,
-            processData: false, // tell jQuery not to process the data
-            contentType: false, // tell jQuery not to set contentType
-            success: function (data) {
-
-                holdCvResponse = data.resumeFile;
-                $("#loadSuccess").modal('show');
-            },
-            error: function (err) {
-                $("#error").modal('show');
-            }
-        });
+        if(file.size > 500000){
+            $("#sizeError").show();
+        }else {
+            $.ajax({
+                url: 'http://mycvtracker.com:20000/user/uploadQuickResume',
+                type: 'POST',
+                data: fd,
+                processData: false, // tell jQuery not to process the data
+                contentType: false, // tell jQuery not to set contentType
+                success: function (data) {
+    
+                    holdCvResponse = data.resumeFile;
+                    $('#onload2').modal('hide');
+                    $("#loadSuccess").modal('show');
+                },
+                error: function (err) {
+                    $('#onload2').modal('hide');
+                    $("#error").modal('show');
+                }
+            });
+        }
+        
     })
     $('#basic-modal .basic').click(function (e) {
         $('#basic-modal-content').modal();

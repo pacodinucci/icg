@@ -261,8 +261,10 @@
 						<form>
 							<input type="email" id="eCVemail" name="email" class="form-control" placeholder="Your email">
 							<input type="text" name="file" id="CVinput" class="form-control" placeholder="Resume References (Monster job Board, Project Manager Apple etc.)">
-							<input type="file"class="form-control" id="fileExplorer" />
+							<input type="file" accept=
+							"application/msword,application/pdf" class="form-control" id="fileExplorer" />
 							<input type="checkbox" name="">
+								<p style="color:red;position: absolute;margin-top: -35px" id="sizeError"><strong>Error</strong> File size limit exceeded.</p>
 							<p class="check-box">By uploading my CV,I agree to the Terms od use and I Acknowledge I have read the privacy
 								policy.</p>
 						</form>
@@ -292,6 +294,7 @@
 					<div class="img">
 						<img src="assets/img/front/step-2.jpg">
 					</div>
+					
 					<div class="next">
 						<button class="btn btn-primary" id="next">Next Step</button>
 					</div>
@@ -342,7 +345,7 @@
 						<img src="assets/img/front/step-4.jpg">
 					</div>
 					<div class="next">
-						<button class="btn btn-primary" id="next">Tr again</button>
+						<button id="tryagain" class="btn btn-primary" id="next">Tr again</button>
 					</div>
 				</div>
 			</div>
