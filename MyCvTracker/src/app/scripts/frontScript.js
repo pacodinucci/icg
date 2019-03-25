@@ -41,6 +41,10 @@ $('#up-popup').click(function () {
 
 $('#next').click(function () {
     $('#onload').modal('hide');
+    $("#eCVemail")[0].value = null;
+    $("#fileExplorer")[0].files[0] = null;
+    $("#CVinput")[0].value = null;
+    $("#sizeError").hide();
     $('#onload2').modal('show');
 });
 
