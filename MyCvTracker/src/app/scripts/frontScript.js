@@ -1,3 +1,4 @@
+
 function drawOnCanvas(file) {
     var reader = new FileReader();
 
@@ -47,6 +48,11 @@ $('#next').click(function () {
     $("#sizeError").hide();
     $('#onload2').modal('show');
 });
+$('#next2').click(function () {
+    if($("#fileExplorer")[0].files[0].size < 500000){
+        $('#onload2').modal('hide');
+    }
+});
 
 
 function base64ToArrayBuffer(base64) {
@@ -89,6 +95,7 @@ jQuery(function ($) {
     var holdCvResponse = null;
     var holdNameOfCV = null;
     $("#sizeError").hide();
+    $("#loader").hide();
     $("#closeSuccess").click(function (event) {
         $("#loadSuccess").modal('hide');
     });
@@ -107,6 +114,7 @@ jQuery(function ($) {
     })
     $("#next2").click(function (event) {
         //make ajax and prepare request
+        $("#loader").show();
         var userEmail = $("#eCVemail")[0].value;
         var file = $("#fileExplorer")[0].files[0];
         var resumeTitle = $("#CVinput")[0].value;
@@ -120,6 +128,7 @@ jQuery(function ($) {
         if(file.size > 500000){
             $("#sizeError").show();
         }else {
+           
             $.ajax({
                 url: 'http://mycvtracker.com:20000/user/uploadQuickResume',
                 type: 'POST',
@@ -129,10 +138,12 @@ jQuery(function ($) {
                 success: function (data) {
     
                     holdCvResponse = data.resumeFile;
+                    $("#loader").hide();
                     $('#onload2').modal('hide');
                     $("#loadSuccess").modal('show');
                 },
                 error: function (err) {
+                    $("#loader").hide();
                     $('#onload2').modal('hide');
                     $("#error").modal('show');
                 }
