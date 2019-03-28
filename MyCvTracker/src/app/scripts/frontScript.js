@@ -45,6 +45,7 @@ $('#next').click(function () {
     $("#eCVemail")[0].value = null;
     $("#fileExplorer")[0].files[0] = null;
     $("#CVinput")[0].value = null;
+    $("#nameHolder").value = null;
     $("#sizeError").hide();
     $('#onload2').modal('show');
 });
@@ -52,6 +53,14 @@ $('#next2').click(function () {
     if($("#fileExplorer")[0].files[0].size < 500000){
         $('#onload2').modal('hide');
     }
+});
+
+$("#fileExplorer").change(function(){
+    $("#nameHolder")[0].value = $("#fileExplorer")[0].files[0].name;
+});
+
+$("#openFileExplorer").click(function(){
+    $("#fileExplorer").trigger('click');
 });
 
 

@@ -1,0 +1,198 @@
+
+
+
+	<section id="account" ng-controller="CvMarketingCtrl">
+
+		<div class="container full">	
+
+			<div class="row form-group">
+				<div class="col-sm-12">
+					<h2 class="text-center">CV Marketing</h2>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<div class="row">
+
+						<div class="col-sm-6 col-sm-offset-3">
+
+							<div>
+								<form name="myForm">
+									<label for="repeatSelect"> Select Campaigns: </label>
+									<select name="repeatSelect" id="repeatSelect" ng-model="user.currentCampaign" ng-change="update(user.currentCampaign,user.myCampaigns)">
+										<option ng-repeat="mycampaign in user.myCampaigns" value="{{mycampaign.id}}">{{mycampaign.campaign}}</option>
+									</select>
+								</form>
+								<hr>
+							</div>
+
+							<form name="CvMarketingForm">
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.subject.$invalid && !CvMarketing.subject.$pristine }">
+									<div class="control-label">Subject</div>
+									<input type="text" class="form-control" placeholder="Subject" ng-model="CvMarketing.subject" ng-required="true" />
+								</div>
+
+								<!--<div class="form-group" ng-class="{ 'has-error' : CvMarketing.content.$invalid && !CvMarketing.content.$pristine }">-->
+									<!--<div class="control-label">Content</div>-->
+									<!--<textarea class="form-control" placeholder="Content" ng-model="CvMarketing.content" ng-required="true"></textarea>-->
+								<!--</div>-->
+
+								<div class="form-group">
+									<div class="control-label">Manual Upload</div>
+									<label class="radio-inline"><input type="radio" name="optradio" ng-model="manualUpload" value="1">Yes</label>
+									<label class="radio-inline"><input type="radio" name="optradio" ng-model="manualUpload" value="0">No</label>
+								</div>
+
+								<div class="form-group" ng-if="manualUpload == 1">
+									<div class="control-label">CampaignFile</div>
+									<input type="file" class="form-control" placeholder="Resume File" file-model="CvMarketing.content"  accept=".doc,.pdf,.docx,.html" id="fileUpload"/>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.content.$invalid && !CvMarketing.content.$pristine }"
+									 ng-if="manualUpload == 0">
+									<div class="control-label">Campaign</div>
+									<ng-ckeditor
+											ng-model="CvMarketing.content"
+											remove-buttons="Image"
+											remove-plugins="iframe,flash,smiley" >
+									</ng-ckeditor>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.target.$invalid && !CvMarketing.target.$pristine }">
+									<div class="control-label">Target</div>
+									<textarea class="form-control" placeholder="Put Your Targets sep by comma" ng-model="CvMarketing.target" ng-required="true"></textarea>
+								</div>
+
+								<!--<div class="form-group">-->
+									<!--<div class="control-label">Campaign File</div>-->
+									<!--<input type="file" class="form-control" placeholder="Campaign File" file-model="myFile"  accept=".doc,.pdf,.docx" id="fileUpload"/>-->
+								<!--</div>-->
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.campaign.$invalid && !CvMarketing.campaign.$pristine }">
+									<div class="control-label">Campaign</div>
+									<input type="text" class="form-control" placeholder="Java Jobs,Solution Architect etc." ng-model="CvMarketing.campaign" ng-required="true" />
+								</div>
+
+								<!--<div class="form-group" ng-class="{ 'has-error' : CvMarketing.phoneNo.$invalid && !CvMarketing.phoneNo.$pristine }">-->
+									<!--<div class="control-label">Phone No</div>-->
+									<!--<input type="text" class="form-control" placeholder="Phone No .." ng-model="CvMarketing.phoneNo" ng-required="true" />-->
+								<!--</div>-->
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.mailServer.$invalid && !CvMarketing.mailServer.$pristine }">
+									<div class="control-label">Mail Server</div>
+									<textarea class="form-control" placeholder="Mail Server" ng-model="CvMarketing.mailServer" ng-required="false"></textarea>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.userAccount.$invalid && !CvMarketing.userAccount.$pristine }">
+									<div class="control-label">User Account</div>
+									<input type="text" class="form-control" placeholder="userAccount" ng-model="CvMarketing.userAccount" ng-required="true" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.userPassword.$invalid && !CvMarketing.userPassword.$pristine }">
+									<div class="control-label">userPassword</div>
+									<input type="password" class="form-control" placeholder="userPassword" ng-model="CvMarketing.userPassword" ng-required="true" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.hourlyRate.$invalid && !CvMarketing.hourlyRate.$pristine }">
+									<div class="control-label">hourlyRate</div>
+									<input type="text" class="form-control" placeholder="hourlyRate" ng-model="CvMarketing.hourlyRate" ng-required="true" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.dailyRate.$invalid && !CvMarketing.dailyRate.$pristine }">
+									<div class="control-label">dailyRate</div>
+									<input type="text" class="form-control" placeholder="dailyRate" ng-model="CvMarketing.dailyRate" ng-required="true" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.sendCV.$invalid && !CvMarketing.sendCV.$pristine }">
+									<div class="control-label">sendCV</div>
+									<input type="text" class="form-control" placeholder="sendCV" ng-model="CvMarketing.sendCV" ng-required="false" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.campaignStatus.$invalid && !CvMarketing.campaignStatus.$pristine }">
+									<div class="control-label">campaignStatus</div>
+									<input type="text" class="form-control" placeholder="campaignStatus" ng-model="CvMarketing.campaignStatus" ng-required="false" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.campaignType.$invalid && !CvMarketing.campaignType.$pristine }">
+									<div class="control-label">campaignType</div>
+									<input type="text" class="form-control" placeholder="campaignType" ng-model="CvMarketing.campaignType" ng-required="false" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.trackingNotesCreated.$invalid && !CvMarketing.trackingNotesCreated.$pristine }">
+									<div class="control-label">TrackingNotesCreated</div>
+									<input type="text" class="form-control" placeholder="trackingNotesCreated" ng-model="CvMarketing.trackingNotesCreated" ng-required="false" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.paymentReceived.$invalid && !CvMarketing.paymentReceived.$pristine }">
+									<div class="control-label">paymentReceived</div>
+									<input type="text" class="form-control" placeholder="paymentReceived" ng-model="CvMarketing.paymentReceived" ng-required="false" />
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.discountCode.$invalid && !CvMarketing.discountCode.$pristine }">
+									<div class="control-label">discountCode</div>
+									<input type="text" class="form-control" placeholder="discountCode" ng-model="CvMarketing.discountCode" ng-required="false" />
+								</div>
+
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.notes.$invalid && !CvMarketing.notes.$pristine }">
+									<div class="control-label">Notes</div>
+									<textarea class="form-control" placeholder="Notes" ng-model="CvMarketing.notes" ng-required="true"></textarea>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-error' : resumeLookUp.$invalid && !resumeLookUp.$pristine }">
+									<div class="control-label">lookUp</div>
+									<input type="text" class="form-control" placeholder="resumeLookUp" ng-model="resumeLookUp" ng-required="false" />
+									<button type="button" class="btn btn-primary btn-block" ng-click="loadResume(resumeLookUp)">Resume LookUp</button>
+								</div>
+
+
+								<div class="form-group" ng-class="{ 'has-error' : CvMarketing.resume.$invalid && !CvMarketing.resume.$pristine }">
+									<div class="control-label">Resume</div>
+									<select
+										class="form-control" 
+										data-placeholder="Resume Title" 
+										ng-model="CvMarketing.resumeId"
+										ng-required="true">
+										<option value=""></option>
+										<option ng-repeat="resume in user.myResumes" value="{{resume.id}}">{{resume.resumeName}} {{resume.resumeTitle}}</option>
+									</select>
+								</div>
+
+
+								<div class="form-group" style="margin-top: 40px;">
+									<button type="button" class="btn btn-primary btn-block" ng-disabled="CvMarketingForm.$invalid" ng-click="
+									postRequest(CvMarketingForm, CvMarketing)">Proceed</button>
+								</div>
+
+								<div class="form-group" style="margin-top: 40px;">
+									<button type="button" class="btn btn-primary btn-block" ng-disabled="CvMarketingForm.$invalid" ng-click="
+									editRequest(CvMarketingForm, CvMarketing)">Edit</button>
+								</div>
+
+								<div class="form-group" style="margin-top: 40px;">
+									<button type="button" class="btn btn-primary btn-block" ng-disabled="CvMarketingForm.$invalid" ng-click="
+									deleteRequest(CvMarketingForm, CvMarketing)">Delete</button>
+								</div>
+
+								<div class="form-group" style="margin-top: 40px;">
+									<button type="button" class="btn btn-primary btn-block" ng-disabled="CvMarketingForm.$invalid" ng-click="
+									cloneRequest(CvMarketingForm, CvMarketing)">Clone</button>
+								</div>
+
+							</form>
+
+						</div>
+
+					</div>
+					
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>

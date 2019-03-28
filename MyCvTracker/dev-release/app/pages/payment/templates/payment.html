@@ -1,0 +1,47 @@
+<section id="payment" ng-controller="PaymentCtrl">
+    <div class="container full" data-ng-init="getPaymentPlans()">
+
+        <div class="row form-group">
+            <div class="col-sm-12">
+                <h2 class="text-center">Payment Plan</h2>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <form class="form-horizontal" role="form">
+                <div class="container">
+                    <div class="row">
+                    <br/>
+
+                        <div ng-repeat="payment in payments" class="col-sm-3" ng-if="payment.paymentType !='Free'">
+                            <div class="p+nel panel-default text-center">
+                                <div class="panel-heading">
+                                    <strong ng-bind="payment.description"></strong>
+                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-bind="' £' + payment.price "></li>
+                                    <li class="list-group-item" ng-bind="payment.ticksNo + ' Ticks'"></li>
+                                    <li class="list-group-item">
+                                        <button ng-click="executePayment(payment.ticksNo,payment.id,payment.description,payment.currency,payment.price)"
+                                                class="btn btn-primary" type="submit">Choose Plan!
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <br/><br/>
+
+                        <div>
+                            <strong>For enabling CV Tracking and CV Marketing Services please email us</strong><h3>info@mycvtracker.com</h3>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>

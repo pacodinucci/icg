@@ -1,0 +1,18 @@
+	
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" ng-click="closeModal()">
+			<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+		</button>
+		<h4 class="modal-title"><span ng-bind="modelTitle"></span></h4>
+	</div>
+	<div>
+	<input type="hidden" ng-model="id"/>
+	<input type="hidden" ng-model="modelType"/>
+		<div class="modal-body">
+				<span ng-bind="modelMessage"></span>		
+			</div>
+		<div class="modal-footer clearfix">
+			<button type="button" class="btn btn-primary" ng-click="modelFunction()">Yes</button>
+			<button type="button" class="btn btn-primary" ng-click="closeModal()">No</button>
+		</div>  
+	</div>

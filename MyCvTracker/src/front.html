@@ -256,8 +256,14 @@
 						<form>
 							<input type="email" id="eCVemail" name="email" class="form-control" placeholder="Your email">
 							<input type="text" name="file" id="CVinput" class="form-control" placeholder="Resume References (Monster job Board, Project Manager Apple etc.)">
+							<div class="input-group inputGroup">
+								<span class="input-group-btn">
+								  <button class="btn btn-default uploadBtn" id="openFileExplorer"   type="button"> Upload </button>
+								</span>
+								<input type="text" id="nameHolder" readonly style="margin-bottom: 20px;" class="form-control" placeholder="Resume name">
+							  </div>
 							<input type="file" accept=
-							"application/msword,application/pdf" class="form-control" id="fileExplorer" />
+							".doc,.docx,.pdf"" class="form-control" id="fileExplorer" style="display: none;" />
 							<span style="color:red;position: absolute;margin-top: -30px" id="sizeError"><strong>Error</strong> File size limit exceeded.</span>
 							<input type="checkbox" name="">
 								
@@ -354,11 +360,26 @@
 	<!-- wrapper ends -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA_7VhjaGDGDeWIOrMi8wdFL2b4L0UgyLg",
+    authDomain: "cvtracker-66e29.firebaseapp.com",
+    databaseURL: "https://cvtracker-66e29.firebaseio.com",
+    projectId: "cvtracker-66e29",
+    storageBucket: "cvtracker-66e29.appspot.com",
+    messagingSenderId: "852640116900"
+  };
+  firebase.initializeApp(config);
+</script>
 
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemodal/1.4.4/jquery.simplemodal.min.js"></script> -->
 
 	<!-- <script type="text/javascript" src="js/custom.js"></script> -->
 	<script type="text/javascript" src="app/scripts/frontScript.js">
+	
 		// $(document).ready(function(e) {
 		//     $(".showonhover").click(function(){
 		// 		$("#selectfile").trigger('click');

@@ -757,3 +757,18 @@ header{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.uploadBtn {
+  height:45px;
+  border: 2px solid #ccc;
+  border-right: 0px;
+}
+.inputGroup {
+  margin-top: -17px
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .inputGroup {
+    margin-top: -10px
+  }
+  
+}
