@@ -1,4 +1,4 @@
-
+var isChecked =  false;
 function drawOnCanvas(file) {
     var reader = new FileReader();
 
@@ -121,8 +121,15 @@ jQuery(function ($) {
         $("#error").modal('hide');
         $('#onload2').modal('show');
     })
+    $('#checkbox1').click(function(){
+        if($(this). prop("checked") == true){
+        isChecked =  true;
+        }
+    });
     $("#next2").click(function (event) {
         //make ajax and prepare request
+       
+       if(isChecked){
         $("#loader").show();
         var userEmail = $("#eCVemail")[0].value;
         var file = $("#fileExplorer")[0].files[0];
@@ -159,6 +166,13 @@ jQuery(function ($) {
             });
         }
         
+       }else{
+         $("#alertDialog").modal("show");   
+    }
+    })
+    $("#closeDialog").click(function(e){
+        $("#alertDialog").modal("hide");
+        $("#onload2").modal("show");
     })
     $('#basic-modal .basic').click(function (e) {
         $('#basic-modal-content').modal();
