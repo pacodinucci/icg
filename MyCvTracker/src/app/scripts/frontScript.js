@@ -172,6 +172,7 @@ jQuery(function ($) {
     })
     $("#closeDialog").click(function(e){
         $("#alertDialog").modal("hide");
+        isChecked = false;
         $("#onload2").modal("show");
     })
     $('#basic-modal .basic').click(function (e) {
