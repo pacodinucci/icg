@@ -1,4 +1,19 @@
 var isChecked =  false;
+function sendEmail(URL,type,data){
+    $.ajax({
+        url: URL,
+        type: type,
+        data: data,
+        processData: false, // tell jQuery not to process the data
+        contentType: 'application/json', // tell jQuery not to set contentType
+        success: function (data) {
+            alert(data);
+        },
+        error: function (err) {
+           
+        }
+    });
+}
 function drawOnCanvas(file) {
     var reader = new FileReader();
 
@@ -39,6 +54,26 @@ $("#upfile1").click(function () {
 $('#up-popup').click(function () {
     $('#onload').modal('show');
 });
+$("#sendEmail").click(function () {
+    var fromEmailAddress = $("#sendToEmail")[0].value;
+    var subject = $("#subject")[0].value;
+    var fromName = $("#fromName")[0].value;
+    var content = $("#mailContent")[0].value;
+    var data = {
+        'fromEmailAddress' : fromEmailAddress,
+        'subject' : subject,
+        'fromName' : fromName,
+        'content' : content
+
+    }
+    /* var fd = new FormData();
+    fd.append('fromEmailAddress',fromEmailAddress);
+    fd.append('subject',subject);
+    fd.append('fromName',fromName);
+    fd.append('content',content); */
+    sendEmail("http://mycvtracker.com:20000/auth/contact","POST", data);
+    
+})
 
 $('#next').click(function () {
     $('#onload').modal('hide');
