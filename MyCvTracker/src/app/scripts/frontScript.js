@@ -1,16 +1,16 @@
-var isChecked =  false;
-function sendEmail(URL,type,data){
+var isChecked = false;
+function sendEmail(URL, type, data) {
     $.ajax({
         url: URL,
         type: type,
-        data: data,
-        processData: false, // tell jQuery not to process the data
+        data: JSON.stringify(data),
+        dataType: "json",
         contentType: 'application/json', // tell jQuery not to set contentType
         success: function (data) {
             alert(data);
         },
         error: function (err) {
-           
+
         }
     });
 }
@@ -60,19 +60,13 @@ $("#sendEmail").click(function () {
     var fromName = $("#fromName")[0].value;
     var content = $("#mailContent")[0].value;
     var data = {
-        'fromEmailAddress' : fromEmailAddress,
-        'subject' : subject,
-        'fromName' : fromName,
-        'content' : content
-
+            'fromEmailAddress': fromEmailAddress,
+            'subject': subject,
+            'fromName': fromName,
+            'content': content
     }
-    /* var fd = new FormData();
-    fd.append('fromEmailAddress',fromEmailAddress);
-    fd.append('subject',subject);
-    fd.append('fromName',fromName);
-    fd.append('content',content); */
-    sendEmail("http://mycvtracker.com:20000/auth/contact","POST", data);
-    
+    sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
+
 })
 
 $('#next').click(function () {
@@ -85,16 +79,16 @@ $('#next').click(function () {
     $('#onload2').modal('show');
 });
 $('#next2').click(function () {
-    if($("#fileExplorer")[0].files[0].size < 500000){
+    if ($("#fileExplorer")[0].files[0].size < 500000) {
         $('#onload2').modal('hide');
     }
 });
 
-$("#fileExplorer").change(function(){
+$("#fileExplorer").change(function () {
     $("#nameHolder")[0].value = $("#fileExplorer")[0].files[0].name;
 });
 
-$("#openFileExplorer").click(function(){
+$("#openFileExplorer").click(function () {
     $("#fileExplorer").trigger('click');
 });
 
@@ -104,11 +98,11 @@ function base64ToArrayBuffer(base64) {
     var binaryLen = binaryString.length;
     var bytes = new Uint8Array(binaryLen);
     for (var i = 0; i < binaryLen; i++) {
-       var ascii = binaryString.charCodeAt(i);
-       bytes[i] = ascii;
+        var ascii = binaryString.charCodeAt(i);
+        bytes[i] = ascii;
     }
     return bytes;
- }
+}
 
 function downloadFile(data, fileName, type) {
 
@@ -145,67 +139,67 @@ jQuery(function ($) {
     });
     $("#downloadCV").click(function (event) {
         var type = '';
-        if($("#fileExplorer")[0].files[0].type === 'application/pdf'){
+        if ($("#fileExplorer")[0].files[0].type === 'application/pdf') {
             type = 'application/pdf';
-        }else {
+        } else {
             type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
         }
-        downloadFile(holdCvResponse,holdNameOfCV.split('.')[0], type);
+        downloadFile(holdCvResponse, holdNameOfCV.split('.')[0], type);
     })
     $("#tryagain").click(function (event) {
         $("#error").modal('hide');
         $('#onload2').modal('show');
     })
-    $('#checkbox1').click(function(){
-        if($(this). prop("checked") == true){
-        isChecked =  true;
+    $('#checkbox1').click(function () {
+        if ($(this).prop("checked") == true) {
+            isChecked = true;
         }
     });
     $("#next2").click(function (event) {
         //make ajax and prepare request
-       
-       if(isChecked){
-        $("#loader").show();
-        var userEmail = $("#eCVemail")[0].value;
-        var file = $("#fileExplorer")[0].files[0];
-        var resumeTitle = $("#CVinput")[0].value;
-        var resumeType = "landingpage";
-        holdNameOfCV = resumeTitle;
-        var fd = new FormData();
-        fd.append('userEmail', userEmail);
-        fd.append('file', file);
-        fd.append('resumeTitle', resumeTitle);
-        fd.append('resumeType', resumeType);
-        if(file.size > 500000){
-            $("#sizeError").show();
-        }else {
-           
-            $.ajax({
-                url: 'http://mycvtracker.com:20000/user/uploadQuickResume',
-                type: 'POST',
-                data: fd,
-                processData: false, // tell jQuery not to process the data
-                contentType: false, // tell jQuery not to set contentType
-                success: function (data) {
-    
-                    holdCvResponse = data.resumeFile;
-                    $("#loader").hide();
-                    $('#onload2').modal('hide');
-                    $("#loadSuccess").modal('show');
-                },
-                error: function (err) {
-                    $("#loader").hide();
-                    $('#onload2').modal('hide');
-                    $("#error").modal('show');
-                }
-            });
+
+        if (isChecked) {
+            $("#loader").show();
+            var userEmail = $("#eCVemail")[0].value;
+            var file = $("#fileExplorer")[0].files[0];
+            var resumeTitle = $("#CVinput")[0].value;
+            var resumeType = "landingpage";
+            holdNameOfCV = resumeTitle;
+            var fd = new FormData();
+            fd.append('userEmail', userEmail);
+            fd.append('file', file);
+            fd.append('resumeTitle', resumeTitle);
+            fd.append('resumeType', resumeType);
+            if (file.size > 500000) {
+                $("#sizeError").show();
+            } else {
+
+                $.ajax({
+                    url: 'http://mycvtracker.com:8080/user/uploadQuickResume',
+                    type: 'POST',
+                    data: fd,
+                    processData: false, // tell jQuery not to process the data
+                    contentType: false, // tell jQuery not to set contentType
+                    success: function (data) {
+
+                        holdCvResponse = data.resumeFile;
+                        $("#loader").hide();
+                        $('#onload2').modal('hide');
+                        $("#loadSuccess").modal('show');
+                    },
+                    error: function (err) {
+                        $("#loader").hide();
+                        $('#onload2').modal('hide');
+                        $("#error").modal('show');
+                    }
+                });
+            }
+
+        } else {
+            $("#alertDialog").modal("show");
         }
-        
-       }else{
-         $("#alertDialog").modal("show");   
-    }
     })
-    $("#closeDialog").click(function(e){
+    $("#closeDialog").click(function (e) {
         $("#alertDialog").modal("hide");
         isChecked = false;
         $("#onload2").modal("show");
