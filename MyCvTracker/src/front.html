@@ -402,47 +402,225 @@
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemodal/1.4.4/jquery.simplemodal.min.js"></script> -->
 
 	<!-- <script type="text/javascript" src="js/custom.js"></script> -->
-	<script type="text/javascript" src="app/scripts/frontScript.js">
+	<script type="text/javascript">
 	
-		// $(document).ready(function(e) {
-		//     $(".showonhover").click(function(){
-		// 		$("#selectfile").trigger('click');
-		// 	});
-		// });
-
-
-		// var input = $('input[type=file]'); // see Example 4
-
-		// input.onchange = function () {
-		//     var file = input.files[0];
-
-		//     drawOnCanvas(file);   // see Example 6
-		//     displayAsImage(file); // see Example 7
-		// };
-
 		
-	</script>
-</body>
-
-</html>
-<!-- <script type="text/javascript">
-    $(".scroll").click(function(event){
-        event.preventDefault();
-        var dest=0;
-        if($(this.hash).offset().top > $(document).height()-$(window).height()){
-            dest=$(document).height()-$(window).height();
-        }else{
-            dest=$(this.hash).offset().top;
-        }
-        $('html,body').animate({scrollTop:dest}, 1000,'swing');
-    });
-    jQuery(function ($) {
-        $('#basic-modal .basic').click(function (e) {
-            $('#basic-modal-content').modal();
-
-            return false;
+var isChecked = false;
+var utility = {
+    sendEmail : function(URL, type, data) {
+        $.ajax({
+            url: URL,
+            type: type,
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: 'application/json', // tell jQuery not to set contentType
+            success: function (data) {
+                //alert(data);
+            },
+            error: function (err) {
+    
+            }
         });
+    },
+    drawOnCanvas : function(file) {
+        var reader = new FileReader();
+    
+        reader.onload = function (e) {
+            var dataURL = e.target.result,
+                c = document.querySelector('canvas'), // see Example 4
+                ctx = c.getContext('2d'),
+                img = new Image();
+    
+            img.onload = function () {
+                c.width = img.width;
+                c.height = img.height;
+                ctx.drawImage(img, 0, 0);
+            };
+    
+            img.src = dataURL;
+        };
+    
+        reader.readAsDataURL(file);
+    },
+    displayAsImage : function (file) {
+        var imgURL = URL.createObjectURL(file),
+            img = document.createElement('img');
+    
+        img.onload = function () {
+            URL.revokeObjectURL(imgURL);
+        };
+    
+        img.src = imgURL;
+        document.body.appendChild(img);
+    },
+    base64ToArrayBuffer : function (base64) {
+        var binaryString = window.atob(base64);
+        var binaryLen = binaryString.length;
+        var bytes = new Uint8Array(binaryLen);
+        for (var i = 0; i < binaryLen; i++) {
+            var ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+        }
+        return bytes;
+    },
+    
+    downloadFile : function (data, fileName, type) {
+    
+        // Create an invisible A element
+        const a = document.createElement("a");
+        a.style.display = "none";
+        document.body.appendChild(a);
+    
+        data = this.base64ToArrayBuffer(data);
+        // Set the HREF to a Blob representation of the data to be downloaded
+        a.href = window.URL.createObjectURL(
+            new Blob([data], {
+                type
+            })
+        );
+    
+        // Use download attribute to set set desired file name
+        a.setAttribute("download", fileName);
+    
+        // Trigger the download by simulating click
+        a.click();
+    
+        // Cleanup
+        window.URL.revokeObjectURL(a.href);
+        document.body.removeChild(a);
+    }
+    
+    
+}
+
+$("#upfile1").click(function () {
+    $("#file1").trigger('click');
+});
+
+$('#up-popup').click(function () {
+    $('#onload').modal('show');
+});
+$("#sendEmail").click(function () {
+    var fromEmailAddress = $("#sendToEmail")[0].value;
+    var subject = $("#subject")[0].value;
+    var fromName = $("#fromName")[0].value;
+    var content = $("#mailContent")[0].value;
+    var data = {
+            'fromEmailAddress': fromEmailAddress,
+            'subject': subject,
+            'fromName': fromName,
+            'content': content
+    }
+    utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
+
+})
+
+$('#next').click(function () {
+    $('#onload').modal('hide');
+    $("#eCVemail")[0].value = null;
+    $("#fileExplorer")[0].files[0] = null;
+    $("#CVinput")[0].value = null;
+    $("#nameHolder").value = null;
+    $("#sizeError").hide();
+    $('#onload2').modal('show');
+});
+$('#next2').click(function () {
+    if ($("#fileExplorer")[0].files[0].size < 500000) {
+        $('#onload2').modal('hide');
+    }
+});
+
+$("#fileExplorer").change(function () {
+    $("#nameHolder")[0].value = $("#fileExplorer")[0].files[0].name;
+});
+
+$("#openFileExplorer").click(function () {
+    $("#fileExplorer").trigger('click');
+});
+
+
+jQuery(function ($) {
+    var holdCvResponse = null;
+    var holdNameOfCV = null;
+    $("#sizeError").hide();
+    $("#loader").hide();
+    $("#closeSuccess").click(function (event) {
+        $("#loadSuccess").modal('hide');
     });
+    $("#downloadCV").click(function (event) {
+        var type = '';
+        if ($("#fileExplorer")[0].files[0].type === 'application/pdf') {
+            type = 'application/pdf';
+        } else {
+            type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        }
+        utility.downloadFile(holdCvResponse, holdNameOfCV.split('.')[0], type);
+    })
+    $("#tryagain").click(function (event) {
+        $("#error").modal('hide');
+        $('#onload2').modal('show');
+    })
+    $('#checkbox1').click(function () {
+        if ($(this).prop("checked") == true) {
+            isChecked = true;
+        }
+    });
+    $("#next2").click(function (event) {
+        //make ajax and prepare request
+
+        if (isChecked) {
+            $("#loader").show();
+            var userEmail = $("#eCVemail")[0].value;
+            var file = $("#fileExplorer")[0].files[0];
+            var resumeTitle = $("#CVinput")[0].value;
+            var resumeType = "landingpage";
+            holdNameOfCV = resumeTitle;
+            var fd = new FormData();
+            fd.append('userEmail', userEmail);
+            fd.append('file', file);
+            fd.append('resumeTitle', resumeTitle);
+            fd.append('resumeType', resumeType);
+            if (file.size > 500000) {
+                $("#sizeError").show();
+            } else {
+
+                $.ajax({
+                    url: 'http://mycvtracker.com:8080/user/uploadQuickResume',
+                    type: 'POST',
+                    data: fd,
+                    processData: false, // tell jQuery not to process the data
+                    contentType: false, // tell jQuery not to set contentType
+                    success: function (data) {
+
+                        holdCvResponse = data.resumeFile;
+                        $("#loader").hide();
+                        $('#onload2').modal('hide');
+                        $("#loadSuccess").modal('show');
+                    },
+                    error: function (err) {
+                        $("#loader").hide();
+                        $('#onload2').modal('hide');
+                        $("#error").modal('show');
+                    }
+                });
+            }
+
+        } else {
+            $("#alertDialog").modal("show");
+        }
+    })
+    $("#closeDialog").click(function (e) {
+        $("#alertDialog").modal("hide");
+        isChecked = false;
+        $("#onload2").modal("show");
+    })
+    $('#basic-modal .basic').click(function (e) {
+        $('#basic-modal-content').modal();
+
+        return false;
+    });
+});
+
 </script>
 
 <script>
