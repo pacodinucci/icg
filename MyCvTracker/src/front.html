@@ -508,7 +508,7 @@ $("#sendEmail").click(function () {
     var data = {
             'fromEmailAddress': fromEmailAddress,
             'subject': subject,
-            'fromName': fromName,
+            'from': fromName,
             'content': content
     }
     utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
