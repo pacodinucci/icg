@@ -13,14 +13,49 @@ html, body {
 }
 
 body {
-  font: 14px/16px $font-family;
+  font: 14px/16px museo700;
   color: $default-text;
   background: linear-gradient(to top, #e0eafc, #cfdef3);
   &.blur-theme {
     @include main-background();
   }
 }
+@font-face {
+    font-family: 'museo700';
+    src: url('../assets/fonts/museo_700-webfont.woff2') format('woff2'),
+         url('../assets/fonts/museo_700-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
+}
+@font-face {
+    font-family: 'museo_slab500';
+    src: url('../assets/fonts/museo_slab_500.woff2') format('woff2'),
+         url('../assets/fonts/museo_slab_500.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1,h2,h3,h4,h5,h6{
+	margin: 0px;
+	padding: 0px;
+	font-family: 'museo700';
+}
+p{
+	margin: 0px;
+	padding: 0px;
+	font-family: 'museo_slab500';
+	font-size: 14px;
+}
+ul{
+	list-style-type: none;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+	font-family: 'museo_slab500';
+}
 body.mobile{
   background: none;
   .body-bg{
@@ -69,7 +104,7 @@ a {
 }
 
 .al-main {
-  margin-left: $left-space;
+  margin-left: $left-space !important;
   padding: 66px 0 34px 0;
   min-height: 500px;
 }
@@ -227,3 +262,72 @@ a {
 .irs-grid-text {
   color: $default-text;
 }
+.footer {
+    width: 100%;
+    min-height: 50px;
+    padding: 50px 0px 20px 0px;
+    background: #1e222c;
+    text-align: center;
+}
+.footer img{
+	margin-bottom: 10px;
+}
+.footer p{
+	color: #fff;
+	margin: 5px 0px;
+}
+.footer .copyright{
+	color: #9099ad;
+}
+.footer-social{
+	margin-top: 20px;
+  padding: 0;
+}
+.footer-social li{
+	display: inline-block;
+	margin: 0px 10px;
+}
+.footer-social li a{
+	color: #9099ad;
+}
+.footer-social li a:hover{
+	color: #489dc4;
+}
+
+#loginForm input[type=text], #loginForm input[type=email], #loginForm button[type=submit], #loginForm textarea,
+#registerForm input[type=text], #registerForm input[type=email], #registerForm button[type=submit] {
+  font-family: 'museo_slab500';
+  font-size: 14px;
+}
+
+// @font-face {
+//     font-family: "Font Awesome 5 Brands";
+//     font-style: normal;
+//     font-weight: normal;
+//     font-display:auto;src: url(../webfonts/fa-brands-400.eot);
+//     src: url(../webfonts/fa-brands-400.eot?#iefix) format("embedded-opentype"),url(../webfonts/fa-brands-400.woff2) format("woff2"),url(../webfonts/fa-brands-400.woff) format("woff"),url(../webfonts/fa-brands-400.ttf) format("truetype"),url(../webfonts/fa-brands-400.svg#fontawesome) format("svg")
+// }
+//
+// .fab {
+//     font-family: "Font Awesome 5 Brands"
+// }
+//
+// .fa-facebook-f:before, .fa-facebook:before {
+//     content: "\f09a";
+// }
+// .fa, .fab, .fal, .far, .fas {
+//     -moz-osx-font-smoothing: grayscale;
+//     -webkit-font-smoothing: antialiased;
+//     display: inline-block;
+//     font-style: normal;
+//     font-variant: normal;
+//     text-rendering: auto;
+//     line-height: 1;
+// }
+//
+// .fa-twitter:before {
+//     content: "\f099";
+// }
+// .fa-facebook-f:before, .fa-facebook:before {
+//     content: "\f09a";
+// }

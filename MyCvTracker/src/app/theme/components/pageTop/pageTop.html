@@ -1,5 +1,23 @@
 <div class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
-  <a ng-href="account" class="al-logo clearfix"><span>MyCV</span>Tracker</a>
+  <!-- <a ng-href="account" class="al-logo clearfix"><span>MyCV</span>Tracker</a> -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="logo">
+          <a ng-href="account" ><img src="assets/img/front/logo.png" alt=""></a>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12 m-align">
+					<ul class="upper-nav">
+						<li><a href=""><span><i class="fab fa-facebook-f"></i></span></a></li>
+						<li><a href=""><span><i class="fab fa-twitter"></i></span></a></li>
+						<li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
+						<li><a href="/login">Login</a></li>
+						<li><a href="/register"><span class="btn-style">Sign Up</span></a></li>
+					</ul>
+				</div>
+    </div>
+
   <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu ng-if="$isAuthenticated"></a>
 
   <!--<div class="search">-->
@@ -20,4 +38,5 @@
     </div>
     <!--<msg-center></msg-center>-->
   </div>
+</div>
 </div>
