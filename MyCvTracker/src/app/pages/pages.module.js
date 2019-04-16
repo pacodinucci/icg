@@ -46,6 +46,7 @@
             // console.log(isAuthPages);
             var frontPage = next.endsWith("/") || next.endsWith(".com");
             var forwardPage = next.endsWith("/forward.html");
+            var coursePage =  next.endsWith("/java_experts.html");
             var activatePage = next.endsWith("/activate.html");
             var selfcomposePage = next.endsWith("/selfcompose.html");
 
@@ -60,6 +61,9 @@
             }
             else if (selfcomposePage) {
                 window.location.href = Utilities.baseUrl() + "/selfcompose.html";
+            }
+            else if(coursePage){
+                 window.location.href = Utilities.baseUrl() + "/java_experts.html";
             }
             else if (restrictedPage && !$auth.isAuthenticated()) {
                     $location.url("/login");
