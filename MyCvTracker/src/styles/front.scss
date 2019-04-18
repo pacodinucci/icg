@@ -724,9 +724,9 @@ header{
   }
 }
 
-.offset-lg-2 {
-    margin-left: 16.666667%;
-}
+// .offset-lg-2 {
+    // margin-left: 16.666667%;
+// }
 
 .modal-content {
   display: -webkit-box;
@@ -777,9 +777,22 @@ header{
   margin-top: -17px
 }
 @media (min-width: 320px) and (max-width: 480px) {
-  
+
   .inputGroup {
     margin-top: -10px
   }
-  
+
+}
+
+.textUploadCV {
+  margin-top: 30px;
+  font-size:30px;
+  animation: blinker 2s ease-in infinite alternate;
+  color: white;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
