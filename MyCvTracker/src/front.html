@@ -61,11 +61,11 @@
 				<div class="boxborder" align="center">
 					<div class="upload-btn">
 						<div class="layer"></div>
-						<button class="up-btn" id="up-popup">
+						<button class="up-btn up-popup" >
 							<img src="assets/img/front/upload-btn.png" class="file-image" id="upfile1" /></button>
 					</div>
 					<div  align="center">
-						<button class="btn btn-primary">Upload CV</button>
+						<button class="btn btn-primary up-popup ">Upload CV</button>
 						<br>
 						<br>
 					</div>
@@ -523,7 +523,7 @@ $("#upfile1").click(function () {
     $("#file1").trigger('click');
 });
 
-$('#up-popup').click(function () {
+$('.up-popup').click(function () {
     $('#onload').modal('show');
 });
 $("#sendEmail").click(function () {
