@@ -267,7 +267,7 @@
 					<div class="img">
 						<form>
 							<input type="email" id="eCVemail" name="email" class="form-control" placeholder="Your email">
-							<input type="text" name="file" id="CVinput" class="form-control" placeholder="Resume References (Monster job Board, Project Manager Apple etc.)">
+							<input type="text" name="refrence" id="CVinput" class="form-control" placeholder="Resume References (Monster job Board, Project Manager Apple etc.)">
 							<div class="input-group inputGroup">
 								<span class="input-group-btn">
 								  <button class="btn btn-default uploadBtn" id="openFileExplorer"   type="button"> Upload </button>
@@ -276,8 +276,11 @@
 							  </div>
 							<input type="file" accept=
 							".doc,.docx,.pdf"" class="form-control" id="fileExplorer" style="display: none;" />
-							<span style="color:red;position: absolute;margin-top: -15px" id="sizeError"><strong>Error</strong> File size limit exceeded.</span>
-							<span style="color:red;position: absolute;margin-top: -15px" id="noFileError"><strong>Error</strong> Please upload a file.</span>
+							
+							<span class="errorStyle"  id="emailError"><strong>Error</strong> Email is required.</span><br>
+							<span class="errorStyle" id="resumeRefError"><strong>Error</strong> Resume refrence is required.</span><br>
+							<span class="errorStyle"  id="sizeError"><strong>Error</strong> File size limit exceeded.</span><br>
+							<span class="errorStyle"  id="noFileError"><strong>Error</strong> Please upload a file.</span>
 							<input type="checkbox" id="checkbox1" name="">
 
 							<p class="check-box">By uploading my CV,I agree to the Terms of use and I Acknowledge I have read the privacy
@@ -517,7 +520,39 @@ var utility = {
     $("#subject")[0].value = '';
     $("#fromName")[0].value = '';
     $("#mailContent")[0].value = '';
+	},
+	clearUploadData : function() {
+	$("#eCVemail")[0].value = null;
+    $("#fileExplorer")[0].value = null;;
+    $("#CVinput")[0].value = null;
+	$("#nameHolder")[0].value = null;
+	},
+	checkEmailEmpty : function() {
+		if($("#eCVemail")[0].value == null || $("#eCVemail")[0].value == undefined || $("#eCVemail")[0].value==''){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	checkResumeRefEmpty : function() {
+		if($("#CVinput")[0].value == null || $("#CVinput")[0].value == undefined || $("#CVinput")[0].value==''){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	hideDOMS : function() {
+	/* $("#sizeError").hide();
+	$("#emailError").hide();
+	$("#resumeRefError").hide();
+	$("#noFileError").hide(); */
+	document.getElementById("sizeError").style.display = "none";
+	document.getElementById("emailError").style.display = "none";
+	document.getElementById("resumeRefError").style.display = "none";
+	document.getElementById("noFileError").style.display = "none";
+   
 	}
+
 }
 
 $("#upfile1").click(function () {
@@ -544,12 +579,8 @@ $("#sendEmail").click(function () {
 
 $('#next').click(function () {
     $('#onload').modal('hide');
-    $("#eCVemail")[0].value = null;
-    $("#fileExplorer")[0].files[0] = null;
-    $("#CVinput")[0].value = null;
-	$("#nameHolder")[0].value = null;
-	$("#sizeError").hide();
-	$("#noFileError").hide();
+    utility.clearUploadData();
+	utility.hideDOMS();
     $('#onload2').modal('show');
 });
 $('#next2').click(function () {
@@ -573,17 +604,11 @@ $("#openFileExplorer").click(function () {
 jQuery(function ($) {
     var holdCvResponse = null;
     var holdNameOfCV = null;
-	$("#sizeError").hide();
-	$("#noFileError").hide();
-    $("#loader").hide();
+	$("#loader").hide();
     $("#closeSuccess").click(function (event) {
-	$("#eCVemail")[0].value = null;
-    $("#fileExplorer")[0].files[0] = null;
-    $("#CVinput")[0].value = null;
-	$("#nameHolder")[0].value = null;
-	$("#sizeError").hide();
-	$("#noFileError").hide();
-        $("#loadSuccess").modal('hide');
+	utility.clearUploadData();
+	utility.hideDOMS();
+    $("#loadSuccess").modal('hide');
     });
     $("#downloadCV").click(function (event) {
         var type = '';
@@ -604,25 +629,51 @@ jQuery(function ($) {
         }
     });
     $("#next2").click(function (event) {
-        //make ajax and prepare request
-		var userEmail = $("#eCVemail")[0].value;
-            var file = $("#fileExplorer")[0].files[0];
+        //make ajax and prepare request after validation
+		var isValid= false;
+		if(utility.checkEmailEmpty()){
+			$("#emailError").show();
+		}else{
+			$("#emailError").hide();
+		}
+		if(utility.checkResumeRefEmpty()){
+			$("#resumeRefError").show();
+		}else{
+			$("#resumeRefError").hide();
+		}
+		var file = $("#fileExplorer")[0].files[0];
+		if(!file){
+			$("#noFileError").show();
+		}else{
+			$("#noFileError").hide();
+		}
+		if(file && file.size > 500000){
+			$("#sizeError").show();
+		}else{
+			$("#sizeError").hide();
+		}
+		if(!isChecked){
+			if(file && file.size < 500000){
+				$("#alertDialog").modal("show");
+			}
+		}
+		if(!utility.checkEmailEmpty() && !utility.checkResumeRefEmpty() && file && file.size < 500000 && isChecked){
+			isValid = true;
+		}else{
+			isValid = false;
+		}
+		if(isValid && isChecked){
+			$("#loader").show();
+			var userEmail = $("#eCVemail")[0].value;
             var resumeTitle = $("#CVinput")[0].value;
             var resumeType = "landingpage";
-            holdNameOfCV = file.name;
-        if (file && isChecked) {
-            $("#loader").show();
+            holdNameOfCV = resumeTitle;
             var fd = new FormData();
             fd.append('userEmail', userEmail);
             fd.append('file', file);
             fd.append('resumeReference', resumeTitle);
             fd.append('resumeType', resumeType);
-            if ( file && file.size > 500000) {
-				$("#noFileError").hide();
-                $("#sizeError").show();
-            } else if(file) {
-
-                $.ajax({
+			$.ajax({
                     url: 'https://mycvtracker.com:8080/user/uploadQuickResume',
                     type: 'POST',
                     data: fd,
@@ -634,24 +685,18 @@ jQuery(function ($) {
                         $("#loader").hide();
                         $('#onload2').modal('hide');
                         $("#loadSuccess").modal('show');
+						utility.clearUploadData();
                     },
                     error: function (err) {
                         $("#loader").hide();
                         $('#onload2').modal('hide');
                         $("#error").modal('show');
+						utility.clearUploadData();
                     }
                 });
-            }else{
-				$("#sizeError").hide();
-				$("#noFileError").show();
-			}
 
-        } else {
-			if(file){
-				$("#alertDialog").modal("show");
-			}
-           
-        }
+		}
+			
     })
     $("#closeDialog").click(function (e) {
         $("#alertDialog").modal("hide");

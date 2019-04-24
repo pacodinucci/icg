@@ -109,7 +109,11 @@ body {
     font-size: 3.5em;
   }
 }
-
+.errorStyle {
+  color:red;
+  position: absolute;
+  margin-top: -15px;
+}
 .blue-heading {
   color: #64B1F2;
 }
