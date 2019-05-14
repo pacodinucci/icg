@@ -1,7 +1,3 @@
-<!-- reCaptcha api -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<!-- /reCaptcha api -->
-
 <div ng-class="(loginModal==true) ? 'login-model' : 'auth-block'">
     <h1>Sign in to MyCVTracker</h1>
     <a href="/register" class="auth-link">New to MyCVTracker? Sign up!</a>
@@ -34,7 +30,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="g-recaptcha btn btn-default btn-auth" ng-click="login()" id="btn-login" data-sitekey="6LcmY6IUAAAAAK-Wlwmz5ax3X3MK7--n-zxZn3k8" data-callback="captchaSubmit" ng-disabled="loginForm.$invalid">Sign in</button>
+                <button type="submit" class="btn btn-default btn-auth" ng-click="login()" id="btn-login" ng-disabled="loginForm.$invalid">Sign in</button>
                 <a href class="forgot-pass" data-toggle="modal" ng-click="openForgetPasswordModal();" ng-if="!loginModal">Forgot password?</a>
             </div>
         </div>
@@ -50,11 +46,3 @@
         <!--</div>-->
     </form>
 </div>
-
-<!-- reCaptcha submit -->
-<script>
-	function captchaSubmit(data) {
-		document.getElementById("loginForm").submit();
-	}
-</script>
-<!-- /reCaptcha submit -->
