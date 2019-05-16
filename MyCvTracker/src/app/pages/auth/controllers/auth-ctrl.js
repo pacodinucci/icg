@@ -10,7 +10,8 @@
                         firstName: '',
                         lastName: '',
                         email: '',
-                        password: ''
+                        password: '',
+                        confirmPassword: ''
                     },
                         login: {
                         email: '',
@@ -25,23 +26,29 @@
                 };
 
                 $scope.register = function (registerModel, registerForm) {
+
+                    var activationKey = Utilities.getParameters().key;
                     if (registerForm.$valid) {
-                        $("#btn-register").html('Signing up');
-                        $auth.signup(registerModel)
-                            .then(function(response) {
-                                Utilities.showSuccessMsg(Utilities.getAlerts('regsitrationSuccess').message);
-                                if($scope.loginModal){
-                                    $scope.$close();
-                                    $rootScope.loginModal=false;
-                                    $scope.loginModal = false;
-                                }
-                                $state.go("login");
-                                $("#btn-register").html('Sign up');
-                                                            })
-                            .catch(function(response) {
-                                Utilities.showErrorMsg(Utilities.getAlerts(response.status));
-                                $("#btn-register").html('Sign up');
-                            });
+                        if ($scope.user.register.password == $scope.user.register.confirmPassword) {
+                            $("#btn-register").html('Signing up');
+                            $auth.signup(registerModel)
+                                .then(function (response) {
+                                    Utilities.showSuccessMsg(Utilities.getAlerts('regsitrationSuccess').message);
+                                    if ($scope.loginModal) {
+                                        $scope.$close();
+                                        $rootScope.loginModal = false;
+                                        $scope.loginModal = false;
+                                    }
+                                    $state.go("login");
+                                    $("#btn-register").html('Sign up');
+                                })
+                                .catch(function (response) {
+                                    Utilities.showErrorMsg(Utilities.getAlerts(response.status));
+                                    $("#btn-register").html('Sign up');
+                                });
+                        } else {
+                            Utilities.showErrorMsg(Utilities.getAlerts('confirmPasswordErorr').message);
+                        }
                     }
                 };
 
