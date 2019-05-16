@@ -1,3 +1,7 @@
+<!-- reCaptcha api -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!-- /reCaptcha api -->
+
 <div class="auth-block">
     <h1>Sign up to MyCVTracker</h1>
     <a href="/login" class="auth-link">Already have a MyCVTracker account? Sign in!</a>
@@ -33,7 +37,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default btn-auth" ng-disabled="registerForm.$invalid" id="btn-register">Sign up</button>
+                <button type="submit" class="g-recaptcha btn btn-default btn-auth" data-sitekey="6LcmY6IUAAAAAK-Wlwmz5ax3X3MK7--n-zxZn3k8" data-callback="captchaSubmit" ng-disabled="registerForm.$invalid" id="btn-register">Sign up</button>
             </div>
         </div>
 
@@ -45,3 +49,12 @@
 
     </form>
 </div>
+
+
+<!-- reCaptcha submit -->
+<script>
+	function captchaSubmit(data) {
+		document.getElementById("registerForm").submit();
+	}
+</script>
+<!-- /reCaptcha submit -->
