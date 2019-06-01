@@ -424,20 +424,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
 	<script src="https://rawgithub.com/CodeSeven/toastr/master/toastr.js"></script>
-	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyA_7VhjaGDGDeWIOrMi8wdFL2b4L0UgyLg",
-			authDomain: "cvtracker-66e29.firebaseapp.com",
-			databaseURL: "https://cvtracker-66e29.firebaseio.com",
-			projectId: "cvtracker-66e29",
-			storageBucket: "cvtracker-66e29.appspot.com",
-			messagingSenderId: "852640116900"
-		};
-		firebase.initializeApp(config);
-	</script>
+
 
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemodal/1.4.4/jquery.simplemodal.min.js"></script> -->
 
@@ -621,6 +609,7 @@
 		jQuery(function ($) {
 			var holdCvResponse = null;
 			var holdNameOfCV = null;
+			var holdFileType = null;
 			$("#loader").hide();
 			$("#closeSuccess").click(function (event) {
 				utility.clearUploadData();
@@ -628,13 +617,7 @@
 				$("#loadSuccess").modal('hide');
 			});
 			$("#downloadCV").click(function (event) {
-				var type = '';
-				if ($("#fileExplorer")[0].files[0].type === 'application/pdf') {
-					type = 'application/pdf';
-				} else {
-					type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-				}
-				utility.downloadFile(holdCvResponse, holdNameOfCV.split('.')[0], type);
+				utility.downloadFile(holdCvResponse, holdNameOfCV.split('.')[0], holdFileType);
 			})
 			$("#tryagain").click(function (event) {
 				$("#error").modal('hide');
@@ -699,6 +682,9 @@
 						success: function (data) {
 
 							holdCvResponse = data.resumeFile;
+							holdNameOfCV = data.resumeName;
+							holdFileType = data.fileType;
+
 							$("#loader").hide();
 							$('#onload2').modal('hide');
 							$("#loadSuccess").modal('show');
