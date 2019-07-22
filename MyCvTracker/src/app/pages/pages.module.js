@@ -34,7 +34,7 @@
         }
 
         $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
-            var publicPages = ['/login','/register','/activateAccount','/resetPassword'];
+            var publicPages = ['/login','/register','/activateAccount','/resetPassword', '/jobs', '/viewJob', '/findjobs', '/terms'];
             var restrictedPage = publicPages.indexOf($location.path()) === -1;
             $rootScope.loginModal = false;
             // console.log(event);
@@ -49,6 +49,10 @@
             var coursePage =  next.endsWith("/java_experts.html");
             var activatePage = next.endsWith("/activate.html");
             var selfcomposePage = next.endsWith("/selfcompose.html");
+            var termsPage = next.endsWith("/terms.html");
+            var cvwritingPage = next.endsWith("/cvwritingpackages.html");
+            var cvMarketingPage = next.endsWith("/cvmarketing.html");
+
 
             if (frontPage) {
                 window.location.href = Utilities.baseUrl() + "/front.html";
@@ -65,6 +69,15 @@
             else if(coursePage){
                  window.location.href = Utilities.baseUrl() + "/java_experts.html";
             }
+            else if(termsPage) {
+                window.location.href = Utilities.baseUrl() + "/terms.html";
+            }
+            else if(cvwritingPage) {
+                window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
+             }
+             else if(cvMarketingPage) {
+                   window.location.href = Utilities.baseUrl() + "/cvmarketing.html";
+             }
             else if (restrictedPage && !$auth.isAuthenticated()) {
                     $location.url("/login");
             }else if(isAuthPages && $auth.isAuthenticated()){
