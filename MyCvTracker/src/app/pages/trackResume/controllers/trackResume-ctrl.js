@@ -257,7 +257,7 @@
 				$scope.init = function () {
 					$scope.getUserDetails();
 					$scope.getUserTick();
-					$scope.validateUserTick();
+					//$scope.validateUserTick();
                     $scope.getMyFavNotes();
 
                 };
