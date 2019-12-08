@@ -31,7 +31,7 @@
                     description: 'Track Resume',
                     link:'trackResume',
                     icon: 'trackResume',
-                    showMenu:true
+                    showMenu:false
                 }, {
                     color: pieColor,
                     description: 'Notifications',
@@ -61,7 +61,7 @@
                     description: 'Settings',
                     link:'settings',
                     icon: 'settings',
-                    showMenu:Authorization.getUserRole() == 'ADMIN'
+                    showMenu:true
                 }
                 ];
 
@@ -206,7 +206,7 @@
 					});
 					AccountSvc.saveProfileSettings(model).then(
 						function () {
-							toastr.error(Utilities.getAlerts('profileSaveSucess'));
+							toastr.success(Utilities.getAlerts('profileSaveSucess'));
 							Utilities.gotoProfilePage();
 
 						},
