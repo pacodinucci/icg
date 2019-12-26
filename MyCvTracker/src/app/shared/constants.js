@@ -220,7 +220,7 @@
                 editNotes : {
                     url : '/user/editNotes'
                 },
-                editNotes : {
+                editCampaignNotes : {
                     url : '/user/editCampaignNotes'
                 },
                 sendTrackedApplication : {

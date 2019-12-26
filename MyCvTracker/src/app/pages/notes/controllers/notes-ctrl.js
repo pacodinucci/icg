@@ -153,7 +153,7 @@
 						})
 							.success(function (data, status, headers, config) {
 								console.debug(data + '  ' + status + ' ' + headers + '  ' + config);
-								toastr.success(Utilities.getAlerts('deleteNotesSuccess'));
+								toastr.success(Utilities.getAlerts('deleteNotesSuccess').message);
 								// new code edited
 								angular.forEach($scope.user.myNotes, function(obj, i) {
 									if(noteId==obj.id){
@@ -206,12 +206,13 @@
 
 							function (notesData) {
 								$scope.notesModal.dismiss();
-								toastr.error(Utilities.getAlerts('resumeTrackRequestSuccess'));
+								toastr.success(Utilities.getAlerts('updateNoteSuccess').message);
 								angular.forEach($scope.user.myNotes, function(obj, i) {
 									if(notesData.id==obj.id){
 										$scope.user.myNotes[i] = notesData;
 									}
 								});
+								
 							}
 						);
 					}
@@ -239,7 +240,7 @@
 							$scope.notesModal.dismiss();
 							$scope.note.createdDate = notesData.createdDate;
 							$scope.note.tracked = notesData.tracked;
-							toastr.error(notesData.tracked ? Utilities.getAlerts('sendTrackedApplicationSuccess'):Utilities.getAlerts('sendUnTrackedApplicationSuccess'));
+							toastr.error(notesData.tracked ? Utilities.getAlerts('sendTrackedApplicationSuccess').message:Utilities.getAlerts('sendUnTrackedApplicationSuccess').message);
 							Utilities.gotoNotesPage();
 						}
 					);

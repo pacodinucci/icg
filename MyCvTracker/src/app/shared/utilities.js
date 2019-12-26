@@ -85,6 +85,10 @@ angular.module('MyCvTracker.shared')
                     type: 'success',
                     message: 'Note has been successfully deleted.',
                 },
+                updateNoteSuccess: {
+                    type: 'success',
+                    message: 'Note has been updated successfully.',
+                },
                 sendTrackedApplicationSuccess: {
                     type: 'success',
                     message: 'This note has been added to tracking.',

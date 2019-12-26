@@ -244,7 +244,7 @@
 					var id = $scope.id;
 					ResumesSvc.downloadMyResume(id);
 					$scope.closeModal();
-					toastr.error(Utilities.getAlerts('resumeDownloadSuccess'));
+					toastr.success(Utilities.getAlerts('resumeDownloadSuccess').message);
 				};
 				////////////////////////////////////////////////////////////////////////////
 				$scope.init = function () {
