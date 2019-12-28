@@ -27,11 +27,13 @@
 			<a ng-click="openDownloadResumeModel(resume.id);" class="tile-item">
 				<div ba-panel ba-panel-class="xsmall-panel light-text">
 					<div class="tile-title">
-						<h3 ng-bind="resume.resumeTitle"></h3>
+						<h3 ng-bind="resume.resumeTitle" class="resume-title"></h3>
 					</div>
+					<hr class="resumeSeprator">
 					<div class="tile-title">
-						<h3 ng-bind="resume.resumeName"></h3>
+						<h3 ng-bind="resume.resumeName" class="resume-name"></h3>
 					</div>
+					<hr class="resumeSeprator">
 					<div class="tile-text">
 						<!--<h5 ng-bind="resume.resumeType"></h5>-->
 						<h5 ng-bind="resume.uploadedAt"></h5>

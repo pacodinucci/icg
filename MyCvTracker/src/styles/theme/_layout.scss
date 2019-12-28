@@ -325,6 +325,26 @@ header {
   }
 }
 
+hr.resumeSeprator{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  border-top: 1px solid #eee;
+
+}
+h3.resume-title,h3.resume-name{
+  font-size: 15px;
+
+}
+
+div.file-upload-error{
+  color: red;
+  text-align: center;
+}
+span.file-size {
+  color: #9099ad;
+  font-size: 9px;
+}
 
 
 // @font-face {
