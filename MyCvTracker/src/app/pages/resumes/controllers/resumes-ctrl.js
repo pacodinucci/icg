@@ -8,6 +8,7 @@
 				var Utilities = $injector.get('Utilities');
 				var AccountSvc = $injector.get('AccountSvc');
 				var ResumesSvc = $injector.get('ResumesSvc');
+				var Constants = $injector.get('Constants');
 
 				//Used scopes
 				$scope.resumeModal = {};
@@ -120,6 +121,7 @@
 						function (resumesData) {
 							$scope.resumeTitle = resumesData.resumeTitle;
 							$scope.resumeType = resumesData.resumeType;
+							$scope.resumeName = resumesData.resumeName;
 							var file = new File([resumesData.resumeFile], resumesData.resumeName);
 							file.name=resumesData.resumeName;
 							file.type="application/msword";
@@ -149,7 +151,7 @@
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 						$scope.closeModal();
                         $rootScope.$broadcast('quickCV');
-						toastr.success(Utilities.getAlerts(id==null ? 'resumeAddedSuccess' : 'resumeEditSuccess'));
+						toastr.success(Utilities.getAlerts(id==null ? 'resumeAddedSuccess' : 'resumeEditSuccess').message);
 
 						data.uploadedAt = Utilities.getFormattedDate(data.uploadedAt);
 						if(id!=null){
@@ -274,9 +276,16 @@
 					var userId = $scope.user.id;
 					var resumeTitle = $scope.resumeTitle;
 					var resumeType = $scope.resumeType;
+					if(file != null && file.size>=50000){
+						$scope.addAlert(Utilities.getAlerts('InputFileInputSizeValidation'));
+						$scope.myFile=null;
+						return false;
+					}
 					if (file != null) {
 						$scope.saveMyResume(file, id, userId, resumeTitle, resumeType);
 					}
+					
+					
 					else {
 						$scope.addAlert(Utilities.getAlerts('InputFileInputRequiredValidation'));
 					}

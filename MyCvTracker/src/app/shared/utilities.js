@@ -181,15 +181,15 @@ angular.module('MyCvTracker.shared')
 
                 InputFileInputTypeValidation: {
                     type: '',
-                    message: 'Please, only select a PDF, Doc, Docx file.'
+                    message: 'Please upload a PDF, Doc, Docx file only.'
                 },
                 InputFileInputSizeValidation: {
                     type: '',
-                    message: 'Please, select a file that is less than 2MB.'
+                    message: 'Please select a file that is less than 500KB.'
                 },
                 InputFileInputRequiredValidation: {
                     type: '',
-                    message: 'Please, select the resume file!'
+                    message: 'Please select the resume file!'
                 },
                 PaymentSuccessfullyExecuted: {
                     type: 'success',
