@@ -79,7 +79,10 @@
 					tracking: false,
 					notification: false,
 					subject: "hello",
-					content: "I am looking for new role"
+					content: "I am looking for new role",
+					firstName: '',
+					lastName: '',
+					emailAddress: ''
 				};
 
 				$scope.getUserProfileSettings = function () {
@@ -88,6 +91,10 @@
 						function (response) {
 							$scope.settings.emailSubscribes = response.emailSubscribes;
 							$scope.settings.trackingMode = response.trackingMode;
+							$scope.settings.firstName = response.firstName;
+							$scope.settings.lastName = response.lastName;
+							$scope.settings.emailAddress = response.emailAddress;
+
 							angular.forEach($scope.settings.emailSubscribes, function (state) {
 								if (state.emailType == 'tracking') {
 									$scope.settings.tracking = state.subscribe;
@@ -177,15 +184,6 @@
 
 				$scope.settingsPage = function () {
 					Utilities.gotoSettingsPage();
-				};
-
-				$scope.getUserTick = function () {
-					$scope.userTick = null;
-					PaymentSvc.getUserTick().then(
-						function (data) {
-							$scope.userTick = data;
-						}
-					);
 				};
 
 				$scope.newSkill = function () {
