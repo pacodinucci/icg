@@ -204,7 +204,7 @@
 					});
 					AccountSvc.saveProfileSettings(model).then(
 						function () {
-							toastr.success(Utilities.getAlerts('profileSaveSucess'));
+							toastr.success(Utilities.getAlerts('profileSaveSucess').message);
 							Utilities.gotoProfilePage();
 
 						},
