@@ -11,12 +11,12 @@
       height: $small-panel-height;
     }
   }
-  @media screen and (min-width: 1325px) {
+  @media screen and (min-width: 1380px) {
     .pie-chart-item-container {
       width: 25%;
     }
   }
-  @media screen and (min-width: 700px) and (max-width: 1325px)  {
+  @media screen and (min-width: 700px) and (max-width: 1380px)  {
     .pie-chart-item-container {
       width: 50%;
     }
@@ -37,7 +37,7 @@
     }
   }
   @media screen and
-    (min-width: 1325px) and (max-width: 1650px),
+    (min-width: 1380px) and (max-width: 1650px),
     (min-width: 700px) and (max-width: 830px),
     (max-width: 400px) {
     .chart-icon {

@@ -579,7 +579,7 @@ angular.module('MyCvTracker.shared')
                     $location.path('CvMarketing');
                 },
                 gotoNotesPage: function () {
-                    $location.path('notes');
+                    $location.path('notes', {}, {reload: true});
                 },
                 gotoCampaignNotesPage: function () {
                     $location.path('CampaignNotes');

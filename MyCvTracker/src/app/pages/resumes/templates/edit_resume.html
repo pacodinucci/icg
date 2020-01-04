@@ -7,8 +7,8 @@
 		</button>
 		<h4 class="modal-title">Edit Resume</h4>
 	</div>
-	<alert ng-repeat="alert in alerts track by $index" type="{{alert.type}}" close="alerts.splice($index, 1)" id="alertModel">
-		<div ng-bind="alert.message" class="file-upload-error"></div>
+	<alert ng-repeat="alert in alerts track by $index" type="{{alert.type}}" close="alerts.splice($index, 1)" id="alertModel" >
+		<div ng-bind="alert.message" class="file-upload-error" ></div>
 	</alert>
 	<div>
 

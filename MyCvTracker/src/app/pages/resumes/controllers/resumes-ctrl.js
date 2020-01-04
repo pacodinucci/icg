@@ -169,16 +169,16 @@
 			        	$scope.closeModal();
 
 			        	if(data.message=='resumeSaveTitleDuplicatedError'){
-			        		toastr.error(Utilities.getAlerts('resumeSaveTitleDuplicatedError'));
+			        		toastr.error(Utilities.getAlerts('resumeSaveTitleDuplicatedError').message);
 			        	}
 			        	else if(data.message=='resumeSaveTypeDuplicatedError'){
-			        		toastr.error(Utilities.getAlerts('resumeSaveTypeDuplicatedError'));
+			        		toastr.error(Utilities.getAlerts('resumeSaveTypeDuplicatedError').message);
 			        	}
 			        	else if(data.message=='resumeSaveLimitError'){
-			        		toastr.error(Utilities.getAlerts('resumeSaveLimitError'));
+			        		toastr.error(Utilities.getAlerts('resumeSaveLimitError').message);
 			        	}
                         else if(data.message=='resumeSaveNameDuplicatedError'){
-                            toastr.error(Utilities.getAlerts('resumeSaveNameDuplicatedError'));
+                            toastr.error(Utilities.getAlerts('resumeSaveNameDuplicatedError').message);
                         }
                         else{
 			        		toastr.error(Utilities.getAlerts('defaultError'));
@@ -224,7 +224,7 @@
 			        .success(function(data, status, headers, config) {
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 						$scope.closeModal();
-						toastr.success(Utilities.getAlerts('deleteResumeuccess'));
+						toastr.success(Utilities.getAlerts('deleteResumeuccess').message);
 						angular.forEach($scope.user.myResumes, function(obj, i) {
 								if(id==obj.id){
 									$scope.user.myResumes.splice(i, 1);    
@@ -234,10 +234,10 @@
 			        .error(function(data, status, headers, config) {
 			        	$scope.closeModal();
 			        	if(data.message=='resumeSaveLeastError'){
-			        		toastr.error(Utilities.getAlerts('resumeSaveLeastError'));
+			        		toastr.error(Utilities.getAlerts('resumeSaveLeastError').message);
 			        	}
 			        	else{
-			        		toastr.error(Utilities.getAlerts('defaultError'));
+			        		toastr.error(Utilities.getAlerts('defaultError').message);
 			        	}
 					});
 				};
@@ -276,7 +276,7 @@
 					var userId = $scope.user.id;
 					var resumeTitle = $scope.resumeTitle;
 					var resumeType = $scope.resumeType;
-					if(file != null && file.size>=50000){
+					if(file != null && file.size>=500000){
 						$scope.addAlert(Utilities.getAlerts('InputFileInputSizeValidation'));
 						$scope.myFile=null;
 						return false;
@@ -289,8 +289,8 @@
 					else {
 						$scope.addAlert(Utilities.getAlerts('InputFileInputRequiredValidation'));
 					}
+					
 				};
-
 
 				$scope.modelFunction = function () {
 					if ($scope.modelType == 'Delete') {
@@ -303,6 +303,7 @@
 			}
 	]);
 
+	
 	angular.module('MyCvTracker.pages.resumes')
 	.directive('fileModel', ['$parse','$injector','Constants', function ($parse,$injector,Constants) {
 	    return {

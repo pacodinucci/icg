@@ -46,8 +46,8 @@
               </div>
                 <!--<msg-center></msg-center>-->
             </div>
-            <div class="col-lg-6 col-md-10 col-20 m-align" ng-if="$isAuthenticated" ng-controller="AccountCtrl">
-                <h3 class="text-center"><strong ng-bind="user.email">!</strong></h3>
+            <div ng-if="$isAuthenticated" ng-controller="AccountCtrl">
+                <h5 class="text-right"><strong ng-bind="user.email">!</strong></h5>
             </div>
   			</div>
       </div>

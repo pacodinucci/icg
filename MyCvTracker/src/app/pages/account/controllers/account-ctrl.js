@@ -105,7 +105,7 @@
 							});
 						},
 						function (response) {
-							toastr.error(Utilities.getAlerts(response.status));
+							toastr.error(Utilities.getAlerts(response.status).message);
 						}
 					);
 				};
@@ -123,10 +123,10 @@
 					AccountSvc.unSubscribeMail(emailType).then(
 						function () {
 
-							toastr.error(Utilities.getAlerts('unsubscribeSucess'));
+							toastr.error(Utilities.getAlerts('unsubscribeSucess').message);
 						},
 						function (response) {
-							toastr.error(Utilities.getAlerts(response.status));
+							toastr.error(Utilities.getAlerts(response.status).message);
 
 						}
 					);
@@ -204,12 +204,12 @@
 					});
 					AccountSvc.saveProfileSettings(model).then(
 						function () {
-							toastr.success(Utilities.getAlerts('profileSaveSucess'));
+							toastr.success(Utilities.getAlerts('profileSaveSucess').message);
 							Utilities.gotoProfilePage();
 
 						},
 						function (response) {
-							toastr.error(Utilities.getAlerts(response.status));
+							toastr.error(Utilities.getAlerts(response.status).message);
 
 						}
 					);

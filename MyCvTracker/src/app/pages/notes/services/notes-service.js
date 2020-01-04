@@ -22,6 +22,18 @@
 
 					},
 
+					getUpdateNotesModal: function (scope, ctrlName) {
+
+						var modalOpts = {
+							templateUrl: 'app/pages/notes/templates/update_note.html',
+							controller: ctrlName,
+							scope: scope
+						};
+
+						return $injector.get('$uibModal').open(modalOpts);
+
+					},
+
 					getDeleteNotesModal: function (scope, ctrlName) {
 
 						var modalOpts = {
