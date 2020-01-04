@@ -33,7 +33,7 @@
   						<li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
   					</ul>
             </div>
-            <div class="col-lg-2 col-md-2 col-4 m-align" ng-if="$isAuthenticated">
+            <div class="col-lg-2 col-md-2 col-4 m-align" ng-if="$isAuthenticated" ng-controller="AuthCtrl">
               <div class="al-user-profile" uib-dropdown>
                 <a uib-dropdown-toggle class="profile-toggle-link">
                   <img ng-src="{{::( 'user' | profilePicture )}}">
