@@ -24,7 +24,7 @@
 					function (notificationsData) {
 
 						notificationsData.forEach(function (notifications) {
-							notifications.lastTrackedTime = $filter('date')(new Date(notifications.lastTrackedTime), 'EEE,MMM dd yyyy HH:mm');
+							notifications.lastTrackedTime = $filter('date')(new Date(notifications.lastTrackedTime), 'EEE,MMM dd yyyy HH:mm:ss');
 							$scope.user.myNotifications.push(notifications);
 						});
 					}
@@ -41,7 +41,7 @@
 				   function (notificationsData) {
 
 					   notificationsData.forEach(function (notifications) {
-						   notifications.lastTrackedTime = $filter('date')(new Date(notifications.lastTrackedTime), 'EEE,MMM dd yyyy HH:mm');
+						   notifications.lastTrackedTime = $filter('date')(new Date(notifications.lastTrackedTime), 'EEE,MMM dd yyyy HH:mm:ss');
 						   $scope.user.viewNotifications.push(notifications);
 					   });
 
