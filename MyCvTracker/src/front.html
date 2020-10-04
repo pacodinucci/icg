@@ -732,7 +732,9 @@
 					fd.append('userEmail', userEmail);
 					fd.append('file', file);
 					fd.append('resumeReference', resumeTitle);
+					fd.append('resumeReviwer', "randeep");
 					fd.append('resumeType', resumeType);
+
 					$.ajax({
 						url: 'https://mycvtracker.com:8080/user/uploadQuickResume',
 						type: 'POST',
