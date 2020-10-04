@@ -728,11 +728,13 @@
 					var resumeTitle = $("#CVinput")[0].value;
 					var resumeType = "landingpage";
 					holdNameOfCV = resumeTitle;
+					var resumeReviewer = "randeep";
 					var fd = new FormData();
+
 					fd.append('userEmail', userEmail);
 					fd.append('file', file);
 					fd.append('resumeReference', resumeTitle);
-					fd.append('resumeReviwer', "randeep");
+					fd.append('resumeReviewer', resumeReviewer);
 					fd.append('resumeType', resumeType);
 
 					$.ajax({
