@@ -15,7 +15,8 @@
         'MyCvTracker.pages.notifications',
         'MyCvTracker.pages.CampaignNotes',
         'MyCvTracker.pages.CvMarketing',
-        'MyCvTracker.pages.campaignNotifications'
+        'MyCvTracker.pages.campaignNotifications',
+        'MyCvTracker.pages.GroupData'
     ]).run(run);
 
     function run(Constants, $rootScope, $http, $location, Utilities, $auth) {

@@ -436,6 +436,24 @@ angular.module('MyCvTracker.shared')
                 getEditNotesUrl: function () {
                     return Constants.baseUrl + Constants.apis.editNotes.url;
                 },
+                addGroupsUrl: function () {
+                    return Constants.baseUrl + Constants.apis.addGroup.url;
+                },
+                editGroupsUrl: function () {
+                    return Constants.baseUrl + Constants.apis.editGroup.url;
+                },
+                getGroupsUrl: function () {
+                    return Constants.baseUrl + Constants.apis.groupsList.url;
+                },
+                getGroupMembersUrl: function () {
+                    return Constants.baseUrl + Constants.apis.getMembers.url;
+                },
+                getEditMembersUrl: function () {
+                    return Constants.baseUrl + Constants.apis.editMembers.url;
+                },
+                getDeleteMembersUrl: function () {
+                    return Constants.baseUrl + Constants.apis.deleteMembers.url;
+                },
 
                 getEditCampaignNotesUrl: function () {
                     return Constants.baseUrl + Constants.apis.editNotes.url;

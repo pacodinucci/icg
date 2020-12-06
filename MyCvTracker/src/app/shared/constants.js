@@ -170,9 +170,32 @@
                 viewCampaignNotes: {
                     url: '/user/viewCampaignNotes'
                 },
-
                 deleteCampaignNotes : {
                     url : '/user/deleteCampaignNotes'
+                },
+                addGroup : {
+                    url : '/cvmarketdata/addGroup'
+                },
+                editGroup : {
+                    url : '/cvmarketdata/editGroup'
+                },
+                groupsList : {
+                    url : '/cvmarketdata/groupsList'
+                },
+                addMembers : {
+                    url : '/cvmarketdata/addMembers'
+                },
+                editMembers : {
+                    url : '/cvmarketdata/editMembers'
+                },
+                deleteMembers : {
+                    url : '/cvmarketdata/deleteMembers'
+                },
+                getMembers : {
+                    url : '/cvmarketdata/getGroupMembers'
+                },
+                editMembers : {
+                    url : '/cvmarketdata/editMembers'
                 },
                 notes: {
                     url: '/user/notesList'

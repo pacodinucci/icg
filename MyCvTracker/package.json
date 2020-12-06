@@ -51,6 +51,7 @@
     "postinstall": "bower install"
   },
   "dependencies": {
+    "angular-ui-grid": "^4.9.1",
     "natives": "^1.1.6"
   }
 }

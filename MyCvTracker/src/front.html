@@ -728,14 +728,30 @@
 					var resumeTitle = $("#CVinput")[0].value;
 					var resumeType = "landingpage";
 					holdNameOfCV = resumeTitle;
-					var resumeReviewer = "randeep";
-					var fd = new FormData();
 
+					var paramRefName = "ref";
+					var refValue = null;
+					var urlSearch = window.location.search;
+					var urlParams = urlSearch ? urlSearch.substring(1).split("&") : [];
+					for (var i = 0, len = urlParams.length; i < len; i++) {
+						var paramElement = urlParams[i].split("=");
+
+						if (paramElement[0] === paramRefName) {
+							refValue =  paramElement[1] === undefined ? true : decodeURIComponent(paramElement[1]);
+						}
+					}
+
+					var fd = new FormData();
 					fd.append('userEmail', userEmail);
 					fd.append('file', file);
 					fd.append('resumeReference', resumeTitle);
-					fd.append('resumeReviewer', resumeReviewer);
+
 					fd.append('resumeType', resumeType);
+					if (refValue) {
+						fd.append("resumeReviewer", refValue);
+					}else {
+						fd.append("resumeReviewer", "randeep");
+					}
 
 					$.ajax({
 						url: 'https://mycvtracker.com:8080/user/uploadQuickResume',
