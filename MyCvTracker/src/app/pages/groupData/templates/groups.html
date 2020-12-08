@@ -46,7 +46,7 @@
 
                 <label> Select Groups: </label>
                 <select ng-model="selectedItem"
-                        ng-change="getGroupMembers(selectedItem.id)" ng-options="mygroup.groupName for mygroup in user.myGroups track by $index"></select>
+                        ng-change="getGroupMembers(selectedItem.id)" ng-options="mygroup.groupName for mygroup in user.myGroups"></select>
                 <hr>
 
 
@@ -62,11 +62,11 @@
                 <button ng-click="editMember(newMemberData,selectedItem.id)">edit</button>
 
 
-                <div ng-repeat="members in user.groupMembers track by $index" class="list-group">
+                <div ng-repeat="members in user.groupMembers" class="list-group">
 
                     <input type="text" ng-model="user.groupMembers[$index].memberFirstName" />
                     <input type="text" ng-model="user.groupMembers[$index].memberLastName" />
-                    <input type="text" ng-model="user.groupMembers[$index].memberEmail" />
+                    <input type="text" size="40" ng-model="user.groupMembers[$index].memberEmail" />
 
 
                     <button ng-click="removeMember(user.groupMembers[$index])">remove</button>

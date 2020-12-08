@@ -61,6 +61,23 @@
 					$scope.resumeType=null;
 				};
 
+					/////////////////////////////////////////////////////////////////////////////////////
+					//open new push to drive modal
+					$scope.openPushResumeModel = function (id, name) {
+						const userEmail = $scope.user.email;
+						if (userEmail.endsWith("@gmail.com")) {
+							$scope.resumeModal = ResumesSvc.getPushResumeModal($scope, 'ResumeCtrl');
+							$scope.recruiterName = null;
+							$scope.recruiterEmail = null;
+							$scope.agencyName=null;
+							$scope.formNotes=null;
+							$scope.selectedResumeId = id;
+							$scope.selectedResumeName = name;
+						} else {
+							$scope.resumeModal = ResumesSvc.getGmailAuthenticationAdviceModal($scope, 'ResumeCtrl');
+						}
+					};
+
                 /////////////////////////////////////////////////////////////////////////////////////
                 //open new Resume Model Function
                 $scope.addNewResumeModelFromTrackResumeModel = function () {
@@ -185,6 +202,43 @@
 			        	}
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 					});
+				};
+
+				$scope.pushToDrive = function() {
+					var trackingId = "";
+					var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+					for (var i = 0; i < 31; i++)
+						trackingId += possible.charAt(Math.floor(Math.random() * possible.length));
+
+					$scope.formProcessing = true;
+					$scope.closeModal();
+
+					var data = {
+						toRecruiter: $scope.recruiterEmail,
+						targetList: $scope.recruiterEmail,
+						recruiter: $scope.recruiterName,
+						notesType: 'job_board',
+						agency: $scope.agencyName,
+						subject: 'email',
+						trackingId: trackingId,
+						content: 'pls check',
+						resumeId: $scope.selectedResumeId,
+						userId: 6, // once we get token after user auth we can use it
+						notes: $scope.formNotes,
+						createdDate: new Date()
+					};
+
+					var url = Utilities.getPushResumeToDriveUrl();
+					$http.post(url, data)
+						.success(function(data, status, headers, config) {
+							$scope.formProcessing = false;
+							toastr.success(Utilities.getAlerts('resumePushedSuccess').message);
+						})
+						.error(function(data, status, headers, config) {
+							$scope.formProcessing = false;
+							toastr.error(Utilities.getAlerts('resumePushToDriveError'));
+						});
 				};
 
 				$scope.checkUserRole = function () {
