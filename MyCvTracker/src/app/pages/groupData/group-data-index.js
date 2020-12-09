@@ -7,7 +7,7 @@
   /** @ngInject */
   function routeConfig($stateProvider) {
     $stateProvider
-        .state('GroupData', {
+        .state('groupdata', {
           url: '/groupdata',
           templateUrl: 'app/pages/GroupData/templates/groups.html',
           title: 'Group Members Data',
