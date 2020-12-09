@@ -8,7 +8,7 @@
   function routeConfig($stateProvider) {
     $stateProvider
         .state('GroupData', {
-          url: '/GroupData',
+          url: '/groupdata',
           templateUrl: 'app/pages/GroupData/templates/groups.html',
           title: 'Group Members Data',
           controller: 'GroupDataCtrl',

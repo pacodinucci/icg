@@ -26,7 +26,14 @@
                     link:'resumes',
                     icon: 'resume',
                     showMenu:true
-                }, {
+                },
+                {
+                     color: pieColor,
+                     description: 'Group Data',
+                     link:'groupdata',
+                     icon: 'groupdata',
+                     showMenu:true
+                 },{
                     color: pieColor,
                     description: 'Track Resume',
                     link:'trackResume',
@@ -38,7 +45,8 @@
                     link:'notifications',
                     icon: 'notification',
                     showMenu:true
-                }, {
+                },
+                {
                     color: pieColor,
                     description: 'CV Marketing Notes',
                     link:'CampaignNotes',
