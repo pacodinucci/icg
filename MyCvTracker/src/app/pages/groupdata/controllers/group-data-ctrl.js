@@ -1,5 +1,5 @@
 
-	angular.module('MyCvTracker.pages.GroupData')
+	angular.module('MyCvTracker.pages.groupdata')
 	  		.controller('GroupDataCtrl', ['toastr', '$scope', '$injector', '$http', '$filter','$window',
 
 			function (toastr, $scope, $injector, $http, $filter,$window) {
@@ -17,7 +17,7 @@
 					groupMembers : []
 				};
 
-				$scope.isAdmin = false;
+				$scope.isAdmin = true;
 
                 $scope.newMemberData = {
                     id: '',

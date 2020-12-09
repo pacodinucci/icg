@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('MyCvTracker.pages.GroupData', [])
+  angular.module('MyCvTracker.pages.groupdata', [])
       .config(routeConfig);
 
   /** @ngInject */
@@ -9,7 +9,7 @@
     $stateProvider
         .state('groupdata', {
           url: '/groupdata',
-          templateUrl: 'app/pages/GroupData/templates/groups.html',
+          templateUrl: 'app/pages/groupdata/templates/groups.html',
           title: 'Group Members Data',
           controller: 'GroupDataCtrl',
           shown: false,

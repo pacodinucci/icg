@@ -1,4 +1,4 @@
-angular.module('MyCvTracker.pages.GroupData')
+angular.module('MyCvTracker.pages.groupdata')
 
     	.factory('GroupDataSvc', ['toastr', 'RestConfig', '$injector',
 
