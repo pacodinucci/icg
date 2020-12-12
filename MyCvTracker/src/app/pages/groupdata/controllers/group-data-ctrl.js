@@ -35,7 +35,9 @@
 				    id: '',
                     groupName: '',
                     groupType: '',
-                    groupLocation: ''
+                    groupLocation: '',
+                    userAccounts: ''
+
 
        			};
 
@@ -167,7 +169,7 @@
                         $scope.groupData.groupName = groups.groupName;
                         $scope.groupData.groupType = groups.groupType
                         $scope.groupData.groupLocation = groups.groupLocation;
-                        $scope.groupData.groupAccess = groups.groupAccess;
+                        $scope.groupData.userAccounts = groups.userAccounts;
 
                         }
                     });
