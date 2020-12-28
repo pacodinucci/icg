@@ -70,6 +70,26 @@
 
                         return $injector.get('$uibModal').open(modalOpts);
                     },
+                  getPushResumeModal: function (scope, ctrlName) {
+
+                      var modalOpts = {
+                          templateUrl: 'app/pages/resumes/templates/push_resume_modal.html',
+                          controller: ctrlName,
+                          scope: scope
+                      };
+
+                      return $injector.get('$uibModal').open(modalOpts);
+                  },
+                  getGmailAuthenticationAdviceModal: function (scope, ctrlName) {
+
+                      var modalOpts = {
+                          templateUrl: 'app/pages/resumes/templates/authentication_advice_modal.html',
+                          controller: ctrlName,
+                          scope: scope
+                      };
+
+                      return $injector.get('$uibModal').open(modalOpts);
+                  },
                     getEditResumeModal: function (scope, ctrlName) {
 
                         var modalOpts = {

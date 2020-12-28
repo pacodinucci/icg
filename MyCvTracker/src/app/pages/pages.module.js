@@ -54,7 +54,7 @@
 
 
             if (frontPage) {
-                window.location.href = Utilities.baseUrl() + "/front.html";
+                window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
             }
             else if (forwardPage) {
                 window.location.href = Utilities.baseUrl() + "/forward.html";

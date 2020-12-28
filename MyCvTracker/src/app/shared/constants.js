@@ -14,8 +14,8 @@
             },
 
             // baseUrl: 'http://ec2-18-221-201-185.us-east-2.compute.amazonaws.com:8080',
-            baseUrl: 'https://mycvtracker.com:8080',
-            //baseUrl: 'http://localhost:8080',
+           // baseUrl: 'https://mycvtracker.com:8080',
+            baseUrl: 'http://localhost:8080',
 
             websocket:{
                 reconnect: 5000,
@@ -130,6 +130,10 @@
 
                 saveResume: {
                 	url: '/user/saveResume'
+                },
+
+                pushToDrive: {
+                    url: '/user/submitResume'
                 },
 
                 deleteResume: {

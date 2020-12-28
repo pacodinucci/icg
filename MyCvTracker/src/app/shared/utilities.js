@@ -37,6 +37,10 @@ angular.module('MyCvTracker.shared')
                     type: 'success',
                     message: 'Resume has been successfully added.',
                 },
+                resumePushedSuccess: {
+                    type: 'success',
+                    message: 'Resume has been successfully pushed to Drive.',
+                },
                 resumeEditSuccess: {
                     type: 'success',
                     message: 'This Resume has been successfully edited.',
@@ -56,6 +60,10 @@ angular.module('MyCvTracker.shared')
                 resumeTrackRequestSuccess: {
                     type: 'success',
                     message: 'Your request has been saved.',
+                },
+                resumePushToDriveError: {
+                    type: 'danger',
+                    message: 'Pushing resume to Drive has failed!',
                 },
                 favNotesSaveLimitError: {
                     type: '',
@@ -336,6 +344,10 @@ angular.module('MyCvTracker.shared')
 
                 getSaveResumesUrl: function () {
                     return Constants.baseUrl + Constants.apis.saveResume.url;
+                },
+
+                getPushResumeToDriveUrl: function () {
+                    return Constants.baseUrl + Constants.apis.pushToDrive.url;
                 },
 
                 geDeleteResumesUrl: function () {
