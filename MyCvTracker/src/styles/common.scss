@@ -1,3 +1,23 @@
 @import 'theme/conf/mixins';
 @import 'theme/conf/colorScheme/mint';
 @import 'theme/conf/variables';
+
+.d-flex {
+  display: -ms-flexbox!important;
+  display: flex!important;
+  align-items: center;
+
+  .flex-fill {
+    -ms-flex: 1 1 auto!important;
+    flex: 1 1 auto!important;
+  }
+}
+
+.card {
+  background-color: #FFF;
+  border-radius: 4px;
+
+  .card-body {
+    padding: 2rem 2.2rem;
+  }
+}

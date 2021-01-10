@@ -6,3 +6,4 @@ bower_components/
 release/
 .vscode/
 dev-release/
+.idea/

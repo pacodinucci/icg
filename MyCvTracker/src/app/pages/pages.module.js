@@ -11,6 +11,7 @@
         'MyCvTracker.pages.account',
         'MyCvTracker.pages.notes',
         'MyCvTracker.pages.resumes',
+        'MyCvTracker.pages.referral',
         'MyCvTracker.pages.payment',
         'MyCvTracker.pages.notifications',
         'MyCvTracker.pages.CampaignNotes',

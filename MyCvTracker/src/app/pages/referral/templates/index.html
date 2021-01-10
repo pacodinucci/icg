@@ -1,0 +1,162 @@
+<section
+  id="referral"
+  ng-controller="ReferralCtrl">
+  <div class="body-section setting-section">
+    <h4 class="section-name">Referral link</h4>
+
+    <div class="section-content">
+      <div class="card referral-setting-card">
+        <div class="card-body">
+          <p class="link-explanation">
+            Maecenas rutrum metus sit amet metus laoreet pulvinar. Fusce facilisis rhoncus quam sit amet laoreet. Nullam
+            nunc nibh, vestibulum vitae posuere non, dapibus id velit.
+            <br />
+            Nullam et tellus sodales, interdum diam a, consectetur augue. Pellentesque et sapien nibh.
+          </p>
+
+          <div class="d-flex">
+            <div class="setting-btn">
+              <button
+                ng-if="!referral.referLink"
+                type="button"
+                class="btn btn-danger"
+                ng-click="generateReferralLink()">
+                Generate Link
+              </button>
+              <button
+                ng-if="referral.referLink"
+                type="button"
+                class="btn btn-primary"
+                ng-click="generateReferralLink()">
+                Copy Link
+              </button>
+            </div>
+            <div class="box-link flex-fill" ng-if="referral.referLink">
+              <div class="box">
+                <span ng-bind="referral.referLink"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-section list-resumes-section">
+    <h4 class="section-name">Referred Resumes (6)</h4>
+
+    <div class="section-content">
+      <div class="row">
+        <div class="col-md-12 col-md-3">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3 class="resume-title">
+                Etiam tincidunt ex et sapien maximus
+              </h3>
+              <hr class="resumeSeprator">
+              <div class="tile-filename">
+                resume.docx
+              </div>
+              <div class="tile-datetime">
+                10 Jan, 2021 07:10
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-md-3">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3 class="resume-title">
+                Etiam tincidunt ex et sapien maximus
+              </h3>
+              <hr class="resumeSeprator">
+              <div class="tile-filename">
+                resume.docx
+              </div>
+              <div class="tile-datetime">
+                10 Jan, 2021 07:10
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-md-3">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3 class="resume-title">
+                Etiam tincidunt ex et sapien maximus
+              </h3>
+              <hr class="resumeSeprator">
+              <div class="tile-filename">
+                resume.docx
+              </div>
+              <div class="tile-datetime">
+                10 Jan, 2021 07:10
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-md-3">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3 class="resume-title">
+                Etiam tincidunt ex et sapien maximus
+              </h3>
+              <hr class="resumeSeprator">
+              <div class="tile-filename">
+                resume.docx
+              </div>
+              <div class="tile-datetime">
+                10 Jan, 2021 07:10
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-md-3">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3 class="resume-title">
+                Etiam tincidunt ex et sapien maximus
+              </h3>
+              <hr class="resumeSeprator">
+              <div class="tile-filename">
+                resume.docx
+              </div>
+              <div class="tile-datetime">
+                10 Jan, 2021 07:10
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-md-3">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3 class="resume-title">
+                Etiam tincidunt ex et sapien maximus
+              </h3>
+              <hr class="resumeSeprator">
+              <div class="tile-filename">
+                resume.docx
+              </div>
+              <div class="tile-datetime">
+                10 Jan, 2021 07:10
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
