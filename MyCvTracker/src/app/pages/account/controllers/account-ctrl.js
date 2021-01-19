@@ -18,6 +18,7 @@ angular.module("MyCvTracker.pages.account")
       baUtil,
       Authorization
     ) {
+      var isAdmin = Authorization.getUserRole() === "ADMIN";
 
       var pieColor = baUtil.hexToRGB(baConfig.colors.defaultText, 0.2);
       $scope.charts = [
@@ -47,7 +48,7 @@ angular.module("MyCvTracker.pages.account")
           description : "Referral",
           link : "referral",
           icon : "resume",
-          showMenu : true
+          showMenu : !isAdmin
         },
         {
           color : pieColor,
@@ -69,6 +70,13 @@ angular.module("MyCvTracker.pages.account")
           link : "notifications",
           icon : "notification",
           showMenu : true
+        },
+        {
+          color : pieColor,
+          description : "User Management",
+          link : "user-management",
+          icon : "resume",
+          showMenu : isAdmin
         },
         {
           color : pieColor,

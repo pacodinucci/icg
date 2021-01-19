@@ -275,7 +275,8 @@ angular.module('MyCvTracker.shared')
                 rejectJobSuccessMessage: {
                     type: 'success',
                     message: 'You have sucessfully rejected this job.'
-                }
+                },
+                newReferralLinkSuccessMsg : "New referral link has been generated"
             };
 
             var Utilities = {
@@ -549,6 +550,14 @@ angular.module('MyCvTracker.shared')
 
                 getCitiesListUrl: function () {
                     return Constants.baseUrl + Constants.apis.citiesList.url;
+                },
+
+                getReferralLinkListUrl: function () {
+                    return Constants.baseUrl + Constants.apis.referralList.url;
+                },
+
+                getReferralLinkNewUrl: function () {
+                    return Constants.baseUrl + Constants.apis.newReferralLink.url;
                 },
 
                 gotoFrontPage: function () {

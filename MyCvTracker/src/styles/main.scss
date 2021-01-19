@@ -27,8 +27,27 @@
     margin-bottom: 2.5em;
   }
 
-  .resume-panel {
+  .referral-link-list {
+    margin-top: 1.5em;
+  }
 
+  .referral-link-panel {
+    .context-name {
+      margin-bottom: 1rem;
+    }
+
+    .link {
+      font-family: 'museo_slab500';
+    }
+
+    .ctrls {
+      padding-left: 1rem;
+      color: #337ab7;
+      cursor: pointer;
+    }
+  }
+
+  .resume-panel {
     .tile-filename,
     .tile-datetime {
       font-family: 'museo_slab500';
@@ -49,3 +68,84 @@
   }
 }
 // end referral section
+
+// user management
+#user-management {
+  .top-filter-section {
+    padding-top: 0.3em;
+    padding-bottom: 1.5em;
+  }
+
+
+
+  .identify-filter {
+    max-width: 350px;
+
+    .filter-label {
+      margin-bottom: 0.8rem;
+    }
+  }
+
+  .user-row {
+    margin-bottom: 1em;
+
+    .top-info {
+      display: -webkit-box!important;
+      display: -ms-flexbox!important;
+      display: flex!important;
+
+      .left-identify {
+        -ms-flex: 1 1 auto!important;
+        flex: 1 1 auto!important;
+      }
+    }
+
+    .left-identify {
+
+      .avatar {
+        img {
+          width: 60px;
+        }
+
+        padding-right: 1.2rem;
+      }
+
+      .avatar,
+      .info-row {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .user-id {
+        color: #9099ad;
+        margin-bottom: 0.3rem;
+      }
+    }
+
+    .right-controls {
+      .fa {
+        font-size: 18px;
+      }
+    }
+
+    .info-col {
+      .info-label {
+        margin-bottom: 0.5rem;
+      }
+
+      .info-text {
+        color: #AAA;
+      }
+
+      .referral-link {
+        cursor: pointer;
+      }
+    }
+
+    &:last-of-type {
+      margin-bottom: 0em;
+    }
+  }
+}
+
+// end user management

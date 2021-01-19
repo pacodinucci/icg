@@ -4,7 +4,8 @@
 	    .controller('ResumesCtrl', ['toastr','$rootScope', '$scope', '$injector','$http',
 
 	        function (toastr, $rootScope, $scope, $injector,$http) {
-	    		// Variables initialization 
+	    	console.log("loading");
+	    		// Variables initialization
 				var Utilities = $injector.get('Utilities');
 				var AccountSvc = $injector.get('AccountSvc');
 				var ResumesSvc = $injector.get('ResumesSvc');
@@ -18,7 +19,6 @@
 
 				//Get User Details Function
 				$scope.getUserDetails = function () {
-
 					AccountSvc.getUser().then(
 
 						function (userData) {
@@ -37,7 +37,7 @@
 				$scope.getMyResumes = function () {
 
 					$scope.user.myResumes = [];
-						
+
 					ResumesSvc.getMyResumes($scope.user.id).then(
 
 						function (resumesData) {
@@ -117,7 +117,7 @@
 					$scope.modelTitle = Utilities.getAlerts('downloadModelTitle').message;
 					$scope.modelMessage = Utilities.getAlerts('downloadModelMessage').message;
 				};
-				
+
 				//Close the resume model function
 				$scope.closeModal = function () {
 					$scope.resumeModal.dismiss();
@@ -132,7 +132,7 @@
 				 */
 				//Find Resume by Function: used in both edit and delete resume model function
 				$scope.findMyResume = function (id) {
-						
+
 					ResumesSvc.findMyResume(id).then(
 
 						function (resumesData) {
@@ -262,7 +262,7 @@
                     );
 
                 }
-				
+
 				//Delete Resume Function
 				$scope.deleteMyResume = function () {
 					var id = $scope.id;
@@ -281,7 +281,7 @@
 						toastr.success(Utilities.getAlerts('deleteResumeuccess').message);
 						angular.forEach($scope.user.myResumes, function(obj, i) {
 								if(id==obj.id){
-									$scope.user.myResumes.splice(i, 1);    
+									$scope.user.myResumes.splice(i, 1);
 						         }
 						});
 					})
@@ -338,12 +338,12 @@
 					if (file != null) {
 						$scope.saveMyResume(file, id, userId, resumeTitle, resumeType);
 					}
-					
-					
+
+
 					else {
 						$scope.addAlert(Utilities.getAlerts('InputFileInputRequiredValidation'));
 					}
-					
+
 				};
 
 				$scope.modelFunction = function () {
@@ -357,7 +357,7 @@
 			}
 	]);
 
-	
+
 	angular.module('MyCvTracker.pages.resumes')
 	.directive('fileModel', ['$parse','$injector','Constants', function ($parse,$injector,Constants) {
 	    return {
@@ -366,7 +366,7 @@
 	            var model = $parse(attrs.fileModel);
 	            var modelSetter = model.assign;
 				var Utilities = $injector.get('Utilities');
-	            
+
 	            element.bind('change', function(){
 	                scope.$apply(function(){
 	                    modelSetter(scope, element[0].files[0]);

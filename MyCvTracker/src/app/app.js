@@ -47,3 +47,7 @@ angular.module('MyCvTracker', [
             $authProvider.storageType = 'sessionStorage';
         }
     });
+
+
+    // rsingh078@gmail.com - mycvtracker@gmail.com
+    // test12345

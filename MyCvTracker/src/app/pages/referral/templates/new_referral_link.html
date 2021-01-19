@@ -1,0 +1,38 @@
+<form
+  name="newReferralLinkForm"
+  ng-submit="generateLink()"
+  novalidate>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      ng-click="closeModal()">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">Generate Referral Link</h4>
+  </div>
+  <div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="control-label">Referral Context</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter context name"
+          ng-model="newReferralForm.context"
+          ng-required="true" />
+      </div>
+    </div>
+    <div class="modal-footer clearfix">
+      <button
+        type="submit"
+        class="btn btn-primary btn-block"
+        ng-disabled="newReferralLinkForm.$invalid || newReferralForm.generating">
+        <span ng-if="!newReferralForm.generating">Generate</span>
+        <span ng-if="newReferralForm.generating">Generating...</span>
+      </button>
+    </div>
+  </div>
+</form>

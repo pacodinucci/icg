@@ -319,6 +319,12 @@
                 },
                 citiesList: {
                     url: '/user/getCitiesList'
+                },
+                referralList : {
+            	      url : "/links/myreferrals"
+                },
+                newReferralLink : {
+                    url : "/links/referrals"
                 }
         	}
         });

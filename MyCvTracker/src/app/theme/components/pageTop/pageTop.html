@@ -36,7 +36,7 @@
             <div class="col-lg-2 col-md-2 col-4 m-align" ng-if="$isAuthenticated" ng-controller="AuthCtrl">
               <div class="al-user-profile" uib-dropdown>
                 <a uib-dropdown-toggle class="profile-toggle-link">
-                  <img ng-src="{{::( 'user' | profilePicture )}}">
+                  <img ng-src="{{::( 'user' | profilePicture )}}" ng-style="{'width' : '60px'}">
                 </a>
                 <ul  class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
                   <li><i class="dropdown-arr"></i></li>
