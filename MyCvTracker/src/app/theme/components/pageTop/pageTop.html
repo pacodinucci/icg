@@ -1,23 +1,62 @@
 <div class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
-  <a ng-href="account" class="al-logo clearfix"><span>MyCV</span>Tracker</a>
-  <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu ng-if="$isAuthenticated"></a>
+  <!-- <a ng-href="account" class="al-logo clearfix"><span>MyCV</span>Tracker</a> -->
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+          <div class="logo col-lg-3 col-md-3 col-6">
+            <a ng-href="/"><img src="assets/img/front/logo.png" alt=""></a>
+          </div>
+          <div class="col-lg-3 col-md-3 col-6">
+            <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu ng-if="$isAuthenticated"></a>
+          </div>
+        </div>
 
-  <!--<div class="search">-->
-    <!--<i class="ion-ios-search-strong" ng-click="startSearch()"></i>-->
-    <!--<input id="searchInput" type="text" placeholder="Search for...">-->
-  <!--</div>-->
+        <div class="col-lg-6 col-md-6 col-12 m-align" ng-if="!$isAuthenticated">
+            <!-- <div class="col-lg-10 col-md-10 col-20 m-align"> -->
+  					<ul class="upper-nav">
+  						<li><a href=""><span><i class="fab fa-facebook-f"></i></span></a></li>
+  						<li><a href=""><span><i class="fab fa-twitter"></i></span></a></li>
+  						<li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
+  						<li ng-if="!$isAuthenticated"><a href="/login">Login</a></li>
+  						<li ng-if="!$isAuthenticated" class="signupButton"><a href="/register"><span class="btn-style">Sign Up</span></a></li>
+  					</ul>
+            <!-- </div> -->
+  			</div>
 
-  <div class="user-profile clearfix" ng-if="$isAuthenticated">
-    <div class="al-user-profile" uib-dropdown>
-      <a uib-dropdown-toggle class="profile-toggle-link">
-        <img ng-src="{{::( 'user' | profilePicture )}}">
-      </a>
-      <ul  class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
-        <li><i class="dropdown-arr"></i></li>
-        <li><a ng-href="settings"><i class="fa fa-cog"></i>Settings</a></li>
-        <li><a href="" ng-click="logout()" target="_self" class="signout" ng-controller="AuthCtrl"><i class="fa fa-power-off"></i>Sign out</a></li>
-      </ul>
-    </div>
-    <!--<msg-center></msg-center>-->
+
+        <div class="col-lg-6 col-md-6 col-12 m-align" ng-if="$isAuthenticated">
+            <div class="col-lg-10 col-md-10 col-20 m-align">
+  					<ul class="upper-nav">
+  						<li><a href=""><span><i class="fab fa-facebook-f"></i></span></a></li>
+  						<li><a href=""><span><i class="fab fa-twitter"></i></span></a></li>
+  						<li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
+  					</ul>
+            </div>
+            <div class="col-lg-2 col-md-2 col-4 m-align" ng-if="$isAuthenticated" ng-controller="AuthCtrl">
+              <div class="al-user-profile" uib-dropdown>
+                <a uib-dropdown-toggle class="profile-toggle-link">
+                  <img ng-src="{{::( 'user' | profilePicture )}}">
+                </a>
+                <ul  class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
+                  <li><i class="dropdown-arr"></i></li>
+                  <li><a ng-href="settings"><i class="fa fa-cog"></i>Settings</a></li>
+                  <li><a href="" ng-click="logout()" target="_self" class="signout"><i class="fa fa-power-off"></i>Sign out</a></li>
+                </ul>
+              </div>
+                <!--<msg-center></msg-center>-->
+            </div>
+            <div ng-if="$isAuthenticated" ng-controller="AccountCtrl">
+                <h5 class="text-right"><strong ng-bind="user.email">!</strong></h5>
+            </div>
+  			</div>
+      </div>
+
+
+    <!--<div class="search">-->
+      <!--<i class="ion-ios-search-strong" ng-click="startSearch()"></i>-->
+      <!--<input id="searchInput" type="text" placeholder="Search for...">-->
+    <!--</div>-->
   </div>
+</header>
 </div>

@@ -93,6 +93,30 @@
 					resetNewPassword : function(url,data){
 						return RESTSvc.post(url,data);
 					},
+					addGroup : function(url, data){
+					    return RESTSvc.post(url,data);
+					},
+					editGroup : function(url, data){
+                        return RESTSvc.put(url,data);
+                    },
+                    addMembers : function(url,data){
+                        return RESTSvc.post(url,data);
+                    },
+                    saveMembersList : function(url,data){
+                        return RESTSvc.put(url,data);
+                    },
+                    getMembersList : function(url,data){
+                        return RESTSvc.get(url,data);
+                    },
+					getGroupsList : function(url,data){
+						return RESTSvc.get(url,data);
+					},
+                    editGroupMembersList : function(url,data){
+                       return RESTSvc.put(url,data);
+                    },
+                    deleteGroupMembersList : function(url,data){
+                        return RESTSvc.put(url,data);
+                    },
 					getMyNotes : function(url,data){
 						return RESTSvc.get(url,data);
 					},

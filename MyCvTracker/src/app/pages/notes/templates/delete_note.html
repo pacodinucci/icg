@@ -8,8 +8,9 @@
 	<div>
 	<input type="hidden" ng-model="id"/>
 		<div class="modal-body">
-				<span>Are you sure you want to delete this Note?.You will lose all the Notifications For this Note.</span>
-			</div>
+			<span>Are you sure you want to delete this Note?</span>
+			<br/><br/><span style="color:red;font-size: 0.95em;">You will lose all the Notifications for this Note.</span>
+	</div>
 		<div class="modal-footer clearfix">
 			<button type="button" class="btn btn-primary" data-ng-click="deleteConfirmNotes(noteId,index)">Yes</button>
 			<button type="button" class="btn btn-primary" ng-click="closeDeleteNoteModal()">No</button>

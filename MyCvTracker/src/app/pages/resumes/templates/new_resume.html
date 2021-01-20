@@ -9,7 +9,7 @@
 		<h4 class="modal-title">Add New Resume</h4>
 	</div>
 	<alert ng-repeat="alert in alerts track by $index" type="{{alert.type}}" close="alerts.splice($index, 1)" id="alertModel">
-		<div ng-bind="alert.message"></div>
+		<div ng-bind="alert.message" class="file-upload-error"></div>
 	</alert>
 	<div>
 
@@ -23,7 +23,7 @@
 						<!--<input type="text" class="form-control" placeholder="Resume Type - Developer , Architect or Project Manager etc." ng-model="resumeType" ng-required="true" />-->
 				<!--</div>-->
 					<div class="form-group">
-						<div class="control-label">Resume File - You can upload upto 5 Resumes</div>
+						<div class="control-label">Resume File - You can upload upto 8 Resumes<span class="file-size">(Max. file size upto 500KB)</span></div>
 						<input type="file" class="form-control" placeholder="Resume File" file-model="myFile"  accept=".doc,.pdf,.docx" id="fileUpload"/>
 					</div> 		
 			</div>

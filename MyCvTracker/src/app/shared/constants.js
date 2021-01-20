@@ -14,8 +14,8 @@
             },
 
             // baseUrl: 'http://ec2-18-221-201-185.us-east-2.compute.amazonaws.com:8080',
-            baseUrl: 'https://mycvtracker.com:8080',
-            // baseUrl: 'http://localhost:8080',
+           baseUrl: 'https://mycvtracker.com:8080',
+           // baseUrl: 'http://localhost:8080',
 
             websocket:{
                 reconnect: 5000,
@@ -26,7 +26,7 @@
             },
 
             fileUpload: {
-                fileSizeLimitInByte : 2100100
+                fileSizeLimitInByte : 500000
             },
 
             jobsSearchCriteriaType: {
@@ -132,6 +132,10 @@
                 	url: '/user/saveResume'
                 },
 
+                pushToDrive: {
+                    url: '/user/submitResume'
+                },
+
                 deleteResume: {
                 	url: '/user/deleteResume'
                 },
@@ -170,9 +174,32 @@
                 viewCampaignNotes: {
                     url: '/user/viewCampaignNotes'
                 },
-
                 deleteCampaignNotes : {
                     url : '/user/deleteCampaignNotes'
+                },
+                addGroup : {
+                    url : '/cvmarketdata/addGroup'
+                },
+                editGroup : {
+                    url : '/cvmarketdata/editGroup'
+                },
+                groupsList : {
+                    url : '/cvmarketdata/groupsList'
+                },
+                addMembers : {
+                    url : '/cvmarketdata/addMembers'
+                },
+                editMembers : {
+                    url : '/cvmarketdata/editMembers'
+                },
+                deleteMembers : {
+                    url : '/cvmarketdata/deleteMembers'
+                },
+                getMembers : {
+                    url : '/cvmarketdata/getGroupMembers'
+                },
+                editMembers : {
+                    url : '/cvmarketdata/editMembers'
                 },
                 notes: {
                     url: '/user/notesList'
@@ -220,7 +247,7 @@
                 editNotes : {
                     url : '/user/editNotes'
                 },
-                editNotes : {
+                editCampaignNotes : {
                     url : '/user/editCampaignNotes'
                 },
                 sendTrackedApplication : {

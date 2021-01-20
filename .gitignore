@@ -5,3 +5,4 @@ bower_components/
 .tmp/
 release/
 .vscode/
+dev-release/

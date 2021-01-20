@@ -8,6 +8,7 @@
 				var Utilities = $injector.get('Utilities');
 				var AccountSvc = $injector.get('AccountSvc');
 				var ResumesSvc = $injector.get('ResumesSvc');
+				var Constants = $injector.get('Constants');
 
 				//Used scopes
 				$scope.resumeModal = {};
@@ -59,6 +60,23 @@
 					$scope.resumeTitle=null;
 					$scope.resumeType=null;
 				};
+
+					/////////////////////////////////////////////////////////////////////////////////////
+					//open new push to drive modal
+					$scope.openPushResumeModel = function (id, name) {
+						const userEmail = $scope.user.email;
+						if (userEmail.endsWith("@gmail.com")) {
+							$scope.resumeModal = ResumesSvc.getPushResumeModal($scope, 'ResumeCtrl');
+							$scope.recruiterName = null;
+							$scope.recruiterEmail = null;
+							$scope.agencyName=null;
+							$scope.formNotes=null;
+							$scope.selectedResumeId = id;
+							$scope.selectedResumeName = name;
+						} else {
+							$scope.resumeModal = ResumesSvc.getGmailAuthenticationAdviceModal($scope, 'ResumeCtrl');
+						}
+					};
 
                 /////////////////////////////////////////////////////////////////////////////////////
                 //open new Resume Model Function
@@ -120,6 +138,7 @@
 						function (resumesData) {
 							$scope.resumeTitle = resumesData.resumeTitle;
 							$scope.resumeType = resumesData.resumeType;
+							$scope.resumeName = resumesData.resumeName;
 							var file = new File([resumesData.resumeFile], resumesData.resumeName);
 							file.name=resumesData.resumeName;
 							file.type="application/msword";
@@ -149,7 +168,7 @@
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 						$scope.closeModal();
                         $rootScope.$broadcast('quickCV');
-						toastr.success(Utilities.getAlerts(id==null ? 'resumeAddedSuccess' : 'resumeEditSuccess'));
+						toastr.success(Utilities.getAlerts(id==null ? 'resumeAddedSuccess' : 'resumeEditSuccess').message);
 
 						data.uploadedAt = Utilities.getFormattedDate(data.uploadedAt);
 						if(id!=null){
@@ -167,22 +186,59 @@
 			        	$scope.closeModal();
 
 			        	if(data.message=='resumeSaveTitleDuplicatedError'){
-			        		toastr.error(Utilities.getAlerts('resumeSaveTitleDuplicatedError'));
+			        		toastr.error(Utilities.getAlerts('resumeSaveTitleDuplicatedError').message);
 			        	}
 			        	else if(data.message=='resumeSaveTypeDuplicatedError'){
-			        		toastr.error(Utilities.getAlerts('resumeSaveTypeDuplicatedError'));
+			        		toastr.error(Utilities.getAlerts('resumeSaveTypeDuplicatedError').message);
 			        	}
 			        	else if(data.message=='resumeSaveLimitError'){
-			        		toastr.error(Utilities.getAlerts('resumeSaveLimitError'));
+			        		toastr.error(Utilities.getAlerts('resumeSaveLimitError').message);
 			        	}
                         else if(data.message=='resumeSaveNameDuplicatedError'){
-                            toastr.error(Utilities.getAlerts('resumeSaveNameDuplicatedError'));
+                            toastr.error(Utilities.getAlerts('resumeSaveNameDuplicatedError').message);
                         }
                         else{
 			        		toastr.error(Utilities.getAlerts('defaultError'));
 			        	}
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 					});
+				};
+
+				$scope.pushToDrive = function() {
+					var trackingId = "";
+					var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+					for (var i = 0; i < 31; i++)
+						trackingId += possible.charAt(Math.floor(Math.random() * possible.length));
+
+					$scope.formProcessing = true;
+					$scope.closeModal();
+
+					var data = {
+						toRecruiter: $scope.recruiterEmail,
+						targetList: $scope.recruiterEmail,
+						recruiter: $scope.recruiterName,
+						notesType: 'job_board',
+						agency: $scope.agencyName,
+						subject: 'email',
+						trackingId: trackingId,
+						content: 'pls check',
+						resumeId: $scope.selectedResumeId,
+						userId: 6, // once we get token after user auth we can use it
+						notes: $scope.formNotes,
+						createdDate: new Date()
+					};
+
+					var url = Utilities.getPushResumeToDriveUrl();
+					$http.post(url, data)
+						.success(function(data, status, headers, config) {
+							$scope.formProcessing = false;
+							toastr.success(Utilities.getAlerts('resumePushedSuccess').message);
+						})
+						.error(function(data, status, headers, config) {
+							$scope.formProcessing = false;
+							toastr.error(Utilities.getAlerts('resumePushToDriveError'));
+						});
 				};
 
 				$scope.checkUserRole = function () {
@@ -222,7 +278,7 @@
 			        .success(function(data, status, headers, config) {
 						console.debug(data+'  '+status+' ' +headers+'  '+config);
 						$scope.closeModal();
-						toastr.success(Utilities.getAlerts('deleteResumeuccess'));
+						toastr.success(Utilities.getAlerts('deleteResumeuccess').message);
 						angular.forEach($scope.user.myResumes, function(obj, i) {
 								if(id==obj.id){
 									$scope.user.myResumes.splice(i, 1);    
@@ -232,10 +288,10 @@
 			        .error(function(data, status, headers, config) {
 			        	$scope.closeModal();
 			        	if(data.message=='resumeSaveLeastError'){
-			        		toastr.error(Utilities.getAlerts('resumeSaveLeastError'));
+			        		toastr.error(Utilities.getAlerts('resumeSaveLeastError').message);
 			        	}
 			        	else{
-			        		toastr.error(Utilities.getAlerts('defaultError'));
+			        		toastr.error(Utilities.getAlerts('defaultError').message);
 			        	}
 					});
 				};
@@ -244,7 +300,7 @@
 					var id = $scope.id;
 					ResumesSvc.downloadMyResume(id);
 					$scope.closeModal();
-					toastr.error(Utilities.getAlerts('resumeDownloadSuccess'));
+					toastr.success(Utilities.getAlerts('resumeDownloadSuccess').message);
 				};
 				////////////////////////////////////////////////////////////////////////////
 				$scope.init = function () {
@@ -274,14 +330,21 @@
 					var userId = $scope.user.id;
 					var resumeTitle = $scope.resumeTitle;
 					var resumeType = $scope.resumeType;
+					if(file != null && file.size>=500000){
+						$scope.addAlert(Utilities.getAlerts('InputFileInputSizeValidation'));
+						$scope.myFile=null;
+						return false;
+					}
 					if (file != null) {
 						$scope.saveMyResume(file, id, userId, resumeTitle, resumeType);
 					}
+					
+					
 					else {
 						$scope.addAlert(Utilities.getAlerts('InputFileInputRequiredValidation'));
 					}
+					
 				};
-
 
 				$scope.modelFunction = function () {
 					if ($scope.modelType == 'Delete') {
@@ -294,6 +357,7 @@
 			}
 	]);
 
+	
 	angular.module('MyCvTracker.pages.resumes')
 	.directive('fileModel', ['$parse','$injector','Constants', function ($parse,$injector,Constants) {
 	    return {

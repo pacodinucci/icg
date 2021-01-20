@@ -26,19 +26,27 @@
                     link:'resumes',
                     icon: 'resume',
                     showMenu:true
-                }, {
+                },
+                {
+                     color: pieColor,
+                     description: 'Group Data',
+                     link:'groupdata',
+                     icon: 'groupdata',
+                     showMenu:true
+                 },{
                     color: pieColor,
                     description: 'Track Resume',
                     link:'trackResume',
                     icon: 'trackResume',
-                    showMenu:true
+                    showMenu:false
                 }, {
                     color: pieColor,
                     description: 'Notifications',
                     link:'notifications',
                     icon: 'notification',
                     showMenu:true
-                }, {
+                },
+                {
                     color: pieColor,
                     description: 'CV Marketing Notes',
                     link:'CampaignNotes',
@@ -61,7 +69,7 @@
                     description: 'Settings',
                     link:'settings',
                     icon: 'settings',
-                    showMenu:Authorization.getUserRole() == 'ADMIN'
+                    showMenu:true
                 }
                 ];
 
@@ -79,7 +87,10 @@
 					tracking: false,
 					notification: false,
 					subject: "hello",
-					content: "I am looking for new role"
+					content: "I am looking for new role",
+					firstName: '',
+					lastName: '',
+					emailAddress: ''
 				};
 
 				$scope.getUserProfileSettings = function () {
@@ -88,6 +99,10 @@
 						function (response) {
 							$scope.settings.emailSubscribes = response.emailSubscribes;
 							$scope.settings.trackingMode = response.trackingMode;
+							$scope.settings.firstName = response.firstName;
+							$scope.settings.lastName = response.lastName;
+							$scope.settings.emailAddress = response.emailAddress;
+
 							angular.forEach($scope.settings.emailSubscribes, function (state) {
 								if (state.emailType == 'tracking') {
 									$scope.settings.tracking = state.subscribe;
@@ -98,7 +113,7 @@
 							});
 						},
 						function (response) {
-							toastr.error(Utilities.getAlerts(response.status));
+							toastr.error(Utilities.getAlerts(response.status).message);
 						}
 					);
 				};
@@ -116,10 +131,10 @@
 					AccountSvc.unSubscribeMail(emailType).then(
 						function () {
 
-							toastr.error(Utilities.getAlerts('unsubscribeSucess'));
+							toastr.error(Utilities.getAlerts('unsubscribeSucess').message);
 						},
 						function (response) {
-							toastr.error(Utilities.getAlerts(response.status));
+							toastr.error(Utilities.getAlerts(response.status).message);
 
 						}
 					);
@@ -179,15 +194,6 @@
 					Utilities.gotoSettingsPage();
 				};
 
-				$scope.getUserTick = function () {
-					$scope.userTick = null;
-					PaymentSvc.getUserTick().then(
-						function (data) {
-							$scope.userTick = data;
-						}
-					);
-				};
-
 				$scope.newSkill = function () {
 
 					$scope.skillLevel = 0;
@@ -206,12 +212,12 @@
 					});
 					AccountSvc.saveProfileSettings(model).then(
 						function () {
-							toastr.error(Utilities.getAlerts('profileSaveSucess'));
+							toastr.success(Utilities.getAlerts('profileSaveSucess').message);
 							Utilities.gotoProfilePage();
 
 						},
 						function (response) {
-							toastr.error(Utilities.getAlerts(response.status));
+							toastr.error(Utilities.getAlerts(response.status).message);
 
 						}
 					);

@@ -13,7 +13,7 @@
           }else {
               loggedInUser = angular.fromJson(localStorage.loggedInUser);
           }
-          var canAccess = loggedInUser!=null ? loggedInUser.userRole == 'ADMIN' || loggedInUser.userRole == 'ITCG' : false;
+          var canAccess = loggedInUser!=null ? loggedInUser.userRole == 'ADMIN' || loggedInUser.userRole == 'OPS' : false;
         $stateProvider
 
         // HOME STATES AND NESTED VIEWS ========================================

@@ -15,7 +15,7 @@ gulp.task('inject-reload', ['inject'], function () {
   browserSync.reload();
 });
 
-gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectFront', 'copyVendorImages','injectForward','injectActivate','injectSelfCompose'], function () {
+gulp.task('inject', ['scripts', 'styles', 'injectAuth', 'injectFront', 'injectTerms', 'injectCVMarketing', 'injectCVWriting', 'copyVendorImages','injectForward','injectActivate','injectSelfCompose'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/main.css'),
     path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
@@ -52,7 +52,28 @@ gulp.task('injectAuth', ['stylesAuth'], function () {
 gulp.task('injectFront', ['stylesFront'], function () {
     return injectAlone({
         css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
-        paths: path.join(conf.paths.src, '/front.html')
+        paths: path.join(conf.paths.src, '/topcvreviews.html')
+    })
+});
+
+gulp.task('injectTerms', ['stylesFront'], function () {
+    return injectAlone({
+        css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
+        paths: path.join(conf.paths.src, '/terms.html')
+    })
+});
+
+gulp.task('injectCVWriting', ['stylesFront'], function () {
+    return injectAlone({
+        css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
+        paths: path.join(conf.paths.src, '/cvwritingpackages.html')
+    })
+});
+
+gulp.task('injectCVMarketing', ['stylesFront'], function () {
+    return injectAlone({
+        css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
+        paths: path.join(conf.paths.src, '/cvmarketing.html')
     })
 });
 

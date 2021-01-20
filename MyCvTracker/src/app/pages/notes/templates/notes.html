@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2" infinite-scroll="addMoreItems()"
              infinite-scroll-disabled="busy || stopScroll" infinite-scroll-distance="1">
-            <div ba-panel ba-panel-title="Recruiter Note Details" ba-panel-class="with-scroll"
+            <div ba-panel ba-panel-title="{{note.agency}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='text-right' style='font-size:11px;font-weight: bold'>Last Updated on:&nbsp;&nbsp;&nbsp;{{note.createdDate}}</span>" ba-panel-class="with-scroll"
                  ng-repeat="note in user.myNotes">
                 <div ng-style="checkNotesStyle(note)">
                     <div class="row">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="AgencyName"><span class="fa fa-fw fa-user-md"></span> Agency Name</label>
@@ -41,15 +41,15 @@
                                     <span ng-bind="note.createdDate" class="form-control" id="CreatedDate"></span>
                                 </strong>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="notes"><span class="fa fa-fw fa-sticky-note"></span> Notes</label>
                                 <strong>
-                                    <span ng-bind="note.notes" class="form-control" id="notes"></span>
-                                </strong>
+                                    <input type="textarea" class="form-control" placeholder="Notes" ng-model="note.notes" ng-required="true"/>
+                                   </strong>
                             </div>
                         </div>
                     </div>
@@ -58,14 +58,14 @@
                             <div class="form-group">
                                 <button data-ng-click="deleteNotes(note.id, $index)" class="btn btn-danger">Delete
                                 </button>
-                                <button data-ng-click="editNotesModel(note, $index)" class="btn btn-primary">Edit
+                                <button data-ng-click="updateNotesModel(note, $index)" class="btn btn-primary">Update
                                 </button>
-                                <button data-ng-click="viewNotesModel(note.id, $index)" class="btn btn-default">Full
+                               <!-- <button data-ng-click="viewNotesModel(note.id, $index)" class="btn btn-default">Full
                                     Details
                                 </button>
-                                <button data-ng-click="sendTrackedApplicaion(note, $index)" class="btn btn-default">Send
+                               <button data-ng-click="sendTrackedApplicaion(note, $index)" class="btn btn-default">Send
                                     Tracked Application
-                                </button>
+                                </button>-->
 
                                 <div ng-hide="checkUserRole()">
                                     <textarea class="form-control" placeholder="referGroup" ng-model="referGroup"

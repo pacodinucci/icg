@@ -7,63 +7,71 @@ angular.module('MyCvTracker.shared')
             var alerts = {
                 401: {
                     type: 'danger',
-                    message: 'Unauthorized Access !',
+                    message: 'Unauthorized Access!',
                 },
                 403: {
                     type: 'danger',
-                    message: 'Authentication Failure. The username or password doesn’t match. Please retry or use the Password Recover option to reset the password.',
+                    message: 'Authentication Failure. The username or password doesn’t match. Please retry or use the Forgot Password option to reset the password.',
                 },
                 409: {
                     type: 'danger',
-                    message: 'User already exists !!',
+                    message: 'User already exists!',
                 },
                 regsitrationSuccess: {
                     type: 'success',
-                    message: 'An activation link has been successfully sent to the registered E-mail ID. Please activate your account to continue with the Registration Process.',
+                    message: 'An activation link has been sent to the registered E-mail ID. Please activate your account to continue with the Registration Process.',
                 },
                 activateSuccess: {
                     type: 'success',
-                    message: 'Your account have been activated.',
+                    message: 'Your account has been activated.',
                 },
                 forgotPasswordSuccess: {
                     type: 'success',
-                    message: 'A password reset link has been successfully sent to the registered E-mail ID.',
+                    message: 'A password reset link has been sent to the registered E-mail ID.',
                 },
                 reactivateSuccess: {
                     type: 'success',
-                    message: 'An activation link has been successfully sent to the registered E-mail',
+                    message: 'An activation link has been sent to the registered E-mail.',
                 },
                 resumeAddedSuccess: {
                     type: 'success',
-                    message: 'Resume has been added successfully.',
+                    message: 'Resume has been successfully added.',
+                },
+                resumePushedSuccess: {
+                    type: 'success',
+                    message: 'Resume has been successfully pushed to Drive.',
                 },
                 resumeEditSuccess: {
                     type: 'success',
-                    message: 'Resume has been Edited successfully.',
+                    message: 'This Resume has been successfully edited.',
                 },
                 resumeSaveNameDuplicatedError: {
                     type: 'danger',
-                    message: 'Resume Name and Resume Reference already exists !',
+                    message: 'This Resume Name and Resume Reference already exists!',
                 },
                 resumeSaveTitleDuplicatedError: {
                     type: 'danger',
-                    message: 'This Resume Title is duplicated !',
+                    message: 'This Resume Title is duplicated!',
                 },
                 resumeSaveTypeDuplicatedError: {
                     type: 'danger',
-                    message: 'This Resume Type is duplicated !',
+                    message: 'This Resume Type is duplicated!',
                 },
                 resumeTrackRequestSuccess: {
                     type: 'success',
                     message: 'Your request has been saved.',
                 },
+                resumePushToDriveError: {
+                    type: 'danger',
+                    message: 'Pushing resume to Drive has failed!',
+                },
                 favNotesSaveLimitError: {
                     type: '',
-                    message: 'You have exceeded the limit for number of fav notes'
+                    message: 'You have exceeded the limit for number of Fav Notes.'
                 },
                 favNotesAlreadyExitsError: {
                     type: '',
-                    message: 'Fav Notes is already exists, Please try some other name'
+                    message: 'This Fav Note name already exists. Please choose a different name.'
                 },
                 CvMarketingRequestSuccess: {
                     type: 'success',
@@ -71,31 +79,35 @@ angular.module('MyCvTracker.shared')
                 },
                 deleteResumeuccess: {
                     type: 'success',
-                    message: 'Resume has been deleted successfully.',
+                    message: 'This Resume has been successfully deleted.',
                 },
                 deleteNotificationSuccess: {
                     type: 'success',
-                    message: 'Notification has been deleted successfully.',
+                    message: 'This Notification has been successfully deleted.',
                 },
                 deleteCampaignNotificationSuccess: {
                     type: 'success',
-                    message: 'Campaign Notification has been deleted successfully.',
+                    message: 'This Campaign Notification has been successfully deleted.',
                 },
                 deleteNotesSuccess: {
                     type: 'success',
-                    message: 'Note has been deleted successfully.',
+                    message: 'Note has been successfully deleted.',
+                },
+                updateNoteSuccess: {
+                    type: 'success',
+                    message: 'Note has been updated successfully.',
                 },
                 sendTrackedApplicationSuccess: {
                     type: 'success',
-                    message: 'The note has been added to tracking.',
+                    message: 'This note has been added to tracking.',
                 },
                 sendUnTrackedApplicationSuccess: {
                     type: 'success',
-                    message: 'The note has been removed from tracking.',
+                    message: 'This note has been removed from tracking.',
                 },
                 defaultError: {
                     type: 'danger',
-                    message: 'Oops ! Something went wrong.',
+                    message: 'Oops! Something went wrong.',
                 },
                 defaultWarning: {
                     type: 'warning',
@@ -107,7 +119,7 @@ angular.module('MyCvTracker.shared')
                 },
                 notActivated: {
                     type: 'warning',
-                    message: 'Your account has not been activated yet. Have you got activation link?'
+                    message: 'Your account has not been activated yet. Have you got an activation link?'
                 },
 
 
@@ -129,25 +141,25 @@ angular.module('MyCvTracker.shared')
 
                 sendTrackedApplicationlMessage: {
                     type: '',
-                    message: 'Are you sure you want to send track application?'
+                    message: 'Are you sure you want to send Tracked Application?'
                 },
 
                 unsubscribeeModelTrackingTitle: {
                     type: '',
-                    message: 'Unsubscribe Tracking Mail'
+                    message: 'You have succesfully unsubscribed to Tracking Mail.'
                 },
                 unsubscribeModelTrackingMessage: {
                     type: '',
-                    message: 'Are you sure you want to Unsubscribe Tracking Mail?'
+                    message: 'Are you sure you want to unsubscribe to Tracking Mail?'
                 },
 
                 unsubscribeeModelNotificationTitle: {
                     type: '',
-                    message: 'Unsubscribe Notification Mail'
+                    message: 'You have successfully unsubscribed to Notification Mail.'
                 },
                 unsubscribeModelNotificationMessage: {
                     type: '',
-                    message: 'Are you sure you want to Unsubscribe Notification Mail?'
+                    message: 'Are you sure you want to unsubscribe to Notification Mail?'
                 },
 
                 downloadModelTitle: {
@@ -160,65 +172,65 @@ angular.module('MyCvTracker.shared')
                 },
                 resumeDownloadSuccess: {
                     type: 'success',
-                    message: 'Resume have been downloaded successfully.',
+                    message: 'Resume has been successfully downloaded.',
                 },
                 resumeSaveLimitError: {
                     type: '',
-                    message: 'You have reached the number of resumes'
+                    message: 'You have reached your resume limit.'
                 },
                 resumeSaveLeastError: {
                     type: '',
-                    message: 'You have at least one resume'
+                    message: 'You have at least one resume.'
                 },
                 notificationDeleteLeastError: {
                     type: '',
-                    message: 'You have at least one note to delete'
+                    message: 'You have at least one note to delete.'
                 },
 
                 InputFileInputTypeValidation: {
                     type: '',
-                    message: 'Please,Select only PDF,Doc,Docx file'
+                    message: 'Please upload a PDF, Doc, Docx file only.'
                 },
                 InputFileInputSizeValidation: {
                     type: '',
-                    message: 'Please,Select file that less than 2MB'
+                    message: 'Please select a file that is less than 500KB.'
                 },
                 InputFileInputRequiredValidation: {
                     type: '',
-                    message: 'Please,Select the resume file!'
+                    message: 'Please select the resume file!'
                 },
                 PaymentSuccessfullyExecuted: {
                     type: 'success',
-                    message: 'The Payment Executed Successfully'
+                    message: 'The payment executed successfully.'
                 },
                 userTickException: {
                     type: 'warning',
-                    message: 'You have exceeded your ticks'
+                    message: 'You have exceeded your ticks.'
                 },
                 resetPasswordSuccess: {
                     type: 'success',
-                    message: 'Reset Password has been Changed successfully.',
+                    message: 'Your password has been successfully changed.',
                 },
                 confirmPasswordErorr: {
                     type: 'warning',
-                    message: 'Please,Enter Two Exact Password'
+                    message: 'Please make sure your passwords match.'
                 },
                 profileSaveSucess: {
                     type: 'success',
-                    message: 'The settings has been saved'
+                    message: 'These settings have been saved.'
                 },
 
                 unsubscribeSucess: {
                     type: 'success',
-                    message: 'The Unsubscribe Proccess is complated Successfully'
+                    message: 'The unsubscribe proccess has been successfully completed.'
                 },
                 jobContentSaveSucess: {
                     type: 'success',
-                    message: 'The Job content is Updated Successfully'
+                    message: 'This job content has been successfully updated.'
                 },
                 jobActivateSaveSucess: {
                     type: 'success',
-                    message: 'The Job is activated Successfully'
+                    message: 'This job has been successfully activated.'
                 },
                 applyJobTitle: {
                     type: '',
@@ -230,7 +242,7 @@ angular.module('MyCvTracker.shared')
                 },
                 applyJobSucsessMessage: {
                     type: 'success',
-                    message: 'The Job is applied Successfully'
+                    message: 'Your job application has been sent successfully.'
                 },
                 editJobTitle: {
                     type: '',
@@ -250,7 +262,7 @@ angular.module('MyCvTracker.shared')
                 },
                 approveJobSuccessMessage: {
                     type: 'success',
-                    message: 'The job is approved successfully'
+                    message: 'This job has been successfully approved.'
                 },
                 rejectJobTitle: {
                     type: '',
@@ -262,7 +274,7 @@ angular.module('MyCvTracker.shared')
                 },
                 rejectJobSuccessMessage: {
                     type: 'success',
-                    message: 'The job is rejected successfully'
+                    message: 'You have sucessfully rejected this job.'
                 }
             };
 
@@ -332,6 +344,10 @@ angular.module('MyCvTracker.shared')
 
                 getSaveResumesUrl: function () {
                     return Constants.baseUrl + Constants.apis.saveResume.url;
+                },
+
+                getPushResumeToDriveUrl: function () {
+                    return Constants.baseUrl + Constants.apis.pushToDrive.url;
                 },
 
                 geDeleteResumesUrl: function () {
@@ -431,6 +447,24 @@ angular.module('MyCvTracker.shared')
 
                 getEditNotesUrl: function () {
                     return Constants.baseUrl + Constants.apis.editNotes.url;
+                },
+                addGroupsUrl: function () {
+                    return Constants.baseUrl + Constants.apis.addGroup.url;
+                },
+                editGroupsUrl: function () {
+                    return Constants.baseUrl + Constants.apis.editGroup.url;
+                },
+                getGroupsUrl: function () {
+                    return Constants.baseUrl + Constants.apis.groupsList.url;
+                },
+                getGroupMembersUrl: function () {
+                    return Constants.baseUrl + Constants.apis.getMembers.url;
+                },
+                getEditMembersUrl: function () {
+                    return Constants.baseUrl + Constants.apis.editMembers.url;
+                },
+                getDeleteMembersUrl: function () {
+                    return Constants.baseUrl + Constants.apis.deleteMembers.url;
                 },
 
                 getEditCampaignNotesUrl: function () {
@@ -575,7 +609,7 @@ angular.module('MyCvTracker.shared')
                     $location.path('CvMarketing');
                 },
                 gotoNotesPage: function () {
-                    $location.path('notes');
+                    $location.path('notes', {}, {reload: true});
                 },
                 gotoCampaignNotesPage: function () {
                     $location.path('CampaignNotes');

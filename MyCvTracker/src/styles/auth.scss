@@ -1,10 +1,9 @@
 @import "common.scss";
-@import "theme/_socicon.scss";
 @import "theme/_layout.scss";
 @import 'theme/buttons.scss';
 @import 'app/form.scss';
-
 $text-color: #ffffff;
+
 
 .auth-main {
   display: flex;
@@ -51,7 +50,7 @@ $text-color: #ffffff;
 .auth-block {
   position: relative;
   max-width: 707px;
-  margin: 0 auto;
+  margin: 70px 30px;
   border-radius: 5px;
   background: #29323c;
   background: linear-gradient(to top, #485563, #29323c);
@@ -62,8 +61,9 @@ $text-color: #ffffff;
     margin-bottom: 28px;
     text-align: center;
   }
-  p {
-    font-size: 16px;
+  p.small-text {
+    color: #fff;
+    margin-top: 10px;
   }
   a {
     text-decoration: none;
@@ -206,5 +206,5 @@ a.forgot-pass {
 }
 
 .btn-auth {
-  color: #ffffff!important;
+  color: #fff!important;
 }

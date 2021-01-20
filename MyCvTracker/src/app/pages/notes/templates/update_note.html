@@ -1,0 +1,19 @@
+<form name="editNoteForm" novalidate ng-submit="saveNote(editNoteForm, selectedNote)">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" ng-click="closeModal()">
+			<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+		</button>
+		<h4 class="modal-title">Update Note - {{selectedNote.agency}}</h4>
+	</div>
+	<div>
+	<input type="hidden" ng-model="id"/>
+		<div class="modal-body">
+			<span>Are you sure you want to update this Note?</span>
+        </div>
+        <input type="hidden" value="selectedNote.notes"/>
+		<div class="modal-footer clearfix">
+			<button type="submit" class="btn btn-primary">Yes</button>
+			<button type="button" class="btn btn-primary" ng-click="closeModal()">No</button>
+		</div>  
+    </div>
+    </form>

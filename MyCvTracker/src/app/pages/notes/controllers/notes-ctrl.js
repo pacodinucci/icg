@@ -79,6 +79,24 @@
 					$scope.notesModal = NotesSvc.getEditNotesModal($scope, 'NotesCtrl');
 				};
 
+				//open update Notes Model Function
+				$scope.updateNotesModel = function (note) {
+
+					$scope.selectedNote =  {
+						id : note.id,
+						toRecruiter : note.toRecruiter,
+						recruiter : note.recruiter,
+						agency : note.agency,
+						subject : note.subject,
+						content : note.content,
+						resumeId : note.resumeId,
+						userId : note.userId,
+						notes : note.notes,
+						createdDate : note.createdDate
+					};
+					$scope.notesModal = NotesSvc.getUpdateNotesModal($scope, 'NotesCtrl');
+				};
+
 				$scope.viewNotesModel = function (noteId, index) {
 					$scope.user.viewNotes = [];
 					$scope.noteId = noteId;
@@ -99,18 +117,15 @@
                     note.createdDate = new Date();
                     note.referContent = referContent;
 					requestObj = note;
-
                     NotesSvc.referCandidates(requestObj);
 
                 };
 
                 $scope.campaignCandidates = function (note,referGroup,referContent,index) {
-
                     note.targetList = referGroup;
                     note.createdDate = new Date();
                     note.referContent = referContent;
                     requestObj = note;
-
                     NotesSvc.campaignCandidates(requestObj);
 
                 };
@@ -131,7 +146,7 @@
 					$scope.index = index;
 					$scope.deleteNotesModal = NotesSvc.getDeleteNotesModal($scope, $scope.NotesCtrl);
 				};
-
+				
                 $scope.checkUserRole = function () {
 					if($scope.user.role == 'ADMIN'){
                         return false;
@@ -146,14 +161,14 @@
 					$scope.deleteConfirmNotes = function (noteId, index) {
 						$scope.closeDeleteNoteModal();
 						var url = Utilities.getDeleteNotesUrl() + "?id=" + noteId;
-						//console.log(Utilities.getDeleteNotesUrl() + "?id=" + noteId);
+						console.log(Utilities.getDeleteNotesUrl() + "?id=" + noteId);
 						$http.delete(url, {
 							transformRequest: angular.identity,
 							headers: {'Content-Type': undefined}
 						})
 							.success(function (data, status, headers, config) {
 								console.debug(data + '  ' + status + ' ' + headers + '  ' + config);
-								toastr.success(Utilities.getAlerts('deleteNotesSuccess'));
+								toastr.success(Utilities.getAlerts('deleteNotesSuccess').message);
 								// new code edited
 								angular.forEach($scope.user.myNotes, function(obj, i) {
 									if(noteId==obj.id){
@@ -168,15 +183,15 @@
 
 							});
 					};
-
+							
 					$scope.closeDeleteNoteModal = function () {
 						$scope.deleteNotesModal.dismiss();
 					};
+					
 				};
-
+				
 				//Close the resume model function
 				$scope.closeModal = function () {
-
 					$scope.notesModal.dismiss();
 					Utilities.gotoNotesPage();
 					$scope.recruiter=null;
@@ -184,6 +199,7 @@
 					$scope.agency=null;
 					$scope.createdDate=null;
 					$scope.note=null;
+					$window.location.reload();
 
 				};
 
@@ -206,16 +222,17 @@
 
 							function (notesData) {
 								$scope.notesModal.dismiss();
-								toastr.error(Utilities.getAlerts('resumeTrackRequestSuccess'));
-								angular.forEach($scope.user.myNotes, function(obj, i) {
-									if(notesData.id==obj.id){
-										$scope.user.myNotes[i] = notesData;
-									}
-								});
+								toastr.success(Utilities.getAlerts('updateNoteSuccess').message);
+								$window.location.reload();
+								
+								
 							}
+							
 						);
+						
 					}
 				};
+				
 
 				$scope.checkNotesStyle = function (note) {
 
@@ -239,7 +256,7 @@
 							$scope.notesModal.dismiss();
 							$scope.note.createdDate = notesData.createdDate;
 							$scope.note.tracked = notesData.tracked;
-							toastr.error(notesData.tracked ? Utilities.getAlerts('sendTrackedApplicationSuccess'):Utilities.getAlerts('sendUnTrackedApplicationSuccess'));
+							toastr.error(notesData.tracked ? Utilities.getAlerts('sendTrackedApplicationSuccess').message:Utilities.getAlerts('sendUnTrackedApplicationSuccess').message);
 							Utilities.gotoNotesPage();
 						}
 					);

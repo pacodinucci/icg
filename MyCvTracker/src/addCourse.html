@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My CV Tracker</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+                 crossorigin="anonymous">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/img/homepage/favicon.ico" rel="shortcut icon" />
+    <link rel="stylesheet" href="styles/course.scss">
+    <style>
+
+
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #fff;
+            padding-bottom: 0px;
+        }
+       
+        .logo img {
+            width: 175px;
+        }
+
+        /* Header starts */
+        header {
+            width: 100%;
+            background: #1e222c;
+            min-height: 50px;
+            padding: 15px 0px;
+        }
+        /* footer starts */
+.footer{
+	width: 100%;
+	min-height: 50px;
+	padding: 50px 0px 20px 0px;
+	background: #1e222c;
+	text-align: center;
+}
+.footer img{
+	margin-bottom: 10px;
+}
+.footer p{
+	color: #fff;
+	margin: 5px 0px;
+}
+.footer .copyright{
+	color: #9099ad;
+}
+.footer-social{
+	margin-top: 20px;
+}
+.footer-social li{
+	display: inline-block;
+	margin: 0px 10px;
+}
+.footer-social li a{
+	color: #9099ad;
+}
+.footer-social li a:hover{
+	color: #489dc4;
+}
+.m-align{
+	text-align: center;
+}
+.upper-nav{
+	float: right;
+}
+.upper-nav li{
+	display: inline-block;
+	margin-top: 15px;
+	padding: 0px 10px;
+}
+.upper-nav li a{
+	color: #fff;
+	font-size: 14px;
+}
+.upper-nav li a .btn-style{
+	background: #3492be;
+	padding: 7px 25px;
+}
+.upper-nav li a .btn-style:hover{
+	color: #3492be;
+	background: #fff;
+}
+.upper-nav li a:hover{
+	color: #3492be;
+	transition: 0.5s linear;
+}
+@media only screen and (max-width: 767px) {
+	.logo{
+		text-align: center;
+	}
+	.upper-nav {
+    float: inherit;
+}
+}
+@media only screen and (max-width: 320px) {
+.upper-nav li a .btn-style {
+    padding: 7px 20px;
+}
+}
+.block{    
+    position: relative;
+    max-width: 707px;
+    margin: 70px 350px;
+    border-radius: 5px;
+    background: #29323c;
+    background: linear-gradient(to top, #485563, #29323c);
+    color: #fff;
+    padding: 32px;    
+}
+
+h1{
+       margin-bottom: 28px;
+    text-align: center;
+}
+
+.block-input {
+  width: 300px;
+  margin-bottom: 24px;
+  /* input {
+    display: block;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    padding: 4px 10px;
+    outline: none;
+  } */
+}
+
+.btn-auth {
+  /* color: #ffffff!important; */
+}
+
+    </style>
+</head>
+<body>
+    <!-- wrapper starts -->
+    <!-- header starts -->
+    <!-- <div id="loader"></div> -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="logo">
+                        <img src="assets/img/front/logo.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12 m-align">
+                    <ul class="upper-nav">
+                        <li><a target="_blank" href="https://www.facebook.com/My-CV-Tracker-494026290989681/" href=""><span><i class="fab fa-facebook-f"></i></span></a></li>
+                        <li><a target="_blank" href="https://twitter.com/mycvtracker" href=""><span><i class="fab fa-twitter"></i></span></a></li>
+                        <li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register"><span class="btn-style">Sign Up</span></a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="block">
+        
+            <h1>Add Course </h1>
+            
+        
+        <div class="row">
+            <!-- <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-12 col-12"> -->
+                <form class="form-horizontal"> 
+                    <!-- <div class="row"> -->
+                            <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <input type="text" id="courseName" class="form-control" name="" placeholder="Name">
+                        </div></div>
+                        <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <input type="text" id="courseAuthor" class="form-control" name="" placeholder="Author">
+                        </div></div>
+                        <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <input type="number" id="coursePrice" class="form-control" name="" placeholder="Price">
+                        </div></div>
+                        <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <input type="text" id="coursePublisher" class="form-control" name=""
+                                placeholder="Publisher">
+                        </div></div>
+                        <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <textarea rows="9" id="courseDescription" class="form-control"
+                                placeholder="Description ..."></textarea>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-12" align="center">
+                            <input type="button" id="addCourseButton" class="btn btn-primary" name="" value="Add">
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </form>
+            <!-- </div> -->
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <img src="assets/img/front/logo.png" width="150px">
+                    <p></p>
+                    <a href="/terms.html" target="_blank">Terms & Conditions</a>
+                    <p>Uxbridge, London, United Kingdom</p>
+                    <p class="copyright">Copyright My CV Tracker</p>
+                    <ul class="footer-social">
+                        <li><a target="_blank" href="https://www.facebook.com/My-CV-Tracker-494026290989681/"><span><i
+                                        class="fab fa-facebook-f"></i></span></a></li>
+                        <li><a target="_blank" href="https://twitter.com/mycvtracker"><span><i
+                                        class="fab fa-twitter"></i></span></a></li>
+                        <li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+</body>
+</html> 
