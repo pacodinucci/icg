@@ -5,17 +5,24 @@ angular.module("MyCvTracker.pages.referral")
     "$scope",
     "$injector",
     "$http",
+    "Authorization",
+    "$location",
     function (
       toastr,
       $rootScope,
       $scope,
       $injector,
-      $http
+      $http,
+      Authorization,
+      $location
     ) {
       var Utilities = $injector.get("Utilities");
       var AccountSvc = $injector.get("AccountSvc");
       var ReferralSvc = $injector.get("ReferralSvc");
-      var ResumesSvc = $injector.get("ResumesSvc");
+
+      var userId = 0;
+      var userEmail = "";
+      var isAdmin = Authorization.getUserRole() === "ADMIN";
 
       $scope.referralModal = {};
       $scope.referral = {
@@ -27,29 +34,18 @@ angular.module("MyCvTracker.pages.referral")
         generating : false
       }
 
-      $scope.generateReferralLink = function () {
-      };
-
       $scope.loadListReferralLinks = function () {
-        ReferralSvc.getListReferralLinks()
-          .then(function (rpData) {
-            $scope.referral.links = rpData;
-          });
-      };
-
-      //Get User Details Function
-      $scope.getUserDetails = function () {
-        AccountSvc.getUser()
-          .then(
-            function (userData) {
-              $scope.user = userData;
-              $scope.loadListReferralLinks();
-            },
-
-            function (response) {
-              toastr.error(Utilities.getAlerts(response.status));
-            }
-          );
+        if (isAdmin) {
+          ReferralSvc.getListReferralLinksOfUser(userId)
+            .then(function (rpData) {
+              $scope.referral.links = rpData;
+            });
+        } else {
+          ReferralSvc.getListReferralLinks()
+            .then(function (rpData) {
+              $scope.referral.links = rpData;
+            });
+        }
       };
 
       $scope.openNewReferralLinkModal = function () {
@@ -65,17 +61,34 @@ angular.module("MyCvTracker.pages.referral")
       $scope.generateLink = function() {
         $scope.newReferralForm.generating = true;
 
-        ReferralSvc.generateLink($scope.newReferralForm.context).then(function() {
-          $scope.newReferralForm.generating = false;
-          $scope.closeModal();
-          $scope.loadListReferralLinks();
-          var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
-          toastr.success(msg, "Success");
-        })
+        if (isAdmin) {
+          ReferralSvc.generateLinkForUser($scope.newReferralForm.context, userEmail).then(function() {
+            $scope.newReferralForm.generating = false;
+            $scope.closeModal();
+            $scope.loadListReferralLinks();
+            var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
+            toastr.success(msg, "Success");
+          })
+        } else {
+          ReferralSvc.generateLink($scope.newReferralForm.context).then(function() {
+            $scope.newReferralForm.generating = false;
+            $scope.closeModal();
+            $scope.loadListReferralLinks();
+            var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
+            toastr.success(msg, "Success");
+          })
+        }
+
       }
 
       $scope.init = function () {
-        $scope.getUserDetails();
+        if (isAdmin) {
+          var params= $location.search();
+          userId = params.userId;
+          userEmail = params.emailName + "@" + params.emailDm;
+        }
+
+        $scope.loadListReferralLinks();
       };
 
       $scope.init();

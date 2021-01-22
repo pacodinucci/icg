@@ -1,0 +1,20 @@
+angular.module("MyCvTracker.pages.userManagement")
+  .factory("UserManagementService", [
+    "toastr",
+    "RestConfig",
+    "$injector",
+    function (
+      toastr,
+      RestConfig,
+      $injector
+    ) {
+      var utilities = $injector.get("Utilities");
+
+      return {
+        getUsers : function() {
+          var url =  utilities.getAuthUserListUrl();
+          return RestConfig.getAuthUsers(url);
+        }
+      };
+    }
+  ]);

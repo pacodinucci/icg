@@ -283,6 +283,10 @@ angular.module("MyCvTracker.shared")
         getReferralLinks : function (url) {
           return RESTSvc.get(url);
         },
+        getReferralLinksOfUser : function (url, userId) {
+          url = url + "?userId="+ userId;
+          return RESTSvc.get(url);
+        },
         generateReferralLink : function (
           url,
           contextName
@@ -293,6 +297,21 @@ angular.module("MyCvTracker.shared")
           }
 
           return RESTSvc.post(url, request);
+        },
+        generateReferralLinkForUser : function (
+          url,
+          userEmail,
+          contextName
+        ) {
+          var request = {
+            referralDetails : contextName,
+            referralLink : userEmail
+          }
+
+          return RESTSvc.post(url, request);
+        },
+        getAuthUsers : function(url) {
+          return RESTSvc.get(url);
         }
       };
 

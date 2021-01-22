@@ -323,8 +323,14 @@
                 referralList : {
             	      url : "/links/myreferrals"
                 },
+                referralListOfOther : {
+                    url : "/links/referrals"
+                },
                 newReferralLink : {
                     url : "/links/referrals"
+                },
+                newReferralLinkForUser : {
+                    url : "/links/referralsForOtherUser"
                 }
         	}
         });

@@ -556,8 +556,20 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.referralList.url;
                 },
 
+                getReferralLinkListUrlOfUser: function () {
+                    return Constants.baseUrl + Constants.apis.referralListOfOther.url;
+                },
+
                 getReferralLinkNewUrl: function () {
                     return Constants.baseUrl + Constants.apis.newReferralLink.url;
+                },
+
+                getReferralLinkNewUrlForUser: function () {
+                    return Constants.baseUrl + Constants.apis.newReferralLinkForUser.url;
+                },
+
+                getAuthUserListUrl: function () {
+                    return Constants.baseUrl + "/auth/users";
                 },
 
                 gotoFrontPage: function () {
