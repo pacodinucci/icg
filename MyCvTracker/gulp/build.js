@@ -2,6 +2,7 @@
 
 var path = require('path');
 var gulp = require('gulp');
+var babel = require('gulp-babel');
 var conf = require('./conf');
 
 var $ = require('gulp-load-plugins')({
@@ -45,6 +46,9 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(jsFilter)
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
+    .pipe(babel({
+      presets: ['@babel/preset-env']
+    }))
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
     .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
@@ -54,7 +58,9 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.autoprefixer())
     .pipe($.minifyCss({ processImport: false }))
     .pipe($.sourcemaps.write('maps'))
-    .pipe(cssFilter.restore)
+    .pipe(cssFilter.restore).pipe(babel({
+      presets: ['@babel/preset-env']
+    }))
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.revReplace())
