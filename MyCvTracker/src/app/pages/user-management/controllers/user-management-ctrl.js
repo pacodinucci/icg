@@ -20,20 +20,23 @@ angular.module("MyCvTracker.pages.userManagement")
 
       $scope.loadUsers = function () {
         userManagementService.getUsers()
-          .then(userList => {
+          .then(function (userList) {
             $scope.userManagement.users = userList;
           });
       };
 
-      $scope.getReferralDirect = (id, email) => {
+      $scope.getReferralDirect = function (
+        id,
+        email
+      ) {
         var emailParts = email.split("@");
         var href = "/referral?userId=" + id + "&emailDm=" + emailParts[1] + "&emailName=" + emailParts[0];
         return href;
-      }
+      };
 
-      $scope.init = () => {
+      $scope.init = function () {
         $scope.loadUsers();
-      }
+      };
 
       $scope.init();
     }
