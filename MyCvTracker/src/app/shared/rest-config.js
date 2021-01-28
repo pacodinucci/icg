@@ -312,7 +312,11 @@ angular.module("MyCvTracker.shared")
         },
         getAuthUsers : function(url) {
           return RESTSvc.get(url);
-        }
+        },
+        getReferredResumeList : function (url, link) {
+          url = url + "?referralLink="+ link;
+          return RESTSvc.get(url);
+        },
       };
 
       return RestConfig;

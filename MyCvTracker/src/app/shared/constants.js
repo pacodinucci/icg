@@ -330,6 +330,9 @@
                 },
                 newReferralLinkForUser : {
                     url : "/links/referralsForOtherUser"
-                }
+                },
+                referredResumesList : {
+                    url : "/links/resumes"
+                },
         	}
         });

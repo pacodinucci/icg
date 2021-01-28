@@ -572,6 +572,10 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + "/auth/users";
                 },
 
+                getReferredResumeListUrl: function () {
+                    return Constants.baseUrl + Constants.apis.referredResumesList.url;
+                },
+
                 gotoFrontPage: function () {
                     $location.path('base.front');
                 },
