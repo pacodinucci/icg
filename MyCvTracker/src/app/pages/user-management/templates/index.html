@@ -6,7 +6,12 @@
       <div class="filter-label">Search for user</div>
       <div class="filter-input">
         <div class="form-group">
-          <input class="form-control" type="text" placeholder="Enter email or name to search" />
+          <input
+            ng-model="userManagement.emailSearch"
+            ng-keypress="$event.keyCode === 13 && loadUsers()"
+            class="form-control"
+            type="text"
+            placeholder="Enter email to search" />
         </div>
       </div>
     </div>

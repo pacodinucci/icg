@@ -1,0 +1,27 @@
+<section
+  id="referral"
+  ng-controller="ReferredResumesCtrl">
+    <div class="body-section list-resumes-section">
+      <div class="section-content">
+        <div class="row">
+          <div ng-repeat="aResume in referredResumes.list track by aResume.id" class="col-xs-12 col-md-3">
+            <div
+              ba-panel
+              ba-panel-class="xsmall-panel light-text resume-panel">
+              <div class="tile-title">
+                <h3 class="resume-title" ng-bind="aResume.resumeTitle"></h3>
+                <hr class="resumeSeprator">
+                <div class="tile-filename" ng-bind="aResume.resumeName"></div>
+                <div class="tile-datetime" ng-bind="formatDateTime(aResume.uploadedAt)"></div>
+                <div class="controls">
+                  <a href="#" ng-click="downloadMyResume(aResume.id)">
+                    <i class="fa fa-download"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

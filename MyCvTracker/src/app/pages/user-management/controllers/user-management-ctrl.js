@@ -15,14 +15,26 @@ angular.module("MyCvTracker.pages.userManagement")
       var userManagementService = $injector.get("UserManagementService");
 
       $scope.userManagement = {
-        users : []
+        users : [],
+        emailSearch : ""
       };
 
       $scope.loadUsers = function () {
-        userManagementService.getUsers()
-          .then(function (userList) {
-            $scope.userManagement.users = userList;
-          });
+        var emailSearch = $scope.userManagement.emailSearch;
+        emailSearch = emailSearch.trim();
+        $scope.userManagement.users = [];
+        if (!!emailSearch) {
+          userManagementService.searchUser(emailSearch)
+            .then(function (user) {
+              $scope.userManagement.users.push(user);
+            });
+        } else {
+          userManagementService.getUsers()
+            .then(function (userList) {
+              $scope.userManagement.users = userList;
+            });
+        }
+
       };
 
       $scope.getReferralDirect = function (

@@ -48,7 +48,7 @@ angular.module("MyCvTracker.pages.account")
           description : "Referral",
           link : "referral",
           icon : "resume",
-          showMenu : !isAdmin
+          showMenu : true
         },
         {
           color : pieColor,

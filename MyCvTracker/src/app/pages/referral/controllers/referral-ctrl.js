@@ -22,7 +22,6 @@ angular.module("MyCvTracker.pages.referral")
 
       var userId = 0;
       var userEmail = "";
-      var isAdmin = Authorization.getUserRole() === "ADMIN";
 
       $scope.referralModal = {};
       $scope.referral = {
@@ -32,10 +31,10 @@ angular.module("MyCvTracker.pages.referral")
       $scope.newReferralForm = {
         context : null,
         generating : false
-      }
+      };
 
       $scope.loadListReferralLinks = function () {
-        if (isAdmin) {
+        if (!!userId) {
           ReferralSvc.getListReferralLinksOfUser(userId)
             .then(function (rpData) {
               $scope.referral.links = rpData;
@@ -58,33 +57,49 @@ angular.module("MyCvTracker.pages.referral")
         $scope.newReferralForm.context = null;
       };
 
-      $scope.generateLink = function() {
+      $scope.generateLink = function () {
         $scope.newReferralForm.generating = true;
 
-        if (isAdmin) {
-          ReferralSvc.generateLinkForUser($scope.newReferralForm.context, userEmail).then(function() {
-            $scope.newReferralForm.generating = false;
-            $scope.closeModal();
-            $scope.loadListReferralLinks();
-            var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
-            toastr.success(msg, "Success");
-          })
+        if (!!userId) {
+          ReferralSvc.generateLinkForUser($scope.newReferralForm.context, userEmail)
+            .then(function () {
+              $scope.newReferralForm.generating = false;
+              $scope.closeModal();
+              $scope.loadListReferralLinks();
+              var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
+              toastr.success(msg, "Success");
+            });
         } else {
-          ReferralSvc.generateLink($scope.newReferralForm.context).then(function() {
-            $scope.newReferralForm.generating = false;
-            $scope.closeModal();
-            $scope.loadListReferralLinks();
-            var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
-            toastr.success(msg, "Success");
-          })
+          ReferralSvc.generateLink($scope.newReferralForm.context)
+            .then(function () {
+              $scope.newReferralForm.generating = false;
+              $scope.closeModal();
+              $scope.loadListReferralLinks();
+              var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
+              toastr.success(msg, "Success");
+            });
         }
+      };
 
+      $scope.copyLink = function(link) {
+        var text = "https://mycvtracker.com/topcvreviews.html?ref=" + link;
+        var input = document.createElement('input');
+        input.setAttribute('value', text);
+        document.body.appendChild(input);
+        input.select();
+        var result = document.execCommand('copy');
+        document.body.removeChild(input);
+        var msg = Utilities.getAlerts("referralLinkCopySuccessMsg");
+        toastr.success(msg, "Success");
+        return result;
       }
 
       $scope.init = function () {
-        if (isAdmin) {
-          var params= $location.search();
+        var params = $location.search();
+        if (params.userId) {
           userId = params.userId;
+        }
+        if (params.emailName && params.emailDm) {
           userEmail = params.emailName + "@" + params.emailDm;
         }
 
