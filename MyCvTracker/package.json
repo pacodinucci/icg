@@ -48,8 +48,7 @@
     "ie 11"
   ],
   "scripts": {
-    "postinstall": "bower install",
-    "preinstall": "npx npm-force-resolutions"
+    "postinstall": "bower install"
   },
   "dependencies": {
     "natives": "^1.1.6"

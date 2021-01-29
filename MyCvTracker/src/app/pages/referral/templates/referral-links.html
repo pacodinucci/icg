@@ -42,9 +42,14 @@
                   </div>
                 </div>
                 <div class="ctrls">
-                  <a ng-href="/referred-resumes?referralLink={{ referral.referralLink }}" title="List resumes">
-                    <i class="fas fa-copy"></i>
-                  </a>
+                  <div class="d-flex">
+                    <a href="#" title="Copy" ng-click="copyLink(referral.referralLink)">
+                      <i class="fas fa-copy"></i>
+                    </a>
+                    <a ng-href="/referred-resumes?referralLink={{ referral.referralLink }}" title="List resumes">
+                      <i class="fas fa-list-alt"></i>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

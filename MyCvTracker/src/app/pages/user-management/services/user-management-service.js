@@ -14,6 +14,10 @@ angular.module("MyCvTracker.pages.userManagement")
         getUsers : function() {
           var url =  utilities.getAuthUserListUrl();
           return RestConfig.getAuthUsers(url);
+        },
+        searchUser : function(email) {
+          var url =  utilities.getAuthUserByEmailUrl();
+          return RestConfig.getAuthUserByEmail(url, email);
         }
       };
     }
