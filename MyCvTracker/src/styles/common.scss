@@ -5,12 +5,15 @@
 .d-flex {
   display: -ms-flexbox!important;
   display: flex!important;
-  align-items: center;
 
   .flex-fill {
     -ms-flex: 1 1 auto!important;
     flex: 1 1 auto!important;
   }
+}
+
+.align-items-center {
+  align-items: center;
 }
 
 .card {

@@ -36,7 +36,12 @@
       margin-bottom: 1rem;
     }
 
+    .info-col {
+      min-width: 0;
+    }
+
     .link {
+      word-break: break-all;
       font-family: 'museo_slab500';
     }
 
