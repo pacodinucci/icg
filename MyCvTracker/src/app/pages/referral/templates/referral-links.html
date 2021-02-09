@@ -38,15 +38,42 @@
               <div class="d-flex">
                 <div class="info-col flex-fill">
                   <div
-                    class="context-name"
-                    ng-if="referral.referralDetails.length">{{referral.referralDetails}}
+                    ng-if="referral.referralType === REFERRAL_TYPE.TEXT_LINK || !referral.referralType"
+                    class="context-name">
+                    <span ng-if="referral.referralDetails.length">{{referral.referralDetails}}</span>
+                    <span ng-if="!referral.referralDetails.length">-</span>
                   </div>
                   <div
+                    ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE"
                     class="context-name"
-                    ng-if="!referral.referralDetails.length">-
+                    ng-click="openReferralDescriptionModal(referral.referralDetails)">
+                    <a href="#">Social Description</a>
                   </div>
-                  <div class="link">
+                  <div
+                    ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
+                    class="context-name"
+                    ng-click="openReferralDescriptionModal(referral.referralDetails, referral.referralTargetEmail)">
+                    <a href="#">
+                      <span ng-if="!referral.referralTargetSubject.length">Job Description</span>
+                      <span ng-if="referral.referralTargetSubject.length">{{ referral.referralTargetSubject }}</span>
+                    </a>
+                  </div>
+                  <div
+                    class="link"
+                    ng-if="referral.referralType === REFERRAL_TYPE.TEXT_LINK || !referral.referralType">
                     https://mycvtracker.com/topcvreviews.html?ref=
+                    <span ng-bind="referral.referralLink"></span>
+                  </div>
+                  <div
+                    class="link"
+                    ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC">
+                    https://mycvtracker.com/referral/job-spec?ref=
+                    <span ng-bind="referral.referralLink"></span>
+                  </div>
+                  <div
+                    class="link"
+                    ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE">
+                    https://mycvtracker.com/referral/social-share?ref=
                     <span ng-bind="referral.referralLink"></span>
                   </div>
                 </div>

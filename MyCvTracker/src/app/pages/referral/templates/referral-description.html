@@ -1,0 +1,29 @@
+<div>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      ng-click="closeModal()">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">Referral Description</h4>
+  </div>
+  <div>
+    <div class="modal-body">
+      <div ng-if="!!referral.selectedTargetEmail">
+        Email: {{ referral.selectedTargetEmail }}
+      </div>
+      <br/>
+      <div>
+        <ng-ckeditor
+          ng-model="referral.selectedDescription"
+          ng-config="referral.descriptionConfig"
+          ng-disabled="true">
+        </ng-ckeditor>
+      </div>
+
+    </div>
+  </div>
+</div>

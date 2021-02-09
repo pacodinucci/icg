@@ -289,11 +289,17 @@ angular.module("MyCvTracker.shared")
         },
         generateReferralLink : function (
           url,
-          contextName
+          contextName,
+          referralType,
+          referralTargetSubject,
+          referralTargetEmail
         ) {
           var request = {
             referralDetails : contextName,
-            referralLink : ""
+            referralLink : "",
+            referralType,
+            referralTargetSubject,
+            referralTargetEmail
           }
 
           return RESTSvc.post(url, request);
@@ -301,11 +307,17 @@ angular.module("MyCvTracker.shared")
         generateReferralLinkForUser : function (
           url,
           userEmail,
-          contextName
+          contextName,
+          referralType,
+          referralTargetSubject,
+          referralTargetEmail
         ) {
           var request = {
             referralDetails : contextName,
-            referralLink : userEmail
+            referralLink : userEmail,
+            referralType,
+            referralTargetSubject,
+            referralTargetEmail
           }
 
           return RESTSvc.post(url, request);
