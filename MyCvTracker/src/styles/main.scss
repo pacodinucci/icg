@@ -34,9 +34,17 @@
   .referral-link-panel {
     .context-name {
       margin-bottom: 1rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .info-col {
+      min-width: 0;
     }
 
     .link {
+      word-break: break-all;
       font-family: 'museo_slab500';
     }
 

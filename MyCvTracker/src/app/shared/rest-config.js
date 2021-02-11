@@ -289,11 +289,17 @@ angular.module("MyCvTracker.shared")
         },
         generateReferralLink : function (
           url,
-          contextName
+          contextName,
+          referralType,
+          referralTargetSubject,
+          referralTargetEmail
         ) {
           var request = {
             referralDetails : contextName,
-            referralLink : ""
+            referralLink : "",
+            referralType,
+            referralTargetSubject,
+            referralTargetEmail
           }
 
           return RESTSvc.post(url, request);
@@ -301,11 +307,17 @@ angular.module("MyCvTracker.shared")
         generateReferralLinkForUser : function (
           url,
           userEmail,
-          contextName
+          contextName,
+          referralType,
+          referralTargetSubject,
+          referralTargetEmail
         ) {
           var request = {
             referralDetails : contextName,
-            referralLink : userEmail
+            referralLink : userEmail,
+            referralType,
+            referralTargetSubject,
+            referralTargetEmail
           }
 
           return RESTSvc.post(url, request);
@@ -319,6 +331,10 @@ angular.module("MyCvTracker.shared")
         },
         getReferredResumeList : function (url, link) {
           url = url + "?referralLink="+ link;
+          return RESTSvc.get(url);
+        },
+        getReferralDetails : function (url, refCode) {
+          url = url + "?referralLink="+ refCode;
           return RESTSvc.get(url);
         },
       };

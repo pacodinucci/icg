@@ -16,6 +16,16 @@
   <div>
     <div class="modal-body">
       <div class="form-group">
+        <label class="control-label">Referral Type</label>
+        <select
+          ng-model="newReferralForm.type"
+          class="form-control">
+          <option ng-value="REFERRAL_TYPE.TEXT_LINK">Text Link</option>
+          <option ng-value="REFERRAL_TYPE.JOB_SPEC">Job</option>
+          <option ng-value="REFERRAL_TYPE.SOCIAL_SHARE">Social</option>
+        </select>
+      </div>
+      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">
         <label class="control-label">Referral Context</label>
         <input
           type="text"
@@ -23,6 +33,32 @@
           placeholder="Enter context name"
           ng-model="newReferralForm.context"
           ng-required="true" />
+      </div>
+      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
+        <label class="control-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter title"
+          ng-model="newReferralForm.title"
+          ng-required="true" />
+      </div>
+      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
+        <label class="control-label">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter email"
+          ng-model="newReferralForm.email"
+          ng-required="true" />
+      </div>
+      <div class="form-group" ng-if="newReferralForm.type !== REFERRAL_TYPE.TEXT_LINK">
+        <label class="control-label">Description</label>
+        <ng-ckeditor
+          ng-model="newReferralForm.description"
+          remove-buttons="Image"
+          remove-plugins="iframe,flash,smiley" >
+        </ng-ckeditor>
       </div>
     </div>
     <div class="modal-footer clearfix">

@@ -16,6 +16,12 @@ angular.module("MyCvTracker.pages.referral")
       Authorization,
       $location
     ) {
+      $scope.REFERRAL_TYPE = {
+        TEXT_LINK : "TEXT_LINK",
+        JOB_SPEC : "JOB_SPEC",
+        SOCIAL_SHARE : "SOCIAL_SHARE"
+      };
+
       var Utilities = $injector.get("Utilities");
       var AccountSvc = $injector.get("AccountSvc");
       var ReferralSvc = $injector.get("ReferralSvc");
@@ -26,11 +32,23 @@ angular.module("MyCvTracker.pages.referral")
       $scope.referralModal = {};
       $scope.referral = {
         links : [],
-        modal : null
+        modal : null,
+        selectedDescription : "",
+        selectedTargetEmail : "",
+        descriptionConfig : {
+          "height" : "470",
+          "removePlugins" : "toolbar,resize",
+          "readOnly" : "true"
+        }
       };
       $scope.newReferralForm = {
+        type : "JOB_SPEC",
         context : null,
-        generating : false
+        description : null,
+        title : null,
+        email : null,
+        generating : false,
+        REFERRAL_TYPE : {}
       };
 
       $scope.loadListReferralLinks = function () {
@@ -51,17 +69,43 @@ angular.module("MyCvTracker.pages.referral")
         $scope.referralModal = ReferralSvc.getNewReferralLinkModal($scope, "ReferalModalCtrl");
       };
 
+      $scope.openReferralDescriptionModal = function (desc, email) {
+        $scope.referral.selectedDescription = desc;
+        $scope.referral.selectedTargetEmail = email;
+        $scope.referralModal = ReferralSvc.getReferralDescriptionModal($scope, "ReferalModalCtrl");
+      };
+
       $scope.closeModal = function () {
         // console.log($scope.referralModal);
         $scope.referralModal.dismiss();
         $scope.newReferralForm.context = null;
+        $scope.referral.selectedDescription = null;
+        $scope.referral.selectedTargetEmail = null;
       };
 
       $scope.generateLink = function () {
         $scope.newReferralForm.generating = true;
 
+        var context = "";
+        var type = $scope.newReferralForm.type;
+        var email = "",
+          title = "";
+        switch (type) {
+          case $scope.REFERRAL_TYPE.TEXT_LINK:
+            context = $scope.newReferralForm.context;
+            break;
+          case  $scope.REFERRAL_TYPE.JOB_SPEC:
+            context = $scope.newReferralForm.description;
+            title = $scope.newReferralForm.title;
+            email = $scope.newReferralForm.email;
+            break;
+          case  $scope.REFERRAL_TYPE.SOCIAL_SHARE:
+            context = $scope.newReferralForm.description;
+            break;
+        }
+
         if (!!userId) {
-          ReferralSvc.generateLinkForUser($scope.newReferralForm.context, userEmail)
+          ReferralSvc.generateLinkForUser(context, userEmail, type, title, email)
             .then(function () {
               $scope.newReferralForm.generating = false;
               $scope.closeModal();
@@ -70,7 +114,7 @@ angular.module("MyCvTracker.pages.referral")
               toastr.success(msg, "Success");
             });
         } else {
-          ReferralSvc.generateLink($scope.newReferralForm.context)
+          ReferralSvc.generateLink(context, type, title, email)
             .then(function () {
               $scope.newReferralForm.generating = false;
               $scope.closeModal();
@@ -81,18 +125,31 @@ angular.module("MyCvTracker.pages.referral")
         }
       };
 
-      $scope.copyLink = function(link) {
-        var text = "https://mycvtracker.com/topcvreviews.html?ref=" + link;
-        var input = document.createElement('input');
-        input.setAttribute('value', text);
+      $scope.copyLink = function (type, link) {
+        var text = ""
+        switch (type) {
+          case $scope.REFERRAL_TYPE.JOB_SPEC:
+            text = "https://mycvtracker.com/job-spec.html?ref=";
+            break;
+          case $scope.REFERRAL_TYPE.SOCIAL_SHARE:
+            text = "https://mycvtracker.com/referral/social-share?ref=";
+            break;
+          case $scope.REFERRAL_TYPE.TEXT_LINK:
+            text = "https://mycvtracker.com/topcvreviews.html?ref=";
+            break;
+        }
+        text = text + link;
+
+        var input = document.createElement("input");
+        input.setAttribute("value", text);
         document.body.appendChild(input);
         input.select();
-        var result = document.execCommand('copy');
+        var result = document.execCommand("copy");
         document.body.removeChild(input);
         var msg = Utilities.getAlerts("referralLinkCopySuccessMsg");
         toastr.success(msg, "Success");
         return result;
-      }
+      };
 
       $scope.init = function () {
         var params = $location.search();

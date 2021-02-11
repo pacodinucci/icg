@@ -2,15 +2,44 @@
 @import 'theme/conf/colorScheme/mint';
 @import 'theme/conf/variables';
 
+a.btn.btn-default {
+  border-width: 1px;
+  color: #666666;
+  background: transparent;
+  border-color: #d6d6d6;
+  font: 14px/16px museo700;
+}
+
 .d-flex {
   display: -ms-flexbox!important;
   display: flex!important;
-  align-items: center;
 
   .flex-fill {
     -ms-flex: 1 1 auto!important;
     flex: 1 1 auto!important;
   }
+
+  .col-auto {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+  }
+
+  &.grid {
+    margin: -15px;
+
+    > [class^=col-] {
+      padding: 15px;
+    }
+  }
+}
+
+
+
+.align-items-center {
+  align-items: center;
 }
 
 .card {

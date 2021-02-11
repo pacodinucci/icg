@@ -52,7 +52,7 @@ gulp.task('injectAuth', ['stylesAuth'], function () {
 gulp.task('injectFront', ['stylesFront'], function () {
     return injectAlone({
         css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
-        paths: path.join(conf.paths.src, '/topcvreviews.html')
+        paths: [path.join(conf.paths.src, '/topcvreviews.html'), path.join(conf.paths.src, '/job-spec.html')]
     })
 });
 
