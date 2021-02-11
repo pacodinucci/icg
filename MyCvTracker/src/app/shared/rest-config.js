@@ -333,6 +333,10 @@ angular.module("MyCvTracker.shared")
           url = url + "?referralLink="+ link;
           return RESTSvc.get(url);
         },
+        getReferralDetails : function (url, refCode) {
+          url = url + "?referralLink="+ refCode;
+          return RESTSvc.get(url);
+        },
       };
 
       return RestConfig;

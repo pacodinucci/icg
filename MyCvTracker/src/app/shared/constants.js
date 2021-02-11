@@ -334,5 +334,8 @@
                 referredResumesList : {
                     url : "/links/resumes"
                 },
+                referralContent : {
+                    url : "/links/referralDetails"
+                },
         	}
         });

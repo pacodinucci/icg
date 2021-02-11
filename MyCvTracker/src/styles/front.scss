@@ -14,7 +14,7 @@ body {
     background-size: auto 100%;
     background-position: 50% 0;
   }
-  
+
 }
 
 .navbar {
@@ -168,7 +168,7 @@ a.social-links {
     background: #29487d;
     border-color: #29487d;
   }
-  
+
   &--tw {
     background: #1da1f3;
     border-color: #1da1f3;
@@ -440,10 +440,10 @@ header{
 	width: 170px;
 	height: 170px;
 /*	background: rgba(255, 255, 255, 0.5);*/
-	
+
 	margin-top: 50px;
 	padding-bottom: 100px;
-	
+
 }
 .layer{
 	position: absolute;
@@ -481,7 +481,7 @@ header{
 	opacity:0.9;
 	color:white;
 	width: 100%;
-	display:block;	
+	display:block;
 	text-align:center;
 	cursor:pointer;
 }
@@ -758,7 +758,7 @@ header{
   bottom: 15px;
   padding: 13px 30px!important;
   left: 0px;
-  font-size:16px; 
+  font-size:16px;
 }
 #loader {
   position: absolute;
@@ -814,3 +814,22 @@ header{
     opacity: 0;
   }
 }
+
+/* Job Spec */
+#job-spec-box {
+  width: 50%;
+  margin: 0 auto;
+  min-width: 350px;
+
+  .boxborder {
+    width: 100%;
+    padding: 0 2em;
+    margin: 0;
+    margin-top: 1em;
+  }
+
+  h4 {
+    color: #FFF;
+  }
+}
+/* End Job Spec */

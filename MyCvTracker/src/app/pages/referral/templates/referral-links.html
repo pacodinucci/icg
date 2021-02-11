@@ -67,7 +67,7 @@
                   <div
                     class="link"
                     ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC">
-                    https://mycvtracker.com/referral/job-spec?ref=
+                    https://mycvtracker.com/job-spec.html?ref=
                     <span ng-bind="referral.referralLink"></span>
                   </div>
                   <div
@@ -83,7 +83,7 @@
                     <a
                       href="#"
                       title="Copy"
-                      ng-click="copyLink(referral.referralLink)">
+                      ng-click="copyLink(referral.referralType, referral.referralLink)">
                       <i class="fas fa-copy"></i>
                     </a>
                     <a

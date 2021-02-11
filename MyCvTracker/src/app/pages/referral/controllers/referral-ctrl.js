@@ -125,8 +125,21 @@ angular.module("MyCvTracker.pages.referral")
         }
       };
 
-      $scope.copyLink = function (link) {
-        var text = "https://mycvtracker.com/topcvreviews.html?ref=" + link;
+      $scope.copyLink = function (type, link) {
+        var text = ""
+        switch (type) {
+          case $scope.REFERRAL_TYPE.JOB_SPEC:
+            text = "https://mycvtracker.com/job-spec.html?ref=";
+            break;
+          case $scope.REFERRAL_TYPE.SOCIAL_SHARE:
+            text = "https://mycvtracker.com/referral/social-share?ref=";
+            break;
+          case $scope.REFERRAL_TYPE.TEXT_LINK:
+            text = "https://mycvtracker.com/topcvreviews.html?ref=";
+            break;
+        }
+        text = text + link;
+
         var input = document.createElement("input");
         input.setAttribute("value", text);
         document.body.appendChild(input);
