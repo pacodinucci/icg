@@ -297,9 +297,9 @@ angular.module("MyCvTracker.shared")
           var request = {
             referralDetails : contextName,
             referralLink : "",
-            referralType,
-            referralTargetSubject,
-            referralTargetEmail
+            referralType : referralType,
+            referralTargetSubject : referralTargetSubject,
+            referralTargetEmail : referralTargetEmail
           }
 
           return RESTSvc.post(url, request);
@@ -315,9 +315,9 @@ angular.module("MyCvTracker.shared")
           var request = {
             referralDetails : contextName,
             referralLink : userEmail,
-            referralType,
-            referralTargetSubject,
-            referralTargetEmail
+            referralType : referralType,
+            referralTargetSubject : referralTargetSubject,
+            referralTargetEmail : referralTargetEmail
           }
 
           return RESTSvc.post(url, request);

@@ -19,9 +19,8 @@
     "MyCvTracker.pages.CampaignNotes",
     "MyCvTracker.pages.CvMarketing",
     "MyCvTracker.pages.campaignNotifications",
-    "MyCvTracker.pages.groupdata",
-    "MyCvTracker.pages.jobs",
-    "MyCvTracker.pages.referralJobSpec",
+    "MyCvTracker.pages.groupdata"
+    // "MyCvTracker.pages.jobs"
   ])
     .run(run);
 
