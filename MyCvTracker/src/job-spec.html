@@ -63,7 +63,7 @@
 
   </head>
 
-  <body>
+  <body id="job-spec-page">
 
 
     <!-- wrapper starts -->
@@ -141,7 +141,9 @@
         </div>
         <br>
         <div style="text-align: center">
-          <button class="btn btn-primary up-popup ">Upload CV</button>
+          <button class="btn btn-primary up-popup">Upload CV</button>
+          <button class="btn generate-btn btn-primary">Generate Referral</button>
+          <button class="btn social-btn btn-warning up-popup">Social Share</button>
         </div>
       </div>
     </div>
@@ -667,6 +669,48 @@
       </div>
     </div>
 
+    <!-- Referral generating modal -->
+    <div
+      class="modal fade bs-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+      id="referral-modal-1">
+
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <h2>Vestibulum ante nisl, mollis a scelerisque a est</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris erat arcu, malesuada sit amet massa quis, tempor blandit dui. Phasellus mollis consequat ex nec iaculis. Vivamus sodales turpis a finibus congue.
+            </p>
+            <br />
+            <div>
+              <form onload="hideDOMS();">
+                <strong>
+                  <span style="color: rgb(184, 49, 47); font-size: 16px;">*** Email are required.</span>
+                </strong>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Your email">
+              </form>
+            </div>
+            <div class="next">
+              <button
+                class="btn btn-primary">
+                Generate
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- modal ends -->
 
     <!-- wrapper ends -->
@@ -837,6 +881,13 @@
           $("#onload")
             .modal("show");
         });
+
+      $(".generate-btn")
+        .click(function () {
+          $("#referral-modal-1")
+            .modal("show");
+        });
+
       $("#sendEmail")
         .click(function () {
           var fromEmailAddress = $("#sendToEmail")[0].value;
