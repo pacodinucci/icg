@@ -342,13 +342,16 @@ img{
   float: left;
   width: 75%;
 }
-.modal-body .btn-primary{
-  position: absolute;
-  bottom: 40px;
-  background-color: #5d9cc0 !important;
-  padding: 8px 30px !important;
 
+.upload-modal {
+  .modal-body .btn-primary {
+    position: absolute;
+    bottom: 40px;
+    background-color: #5d9cc0 !important;
+    padding: 8px 30px !important;
+  }
 }
+
 .modal-body input[type=email]{
   min-height: 45px;
   margin-top: 10px;
@@ -829,6 +832,28 @@ header{
 
     .btn-primary {
       position: static;
+    }
+
+    .result {
+      display: none;
+    }
+
+    .input-error {
+      display: none;
+
+      &.show {
+        display: block;
+      }
+    }
+
+    &.success {
+      .result {
+        display: block;
+      }
+
+      .generate-form {
+        display: none;
+      }
     }
   }
 }

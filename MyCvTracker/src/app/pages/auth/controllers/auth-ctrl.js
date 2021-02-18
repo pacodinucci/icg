@@ -4,7 +4,8 @@
         .controller('AuthCtrl', ['$scope','$location','$http','$injector','$uibModal','Utilities','$rootScope','$auth','$window','$state','AuthSvc','baSidebarService',
 
             function ($scope,$location,$http,$injector,$uibModal,Utilities,$rootScope,$auth,$window,$state,AuthSvc,baSidebarService) {
-                $scope.loginModal = $rootScope.loginModal;
+
+            $scope.loginModal = $rootScope.loginModal;
                 $scope.user = {
                     register: {
                         firstName: '',
