@@ -331,8 +331,14 @@
                 newReferralLinkForUser : {
                     url : "/links/referralsForOtherUser"
                 },
+                shareReferralLink : {
+                    url : "/links/shareInsideReferral"
+                },
                 referredResumesList : {
                     url : "/links/resumes"
+                },
+                listChildRefLinks : {
+                    url : "/links/childRefLinks"
                 },
                 referralContent : {
                     url : "/links/referralDetails"

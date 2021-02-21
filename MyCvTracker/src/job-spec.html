@@ -147,7 +147,7 @@
         <div style="text-align: center">
           <button class="btn btn-primary up-popup">Upload CV</button>
           <button class="btn generate-btn btn-primary">Share Referral</button>
-          <button class="btn social-btn btn-warning up-popup">Social Share</button>
+          <button class="btn social-btn btn-warning">Social Share</button>
         </div>
       </div>
     </div>
@@ -754,6 +754,28 @@
       </div>
     </div>
 
+    <div
+      class="modal fade bs-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+      id="social-share-modal">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <br/>
+            <h2>Social share</h2>
+            <p>
+              Referral link has been copied to clipboard. You can past the link into your social.
+            </p>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- modal ends -->
 
     <!-- wrapper ends -->
@@ -930,6 +952,20 @@
             .modal("show");
         });
 
+      $(".social-btn")
+        .click(function () {
+          var currentUrl = window.location.href;
+          var input = document.createElement("input");
+          input.setAttribute("value", currentUrl);
+          document.body.appendChild(input);
+          input.select();
+          var result = document.execCommand("copy");
+          document.body.removeChild(input);
+
+          $("#social-share-modal")
+            .modal("show");
+        });
+
       $("#referral-modal-auth .btn-danger")
         .click(function () {
           $("#referral-modal-auth")
@@ -944,6 +980,13 @@
             $("#referral-modal-1")
               .modal("show");
           }, 500);
+        });
+      $("#referral-modal-auth .btn-primary")
+        .click(function () {
+          window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+
+          $("#referral-modal-auth")
+            .modal("hide");
         });
 
       $("#sendEmail")

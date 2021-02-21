@@ -27,7 +27,7 @@ angular.module("MyCvTracker.pages.referral")
       var ReferralSvc = $injector.get("ReferralSvc");
 
       var userId = 0;
-      var userEmail = "";
+      var userEmail = "", parentLink = "";
 
       $scope.referralModal = {};
       $scope.referral = {
@@ -39,6 +39,10 @@ angular.module("MyCvTracker.pages.referral")
           "height" : "470",
           "removePlugins" : "toolbar,resize",
           "readOnly" : "true"
+        },
+        shareReferral : {
+          generating : false,
+          refCode : "fdsklfjs"
         }
       };
       $scope.newReferralForm = {
@@ -75,12 +79,33 @@ angular.module("MyCvTracker.pages.referral")
         $scope.referralModal = ReferralSvc.getReferralDescriptionModal($scope, "ReferalModalCtrl");
       };
 
+      $scope.openShareReferralModal = function() {
+        var shareReferral = $scope.referral.shareReferral;
+        shareReferral.generating = true;
+
+        $scope.referralModal = ReferralSvc.getShareReferralModal($scope, "ReferalModalCtrl");
+
+        ReferralSvc.shareReferralLink(parentLink)
+          .then(function (data) {
+            $scope.referral.shareReferral.refCode = data.referralLink;
+            $scope.referral.shareReferral.generating = false;
+          });
+      }
+
       $scope.closeModal = function () {
         // console.log($scope.referralModal);
         $scope.referralModal.dismiss();
         $scope.newReferralForm.context = null;
         $scope.referral.selectedDescription = null;
         $scope.referral.selectedTargetEmail = null;
+        $scope.referral.shareReferral.generating = false;
+        $scope.referral.shareReferral.refCode = "";
+
+        if (!!parentLink) {
+          $location.url("/referral");
+
+          $scope.loadListReferralLinks();
+        }
       };
 
       $scope.generateLink = function () {
@@ -153,14 +178,19 @@ angular.module("MyCvTracker.pages.referral")
 
       $scope.init = function () {
         var params = $location.search();
-        if (params.userId) {
-          userId = params.userId;
-        }
-        if (params.emailName && params.emailDm) {
-          userEmail = params.emailName + "@" + params.emailDm;
-        }
+        if (params.parentLink) {
+          parentLink = params.parentLink;
+          $scope.openShareReferralModal();
+        } else {
+          if (params.userId) {
+            userId = params.userId;
+          }
+          if (params.emailName && params.emailDm) {
+            userEmail = params.emailName + "@" + params.emailDm;
+          }
 
-        $scope.loadListReferralLinks();
+          $scope.loadListReferralLinks();
+        }
       };
 
       $scope.init();

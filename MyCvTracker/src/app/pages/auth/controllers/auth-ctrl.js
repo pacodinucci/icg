@@ -78,7 +78,16 @@
                                 $rootScope.loginModal=false;
                                 $scope.loginModal = false;
                             }
-                            $state.go("account");
+
+                            var params = $location.search();
+                            var redirectUrl = params.redirect;
+                            if (!!redirectUrl) {
+                                $location.url(redirectUrl);
+                            } else {
+                                $state.go("/account");
+                            }
+                            // var url = !!redirectUrl ? redirectUrl : "/account";
+
                             //var baseURL = Utilities.baseUrl()+'?fromLogin';
                             //setTimeout(function(){location.href=baseURL} , 5000);
                         })

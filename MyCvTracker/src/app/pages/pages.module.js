@@ -105,7 +105,10 @@
         } else if (restrictedPage && !$auth.isAuthenticated()) {
           $location.url("/login");
         } else if (isAuthPages && $auth.isAuthenticated()) {
-          $location.url("/account");
+          var params = $location.search();
+          var redirectUrl = params.redirect;
+          var url = !!redirectUrl ? redirectUrl : "/account";
+          $location.url(url);
         }
       }
     );

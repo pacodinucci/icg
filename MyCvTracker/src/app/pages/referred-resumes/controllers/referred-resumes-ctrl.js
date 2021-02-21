@@ -22,15 +22,34 @@ angular.module("MyCvTracker.pages.referredResumes")
 
       var isAdmin = Authorization.getUserRole() === "ADMIN";
       var referralLink = "";
+      var childLinks = [];
 
       $scope.referredResumes = {
         list : []
       };
 
-      $scope.loadListReferredResumes = function() {
-        service.getReferredResumes(referralLink).then(function(rpData) {
-          $scope.referredResumes.list = rpData;
+      $scope.loadListReferredResumes = function(refCode) {
+        service.getReferredResumes(refCode).then(function(rpData) {
+          if (rpData && rpData.length > 0) {
+            var oldList = $scope.referredResumes.list;
+            $scope.referredResumes.list = oldList.concat(rpData);
+          }
         });
+      }
+
+      $scope.loadListChildLinks = function() {
+        service.getChildLinks(referralLink).then(function(rpData) {
+          childLinks = rpData;
+
+          $scope.loadListReferredResumesOfChild();
+        });
+      }
+
+      $scope.loadListReferredResumesOfChild = function() {
+        for (var i = 0, len = childLinks.length; i < len; i++) {
+          var childRefLink = childLinks[i].referralLink;
+          $scope.loadListReferredResumes(childRefLink);
+        }
       }
 
       $scope.formatDateTime = function(utcStr) {
@@ -46,7 +65,8 @@ angular.module("MyCvTracker.pages.referredResumes")
         var params = $location.search();
         referralLink = params.referralLink;
 
-        $scope.loadListReferredResumes();
+        $scope.loadListReferredResumes(referralLink);
+        $scope.loadListChildLinks();
       }
 
       $scope.init();
