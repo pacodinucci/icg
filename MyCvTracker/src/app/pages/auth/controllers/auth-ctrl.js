@@ -84,7 +84,7 @@
                             if (!!redirectUrl) {
                                 $location.url(redirectUrl);
                             } else {
-                                $state.go("/account");
+                                $location.url("/account");
                             }
                             // var url = !!redirectUrl ? redirectUrl : "/account";
 
@@ -92,7 +92,6 @@
                             //setTimeout(function(){location.href=baseURL} , 5000);
                         })
                         .catch(function(response) {
-                            console.log(response);
                             $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
                             Utilities.showErrorMsg(response.message);
                             $("#btn-login").html('Sign in');

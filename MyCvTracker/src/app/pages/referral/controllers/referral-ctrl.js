@@ -93,6 +93,7 @@ angular.module("MyCvTracker.pages.referral")
       }
 
       $scope.closeModal = function () {
+        console.log("close modal ne");
         // console.log($scope.referralModal);
         $scope.referralModal.dismiss();
         $scope.newReferralForm.context = null;

@@ -35,7 +35,8 @@ angular.module("MyCvTracker.pages.referral")
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/new_referral_link.html',
             controller: ctrlName,
-            scope: scope
+            scope: scope,
+            backdrop: 'static'
           };
 
           return $injector.get('$uibModal').open(modalOpts);
@@ -44,7 +45,8 @@ angular.module("MyCvTracker.pages.referral")
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/referral-description.html',
             controller: ctrlName,
-            scope: scope
+            scope: scope,
+            backdrop: 'static'
           };
 
           return $injector.get('$uibModal').open(modalOpts);
@@ -53,7 +55,8 @@ angular.module("MyCvTracker.pages.referral")
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/share-referral-link.html',
             controller: ctrlName,
-            scope: scope
+            scope: scope,
+            backdrop: 'static'
           };
 
           return $injector.get('$uibModal').open(modalOpts);
