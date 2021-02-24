@@ -333,6 +333,16 @@ angular.module("MyCvTracker.shared")
 
           return RESTSvc.post(url, request);
         },
+        shareResumeToParentLink : function (
+          url,
+          refCode
+        ) {
+          var request = {
+            "referralLink": refCode
+          }
+
+          return RESTSvc.post(url, request);
+        },
         getAuthUsers : function(url) {
           return RESTSvc.get(url);
         },

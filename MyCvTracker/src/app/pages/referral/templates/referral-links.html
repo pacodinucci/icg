@@ -30,7 +30,7 @@
       <div class="referral-link-list">
         <div class="row">
           <div
-            class="col-12 col-md-4"
+            class="col-12 col-xl-3 col-md-4"
             ng-repeat="referral in referral.links track by referral.id">
             <div
               ba-panel
@@ -76,12 +76,19 @@
                 </div>
 
                 <div class="ctrls">
-                  <div class="d-flex align-items-center">
+                  <div class="ctrls-container d-flex align-items-center">
                     <a
                       href="#"
                       title="Copy"
                       ng-click="copyLink(referral.referralType, referral.referralLink)">
                       <i class="fas fa-copy"></i>
+                    </a>
+                    <a
+                      ng-if="ableToShare(referral)"
+                      href="#"
+                      title="Share referred resumes to parent"
+                      ng-click="openShareResumesToParent(referral)">
+                      <i class="fas fa-external-link-square-alt"></i>
                     </a>
                     <a
                       ng-href="/referred-resumes?referralLink={{ referral.referralLink }}"

@@ -574,6 +574,11 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.shareReferralLink.url;
                 },
 
+
+                getShareResumeToParentLinkUrl: function () {
+                    return Constants.baseUrl + Constants.apis.shareResumeToParentLink.url;
+                },
+
                 getReferralContentUrl: function () {
                     return Constants.baseUrl + Constants.apis.referralContent.url;
                 },

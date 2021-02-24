@@ -874,4 +874,44 @@ header{
     color: #FFF;
   }
 }
+
+#social-share-widget {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  color: #FFF;
+
+  .fa-facebook-f:before {
+    content: "\f39e";
+  }
+
+  .share-square {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #4267B2;
+    cursor: pointer;
+
+    &.linkedin-square {
+      background-color: #0077b5;
+    }
+
+    &.twitter-square {
+      background-color: #55acee;
+    }
+
+    &:hover {
+      background-color: #5a7dc3;
+
+      &.linkedin-square {
+        background-color: #167eb5;
+      }
+
+      &.twitter-square {
+        background-color: #8ac6f3;
+      }
+    }
+  }
+}
 /* End Job Spec */

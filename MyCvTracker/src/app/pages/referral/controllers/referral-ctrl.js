@@ -1,5 +1,6 @@
 angular.module("MyCvTracker.pages.referral")
   .controller("ReferralCtrl", [
+    "Constants",
     "toastr",
     "$rootScope",
     "$scope",
@@ -8,6 +9,7 @@ angular.module("MyCvTracker.pages.referral")
     "Authorization",
     "$location",
     function (
+      Constants,
       toastr,
       $rootScope,
       $scope,
@@ -16,6 +18,8 @@ angular.module("MyCvTracker.pages.referral")
       Authorization,
       $location
     ) {
+      var JOB_STATUS = Constants.jobAppStatus;
+
       $scope.REFERRAL_TYPE = {
         TEXT_LINK : "TEXT_LINK",
         JOB_SPEC : "JOB_SPEC",
@@ -42,7 +46,12 @@ angular.module("MyCvTracker.pages.referral")
         },
         shareReferral : {
           generating : false,
-          refCode : "fdsklfjs"
+          refCode : ""
+        },
+        shareResume : {
+          referral : null,
+          sharing : false,
+          success : false
         }
       };
       $scope.newReferralForm = {
@@ -92,8 +101,12 @@ angular.module("MyCvTracker.pages.referral")
           });
       }
 
+      $scope.openShareResumeModal = function (referral) {
+        $scope.referral.shareResume.referral = referral;
+        $scope.referralModal = ReferralSvc.getSharingResumeModal($scope, "ReferalModalCtrl");
+      };
+
       $scope.closeModal = function () {
-        console.log("close modal ne");
         // console.log($scope.referralModal);
         $scope.referralModal.dismiss();
         $scope.newReferralForm.context = null;
@@ -101,6 +114,9 @@ angular.module("MyCvTracker.pages.referral")
         $scope.referral.selectedTargetEmail = null;
         $scope.referral.shareReferral.generating = false;
         $scope.referral.shareReferral.refCode = "";
+        $scope.referral.shareResume.sharing = false;
+        $scope.referral.shareResume.success = false;
+        $scope.referral.shareResume.referral = null;
 
         if (!!parentLink) {
           $location.url("/referral");
@@ -151,6 +167,23 @@ angular.module("MyCvTracker.pages.referral")
         }
       };
 
+      $scope.shareReferredResumes = function() {
+        var shareResume = $scope.referral.shareResume;
+        var refCode = shareResume.referral.referralLink;
+        shareResume.sharing = true;
+
+        ReferralSvc.shareResumeToParent(refCode)
+          .then(function() {
+            $scope.referral.shareResume.referral.jobAppStatus = JOB_STATUS.SHARED_WITH_TARGET;
+            shareResume.success = true;
+            shareResume.sharing = false;
+          }, function() {
+            $scope.referral.shareResume.referral.jobAppStatus = JOB_STATUS.SHARED_WITH_TARGET;
+            shareResume.success = true;
+            shareResume.sharing = false;
+          });
+      }
+
       $scope.copyLink = function (type, link) {
         var text = ""
         switch (type) {
@@ -176,6 +209,18 @@ angular.module("MyCvTracker.pages.referral")
         toastr.success(msg, "Success");
         return result;
       };
+
+      $scope.ableToShare = function(referral) {
+        return referral.referralType === $scope.REFERRAL_TYPE.JOB_SPEC && referral.jobAppStatus !== JOB_STATUS.SHARED_WITH_TARGET
+          && referral.referralLink !== referral.parentReferralLink;
+      }
+
+      $scope.openShareResumesToParent = function(referral) {
+        var status = referral.jobAppStatus;
+        if (status !== JOB_STATUS.SHARED_WITH_TARGET) {
+          $scope.openShareResumeModal(referral);
+        }
+      }
 
       $scope.init = function () {
         var params = $location.search();

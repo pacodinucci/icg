@@ -2,13 +2,24 @@
 <html>
 
   <head>
-    <title>My CV Tracker</title>
+    <title>My CV Tracker - Job Spec</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta
       name="keywords"
       content="top cv review, topcv review, free cv review,top resume reviews">
+
+    <meta
+      property="og:title"
+      content="My CV Tracker - Job Spec" />
+    <meta
+      property="og:description"
+      content="We help in other ways with new tools and services to get you that job" />
+    <meta
+      property="og:image"
+      content="https://mycvtracker.com/assets/img/front/logo.png" />
+
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
@@ -64,7 +75,21 @@
   </head>
 
   <body id="job-spec-page">
-
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId : "451567749326048",
+          autoLogAppEvents : true,
+          xfbml : true,
+          version : "v9.0"
+        });
+      };
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"></script>
 
     <!-- wrapper starts -->
     <!-- header starts -->
@@ -146,8 +171,7 @@
         <br>
         <div style="text-align: center">
           <button class="btn btn-primary up-popup">Upload CV</button>
-          <button class="btn generate-btn btn-primary">Share Referral</button>
-          <button class="btn social-btn btn-warning">Social Share</button>
+          <button class="btn generate-btn btn-warning">Share Referral</button>
         </div>
       </div>
     </div>
@@ -342,6 +366,19 @@
       </div>
     </div>
     <!-- subscribe newsletter ends -->
+
+    <div id="social-share-widget">
+      <div class="share-square facebook-square">
+        <i class="fab fa-facebook-f"></i>
+      </div>
+      <div class="share-square twitter-square">
+        <i class="fab fa-twitter"></i>
+      </div>
+      <div class="share-square linkedin-square">
+        <i class="fab fa-linkedin-in"></i>
+      </div>
+    </div>
+
     <!-- footer starts -->
     <div class="footer">
       <div class="container">
@@ -747,7 +784,9 @@
 
             <div class="result">
               <div class="desc">Referral link has been generated successfully</div>
-              <a href="#" class="ref-link"></a>
+              <a
+                href="#"
+                class="ref-link"></a>
             </div>
           </div>
         </div>
@@ -765,12 +804,12 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-body">
-            <br/>
+            <br />
             <h2>Social share</h2>
             <p>
               Referral link has been copied to clipboard. You can past the link into your social.
             </p>
-            <br/>
+            <br />
           </div>
         </div>
       </div>
@@ -948,22 +987,54 @@
 
       $(".generate-btn")
         .click(function () {
-          $("#referral-modal-auth")
-            .modal("show");
+          var token = localStorage.getItem("token");
+          if (!!token) {
+            window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+          } else {
+            $("#referral-modal-auth")
+              .modal("show");
+          }
         });
 
-      $(".social-btn")
+      var socialWindow = null;
+      $("#social-share-widget .facebook-square")
         .click(function () {
           var currentUrl = window.location.href;
-          var input = document.createElement("input");
-          input.setAttribute("value", currentUrl);
-          document.body.appendChild(input);
-          input.select();
-          var result = document.execCommand("copy");
-          document.body.removeChild(input);
+          FB.ui({
+            method : "share",
+            href : currentUrl
+          }, function (response) {
+          });
+        });
+      $("#social-share-widget .twitter-square")
+        .click(function () {
+          var currentUrl = window.location.href;
+          var url = "https://twitter.com/intent/tweet?text=" + currentUrl;
 
-          $("#social-share-modal")
-            .modal("show");
+          var width = $(window)
+            .width();
+          var height = $(window)
+            .height();
+          var windowWidth = Math.round(width / 2);
+          if (windowWidth < 300) windowWidth = 300
+          var windowHeight = Math.round(height / 2 * 3);
+
+          window.open(url, "Twitter Share", "width="+ windowWidth + ",height=" + windowHeight);
+        });
+      $("#social-share-widget .linkedin-square")
+        .click(function () {
+          var currentUrl = window.location.href;
+          var url = "https://www.linkedin.com/shareArticle?url=" + currentUrl;
+
+          var width = $(window)
+            .width();
+          var height = $(window)
+            .height();
+          var windowWidth = Math.round(width / 2);
+          if (windowWidth < 300) windowWidth = 300
+          var windowHeight = Math.round(height / 2 * 3);
+
+          window.open(url, "Linkedin Share", "width="+ windowWidth + ",height=" + windowHeight);
         });
 
       $("#referral-modal-auth .btn-danger")
@@ -974,9 +1045,10 @@
           fModal.removeClass("success");
           fModal.val("");
 
-          $("#referral-modal-1 .input-error").removeClass("show");
+          $("#referral-modal-1 .input-error")
+            .removeClass("show");
 
-          setTimeout(function() {
+          setTimeout(function () {
             $("#referral-modal-1")
               .modal("show");
           }, 500);
@@ -1209,31 +1281,38 @@
           });
         $("#referral-modal-1 .sharing-referral-btn")
           .click(function () {
-            var email = $("#share-referral-email").val();
+            var email = $("#share-referral-email")
+              .val();
             var EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
             if (!email || !EMAIL_REGEX.test(email)) {
-              $(".referral-email-error").addClass("show");
+              $(".referral-email-error")
+                .addClass("show");
             } else {
-              $(".referral-email-error").removeClass("show");
+              $(".referral-email-error")
+                .removeClass("show");
 
-              $(this).html("Generating...");
+              $(this)
+                .html("Generating...");
 
               $.ajax({
                 url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
                 type : "POST",
                 data : JSON.stringify({
                   referralType : "JOB_SPEC",
-                  parentReferralLink: refCode,
+                  parentReferralLink : refCode,
                   referralLink : email
                 }),
                 dataType : "json",
                 contentType : "application/json",
                 success : function (data) {
-                  $("#referral-modal-1").addClass("success");
-                  $("#referral-modal-1 .ref-link").html("https://mycvtracker.com/job-spec.html?ref=" +  data.referralLink);
+                  $("#referral-modal-1")
+                    .addClass("success");
+                  $("#referral-modal-1 .ref-link")
+                    .html("https://mycvtracker.com/job-spec.html?ref=" + data.referralLink);
 
-                  $(this).html("Generate");
+                  $(this)
+                    .html("Generate");
                   console.log("success", data);
                 }
               });

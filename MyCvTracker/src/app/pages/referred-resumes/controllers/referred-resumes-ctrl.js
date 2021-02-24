@@ -1,5 +1,6 @@
 angular.module("MyCvTracker.pages.referredResumes")
   .controller("ReferredResumesCtrl", [
+    "Constants",
     "toastr",
     "$rootScope",
     "$scope",
@@ -8,6 +9,7 @@ angular.module("MyCvTracker.pages.referredResumes")
     "Authorization",
     "$location",
     function (
+      Constants,
       toastr,
       $rootScope,
       $scope,
@@ -16,6 +18,8 @@ angular.module("MyCvTracker.pages.referredResumes")
       Authorization,
       $location
     ) {
+      var JOB_STATUS = Constants.jobAppStatus;
+
       var Utilities = $injector.get("Utilities");
       var service = $injector.get("ReferredResumesService");
       var ResumesSvc = $injector.get('ResumesSvc');
@@ -47,8 +51,12 @@ angular.module("MyCvTracker.pages.referredResumes")
 
       $scope.loadListReferredResumesOfChild = function() {
         for (var i = 0, len = childLinks.length; i < len; i++) {
-          var childRefLink = childLinks[i].referralLink;
-          $scope.loadListReferredResumes(childRefLink);
+          var link = childLinks[i];
+          var childRefLink = link.referralLink;
+          var status = link.jobAppStatus;
+          if (status === JOB_STATUS.SHARED_WITH_TARGET) {
+            $scope.loadListReferredResumes(childRefLink);
+          }
         }
       }
 
