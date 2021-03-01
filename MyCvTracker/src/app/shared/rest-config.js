@@ -335,10 +335,12 @@ angular.module("MyCvTracker.shared")
         },
         shareResumeToParentLink : function (
           url,
-          refCode
+          parentLink,
+          id
         ) {
+          url = url + "?referralLink=" + parentLink;
           var request = {
-            "referralLink": refCode
+            "id": id
           }
 
           return RESTSvc.post(url, request);

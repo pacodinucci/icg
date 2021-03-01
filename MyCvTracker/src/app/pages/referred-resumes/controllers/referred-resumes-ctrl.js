@@ -18,18 +18,22 @@ angular.module("MyCvTracker.pages.referredResumes")
       Authorization,
       $location
     ) {
-      var JOB_STATUS = Constants.jobAppStatus;
+      $scope.JOB_STATUS = Constants.jobAppStatus;
 
       var Utilities = $injector.get("Utilities");
       var service = $injector.get("ReferredResumesService");
       var ResumesSvc = $injector.get('ResumesSvc');
 
       var isAdmin = Authorization.getUserRole() === "ADMIN";
-      var referralLink = "";
+      var referralLink = "", parentLink = "";
       var childLinks = [];
 
+      $scope.resumesModal = null;
       $scope.referredResumes = {
-        list : []
+        list : [],
+        shareResume : null,
+        sharing : false,
+        sharingSuccess : false
       };
 
       $scope.loadListReferredResumes = function(refCode) {
@@ -54,7 +58,7 @@ angular.module("MyCvTracker.pages.referredResumes")
           var link = childLinks[i];
           var childRefLink = link.referralLink;
           var status = link.jobAppStatus;
-          if (status === JOB_STATUS.SHARED_WITH_TARGET) {
+          if (status === $scope.JOB_STATUS.SHARED_WITH_TARGET) {
             $scope.loadListReferredResumes(childRefLink);
           }
         }
@@ -69,12 +73,44 @@ angular.module("MyCvTracker.pages.referredResumes")
         toastr.success(Utilities.getAlerts('resumeDownloadSuccess').message);
       };
 
+      $scope.ableToShare = function(status) {
+        return !!parentLink && status === $scope.JOB_STATUS.APPLIED_JOB;
+      }
+
+      $scope.openShareResumeModal = function (resume) {
+        $scope.referredResumes.shareResume = resume;
+        $scope.resumesModal = service.getSharingResumeModal($scope, "ReferalModalCtrl");
+      };
+
+      $scope.shareReferredResumes = function() {
+        var id = $scope.referredResumes.shareResume.id;
+        $scope.referredResumes.sharing = true;
+
+        service.shareResumeToParent(id, parentLink)
+          .then(function() {
+            $scope.referredResumes.shareResume.jobAppStatus = $scope.JOB_STATUS.SHARED_WITH_TARGET;
+            $scope.referredResumes.sharingSuccess = true;
+            $scope.referredResumes.sharing = false;
+          }, function() {
+            $scope.referredResumes.shareResume.jobAppStatus = $scope.JOB_STATUS.SHARED_WITH_TARGET;
+            $scope.referredResumes.sharingSuccess = true;
+            $scope.referredResumes.sharing = false;
+          });
+      }
+
+      $scope.closeModal = function() {
+        $scope.resumesModal.dismiss();
+        $scope.referredResumes.shareId = null;
+        $scope.referredResumes.sharing = false;
+        $scope.referredResumes.sharingSuccess = false;
+      }
+
       $scope.init = function() {
         var params = $location.search();
         referralLink = params.referralLink;
+        parentLink = params.parentLink;
 
         $scope.loadListReferredResumes(referralLink);
-        $scope.loadListChildLinks();
       }
 
       $scope.init();

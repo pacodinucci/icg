@@ -31,10 +31,6 @@ angular.module("MyCvTracker.pages.referral")
           var url = utilities.getShareReferralLinkUrl();
           return RestConfig.shareParentReferralLink(url, refCode);
         },
-        shareResumeToParent : function(refCode) {
-          var url = utilities.getShareResumeToParentLinkUrl();
-          return RestConfig.shareResumeToParentLink(url, refCode);
-        },
         getNewReferralLinkModal: function (scope, ctrlName) {
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/new_referral_link.html',
@@ -58,16 +54,6 @@ angular.module("MyCvTracker.pages.referral")
         getShareReferralModal: function (scope, ctrlName) {
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/share-referral-link.html',
-            controller: ctrlName,
-            scope: scope,
-            backdrop: 'static'
-          };
-
-          return $injector.get('$uibModal').open(modalOpts);
-        },
-        getSharingResumeModal: function (scope, ctrlName) {
-          var modalOpts = {
-            templateUrl: 'app/pages/referral/templates/share-resumes-modal.html',
             controller: ctrlName,
             scope: scope,
             backdrop: 'static'
