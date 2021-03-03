@@ -171,7 +171,8 @@
         <br>
         <div style="text-align: center">
           <button class="btn btn-primary up-popup">Upload CV</button>
-          <button class="btn generate-btn btn-warning">Share Referral</button>
+          <button class="btn btn-primary social-share-btn">Social Share</button>
+          <button class="btn generate-btn btn-warning">Referral Bounty</button>
         </div>
       </div>
     </div>
@@ -366,18 +367,6 @@
       </div>
     </div>
     <!-- subscribe newsletter ends -->
-
-    <div id="social-share-widget">
-      <div class="share-square facebook-square">
-        <i class="fab fa-facebook-f"></i>
-      </div>
-      <div class="share-square twitter-square">
-        <i class="fab fa-twitter"></i>
-      </div>
-      <div class="share-square linkedin-square">
-        <i class="fab fa-linkedin-in"></i>
-      </div>
-    </div>
 
     <!-- footer starts -->
     <div class="footer">
@@ -633,7 +622,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -815,6 +803,49 @@
       </div>
     </div>
 
+    <div
+      class="modal fade bs-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+      id="social-selection-modal">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <h2>Social share</h2>
+            <p>
+              Please select a channel to share
+            </p>
+            <br />
+            <div class="social-btns">
+              <div class="a-btn">
+                <a
+                  href="#"
+                  class="btn btn-primary fb-btn">
+                  <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+              </div>
+              <div class="a-btn">
+                <a
+                  href="#"
+                  class="btn btn-primary tw-btn">
+                  <i class="fab fa-twitter"></i> Twitter
+                </a>
+              </div>
+              <div class="a-btn">
+                <a
+                  href="#"
+                  class="btn btn-primary ld-btn">
+                  <i class="fab fa-linkedin-in"></i> Linked
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- modal ends -->
 
     <!-- wrapper ends -->
@@ -997,7 +1028,7 @@
         });
 
       var socialWindow = null;
-      $("#social-share-widget .facebook-square")
+      $("#social-selection-modal .fb-btn")
         .click(function () {
           var currentUrl = window.location.href;
           FB.ui({
@@ -1006,7 +1037,7 @@
           }, function (response) {
           });
         });
-      $("#social-share-widget .twitter-square")
+      $("#social-selection-modal .tw-btn")
         .click(function () {
           var currentUrl = window.location.href;
           var url = "https://twitter.com/intent/tweet?text=" + currentUrl;
@@ -1016,12 +1047,12 @@
           var height = $(window)
             .height();
           var windowWidth = Math.round(width / 2);
-          if (windowWidth < 300) windowWidth = 300
-          var windowHeight = Math.round(height / 2 * 3);
+          if (windowWidth < 300) windowWidth = 300;
+          var windowHeight = Math.round(height / 3 * 2);
 
-          window.open(url, "Twitter Share", "width="+ windowWidth + ",height=" + windowHeight);
+          window.open(url, "Twitter Share", "width=" + windowWidth + ",height=" + windowHeight);
         });
-      $("#social-share-widget .linkedin-square")
+      $("#social-selection-modal .ld-btn")
         .click(function () {
           var currentUrl = window.location.href;
           var url = "https://www.linkedin.com/shareArticle?url=" + currentUrl;
@@ -1031,10 +1062,10 @@
           var height = $(window)
             .height();
           var windowWidth = Math.round(width / 2);
-          if (windowWidth < 300) windowWidth = 300
-          var windowHeight = Math.round(height / 2 * 3);
+          if (windowWidth < 300) windowWidth = 300;
+          var windowHeight = Math.round(height / 3 * 2);
 
-          window.open(url, "Linkedin Share", "width="+ windowWidth + ",height=" + windowHeight);
+          window.open(url, "Linkedin Share", "width=" + windowWidth + ",height=" + windowHeight);
         });
 
       $("#referral-modal-auth .btn-danger")
@@ -1059,6 +1090,11 @@
 
           $("#referral-modal-auth")
             .modal("hide");
+        });
+      $(".social-share-btn")
+        .click(function () {
+          $("#social-selection-modal")
+            .modal("show");
         });
 
       $("#sendEmail")

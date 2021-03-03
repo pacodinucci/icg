@@ -94,6 +94,7 @@
 						return deferred.promise;
 					},
 					download: function( url) {
+						console.log("download", url);
 						location.href = url;
 					}
 				};
