@@ -59,19 +59,8 @@
                     </a>
                   </div>
                   <div
-                    class="link"
-                    ng-if="referral.referralType === REFERRAL_TYPE.TEXT_LINK || !referral.referralType">
-                    https://mycvtracker.com/topcvreviews.html?ref=<span ng-bind="referral.referralLink"></span>
-                  </div>
-                  <div
-                    class="link"
-                    ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC">
-                    https://mycvtracker.com/job-spec.html?ref=<span ng-bind="referral.referralLink"></span>
-                  </div>
-                  <div
-                    class="link"
-                    ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE">
-                    https://mycvtracker.com/referral/social-share?ref=<span ng-bind="referral.referralLink"></span>
+                    ng-bind="getReferralLink(referral)"
+                    class="link">
                   </div>
                 </div>
 
@@ -80,7 +69,7 @@
                     <a
                       href="#"
                       title="Copy"
-                      ng-click="copyLink(referral.referralType, referral.referralLink)">
+                      ng-click="copyLink(referral)">
                       <i class="fas fa-copy"></i>
                     </a>
 

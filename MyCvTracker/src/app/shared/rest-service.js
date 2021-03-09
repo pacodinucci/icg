@@ -95,7 +95,7 @@
 					},
 					download: function( url) {
 						console.log("download", url);
-						location.href = url;
+						// location.href = url;
 					}
 				};
 			}
