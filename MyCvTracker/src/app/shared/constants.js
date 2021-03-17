@@ -355,5 +355,8 @@
                 referralContent : {
                     url : "/links/referralDetails"
                 },
+                resumeTokenLink : {
+                    url : "/user/getSharedResumeAccessToken"
+                }
         	}
         });

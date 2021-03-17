@@ -19,9 +19,9 @@ angular.module("MyCvTracker.pages.referredResumes")
           var url = utilities.getChildRefLinks();
           return RestConfig.getChildRefLinkList(url, parentLink);
         },
-        shareResumeToParent : function(id, parentLink) {
+        shareResumeToParent : function(id, referralLink) {
           var url = utilities.getShareResumeToParentLinkUrl();
-          return RestConfig.shareResumeToParentLink(url, parentLink, id);
+          return RestConfig.shareResumeToParentLink(url, referralLink, id);
         },
         getSharingResumeModal: function (scope, ctrlName) {
           var modalOpts = {
@@ -32,6 +32,10 @@ angular.module("MyCvTracker.pages.referredResumes")
           };
 
           return $injector.get('$uibModal').open(modalOpts);
+        },
+        getResumeToken: function(id, referralLink) {
+          var url = utilities.getResumeTokenUrl();
+          return RestConfig.getResumeTokenToPreview(url, referralLink, id);
         }
       };
     }

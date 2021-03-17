@@ -27,6 +27,11 @@
                      ng-click="downloadMyResume(aResume.id)">
                     <i class="fa fa-download"></i>
                   </a>
+                  <a href="#"
+                     title="Preview"
+                     ng-click="openPreviewResume(aResume.id, aResume.fileType)">
+                    <i class="fas fa-search"></i>
+                  </a>
                   <a
                     ng-if="ableToShare(aResume.resumeStatus)"
                     href="#"
