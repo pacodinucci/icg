@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title">Share Resumes To Parent</h4>
+</div>
+<div class="modal-body">
+  <h5 ng-if="!referredResumes.sharingSuccess">Would you like to continue sharing this resumes to target?</h5>
+  <h5 class="text-success" ng-if="referredResumes.sharingSuccess">Referred resume has been shared to parent referral successfully!</h5>
+</div>
+<div
+  class="modal-footer clearfix">
+  <button
+    ng-disabled="referredResumes.sharing"
+    ng-if="!referredResumes.sharingSuccess"
+    ng-click="!referredResumes.sharing && shareReferredResumes()"
+    type="button"
+    class="btn btn-primary" ng-bind="referredResumes.sharing ? 'Sharing...' : 'Share'">
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary" ng-click="!referredResumes.sharing && closeModal()">
+    Cancel
+  </button>
+</div>

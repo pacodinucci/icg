@@ -11,11 +11,33 @@
               <div class="tile-title">
                 <h3 class="resume-title" ng-bind="aResume.resumeTitle"></h3>
                 <hr class="resumeSeprator">
-                <div class="tile-filename" ng-bind="aResume.resumeName"></div>
+                <div class="tile-filename">
+                  <span ng-if="aResume.resumeStatus === JOB_STATUS.APPLIED_JOB" class="text-warning">Job Applied</span>
+                  <span ng-if="aResume.resumeStatus === JOB_STATUS.SHARED_WITH_TARGET" class="text-warning">Shared with target</span>
+                  <span ng-if="aResume.resumeStatus === JOB_STATUS.SELECTED_FOR_INTERVIEW" class="text-primary">Selected for interview</span>
+                  <span ng-if="aResume.resumeStatus === JOB_STATUS.REJECTED_FOR_INTERVIEW" class="text-danger">Rejected for interview</span>
+                  <span ng-if="aResume.resumeStatus === JOB_STATUS.REJECTED_FOR_JOB" class="text-danger">Rejected for job</span>
+                  <span ng-if="aResume.resumeStatus === JOB_STATUS.SELECTED_FOR_JOB" class="text-success">Selected for job</span>
+                  <span ng-if="!!!aResume.resumeStatus">-</span>
+                </div>
                 <div class="tile-datetime" ng-bind="formatDateTime(aResume.uploadedAt)"></div>
                 <div class="controls">
-                  <a href="#" ng-click="downloadMyResume(aResume.id)">
+                  <a href="#"
+                     title="Download"
+                     ng-click="downloadMyResume(aResume.id)">
                     <i class="fa fa-download"></i>
+                  </a>
+                  <a href="#"
+                     title="Preview"
+                     ng-click="openPreviewResume(aResume.id, aResume.fileType)">
+                    <i class="fas fa-search"></i>
+                  </a>
+                  <a
+                    ng-if="ableToShare(aResume.resumeStatus)"
+                    href="#"
+                    title="Share to parent"
+                    ng-click="openShareResumeModal(aResume)">
+                    <i class="fas fa-external-link-square-alt"></i>
                   </a>
                 </div>
               </div>

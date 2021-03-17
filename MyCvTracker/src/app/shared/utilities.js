@@ -569,6 +569,20 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.newReferralLinkForUser.url;
                 },
 
+
+                getShareReferralLinkUrl: function () {
+                    return Constants.baseUrl + Constants.apis.shareReferralLink.url;
+                },
+
+
+                getShareResumeToParentLinkUrl: function () {
+                    return Constants.baseUrl + Constants.apis.shareResumeToParentLink.url;
+                },
+
+                getResumeTokenUrl: function () {
+                    return Constants.baseUrl + Constants.apis.resumeTokenLink.url;
+                },
+
                 getReferralContentUrl: function () {
                     return Constants.baseUrl + Constants.apis.referralContent.url;
                 },
@@ -583,6 +597,10 @@ angular.module('MyCvTracker.shared')
 
                 getReferredResumeListUrl: function () {
                     return Constants.baseUrl + Constants.apis.referredResumesList.url;
+                },
+
+                getChildRefLinks: function () {
+                    return Constants.baseUrl + Constants.apis.listChildRefLinks.url;
                 },
 
                 gotoFrontPage: function () {

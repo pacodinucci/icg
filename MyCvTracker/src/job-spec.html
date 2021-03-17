@@ -2,13 +2,24 @@
 <html>
 
   <head>
-    <title>My CV Tracker</title>
+    <title>My CV Tracker - Job Spec</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta
       name="keywords"
       content="top cv review, topcv review, free cv review,top resume reviews">
+
+    <meta
+      property="og:title"
+      content="My CV Tracker - Job Spec" />
+    <meta
+      property="og:description"
+      content="We help in other ways with new tools and services to get you that job" />
+    <meta
+      property="og:image"
+      content="https://mycvtracker.com/assets/img/front/logo.png" />
+
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
@@ -63,8 +74,22 @@
 
   </head>
 
-  <body>
-
+  <body id="job-spec-page">
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId : "451567749326048",
+          autoLogAppEvents : true,
+          xfbml : true,
+          version : "v9.0"
+        });
+      };
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"></script>
 
     <!-- wrapper starts -->
     <!-- header starts -->
@@ -118,7 +143,9 @@
     <!-- header ends -->
     <!-- upload image -->
     <div class="main-img">
-      <div class="container"  id="job-spec-container">
+      <div
+        class="container"
+        id="job-spec-container">
         <div class="row">
           <div align="center">
             <h3>Find out what happens to your CV when it leaves your mailbox</h3>
@@ -126,7 +153,9 @@
           </div>
           <div class="clearfix"></div>
           <div id="job-spec-box">
-            <h4>Job Title : <span class="job-title">...</span></h4>
+            <h4>Job Title :
+              <span class="job-title">...</span>
+            </h4>
             <div
               class="boxborder"
               align="left">
@@ -141,7 +170,9 @@
         </div>
         <br>
         <div style="text-align: center">
-          <button class="btn btn-primary up-popup ">Upload CV</button>
+          <button class="btn btn-primary up-popup">Upload CV</button>
+          <button class="btn btn-primary social-share-btn">Social Share</button>
+          <button class="btn generate-btn btn-warning">Referral Bounty</button>
         </div>
       </div>
     </div>
@@ -336,6 +367,7 @@
       </div>
     </div>
     <!-- subscribe newsletter ends -->
+
     <!-- footer starts -->
     <div class="footer">
       <div class="container">
@@ -379,7 +411,7 @@
     <!-- footer ends -->
     <!-- modals -->
     <div
-      class="modal fade bs-example-modal-lg"
+      class="modal fade bs-example-modal-lg upload-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="myLargeModalLabel"
@@ -411,7 +443,7 @@
 
     <!-- modal secong -->
     <div
-      class="modal fade bs-example-modal-lg"
+      class="modal fade bs-example-modal-lg upload-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="myLargeModalLabel"
@@ -533,13 +565,12 @@
 
     <!-- modal third -->
     <div
-      class="modal fade bs-example-modal-lg"
+      class="modal fade bs-example-modal-lg upload-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="myLargeModalLabel"
       aria-hidden="true"
       id="onload">
-
       <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -591,7 +622,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -667,6 +697,155 @@
       </div>
     </div>
 
+    <!-- Referral generating modal -->
+    <div
+      class="modal fade bs-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+      id="referral-modal-auth">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <h2>Are you MyCv Tracker user?</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris erat arcu, malesuada sit amet massa quis,
+              tempor blandit dui.
+            </p>
+            <br />
+            <div class="next">
+              <button
+                class="btn btn-primary">
+                Login
+              </button>
+
+              <button
+                class="btn btn-danger">
+                Continue as Normal User
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade bs-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+      id="referral-modal-1">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <h2>Vestibulum ante nisl, mollis a scelerisque a est</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris erat arcu, malesuada sit amet massa quis,
+              tempor blandit dui. Phasellus mollis consequat ex nec iaculis. Vivamus sodales turpis a finibus congue.
+            </p>
+            <br />
+
+            <div class="generate-form">
+              <div>
+                <strong>
+                  <span style="color: rgb(184, 49, 47); font-size: 16px;">*** Email are required.</span>
+                </strong>
+                <input
+                  id="share-referral-email"
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Your email">
+                <div class="text-danger input-error referral-email-error">Email is invalid!</div>
+              </div>
+              <div class="next">
+                <button
+                  class="btn btn-primary sharing-referral-btn">
+                  Generate
+                </button>
+              </div>
+            </div>
+
+            <div class="result">
+              <div class="desc">Referral link has been generated successfully</div>
+              <a
+                href="#"
+                class="ref-link"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade bs-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+      id="social-share-modal">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <br />
+            <h2>Social share</h2>
+            <p>
+              Referral link has been copied to clipboard. You can past the link into your social.
+            </p>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade bs-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+      id="social-selection-modal">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+            <h2>Social share</h2>
+            <p>
+              Please select a channel to share
+            </p>
+            <br />
+            <div class="social-btns">
+              <div class="a-btn">
+                <a
+                  href="#"
+                  class="btn btn-primary fb-btn">
+                  <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+              </div>
+              <div class="a-btn">
+                <a
+                  href="#"
+                  class="btn btn-primary tw-btn">
+                  <i class="fab fa-twitter"></i> Twitter
+                </a>
+              </div>
+              <div class="a-btn">
+                <a
+                  href="#"
+                  class="btn btn-primary ld-btn">
+                  <i class="fab fa-linkedin-in"></i> Linked
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- modal ends -->
 
     <!-- wrapper ends -->
@@ -823,7 +1002,6 @@
             .hide();
 
         }
-
       };
 
       $("#upfile1")
@@ -837,6 +1015,88 @@
           $("#onload")
             .modal("show");
         });
+
+      $(".generate-btn")
+        .click(function () {
+          var token = localStorage.getItem("token");
+          if (!!token) {
+            window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+          } else {
+            $("#referral-modal-auth")
+              .modal("show");
+          }
+        });
+
+      var socialWindow = null;
+      $("#social-selection-modal .fb-btn")
+        .click(function () {
+          var currentUrl = window.location.href;
+          FB.ui({
+            method : "share",
+            href : currentUrl
+          }, function (response) {
+          });
+        });
+      $("#social-selection-modal .tw-btn")
+        .click(function () {
+          var currentUrl = window.location.href;
+          var url = "https://twitter.com/intent/tweet?text=" + currentUrl;
+
+          var width = $(window)
+            .width();
+          var height = $(window)
+            .height();
+          var windowWidth = Math.round(width / 2);
+          if (windowWidth < 300) windowWidth = 300;
+          var windowHeight = Math.round(height / 3 * 2);
+
+          window.open(url, "Twitter Share", "width=" + windowWidth + ",height=" + windowHeight);
+        });
+      $("#social-selection-modal .ld-btn")
+        .click(function () {
+          var currentUrl = window.location.href;
+          var url = "https://www.linkedin.com/shareArticle?url=" + currentUrl;
+
+          var width = $(window)
+            .width();
+          var height = $(window)
+            .height();
+          var windowWidth = Math.round(width / 2);
+          if (windowWidth < 300) windowWidth = 300;
+          var windowHeight = Math.round(height / 3 * 2);
+
+          window.open(url, "Linkedin Share", "width=" + windowWidth + ",height=" + windowHeight);
+        });
+
+      $("#referral-modal-auth .btn-danger")
+        .click(function () {
+          $("#referral-modal-auth")
+            .modal("hide");
+          var fModal = $("#referral-modal-1");
+          fModal.removeClass("success");
+          fModal.val("");
+
+          $("#referral-modal-1 .input-error")
+            .removeClass("show");
+
+          setTimeout(function () {
+            $("#referral-modal-1")
+              .modal("show");
+          }, 500);
+        });
+      $("#referral-modal-auth .btn-primary")
+        .click(function () {
+          window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+
+          $("#referral-modal-auth")
+            .modal("hide");
+        });
+      $(".social-share-btn")
+        .click(function () {
+          $("#social-selection-modal")
+            .modal("show");
+        });
+
       $("#sendEmail")
         .click(function () {
           var fromEmailAddress = $("#sendToEmail")[0].value;
@@ -1008,7 +1268,7 @@
               }
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/user/uploadQuickResume",
+                url : "https://mycvtracker.com:8080/user/applyJobs",
                 type : "POST",
                 data : fd,
                 processData : false, // tell jQuery not to process the data
@@ -1055,6 +1315,45 @@
 
             return false;
           });
+        $("#referral-modal-1 .sharing-referral-btn")
+          .click(function () {
+            var email = $("#share-referral-email")
+              .val();
+            var EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+            if (!email || !EMAIL_REGEX.test(email)) {
+              $(".referral-email-error")
+                .addClass("show");
+            } else {
+              $(".referral-email-error")
+                .removeClass("show");
+
+              $(this)
+                .html("Generating...");
+
+              $.ajax({
+                url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
+                type : "POST",
+                data : JSON.stringify({
+                  referralType : "JOB_SPEC",
+                  parentReferralLink : refCode,
+                  referralLink : email
+                }),
+                dataType : "json",
+                contentType : "application/json",
+                success : function (data) {
+                  $("#referral-modal-1")
+                    .addClass("success");
+                  $("#referral-modal-1 .ref-link")
+                    .html("https://mycvtracker.com/job-spec.html?ref=" + data.referralLink);
+
+                  $(this)
+                    .html("Generate");
+                  console.log("success", data);
+                }
+              });
+            }
+          });
 
         var urlSearch = window.location.search;
         var urlParams = urlSearch ? urlSearch.substring(1)
@@ -1079,8 +1378,10 @@
             contentType : "application/json",
             success : function (data) {
               jobTitle = data.referralTargetSubject;
-              $("#job-spec-box .job-title").html(jobTitle);
-              $("#job-spec-box .job-detail").html(data.referralDetails);
+              $("#job-spec-box .job-title")
+                .html(jobTitle);
+              $("#job-spec-box .job-detail")
+                .html(data.referralDetails);
             }
           });
         }
@@ -1111,9 +1412,6 @@
 
       ga("create", "UA-52786419-3", "auto");
       ga("send", "pageview");
-
     </script>
-
   </body>
-
 </html>

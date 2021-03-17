@@ -322,6 +322,43 @@ angular.module("MyCvTracker.shared")
 
           return RESTSvc.post(url, request);
         },
+        shareParentReferralLink : function (
+          url,
+          refCode
+        ) {
+          var request = {
+            referralType : "JOB_SPEC",
+            parentReferralLink : refCode
+          }
+
+          return RESTSvc.post(url, request);
+        },
+        shareResumeToParentLink : function (
+          url,
+          referralLink,
+          id
+        ) {
+          // url = url + "?referralLink=" + parentLink;
+          var request = {
+            "referralLink" : referralLink,
+            "resumeId": id
+          }
+
+          return RESTSvc.post(url, request);
+        },
+        getResumeTokenToPreview : function (
+          url,
+          referralLink,
+          id
+        ) {
+          // url = url + "?referralLink=" + parentLink;
+          var request = {
+            "referralLink" : referralLink,
+            "resumeId": id
+          }
+
+          return RESTSvc.post(url, request);
+        },
         getAuthUsers : function(url) {
           return RESTSvc.get(url);
         },
@@ -331,6 +368,10 @@ angular.module("MyCvTracker.shared")
         },
         getReferredResumeList : function (url, link) {
           url = url + "?referralLink="+ link;
+          return RESTSvc.get(url);
+        },
+        getChildRefLinkList : function (url, link) {
+          url = url + "?parentRefLink="+ link;
           return RESTSvc.get(url);
         },
         getReferralDetails : function (url, refCode) {

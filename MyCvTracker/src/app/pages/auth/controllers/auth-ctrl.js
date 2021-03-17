@@ -4,7 +4,8 @@
         .controller('AuthCtrl', ['$scope','$location','$http','$injector','$uibModal','Utilities','$rootScope','$auth','$window','$state','AuthSvc','baSidebarService',
 
             function ($scope,$location,$http,$injector,$uibModal,Utilities,$rootScope,$auth,$window,$state,AuthSvc,baSidebarService) {
-                $scope.loginModal = $rootScope.loginModal;
+
+            $scope.loginModal = $rootScope.loginModal;
                 $scope.user = {
                     register: {
                         firstName: '',
@@ -77,12 +78,20 @@
                                 $rootScope.loginModal=false;
                                 $scope.loginModal = false;
                             }
-                            $state.go("account");
+
+                            var params = $location.search();
+                            var redirectUrl = params.redirect;
+                            if (!!redirectUrl) {
+                                $location.url(redirectUrl);
+                            } else {
+                                $location.url("/account");
+                            }
+                            // var url = !!redirectUrl ? redirectUrl : "/account";
+
                             //var baseURL = Utilities.baseUrl()+'?fromLogin';
                             //setTimeout(function(){location.href=baseURL} , 5000);
                         })
                         .catch(function(response) {
-                            console.log(response);
                             $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+' !</div>');
                             Utilities.showErrorMsg(response.message);
                             $("#btn-login").html('Sign in');

@@ -27,11 +27,16 @@ angular.module("MyCvTracker.pages.referral")
           var url = utilities.getReferralLinkNewUrlForUser();
           return RestConfig.generateReferralLinkForUser(url, email, name, type, title, targetEmail);
         },
+        shareReferralLink : function(refCode) {
+          var url = utilities.getShareReferralLinkUrl();
+          return RestConfig.shareParentReferralLink(url, refCode);
+        },
         getNewReferralLinkModal: function (scope, ctrlName) {
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/new_referral_link.html',
             controller: ctrlName,
-            scope: scope
+            scope: scope,
+            backdrop: 'static'
           };
 
           return $injector.get('$uibModal').open(modalOpts);
@@ -40,7 +45,18 @@ angular.module("MyCvTracker.pages.referral")
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/referral-description.html',
             controller: ctrlName,
-            scope: scope
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
+        },
+        getShareReferralModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/referral/templates/share-referral-link.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
           };
 
           return $injector.get('$uibModal').open(modalOpts);

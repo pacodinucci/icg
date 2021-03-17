@@ -36,6 +36,15 @@
                 JOBS_CRITERIA_TYPE_JOB_TITLE : '5'
             },
 
+            jobAppStatus : {
+                APPLIED_JOB : "APPLIED_JOB",
+                SHARED_WITH_TARGET : "SHARED_WITH_TARGET",
+                SELECTED_FOR_INTERVIEW : "SELECTED_FOR_INTERVIEW",
+                REJECTED_FOR_INTERVIEW : "REJECTED_FOR_INTERVIEW",
+                REJECTED_FOR_JOB : "REJECTED_FOR_JOB",
+                SELECTED_FOR_JOB : "SELECTED_FOR_JOB"
+            },
+
             jobStatusText: [
                 {
                     id: 1,
@@ -331,11 +340,23 @@
                 newReferralLinkForUser : {
                     url : "/links/referralsForOtherUser"
                 },
+                shareReferralLink : {
+                    url : "/links/shareInsideReferral"
+                },
+                shareResumeToParentLink : {
+                    url : "/links/shareWithTarget"
+                },
                 referredResumesList : {
                     url : "/links/resumes"
+                },
+                listChildRefLinks : {
+                    url : "/links/childRefLinks"
                 },
                 referralContent : {
                     url : "/links/referralDetails"
                 },
+                resumeTokenLink : {
+                    url : "/user/getSharedResumeAccessToken"
+                }
         	}
         });

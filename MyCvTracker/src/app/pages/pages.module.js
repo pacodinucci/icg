@@ -84,7 +84,6 @@
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
 
-
         if (frontPage) {
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
         } else if (jobSpecPage) {
@@ -106,7 +105,10 @@
         } else if (restrictedPage && !$auth.isAuthenticated()) {
           $location.url("/login");
         } else if (isAuthPages && $auth.isAuthenticated()) {
-          $location.url("/account");
+          var params = $location.search();
+          var redirectUrl = params.redirect;
+          var url = !!redirectUrl ? redirectUrl : "/account";
+          $location.url(url);
         }
       }
     );
