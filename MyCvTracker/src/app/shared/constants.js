@@ -349,6 +349,9 @@
                 referredResumesList : {
                     url : "/links/resumes"
                 },
+                jobSpecList : {
+                    url : "/links/jobReferrals"
+                },
                 listChildRefLinks : {
                     url : "/links/childRefLinks"
                 },

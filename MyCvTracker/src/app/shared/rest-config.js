@@ -292,14 +292,18 @@ angular.module("MyCvTracker.shared")
           contextName,
           referralType,
           referralTargetSubject,
-          referralTargetEmail
+          referralTargetEmail,
+          jobType,
+          jobLocation
         ) {
           var request = {
             referralDetails : contextName,
             referralLink : "",
             referralType : referralType,
             referralTargetSubject : referralTargetSubject,
-            referralTargetEmail : referralTargetEmail
+            referralTargetEmail : referralTargetEmail,
+            jobType : jobType,
+            jobLocation : jobLocation
           }
 
           return RESTSvc.post(url, request);
@@ -310,14 +314,18 @@ angular.module("MyCvTracker.shared")
           contextName,
           referralType,
           referralTargetSubject,
-          referralTargetEmail
+          referralTargetEmail,
+          jobType,
+          jobLocation
         ) {
           var request = {
             referralDetails : contextName,
             referralLink : userEmail,
             referralType : referralType,
             referralTargetSubject : referralTargetSubject,
-            referralTargetEmail : referralTargetEmail
+            referralTargetEmail : referralTargetEmail,
+            jobType : jobType,
+            jobLocation : jobLocation
           }
 
           return RESTSvc.post(url, request);
@@ -376,6 +384,9 @@ angular.module("MyCvTracker.shared")
         },
         getReferralDetails : function (url, refCode) {
           url = url + "?referralLink="+ refCode;
+          return RESTSvc.get(url);
+        },
+        getJobSpecList : function (url) {
           return RESTSvc.get(url);
         },
       };

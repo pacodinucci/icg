@@ -75,8 +75,20 @@ angular.module("MyCvTracker.pages.referredResumes")
       };
 
       $scope.downloadMyResume = function (id) {
-        ResumesSvc.downloadMyResume(id);
-        toastr.success(Utilities.getAlerts("resumeDownloadSuccess").message);
+        service.getResumeToken(id, referralLink)
+          .then(function (data) {
+            var url = "https://mycvtracker.com:8080/user/downloadResume?accessToken=" + data.token;
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            toastr.success(Utilities.getAlerts("resumeDownloadSuccess").message);
+          }, function () {
+          });
       };
 
       $scope.openPreviewResume = function (id, fileType) {

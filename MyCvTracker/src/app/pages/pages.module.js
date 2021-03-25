@@ -19,8 +19,9 @@
     "MyCvTracker.pages.CampaignNotes",
     "MyCvTracker.pages.CvMarketing",
     "MyCvTracker.pages.campaignNotifications",
-    "MyCvTracker.pages.groupdata"
-    // "MyCvTracker.pages.jobs"
+    "MyCvTracker.pages.groupdata",
+    "MyCvTracker.pages.jobs",
+    "MyCvTracker.pages.jobList"
   ])
     .run(run);
 
@@ -56,6 +57,7 @@
           "/activateAccount",
           "/resetPassword",
           "/jobs",
+          "/job-list",
           "/viewJob",
           "/findjobs",
           "/terms"

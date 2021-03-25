@@ -173,3 +173,170 @@
 }
 
 // end user management
+
+// list jobs page
+#job-list-page {
+  .section-title {
+    margin-bottom: 1em;
+  }
+
+  .top-filter {
+    .top-filter-container {
+      padding: 2em 1.5EM;
+      background-color: #FFF;
+      border-radius: 2px;
+    }
+  }
+
+  .top-filter-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: -10px;
+
+    .filter-col {
+      padding: 10px;
+      -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+
+      &.btn-col,
+      &.location-col {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+      }
+
+    }
+
+    .btn-search {
+      .btn {
+        width: 250px;
+      }
+    }
+
+    .location-search-input {
+      width: 320px;
+    }
+
+    @media (max-width: 1199.98px) {
+      .filter-col {
+        -webkit-box-flex: 0  !important;;
+        -ms-flex: 0 0 50% !important;
+        flex: 0 0 50% !important;;
+        max-width: 50% !important;;
+
+        &.btn-col {
+          -ms-flex: 0 0 100% !important;;
+          flex: 0 0 100% !important;;
+          max-width: 100% !important;;
+        }
+      }
+
+      .location-search-input {
+        width: 100%;
+      }
+
+      .btn-search {
+        .btn {
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .list-jobs {
+    background-color: #FFF;
+    border-radius: 2px;
+
+    .job-row {
+      padding: 1.6em 1.2em;
+      border-bottom: solid 1px #cbcbcb;
+      cursor: pointer;
+
+      &:last-of-type {
+        border: none;
+      }
+
+      .job-panel {
+        .title {
+          font-family: 'museo700';
+          font-size: 18px;
+          line-height: 1.4em;
+        }
+
+        .location {
+          margin-top: 0.6em;
+          color: #9099ad;
+        }
+
+        .datetime {
+          margin-top: 0.6em;
+          font-family: 'museo_slab500';
+        }
+
+        .badge-success {
+          background-color: #7fb927;
+        }
+
+        .type-badge {
+          width: 100px;
+          text-align: right;
+        }
+      }
+
+      &:hover {
+        .job-panel {
+          .title {
+            color:#337ab7
+          }
+        }
+      }
+
+      .flex-row {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        align-items: center;
+        -webkit-align-items: center;
+
+        .info-col {
+          flex: 1 0 0;
+        }
+      }
+    }
+
+    .load-more-row {
+      cursor: pointer;
+
+      .load-more-btn {
+        text-align: center;
+        color: #337ab7;
+        font-size: 16px;
+      }
+
+      &:hover {
+        .load-more-btn {
+          color: #23527c;
+        }
+      }
+    }
+  }
+
+  .bottom-paging {
+    .pagination {
+      margin: 0;
+    }
+  }
+
+  .jobs-result {
+    padding-top: 2.4em;
+  }
+}
+// end list jobs page

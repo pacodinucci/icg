@@ -599,6 +599,10 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.referredResumesList.url;
                 },
 
+                getJobSpecListUrl: function () {
+                    return Constants.baseUrl + Constants.apis.jobSpecList.url;
+                },
+
                 getChildRefLinks: function () {
                     return Constants.baseUrl + Constants.apis.listChildRefLinks.url;
                 },

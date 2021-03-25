@@ -52,6 +52,24 @@
           ng-model="newReferralForm.email"
           ng-required="true" />
       </div>
+      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
+        <label class="control-label">Job type</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Fulltime, partime, remote, ..."
+          ng-model="newReferralForm.jobType"
+          ng-required="true" />
+      </div>
+      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
+        <label class="control-label">Location</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter location"
+          ng-model="newReferralForm.location"
+          ng-required="true" />
+      </div>
       <div class="form-group" ng-if="newReferralForm.type !== REFERRAL_TYPE.TEXT_LINK">
         <label class="control-label">Description</label>
         <ng-ckeditor

@@ -61,6 +61,8 @@ angular.module("MyCvTracker.pages.referral")
         description : null,
         title : null,
         email : null,
+        location : null,
+        jobType : null,
         generating : false,
         REFERRAL_TYPE : {}
       };
@@ -130,7 +132,7 @@ angular.module("MyCvTracker.pages.referral")
         var context = "";
         var type = $scope.newReferralForm.type;
         var email = "",
-          title = "";
+          title = "", location = "", jobType = "";
         switch (type) {
           case $scope.REFERRAL_TYPE.TEXT_LINK:
             context = $scope.newReferralForm.context;
@@ -139,6 +141,8 @@ angular.module("MyCvTracker.pages.referral")
             context = $scope.newReferralForm.description;
             title = $scope.newReferralForm.title;
             email = $scope.newReferralForm.email;
+            location = $scope.newReferralForm.location;
+            jobType = $scope.newReferralForm.jobType;
             break;
           case  $scope.REFERRAL_TYPE.SOCIAL_SHARE:
             context = $scope.newReferralForm.description;
@@ -146,7 +150,7 @@ angular.module("MyCvTracker.pages.referral")
         }
 
         if (!!userId) {
-          ReferralSvc.generateLinkForUser(context, userEmail, type, title, email)
+          ReferralSvc.generateLinkForUser(context, userEmail, type, title, email, jobType, location)
             .then(function () {
               $scope.newReferralForm.generating = false;
               $scope.closeModal();
@@ -155,7 +159,7 @@ angular.module("MyCvTracker.pages.referral")
               toastr.success(msg, "Success");
             });
         } else {
-          ReferralSvc.generateLink(context, type, title, email)
+          ReferralSvc.generateLink(context, type, title, email, jobType, location)
             .then(function () {
               $scope.newReferralForm.generating = false;
               $scope.closeModal();
