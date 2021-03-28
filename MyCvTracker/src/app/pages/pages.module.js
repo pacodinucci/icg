@@ -57,7 +57,7 @@
           "/activateAccount",
           "/resetPassword",
           "/jobs",
-          "/job-list",
+          "/jobs-list",
           "/viewJob",
           "/findjobs",
           "/terms"

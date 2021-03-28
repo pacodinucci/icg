@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">Delete referral</h4>
+</div>
+<div>
+  <div class="modal-body">
+    <div>
+      <br/>
+      <div>
+        Would you like to continue deleting this referral?
+      </div>
+      <br/>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      ng-disabled="inDeletingReferral"
+      type="button"
+      class="btn btn-danger" ng-click="deleteReferral()">
+      Continue
+    </button>
+    <button
+      ng-disabled="inDeletingReferral"
+      type="button"
+      class="btn btn-secondary" ng-click="closeModal()">
+      Close
+    </button>
+  </div>
+</div>

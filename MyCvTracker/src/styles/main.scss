@@ -262,6 +262,11 @@
         border: none;
       }
 
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
       .job-panel {
         .title {
           font-family: 'museo700';

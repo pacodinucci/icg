@@ -278,6 +278,7 @@ angular.module('MyCvTracker.shared')
                 },
                 newReferralLinkSuccessMsg : "New referral link has been generated",
                 referralLinkCopySuccessMsg : "Copied",
+                deleteReferralLinkSuccessMsg : "Referral link has been deleted successfully."
             };
 
             var Utilities = {
@@ -577,6 +578,10 @@ angular.module('MyCvTracker.shared')
 
                 getShareResumeToParentLinkUrl: function () {
                     return Constants.baseUrl + Constants.apis.shareResumeToParentLink.url;
+                },
+
+                getDeleteReferralUrl: function () {
+                    return Constants.baseUrl + Constants.apis.deleteReferralLink.url;
                 },
 
                 getResumeTokenUrl: function () {

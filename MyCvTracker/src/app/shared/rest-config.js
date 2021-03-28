@@ -354,6 +354,13 @@ angular.module("MyCvTracker.shared")
 
           return RESTSvc.post(url, request);
         },
+        deleteReferralLink : function (
+          url,
+          referralLink
+        ) {
+          url = url + "?referralLink=" + referralLink;
+          return RESTSvc.delete(url);
+        },
         getResumeTokenToPreview : function (
           url,
           referralLink,

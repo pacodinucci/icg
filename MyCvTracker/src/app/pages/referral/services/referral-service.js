@@ -41,6 +41,16 @@ angular.module("MyCvTracker.pages.referral")
 
           return $injector.get('$uibModal').open(modalOpts);
         },
+        getDeleteReferralLinkModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/referral/templates/delete-referral-confirm.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
+        },
         getReferralDescriptionModal: function (scope, ctrlName) {
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/referral-description.html',
@@ -60,6 +70,10 @@ angular.module("MyCvTracker.pages.referral")
           };
 
           return $injector.get('$uibModal').open(modalOpts);
+        },
+        deleteReferralLink : function(referralLink) {
+          var url = utilities.getDeleteReferralUrl();
+          return RestConfig.deleteReferralLink(url, referralLink);
         }
       };
     }

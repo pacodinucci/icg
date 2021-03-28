@@ -66,6 +66,8 @@ angular.module("MyCvTracker.pages.referral")
         generating : false,
         REFERRAL_TYPE : {}
       };
+      $scope.deletingReferralLink = "";
+      $scope.inDeletingReferral = false;
 
       $scope.loadListReferralLinks = function () {
         if (!!userId) {
@@ -83,6 +85,11 @@ angular.module("MyCvTracker.pages.referral")
 
       $scope.openNewReferralLinkModal = function () {
         $scope.referralModal = ReferralSvc.getNewReferralLinkModal($scope, "ReferalModalCtrl");
+      };
+
+      $scope.openDeleteReferralLinkModal = function (referralLink) {
+        $scope.deletingReferralLink = referralLink;
+        $scope.referralModal = ReferralSvc.getDeleteReferralLinkModal($scope, "ReferalModalCtrl");
       };
 
       $scope.openReferralDescriptionModal = function (
@@ -118,6 +125,7 @@ angular.module("MyCvTracker.pages.referral")
         $scope.referral.shareResume.sharing = false;
         $scope.referral.shareResume.success = false;
         $scope.referral.shareResume.referral = null;
+        $scope.deletingReferralLink = "";
 
         if (!!parentLink) {
           $location.url("/referral");
@@ -184,6 +192,20 @@ angular.module("MyCvTracker.pages.referral")
             $scope.referral.shareResume.referral.jobAppStatus = JOB_STATUS.SHARED_WITH_TARGET;
             shareResume.success = true;
             shareResume.sharing = false;
+          });
+      };
+
+      $scope.deleteReferral = function () {
+        if ($scope.inDeletingReferral) return;
+        $scope.inDeletingReferral = true;
+
+        ReferralSvc.deleteReferralLink($scope.deletingReferralLink)
+          .then(function () {
+            $scope.loadListReferralLinks();
+            $scope.inDeletingReferral = false;
+            $scope.closeModal();
+            var msg = Utilities.getAlerts("deleteReferralLinkSuccessMsg");
+            toastr.success(msg, "Success");
           });
       };
 

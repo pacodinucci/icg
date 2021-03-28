@@ -346,6 +346,9 @@
                 shareResumeToParentLink : {
                     url : "/links/shareWithTarget"
                 },
+                deleteReferralLink : {
+                    url : "/links/referrals"
+                },
                 referredResumesList : {
                     url : "/links/resumes"
                 },
