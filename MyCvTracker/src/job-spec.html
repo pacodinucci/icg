@@ -483,11 +483,12 @@
                   class="form-control"
                   placeholder="Your email">
                 <input
+                  style="display: none"
                   type="text"
                   name="refrence"
                   id="CVinput"
                   class="form-control"
-                  placeholder="**Required Field - Example LinkedIn, Project Manager, Apple etc.)">
+                  placeholder="Example LinkedIn, Project Manager, Apple etc.)">
                 <span style="color: #9099ad;font-size: 12px;">(Max. file size upto 500KB)</span>
                 <div class="input-group inputGroup">
 								<span class="input-group-btn">
@@ -511,29 +512,26 @@
                   class=" form-control"
                   id="fileExplorer"
                   style="display: none;" />
-                <span
+                <div
                   class="errorStyle"
                   id="emailError"><strong>Error</strong> Email is
-									required.</span>
-                <br>
-                <span
+									required.</div>
+                <div
                   class="errorStyle"
                   id="resumeRefError"><strong>Error</strong> Resume refrence is
-									required.</span>
-                <br>
-                <span
+									required.</div>
+                <div
                   class="errorStyle"
                   id="sizeError"><strong>Error</strong> File size limit
-									exceeded.</span>
-                <br>
-                <span
+									exceeded.</div>
+                <div
                   class="errorStyle"
                   id="noFileError"><strong>Error</strong> Please upload a
-									file.</span>
-                <span
+									file.</div>
+                <div
                   class="errorStyle"
                   id="fileExtError1"><strong>Error</strong> Please upload a PDF, Doc,
-									 Docx file only</span>
+									 Docx file only</div>
                 <input
                   type="checkbox"
                   id="checkbox1"
@@ -652,11 +650,6 @@
                 class="btn btn-primary"
                 id="closeSuccess">Close
               </button>
-            </div>
-            <div class="blink"><span class="downloadBlinkSpan"><button
-              type="button"
-              id="downloadCV"
-              class="btn btn-link download">Download</button></span>
             </div>
           </div>
         </div>
@@ -1118,6 +1111,14 @@
           $("#onload")
             .modal("hide");
           utility.clearUploadData();
+          var authInfoStr = localStorage.getItem("loggedInUser");
+          if (!!authInfoStr) {
+            var authInfo = JSON.parse(authInfoStr);
+            var authEmail = authInfo.email;
+            if (!!authEmail) {
+              $("#eCVemail").val(authEmail);
+            }
+          }
           utility.hideDOMS();
           $("#onload2")
             .modal("show");
@@ -1212,13 +1213,13 @@
               $("#emailError")
                 .hide();
             }
-            if (utility.checkResumeRefEmpty()) {
-              $("#resumeRefError")
-                .show();
-            } else {
-              $("#resumeRefError")
-                .hide();
-            }
+            // if (utility.checkResumeRefEmpty()) {
+            //   $("#resumeRefError")
+            //     .show();
+            // } else {
+            //   $("#resumeRefError")
+            //     .hide();
+            // }
             var file = $("#fileExplorer")[0].files[0];
 
             if (!file) {
@@ -1242,7 +1243,7 @@
                   .modal("show");
               }
             }
-            if (!utility.checkEmailEmpty() && !utility.checkResumeRefEmpty() && file && file.size < 500000 && isChecked) {
+            if (!utility.checkEmailEmpty() && file && file.size < 500000 && isChecked) {
               isValid = true;
             } else {
               isValid = false;
@@ -1251,14 +1252,15 @@
               $("#loader")
                 .show();
               var userEmail = $("#eCVemail")[0].value;
-              var resumeTitle = $("#CVinput")[0].value;
+              var resumeTitle = "";
+              // var resumeTitle = $("#CVinput")[0].value;
               var resumeType = "landingpage";
               holdNameOfCV = resumeTitle;
 
               var fd = new FormData();
               fd.append("userEmail", userEmail);
               fd.append("file", file);
-              fd.append("resumeReference", resumeTitle);
+              fd.append("resumeReference", "");
               fd.append("resumeType", resumeType);
 
               if (!!refCode) {
