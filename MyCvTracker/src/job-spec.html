@@ -142,13 +142,13 @@
     </header>
     <!-- header ends -->
     <!-- upload image -->
-    <div class="main-img">
+    <div>
       <div
         class="container"
         id="job-spec-container">
         <div class="row">
           <div align="center">
-            <h3>Find out what happens to your CV when it leaves your mailbox</h3>
+            <h3>Build Referrals based Hiring Network. </h3>
             <br>
           </div>
           <div class="clearfix"></div>
@@ -156,6 +156,7 @@
             <h4>Job Title :
               <span class="job-title">...</span>
             </h4>
+            <!-- can we have box border to some other colour of white -->
             <div
               class="boxborder"
               align="left">
@@ -456,26 +457,11 @@
         <div class="modal-content">
           <div class="modal-body">
             <h3>Step 2</h3>
-            <h2>Please provide email / resume references</h2>
-            <p>To get all the benefits from tracking please provide your email and resume reference (linked In,Project
-              Manager,Indeed etc.) below and we will send through
-              all
-              notification.
-              <br>
-              <a
-                href="https://bit.ly/390Dr7m"
-                rel="noopener noreferrer"
-                target="_blank">Please refer this help Video.
-              </a>
-            </p>
-
+            <h2>Please provide email in case you are new user. My CV Tracker platform applies tracking
+            to your CV.</h2>
 
             <div class="img">
               <form onload="hideDOMS();">
-
-                <strong>
-                  <span style="color: rgb(184, 49, 47); font-size: 16px;">*** Resume Reference and Email are required.</span>
-                </strong>
                 <input
                   type="email"
                   id="eCVemail"
@@ -1102,7 +1088,7 @@
             "from" : fromName,
             "content" : content
           };
-          utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
+          utility.sendEmail("http://localhost:8080/auth/contact", "POST", data);
 
         });
 
@@ -1270,7 +1256,7 @@
               }
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/user/applyJobs",
+                url : "http://localhost:8080/user/applyJobs",
                 type : "POST",
                 data : fd,
                 processData : false, // tell jQuery not to process the data
@@ -1334,7 +1320,7 @@
                 .html("Generating...");
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
+                url : "http://localhost:8080/links/shareOutsideReferral",
                 type : "POST",
                 data : JSON.stringify({
                   referralType : "JOB_SPEC",
@@ -1347,7 +1333,7 @@
                   $("#referral-modal-1")
                     .addClass("success");
                   $("#referral-modal-1 .ref-link")
-                    .html("https://mycvtracker.com/job-spec.html?ref=" + data.referralLink);
+                    .html("http://localhost/job-spec.html?ref=" + data.referralLink);
 
                   $(this)
                     .html("Generate");
@@ -1374,7 +1360,7 @@
         if (!!refCode) {
           // load job spec
           $.ajax({
-            url : "https://mycvtracker.com:8080/links/referralDetails?referralLink=" + refCode,
+            url : "http://localhost:8080/links/referralDetails?referralLink=" + refCode,
             type : "GET",
             dataType : "json",
             contentType : "application/json",
