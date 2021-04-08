@@ -498,6 +498,10 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.resetNewPassword.url;
                 },
 
+                resetPasswordAndActivate: function () {
+                    return Constants.baseUrl + Constants.apis.resetPasswordAndActivate.url;
+                },
+
                 saveProfileSettingsUrl: function () {
                     return Constants.baseUrl + Constants.apis.saveProfileSettings.url;
                 },

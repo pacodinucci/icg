@@ -305,6 +305,10 @@
                     url: '/auth/resetPassword'
                 },
 
+                resetPasswordAndActivate: {
+                    url: '/auth/activateOut'
+                },
+
                 saveProfileSettings: {
                     url: '/auth/saveProfileSettings'
                 },

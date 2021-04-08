@@ -178,6 +178,31 @@
                     }
                 };
 
+                $scope.resetPasswordAndActivate = function ($pwd1, $pwd, resetForm) {
+
+                    var activationKey = Utilities.getParameters().key;
+                    if (resetForm.$valid) {
+                        if ($scope.user.resetPassword.newPwd1 == $scope.user.resetPassword.newPwd2) {
+                            $scope.resetPassword = {
+                                password: $scope.user.resetPassword.newPwd1,
+                                activationKey: activationKey,
+                            }
+                            AuthSvc.resetPasswordAndActivate($scope.resetPassword).then(
+                                function (data) {
+                                    Utilities.showSuccessMsg(Utilities.getAlerts('resetPasswordSuccess').message);
+                                    $state.go("login");
+                                },
+
+                                function (response) {
+                                    Utilities.showErrorMsg(Utilities.getAlerts(response.status));
+                                }
+                            );
+                        }else{
+                            Utilities.showErrorMsg(Utilities.getAlerts('confirmPasswordErorr').message);
+                        }
+                    }
+                };
+
                 $scope.activate = function () {
                     var key = Utilities.getParameters().key;
                     if (key) {

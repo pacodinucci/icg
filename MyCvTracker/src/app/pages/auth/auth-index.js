@@ -42,6 +42,18 @@
               },
           });
 
+       $stateProvider
+        .state('activateOut', {
+            url: '/activateOut',
+            controller: 'AuthCtrl',
+            templateUrl: 'app/pages/auth/templates/activateout.html',
+            title: 'Reset Password & Activate Account',
+            shown:false,
+            sidebarMeta: {
+                order: 800,
+            },
+        });
+
       $stateProvider
           .state('activateAccount', {
               url: '/activateAccount',

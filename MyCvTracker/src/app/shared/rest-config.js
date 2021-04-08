@@ -141,6 +141,12 @@ angular.module("MyCvTracker.shared")
         ) {
           return RESTSvc.post(url, data);
         },
+        resetPasswordAndActivate : function (
+          url,
+          data
+        ) {
+          return RESTSvc.post(url, data);
+        },
         addGroup : function (
           url,
           data

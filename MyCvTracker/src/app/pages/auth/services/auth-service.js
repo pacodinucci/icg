@@ -36,6 +36,10 @@
                         var url = Utilities.resetNewPasswordUrl();
                         return RestConfig.resetNewPassword(url, passwordModel);
                     },
+                    resetPasswordAndActivate: function(passwordModel) {
+                        var url = Utilities.resetPasswordAndActivate();
+                        return RestConfig.resetPasswordAndActivate(url, passwordModel);
+                    },
             	};
 
                 return AuthSvc;

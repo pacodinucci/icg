@@ -56,6 +56,7 @@
           "/register",
           "/activateAccount",
           "/resetPassword",
+          "/activateOut",
           "/jobs",
           "/jobs-list",
           "/viewJob",
