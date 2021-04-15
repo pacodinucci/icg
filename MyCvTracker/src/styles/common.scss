@@ -11,12 +11,12 @@ a.btn.btn-default {
 }
 
 .d-flex {
-  display: -ms-flexbox!important;
-  display: flex!important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 
   .flex-fill {
-    -ms-flex: 1 1 auto!important;
-    flex: 1 1 auto!important;
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
   }
 
   .col-auto {
@@ -37,7 +37,6 @@ a.btn.btn-default {
 }
 
 
-
 .align-items-center {
   align-items: center;
 }
@@ -48,5 +47,26 @@ a.btn.btn-default {
 
   .card-body {
     padding: 2rem 2.2rem;
+  }
+}
+
+.badge {
+  padding: 4px 8px;
+  font-size: 11px;
+
+  &.badge-warning {
+    background-color: #8a6d3b;
+  }
+
+  &.badge-success {
+    background-color: #7fb927;
+  }
+
+  &.badge-info {
+    background-color: #337ab7;;
+  }
+
+  &.badge-danger {
+    background-color: #a94442;
   }
 }

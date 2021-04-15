@@ -584,6 +584,18 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.shareResumeToParentLink.url;
                 },
 
+                getShareResumeToTargetUrl: function () {
+                    return Constants.baseUrl + Constants.apis.shareResumeToTarget.url;
+                },
+
+                getUpdateResumeInterviewStatusUrl: function () {
+                    return Constants.baseUrl + Constants.apis.updateResumeInterviewStt.url;
+                },
+
+                getUpdateResumeJobStatusUrl: function () {
+                    return Constants.baseUrl + Constants.apis.updateResumeJobStt.url;
+                },
+
                 getDeleteReferralUrl: function () {
                     return Constants.baseUrl + Constants.apis.deleteReferralLink.url;
                 },
@@ -606,6 +618,11 @@ angular.module('MyCvTracker.shared')
 
                 getReferredResumeListUrl: function () {
                     return Constants.baseUrl + Constants.apis.referredResumesList.url;
+                },
+
+                getTargetResumeDetailUrl: function (id) {
+                    var url = Constants.baseUrl + Constants.apis.targetResumeDetailLink.url;
+                    return url.replace("{id}", id);
                 },
 
                 getJobSpecListUrl: function () {

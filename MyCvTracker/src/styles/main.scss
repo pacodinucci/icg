@@ -61,10 +61,24 @@
   }
 
   .resume-panel {
+    .flex-row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      align-items: center;
+      -webkit-align-items: center;
+
+      .flex-fill {
+        -ms-flex: 1 1 auto !important;
+        flex: 1 1 auto !important;
+      }
+    }
+
     .tile-filename,
     .tile-datetime {
       font-family: 'museo_slab500';
-
     }
 
     .tile-filename {
@@ -87,6 +101,12 @@
         &:last-of-type {
           margin-right: 0;
         }
+      }
+    }
+
+    &.target-resume-panel {
+      .tile-datetime {
+        margin-top: 0.6rem;
       }
     }
   }

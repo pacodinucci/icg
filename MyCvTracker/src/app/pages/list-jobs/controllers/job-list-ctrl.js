@@ -22,15 +22,15 @@ angular.module("MyCvTracker.pages.jobList")
       var mainSvc = $injector.get("JobSpecListService");
 
       $scope.searchForm = {
-          title : "",
-          location : "",
-          page : 1,
+        title : "",
+        location : "",
+        page : 1,
       };
       $scope.listJob = [];
       $scope.loading = false;
       $scope.hasNext = true;
 
-      $scope.getJobList = function() {
+      $scope.getJobList = function () {
         $scope.loading = true;
 
         var page = $scope.searchForm.page;
@@ -40,24 +40,31 @@ angular.module("MyCvTracker.pages.jobList")
         mainSvc.listJobSpecs(page, title, location)
           .then(function (rpData) {
             var len = rpData.length;
-            $scope.listJob = $scope.listJob.concat(rpData);
+            if (len > 0) {
+              for (var i = 0; i < len; i++) {
+                var newJob = rpData[i];
+                if (!!newJob.referralTargetSubject && !!newJob.jobLocation && !!newJob.jobType) {
+                  $scope.listJob.push(newJob);
+                }
+              }
+            }
             $scope.loading = false;
             $scope.hasNext = len >= 12;
           });
-      }
+      };
 
-      $scope.searchJobList = function() {
+      $scope.searchJobList = function () {
         $scope.searchForm.page = 1;
         $scope.listJob = [];
         $scope.getJobList();
-      }
+      };
 
-      $scope.loadMore = function() {
+      $scope.loadMore = function () {
         $scope.searchForm.page += 1;
         $scope.getJobList();
-      }
+      };
 
-      $scope.getFormattedPostDate = function(utc) {
+      $scope.getFormattedPostDate = function (utc) {
         if (!!utc) {
           var dateObj = new Date(utc + "Z");
 
@@ -73,11 +80,11 @@ angular.module("MyCvTracker.pages.jobList")
         }
 
         return "";
-      }
+      };
 
-      $scope.init = function() {
-          $scope.getJobList();
-      }
+      $scope.init = function () {
+        $scope.getJobList();
+      };
 
       $scope.init();
     }

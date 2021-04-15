@@ -341,21 +341,55 @@ angular.module("MyCvTracker.shared")
           refCode
         ) {
           var request = {
-            referralType : "JOB_SPEC",
-            parentReferralLink : refCode
+            referralLink : refCode
           }
 
           return RESTSvc.post(url, request);
         },
         shareResumeToParentLink : function (
           url,
-          referralLink,
           id
         ) {
           // url = url + "?referralLink=" + parentLink;
           var request = {
-            "referralLink" : referralLink,
             "resumeId": id
+          }
+
+          return RESTSvc.post(url, request);
+        },
+        shareResumeToTargetLink : function (
+          url,
+          id
+        ) {
+          // url = url + "?referralLink=" + parentLink;
+          var request = {
+            "resumeId": id
+          }
+
+          return RESTSvc.post(url, request);
+        },
+        updateResumeInterview : function (
+          url,
+          id,
+          resumeStatus
+        ) {
+          // url = url + "?referralLink=" + parentLink;
+          var request = {
+            "id": id,
+            "resumeStatus" : resumeStatus
+          }
+
+          return RESTSvc.post(url, request);
+        },
+        updateResumeJob : function (
+          url,
+          id,
+          resumeStatus
+        ) {
+          // url = url + "?referralLink=" + parentLink;
+          var request = {
+            "id": id,
+            "resumeStatus" : resumeStatus
           }
 
           return RESTSvc.post(url, request);
@@ -400,6 +434,10 @@ angular.module("MyCvTracker.shared")
           return RESTSvc.get(url);
         },
         getJobSpecList : function (url) {
+          return RESTSvc.get(url);
+        },
+        getTargetResumeDetail : function (url, token) {
+          url = url + "?token="+ token;
           return RESTSvc.get(url);
         },
       };

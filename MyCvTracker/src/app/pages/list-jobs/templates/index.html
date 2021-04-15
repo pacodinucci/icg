@@ -48,16 +48,13 @@
               <div class="job-panel">
                 <div class="flex-row">
                   <div class="info-col">
-                    <div class="title" ng-if="!!aJob.referralTargetSubject" ng-bind="aJob.referralTargetSubject"></div>
-                    <div class="title" ng-if="!aJob.referralTargetSubject">Title</div>
-                    <div class="location" ng-if="!!aJob.jobLocation" ng-bind="aJob.jobLocation"></div>
-                    <div class="location" ng-if="!aJob.jobLocation">Location: Undefined</div>
+                    <div class="title" ng-bind="aJob.referralTargetSubject"></div>
+                    <div class="location" ng-bind="aJob.jobLocation"></div>
                     <div class="datetime" ng-if="!!aJob.publishedDate">posted at {{ getFormattedPostDate(aJob.publishedDate) }}</div>
                   </div>
 
                   <div class="type-col">
-                    <span class="badge badge-success" ng-if="!!aJob.jobType" ng-bind="aJob.jobType"></span>
-                    <span class="badge badge-success" ng-if="!aJob.jobType">Undefined</span>
+                    <span class="badge badge-success" ng-bind="aJob.jobType"></span>
                   </div>
                 </div>
               </div>

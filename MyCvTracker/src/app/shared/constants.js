@@ -45,6 +45,11 @@
                 SELECTED_FOR_JOB : "SELECTED_FOR_JOB"
             },
 
+            resumeSharedLevel : {
+                PARENT : "PARENT",
+                JOB_POSTER : "JOB_POSTER"
+            },
+
             jobStatusText: [
                 {
                     id: 1,
@@ -348,13 +353,25 @@
                     url : "/links/shareInsideReferral"
                 },
                 shareResumeToParentLink : {
+                    url : "/links/shareWithParent"
+                },
+                shareResumeToTarget : {
                     url : "/links/shareWithTarget"
+                },
+                updateResumeInterviewStt : {
+                    url : "/user/resume/interview/update"
+                },
+                updateResumeJobStt : {
+                    url : "/user/resume/job-status/update"
                 },
                 deleteReferralLink : {
                     url : "/links/referrals"
                 },
                 referredResumesList : {
                     url : "/links/resumes"
+                },
+                targetResumeDetailLink : {
+                    url : "/user/resume/{id}/detail"
                 },
                 jobSpecList : {
                     url : "/links/jobReferrals"

@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title">Interview status</h4>
+</div>
+<div class="modal-body">
+  <h5>Would you like to select the resume for job?</h5>
+  <br/>
+  <div class="form-group">
+    <div class="form-check">
+      <input
+        ng-model="referredResumes.updateSttInput"
+        class="form-check-input"
+        type="radio"
+        value="select">
+      <label class="form-check-label">
+        Select
+      </label>
+    </div>
+    <div class="form-check">
+      <input
+        ng-model="referredResumes.updateSttInput"
+        class="form-check-input"
+        type="radio"
+        value="reject">
+      <label class="form-check-label">
+        Reject
+      </label>
+    </div>
+  </div>
+</div>
+<div
+  class="modal-footer clearfix">
+  <button
+    ng-disabled="referredResumes.sharing"
+    ng-if="!referredResumes.sharingSuccess"
+    ng-click="!referredResumes.sharing && updateJobStt()"
+    type="button"
+    class="btn btn-primary"
+    ng-bind="referredResumes.sharing ? 'Updating...' : 'Confirm'">
+  </button>
+  <button
+    ng-if="!referredResumes.sharingSuccess"
+    type="button"
+    class="btn btn-secondary"
+    ng-click="!referredResumes.sharing && closeModal()">
+    Cancel
+  </button>
+</div>

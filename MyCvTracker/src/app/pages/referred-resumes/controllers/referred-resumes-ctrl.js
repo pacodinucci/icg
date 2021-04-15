@@ -19,6 +19,7 @@ angular.module("MyCvTracker.pages.referredResumes")
       $location
     ) {
       $scope.JOB_STATUS = Constants.jobAppStatus;
+      $scope.SHARED_LEVEL = Constants.resumeSharedLevel;
 
       var Utilities = $injector.get("Utilities");
       var service = $injector.get("ReferredResumesService");
@@ -34,7 +35,8 @@ angular.module("MyCvTracker.pages.referredResumes")
         list : [],
         shareResume : null,
         sharing : false,
-        sharingSuccess : false
+        sharingSuccess : false,
+        updateSttInput : "select"
       };
 
       $scope.loadListReferredResumes = function (refCode) {
@@ -109,8 +111,17 @@ angular.module("MyCvTracker.pages.referredResumes")
           });
       };
 
-      $scope.ableToShare = function (status) {
-        return !!parentLink && status === $scope.JOB_STATUS.APPLIED_JOB;
+      $scope.ableToShare = function (sharedLevel) {
+        if (!!parentLink) {
+          return sharedLevel === null;
+        } else {
+          return sharedLevel === $scope.SHARED_LEVEL.PARENT;
+        }
+      };
+
+      $scope.ableToUpdate = function (sharedLevel, resumeStatus) {
+        return $scope.ableToShare(sharedLevel) && (resumeStatus === $scope.JOB_STATUS.APPLIED_JOB || resumeStatus === $scope.JOB_STATUS.SELECTED_FOR_INTERVIEW ||
+          resumeStatus === $scope.JOB_STATUS.SELECTED_FOR_INTERVIEW);
       };
 
       $scope.openShareResumeModal = function (resume) {
@@ -118,19 +129,60 @@ angular.module("MyCvTracker.pages.referredResumes")
         $scope.resumesModal = service.getSharingResumeModal($scope, "ReferalModalCtrl");
       };
 
-      $scope.shareReferredResumes = function () {
-        var id = $scope.referredResumes.shareResume.id;
-        $scope.referredResumes.sharing = true;
+      $scope.openStatusModal = function (resume) {
+        var status= resume.resumeStatus;
+        $scope.referredResumes.shareResume = resume;
+        if (status === $scope.JOB_STATUS.APPLIED_JOB) {
+          $scope.resumesModal = service.getInterviewResumeModal($scope, "ReferalModalCtrl");
+        } else if (status === $scope.JOB_STATUS.SELECTED_FOR_INTERVIEW) {
+          $scope.resumesModal = service.getJobResumeModal($scope, "ReferalModalCtrl");
+        }
+      };
 
-        service.shareResumeToParent(id, referralLink)
+      $scope.shareReferredResumes = function () {
+        var resume = $scope.referredResumes.shareResume;
+        var id = resume.id;
+        var sharedLevel = resume.sharedWith;
+
+        var isParent = sharedLevel === $scope.SHARED_LEVEL.PARENT;
+        var shareFunc = isParent ? service.shareResumeToTarget : service.shareResumeToParent;
+
+        $scope.referredResumes.sharing = true;
+        shareFunc(id)
           .then(function () {
-            $scope.referredResumes.shareResume.resumeStatus = $scope.JOB_STATUS.SHARED_WITH_TARGET;
+            $scope.referredResumes.shareResume.sharedWith = isParent ? $scope.SHARED_LEVEL.JOB_POSTER : $scope.SHARED_LEVEL.PARENT;
             $scope.referredResumes.sharingSuccess = true;
             $scope.referredResumes.sharing = false;
-          }, function () {
-            $scope.referredResumes.shareResume.resumeStatus = $scope.JOB_STATUS.SHARED_WITH_TARGET;
+          });
+      };
+
+      $scope.updateInterviewStt = function () {
+        var resume = $scope.referredResumes.shareResume;
+        var id = resume.id;
+        var stt = $scope.referredResumes.updateSttInput === "select" ? $scope.JOB_STATUS.SELECTED_FOR_INTERVIEW : $scope.JOB_STATUS.REJECTED_FOR_INTERVIEW;
+
+        $scope.referredResumes.sharing = true;
+        service.updateResumeInterviewStatus(id, stt)
+          .then(function () {
+            $scope.referredResumes.shareResume.resumeStatus = stt;
             $scope.referredResumes.sharingSuccess = true;
             $scope.referredResumes.sharing = false;
+            $scope.closeModal();
+          });
+      };
+
+      $scope.updateJobStt = function () {
+        var resume = $scope.referredResumes.shareResume;
+        var id = resume.id;
+        var stt = $scope.referredResumes.updateSttInput === "select" ? $scope.JOB_STATUS.SELECTED_FOR_JOB : $scope.JOB_STATUS.REJECTED_FOR_JOB;
+
+        $scope.referredResumes.sharing = true;
+        service.updateResumeJobStatus(id, stt)
+          .then(function () {
+            $scope.referredResumes.shareResume.resumeStatus = stt;
+            $scope.referredResumes.sharingSuccess = true;
+            $scope.referredResumes.sharing = false;
+            $scope.closeModal();
           });
       };
 
@@ -139,6 +191,7 @@ angular.module("MyCvTracker.pages.referredResumes")
         $scope.referredResumes.shareId = null;
         $scope.referredResumes.sharing = false;
         $scope.referredResumes.sharingSuccess = false;
+        $scope.referredResumes.updateSttInput = "select";
       };
 
       $scope.init = function () {

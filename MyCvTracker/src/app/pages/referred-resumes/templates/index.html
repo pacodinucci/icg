@@ -1,49 +1,74 @@
 <section
   id="referral"
   ng-controller="ReferredResumesCtrl">
-    <div class="body-section list-resumes-section">
-      <div class="section-content">
-        <div class="row">
-          <div ng-repeat="aResume in referredResumes.list track by aResume.id" class="col-xs-12 col-md-3">
-            <div
-              ba-panel
-              ba-panel-class="xsmall-panel light-text resume-panel">
-              <div class="tile-title">
-                <h3 class="resume-title" ng-bind="aResume.resumeTitle"></h3>
-                <hr class="resumeSeprator">
-                <div class="tile-filename">
-                  <span ng-if="aResume.resumeStatus === JOB_STATUS.APPLIED_JOB" class="text-warning">Job Applied</span>
-                  <span ng-if="aResume.resumeStatus === JOB_STATUS.SHARED_WITH_TARGET" class="text-warning">Shared with target</span>
-                  <span ng-if="aResume.resumeStatus === JOB_STATUS.SELECTED_FOR_INTERVIEW" class="text-primary">Selected for interview</span>
-                  <span ng-if="aResume.resumeStatus === JOB_STATUS.REJECTED_FOR_INTERVIEW" class="text-danger">Rejected for interview</span>
-                  <span ng-if="aResume.resumeStatus === JOB_STATUS.REJECTED_FOR_JOB" class="text-danger">Rejected for job</span>
-                  <span ng-if="aResume.resumeStatus === JOB_STATUS.SELECTED_FOR_JOB" class="text-success">Selected for job</span>
-                  <span ng-if="!!!aResume.resumeStatus">-</span>
-                </div>
-                <div class="tile-datetime" ng-bind="formatDateTime(aResume.uploadedAt)"></div>
-                <div class="controls">
-                  <a href="#"
-                     title="Download"
-                     ng-click="downloadMyResume(aResume.id)">
-                    <i class="fa fa-download"></i>
-                  </a>
-                  <a href="#"
-                     title="Preview"
-                     ng-click="openPreviewResume(aResume.id, aResume.fileType)">
-                    <i class="fas fa-search"></i>
-                  </a>
-                  <a
-                    ng-if="ableToShare(aResume.resumeStatus)"
-                    href="#"
-                    title="Share to parent"
-                    ng-click="openShareResumeModal(aResume)">
-                    <i class="fas fa-external-link-square-alt"></i>
-                  </a>
-                </div>
+  <div class="body-section list-resumes-section">
+    <div class="section-content">
+      <div class="row">
+        <div
+          ng-repeat="aResume in referredResumes.list track by aResume.id"
+          class="col-xs-12 col-md-3">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3
+                class="resume-title"
+                ng-bind="aResume.resumeTitle"></h3>
+              <hr class="resumeSeprator">
+              <div class="tile-filename">
+                  <span
+                    class="badge badge-warning"
+                    ng-if="aResume.resumeStatus === JOB_STATUS.APPLIED_JOB">Job Applied</span>
+                <span
+                  class="badge badge-warning"
+                  ng-if="aResume.resumeStatus === JOB_STATUS.SELECTED_FOR_INTERVIEW">Selected for interview</span>
+                <span
+                  class="badge badge-danger"
+                  ng-if="aResume.resumeStatus === JOB_STATUS.REJECTED_FOR_INTERVIEW">Rejected for interview</span>
+                <span
+                  class="badge badge-danger"
+                  ng-if="aResume.resumeStatus === JOB_STATUS.REJECTED_FOR_JOB">Rejected for job</span>
+                <span
+                  class="badge badge-success"
+                  ng-if="aResume.resumeStatus === JOB_STATUS.SELECTED_FOR_JOB">Selected for job</span>
+                <span ng-if="aResume.sharedWith === SHARED_LEVEL.PARENT" class="badge badge-info">Shared To Parent</span>
+                <span ng-if="aResume.sharedWith === SHARED_LEVEL.JOB_POSTER" class="badge badge-info">Shared To Poster</span>
+              </div>
+              <div
+                class="tile-datetime"
+                ng-bind="formatDateTime(aResume.uploadedAt)"></div>
+              <div class="controls">
+                <a
+                  href="#"
+                  title="Download"
+                  ng-click="downloadMyResume(aResume.id)">
+                  <i class="fa fa-download"></i>
+                </a>
+                <a
+                  href="#"
+                  title="Preview"
+                  ng-click="openPreviewResume(aResume.id, aResume.fileType)">
+                  <i class="fas fa-search"></i>
+                </a>
+                <a
+                  ng-if="ableToShare(aResume.sharedWith)"
+                  href="#"
+                  title="Share to parent"
+                  ng-click="openShareResumeModal(aResume)">
+                  <i class="fas fa-external-link-square-alt"></i>
+                </a>
+                <a
+                  ng-if="ableToUpdate(aResume.sharedWith, aResume.resumeStatus)"
+                  href="#"
+                  title="Update Status"
+                  ng-click="openStatusModal(aResume)">
+                  <i class="fas fa-edit"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </section>

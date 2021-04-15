@@ -1243,6 +1243,7 @@
 
               if (!!refCode) {
                 fd.append("resumeReviewer", refCode);
+                fd.append("referralLink", refCode);
               } else {
                 fd.append("resumeReviewer", "randeep");
               }
@@ -1315,9 +1316,8 @@
                 url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
                 type : "POST",
                 data : JSON.stringify({
-                  referralType : "JOB_SPEC",
-                  parentReferralLink : refCode,
-                  referralLink : email
+                  referralLink : refCode,
+                  userEmail : email
                 }),
                 dataType : "json",
                 contentType : "application/json",
@@ -1329,7 +1329,6 @@
 
                   $(this)
                     .html("Generate");
-                  console.log("success", data);
                 }
               });
             }

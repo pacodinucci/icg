@@ -21,7 +21,8 @@
     "MyCvTracker.pages.campaignNotifications",
     "MyCvTracker.pages.groupdata",
     "MyCvTracker.pages.jobs",
-    "MyCvTracker.pages.jobList"
+    "MyCvTracker.pages.jobList",
+    "MyCvTracker.pages.targetResumeDetail"
   ])
     .run(run);
 
@@ -59,6 +60,7 @@
           "/activateOut",
           "/jobs",
           "/jobs-list",
+          "/target-resume-detail",
           "/viewJob",
           "/findjobs",
           "/terms"
