@@ -53,7 +53,7 @@
                 <a
                   ng-if="ableToShare(aResume.sharedWith)"
                   href="#"
-                  title="Share to parent"
+                  ng-attr-title='{{ isShareToTarget(aResume.sharedWith) ? "Share to target" : "Share to parent"}}'
                   ng-click="openShareResumeModal(aResume)">
                   <i class="fas fa-external-link-square-alt"></i>
                 </a>

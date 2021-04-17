@@ -36,7 +36,8 @@ angular.module("MyCvTracker.pages.referredResumes")
         shareResume : null,
         sharing : false,
         sharingSuccess : false,
-        updateSttInput : "select"
+        updateSttInput : "select",
+        isChildRef : false
       };
 
       $scope.loadListReferredResumes = function (refCode) {
@@ -86,9 +87,9 @@ angular.module("MyCvTracker.pages.referredResumes")
             link.target = '_blank';
             document.body.appendChild(link);
             link.click();
-            link.remove();
-
             toastr.success(Utilities.getAlerts("resumeDownloadSuccess").message);
+
+            link.remove();
           }, function () {
           });
       };
@@ -111,11 +112,15 @@ angular.module("MyCvTracker.pages.referredResumes")
           });
       };
 
+      $scope.isShareToTarget = function(sharedLevel) {
+        return !$scope.referredResumes.isChildRef && (!sharedLevel || sharedLevel === $scope.SHARED_LEVEL.PARENT);
+      }
+
       $scope.ableToShare = function (sharedLevel) {
-        if (!!parentLink) {
+        if ($scope.referredResumes.isChildRef) {
           return sharedLevel === null;
         } else {
-          return sharedLevel === $scope.SHARED_LEVEL.PARENT;
+          return  !sharedLevel || sharedLevel === $scope.SHARED_LEVEL.PARENT;
         }
       };
 
@@ -144,13 +149,13 @@ angular.module("MyCvTracker.pages.referredResumes")
         var id = resume.id;
         var sharedLevel = resume.sharedWith;
 
-        var isParent = sharedLevel === $scope.SHARED_LEVEL.PARENT;
-        var shareFunc = isParent ? service.shareResumeToTarget : service.shareResumeToParent;
+        var isToTarget = $scope.isShareToTarget(sharedLevel);
+        var shareFunc = isToTarget ? service.shareResumeToTarget : service.shareResumeToParent;
 
         $scope.referredResumes.sharing = true;
         shareFunc(id)
           .then(function () {
-            $scope.referredResumes.shareResume.sharedWith = isParent ? $scope.SHARED_LEVEL.JOB_POSTER : $scope.SHARED_LEVEL.PARENT;
+            $scope.referredResumes.shareResume.sharedWith = isToTarget ? $scope.SHARED_LEVEL.JOB_POSTER : $scope.SHARED_LEVEL.PARENT;
             $scope.referredResumes.sharingSuccess = true;
             $scope.referredResumes.sharing = false;
           });
@@ -199,6 +204,7 @@ angular.module("MyCvTracker.pages.referredResumes")
         referralLink = params.referralLink;
         parentLink = params.parentLink;
 
+        $scope.referredResumes.isChildRef = !!parentLink;
         $scope.loadListReferredResumes(referralLink);
       };
 

@@ -30,7 +30,7 @@
       <div class="referral-link-list">
         <div class="row">
           <div
-            class="col-12 col-xl-3 col-md-4"
+            class="col-12 col-md-6"
             ng-repeat="referral in referral.links track by referral.id">
             <div
               ba-panel
@@ -58,35 +58,49 @@
                       <span ng-if="referral.referralTargetSubject.length">{{ referral.referralTargetSubject }}</span>
                     </a>
                   </div>
-                  <div
-                    ng-bind="getReferralLink(referral)"
-                    class="link">
+                  <div class="referral-type" ng-if="referral.referralType === REFERRAL_TYPE.TEXT_LINK">
+                    Text
+                  </div>
+                  <div class="referral-type" ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC">
+                    Job Spec
+                  </div>
+                  <div class="referral-type" ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE">
+                    Social Share
                   </div>
                 </div>
 
-                <div class="ctrls">
-                  <div class="ctrls-container d-flex align-items-center">
-                    <a
-                      href="#"
-                      title="Copy"
-                      ng-click="copyLink(referral)">
-                      <i class="fas fa-copy"></i>
-                    </a>
+                <div class="ref-stt" ng-if="referral.parentReferralLink !== referral.referralLink">
+                  <div class="badge badge-warning">Child Ref</div>
+                </div>
+              </div>
 
-                    <a
-                      ng-href="{{getResumesLink(referral.referralLink, referral.parentReferralLink)}}"
-                      title="List resumes">
-                      <i class="fas fa-list-alt"></i>
-                    </a>
+              <div
+                ng-bind="getReferralLink(referral)"
+                class="link">
+              </div>
 
-                    <a
-                      class="trash-ctrl"
-                      href="#"
-                      title="Delete"
-                      ng-click="openDeleteReferralLinkModal(referral.referralLink)">
-                      <i class="fas fa-trash"></i>
-                    </a>
-                  </div>
+              <div class="ctrls">
+                <div class="ctrls-container d-flex align-items-center">
+                  <a
+                    href="#"
+                    title="Copy"
+                    ng-click="copyLink(referral)">
+                    <i class="fas fa-copy"></i>
+                  </a>
+
+                  <a
+                    ng-href="{{getResumesLink(referral.referralLink, referral.parentReferralLink)}}"
+                    title="List resumes">
+                    <i class="fas fa-list-alt"></i>
+                  </a>
+
+                  <a
+                    class="trash-ctrl"
+                    href="#"
+                    title="Delete"
+                    ng-click="openDeleteReferralLinkModal(referral.referralLink)">
+                    <i class="fas fa-trash"></i>
+                  </a>
                 </div>
               </div>
             </div>

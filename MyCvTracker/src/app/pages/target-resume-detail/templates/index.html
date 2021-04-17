@@ -8,8 +8,9 @@
         ba-panel-class="xsmall-panel light-text resume-panel target-resume-panel">
         <div class="job-detail">
           <div class="title">
-            <h4>Job title fsdf dsf aof dsfong sdfg</h4>
+            <h4 ng-bind="resumeData.job.referralTargetSubject"></h4>
           </div>
+          <div class="location text-primary mt-1" ng-bind="resumeData.job.jobLocation"></div>
         </div>
 
         <hr class="resumeSeprator">
@@ -17,34 +18,50 @@
         <div class="flex-row">
           <div class="flex-fill">
             <h5
-              class="resume-title">Application.docx</h5>
+              class="resume-title"
+              ng-bind="resumeData.detail.resumeTitle"></h5>
             <div
-              class="tile-datetime">13 Jun 2021</div>
+              class="tile-datetime"
+              ng-bind="formatDateTime(resumeData.detail.uploadedAt)"></div>
           </div>
 
           <div>
+             <span
+               class="badge badge-warning"
+               ng-if="resumeData.detail.resumeStatus === JOB_STATUS.APPLIED_JOB">Job Applied</span>
             <span
-              class="badge badge-warning">Job Applied</span>
+              class="badge badge-warning"
+              ng-if="resumeData.detail.resumeStatus === JOB_STATUS.SELECTED_FOR_INTERVIEW">Selected for interview</span>
+            <span
+              class="badge badge-danger"
+              ng-if="resumeData.detail.resumeStatus === JOB_STATUS.REJECTED_FOR_INTERVIEW">Rejected for interview</span>
+            <span
+              class="badge badge-danger"
+              ng-if="resumeData.detail.resumeStatus === JOB_STATUS.REJECTED_FOR_JOB">Rejected for job</span>
+            <span
+              class="badge badge-success"
+              ng-if="resumeData.detail.resumeStatus === JOB_STATUS.SELECTED_FOR_JOB">Selected for job</span>
           </div>
         </div>
 
         <div class="controls">
           <a
+            ng-click="downloadResume()"
             href="#"
             title="Download">
             <i class="fa fa-download"></i>
           </a>
           <a
+            ng-click="openPreviewResume()"
             href="#"
             title="Preview">
             <i class="fas fa-search"></i>
           </a>
           <a
-            href="#"
-            title="Share to parent">
-            <i class="fas fa-external-link-square-alt"></i>
-          </a>
-          <a
+            ng-if="resumeData.detail.resumeStatus !== JOB_STATUS.REJECTED_FOR_INTERVIEW &&
+            resumeData.detail.resumeStatus !== JOB_STATUS.REJECTED_FOR_JOB &&
+            resumeData.detail.resumeStatus !== JOB_STATUS.SELECTED_FOR_JOB"
+            ng-click="openStatusModal()"
             href="#"
             title="Update Status">
             <i class="fas fa-edit"></i>

@@ -32,8 +32,14 @@
   }
 
   .referral-link-panel {
+    .referral-type {
+      font-family: 'museo_slab500';
+      margin-top: 0.3rem;
+      font-size: 13px;
+      color: #9099ad;
+    }
+
     .context-name {
-      margin-bottom: 1rem;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -44,6 +50,7 @@
     }
 
     .link {
+      margin-top: 1rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -53,9 +60,10 @@
     .ctrls {
       color: #337ab7;
       cursor: pointer;
+      margin-top: 1rem;
 
       .fas {
-        margin-left: 8px;
+        margin-right: 8px;
       }
     }
   }
@@ -107,6 +115,10 @@
     &.target-resume-panel {
       .tile-datetime {
         margin-top: 0.6rem;
+      }
+
+      .mt-1 {
+        margin-top: 0.3rem;
       }
     }
   }

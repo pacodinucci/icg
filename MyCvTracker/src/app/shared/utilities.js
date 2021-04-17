@@ -608,6 +608,14 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.referralContent.url;
                 },
 
+                getTargetUpdateResumeInterviewStatusUrl: function () {
+                    return Constants.baseUrl + "/user/resume/interview/target-update";
+                },
+
+                getTargetUpdateResumeJobStatusUrl: function () {
+                    return Constants.baseUrl + "/user/resume/job-status/target-update";
+                },
+
                 getAuthUserListUrl: function () {
                     return Constants.baseUrl + "/auth/users";
                 },

@@ -1,9 +1,17 @@
 <div class="modal-header">
-  <h4 class="modal-title">Share Resumes To Parent</h4>
+  <h4 class="modal-title"
+      ng-if="!referredResumes.sharingSuccess"
+      ng-bind="isShareToTarget(referredResumes.shareResume.sharedWith) ?
+  'Share Resumes To Target' : 'Share Resumes To Parent'"></h4>
+  <h4 class="modal-title"
+      ng-if="referredResumes.sharingSuccess">Success</h4>
 </div>
 <div class="modal-body">
-  <h5 ng-if="!referredResumes.sharingSuccess">Would you like to continue sharing this resumes to target?</h5>
-  <h5 class="text-success" ng-if="referredResumes.sharingSuccess">Referred resume has been shared to parent referral successfully!</h5>
+  <h5 ng-if="!referredResumes.sharingSuccess"
+      ng-bind="isShareToTarget(referredResumes.shareResume.sharedWith) ?
+  'Would you like to continue sharing this resumes to target?' :
+  'Would you like to continue sharing this resumes to parent?'"></h5>
+  <h5 class="text-success" ng-if="referredResumes.sharingSuccess">Referred resume has been shared successfully!</h5>
 </div>
 <div
   class="modal-footer clearfix">

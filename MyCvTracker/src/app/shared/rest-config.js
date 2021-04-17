@@ -394,6 +394,36 @@ angular.module("MyCvTracker.shared")
 
           return RESTSvc.post(url, request);
         },
+        targetUpdateResumeInterview : function (
+          url,
+          id,
+          resumeStatus,
+          targetAccessToken
+        ) {
+          // url = url + "?referralLink=" + parentLink;
+          var request = {
+            "id": id,
+            "resumeStatus" : resumeStatus,
+            "targetAccessToken" : targetAccessToken
+          }
+
+          return RESTSvc.post(url, request);
+        },
+        targetUpdateResumeJob : function (
+          url,
+          id,
+          resumeStatus,
+          targetAccessToken
+        ) {
+          // url = url + "?referralLink=" + parentLink;
+          var request = {
+            "id": id,
+            "resumeStatus" : resumeStatus,
+            "targetAccessToken" : targetAccessToken
+          }
+
+          return RESTSvc.post(url, request);
+        },
         deleteReferralLink : function (
           url,
           referralLink
