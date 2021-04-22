@@ -972,3 +972,26 @@ header{
   }
 }
 /* End Job Spec */
+
+#cookie-confirm-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  z-index: 1000;
+
+  .confirm-container {
+    background-color: #FFF;
+    text-align: center;
+    padding: 1.2rem 0;
+  }
+
+  .btn-primary {
+    margin-left: 1rem;
+  }
+
+  &.active {
+    display: block;
+  }
+}
