@@ -243,7 +243,7 @@ angular.module("MyCvTracker.pages.referral")
 
         tt = tt.replace(/  +/g, " ").replaceAll(" ", "-");
 
-        return text + link + "&title=" + tt;
+        return text + link + "&title=" + encodeURIComponent(tt);
       };
 
       $scope.copyLink = function (referral) {

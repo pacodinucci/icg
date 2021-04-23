@@ -44,7 +44,7 @@
       <div class="jobs-result">
         <div class="list-jobs">
           <div class="job-row" ng-repeat="aJob in listJob track by aJob.id">
-            <a ng-href="https://mycvtracker.com/job-spec.html?ref={{ aJob.referralLink }}&title={{ aJob.referralTargetSubject }}">
+            <a target="_blank" ng-href="{{ getLink(aJob.referralLink, aJob.referralTargetSubject) }}">
               <div class="job-panel">
                 <div class="flex-row">
                   <div class="info-col">

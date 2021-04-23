@@ -82,6 +82,11 @@ angular.module("MyCvTracker.pages.jobList")
         return "";
       };
 
+      $scope.getLink = function(refCode, title) {
+        var url = "job-spec.html?" + "ref=" +  refCode + "&title=" + encodeURIComponent(title);
+        return url;
+      }
+
       $scope.init = function () {
         $scope.getJobList();
       };
