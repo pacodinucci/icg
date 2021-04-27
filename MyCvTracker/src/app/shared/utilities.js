@@ -624,6 +624,14 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + "/auth/userByEmail";
                 },
 
+                getDeleteUserUrl: function () {
+                    return Constants.baseUrl + "/auth/users/{userId}/delete";
+                },
+
+                getRef: function () {
+                    return Constants.baseUrl + Constants.apis.referredResumesList.url;
+                },
+
                 getReferredResumeListUrl: function () {
                     return Constants.baseUrl + Constants.apis.referredResumesList.url;
                 },

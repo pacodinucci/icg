@@ -18,6 +18,10 @@ angular.module("MyCvTracker.pages.userManagement")
         searchUser : function(email) {
           var url =  utilities.getAuthUserByEmailUrl();
           return RestConfig.getAuthUserByEmail(url, email);
+        },
+        deleteUser : function(id) {
+          var url =  utilities.getDeleteUserUrl();
+          return RestConfig.deleteUserAccount(url, id);
         }
       };
     }

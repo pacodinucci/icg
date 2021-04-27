@@ -37,8 +37,15 @@ angular.module("MyCvTracker.pages.referredResumes")
         sharing : false,
         sharingSuccess : false,
         updateSttInput : "select",
-        isChildRef : false
+        isChildRef : false,
+        detail : {}
       };
+
+      $scope.loadRefContent = function(refCode) {
+        service.getReferralDetail(refCode).then(function (rpData) {
+          $scope.referredResumes.detail = rpData;
+        });
+      }
 
       $scope.loadListReferredResumes = function (refCode) {
         service.getReferredResumes(refCode)
@@ -206,6 +213,7 @@ angular.module("MyCvTracker.pages.referredResumes")
 
         $scope.referredResumes.isChildRef = !!parentLink;
         $scope.loadListReferredResumes(referralLink);
+        $scope.loadRefContent(referralLink);
       };
 
       $scope.init();

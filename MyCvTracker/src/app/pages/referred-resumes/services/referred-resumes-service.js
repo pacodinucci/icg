@@ -11,6 +11,10 @@ angular.module("MyCvTracker.pages.referredResumes")
       var utilities = $injector.get("Utilities");
 
       return {
+        getReferralDetail: function(referralLink) {
+          var url = utilities.getReferralContentUrl();
+          return RestConfig.getReferralContent(url, referralLink);
+        },
         getReferredResumes: function(referralLink) {
           var url = utilities.getReferredResumeListUrl();
           return RestConfig.getReferredResumeList(url, referralLink);

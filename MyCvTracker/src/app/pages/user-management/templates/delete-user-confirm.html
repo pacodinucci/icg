@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h4 class="modal-title">Delete user</h4>
+</div>
+<div>
+  <div class="modal-body">
+    <div>
+      <br/>
+      <div ng-if="!userManagement.inDeleting">
+        Would you like to continue deleting this user?
+      </div>
+      <div ng-if="userManagement.inDeleting">
+        Deleting the user is in progress...
+      </div>
+      <br/>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      ng-disabled="userManagement.inDeleting"
+      type="button"
+      class="btn btn-danger" ng-click="deleteUser()">
+      Continue
+    </button>
+    <button
+      ng-disabled="userManagement.inDeleting"
+      type="button"
+      class="btn btn-secondary" ng-click="closeModal()">
+      Close
+    </button>
+  </div>
+</div>

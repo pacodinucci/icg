@@ -447,8 +447,16 @@ angular.module("MyCvTracker.shared")
         getAuthUsers : function(url) {
           return RESTSvc.get(url);
         },
+        deleteUserAccount : function(url, id) {
+          url = url.replace("{userId}", id);
+          return RESTSvc.delete(url);
+        },
         getAuthUserByEmail : function(url, email) {
           url = url + "?email=" + email;
+          return RESTSvc.get(url);
+        },
+        getReferralContent : function (url, link) {
+          url = url.replace("{referralLink}", link);
           return RESTSvc.get(url);
         },
         getReferredResumeList : function (url, link) {

@@ -1393,7 +1393,7 @@
           var expires = "expires=" + d.toUTCString();
           document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
-        var cookieAcc = getCookie("cookieAccept");
+        var cookieAcc = getCookie("cookieAcc");
 
         $( "body" ).append( "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>" );
         if (cookieAcc !== "1") {

@@ -380,7 +380,7 @@
                     url : "/links/childRefLinks"
                 },
                 referralContent : {
-                    url : "/links/referralDetails"
+                    url : "/links/referral/{referralLink}/detail"
                 },
                 resumeTokenLink : {
                     url : "/user/getSharedResumeAccessToken"

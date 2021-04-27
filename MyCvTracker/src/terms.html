@@ -40,9 +40,11 @@
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
             <div class="logo">
-              <img
-                src="assets/img/front/logo.png"
-                alt="">
+              <a href="/" title="My Cv Tracker - Homepage">
+                <img
+                  src="assets/img/front/logo.png"
+                  alt="">
+              </a>
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-12 m-align">
@@ -471,7 +473,7 @@
           document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
-        var cookieAcc = getCookie("cookieAccept");
+        var cookieAcc = getCookie("cookieAcc");
 
         $("body")
           .append(
@@ -486,6 +488,8 @@
             setCookie("cookieAcc", "1", 7);
             $("#cookie-confirm-popup")
               .removeClass("active");
+
+            window.location.href = "/";
           });
       });
     </script>

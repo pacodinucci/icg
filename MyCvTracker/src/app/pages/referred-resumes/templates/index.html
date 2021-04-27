@@ -4,6 +4,19 @@
   <div class="body-section list-resumes-section">
     <div class="section-content">
       <div class="row">
+        <div class="col-xs-12">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text spec-detail-panel">
+            <h4>
+              {{ referredResumes.detail.referralTargetSubject }}
+            </h4>
+
+            <div class="target-email">
+              Target email: {{ referredResumes.detail.referralTargetEmail }}
+            </div>
+          </div>
+        </div>
         <div
           ng-repeat="aResume in referredResumes.list track by aResume.id"
           class="col-xs-12 col-md-3">
