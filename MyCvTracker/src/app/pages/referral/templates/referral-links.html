@@ -47,7 +47,10 @@
                     ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE"
                     class="context-name"
                     ng-click="openReferralDescriptionModal(referral.referralDetails)">
-                    <a href="#">Social Description</a>
+                    <a href="#">
+                      <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
+                      <span ng-if="!referral.referralTargetSubject.length">Social Description</span>
+                    </a>
                   </div>
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
@@ -89,7 +92,8 @@
                   </a>
 
                   <a
-                    ng-href="{{getResumesLink(referral.referralLink, referral.parentReferralLink)}}"
+                    ng-if="referral.referralType !== REFERRAL_TYPE.TEXT_LINK"
+                    ng-href="{{getResumesLink(referral.referralType, referral.referralLink, referral.parentReferralLink)}}"
                     title="List resumes">
                     <i class="fas fa-list-alt"></i>
                   </a>

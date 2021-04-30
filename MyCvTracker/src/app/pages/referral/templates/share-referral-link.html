@@ -14,10 +14,7 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in aliquam justo.
       </div>
       <br/>
-      <a href="#">
-        https://mycvtracker.com/job-spec.html?ref=
-        <span ng-bind="referral.shareReferral.refCode"></span>
-      </a>
+      <a href="#" ng-bind="getRefLink(referral.shareReferral.referralType, referral.shareReferral.refCode, referral.shareReferral.referralTargetSubject)"></a>
       <br/>
       <br/>
     </div>

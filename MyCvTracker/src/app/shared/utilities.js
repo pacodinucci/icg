@@ -649,6 +649,16 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.listChildRefLinks.url;
                 },
 
+
+                getSocialRegistrationListUrl: function () {
+                    return Constants.baseUrl + "/social-registration/{referralLink}/list";
+                },
+
+                getShareSocialToParentLinkUrl: function () {
+                    return Constants.baseUrl + "/social-registration/share-with-parent";
+                },
+
+
                 gotoFrontPage: function () {
                     $location.path('base.front');
                 },

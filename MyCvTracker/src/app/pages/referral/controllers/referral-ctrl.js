@@ -47,7 +47,9 @@ angular.module("MyCvTracker.pages.referral")
         },
         shareReferral : {
           generating : false,
-          refCode : ""
+          refCode : "",
+          referralType : "",
+          referralTargetSubject : ""
         },
         shareResume : {
           referral : null,
@@ -110,6 +112,8 @@ angular.module("MyCvTracker.pages.referral")
         ReferralSvc.shareReferralLink(parentLink)
           .then(function (data) {
             $scope.referral.shareReferral.refCode = data.referralLink;
+            $scope.referral.shareReferral.referralType = data.referralType;
+            $scope.referral.shareReferral.referralTargetSubject = data.referralTargetSubject;
             $scope.referral.shareReferral.generating = false;
           });
       };
@@ -154,6 +158,7 @@ angular.module("MyCvTracker.pages.referral")
             break;
           case  $scope.REFERRAL_TYPE.SOCIAL_SHARE:
             context = $scope.newReferralForm.description;
+            title = $scope.newReferralForm.title;
             break;
         }
 
@@ -210,10 +215,12 @@ angular.module("MyCvTracker.pages.referral")
       };
 
       $scope.getResumesLink = function (
+        type,
         link,
         parentLink
       ) {
-        var url = "/referred-resumes?referralLink=" + link;
+        var path = type ===  $scope.REFERRAL_TYPE.SOCIAL_SHARE ? "/social-registrations" : "/referred-resumes";
+        var url = path + "?referralLink=" + link;
         if (!!parentLink && parentLink !== link) url = url + "&parentLink=" + parentLink;
 
         return url;
@@ -222,29 +229,30 @@ angular.module("MyCvTracker.pages.referral")
       $scope.getReferralLink = function (referral) {
         var refType = referral.referralType;
         var link = referral.referralLink;
+        var tt = referral.referralTargetSubject;
 
-        var tt = "";
+       return $scope.getRefLink(refType, link, tt);
+      };
+
+      $scope.getRefLink = function(refType, link, subject) {
         var text = "";
         switch (refType) {
           case $scope.REFERRAL_TYPE.JOB_SPEC:
             text = "https://mycvtracker.com/job-spec.html?ref=";
-            tt = referral.referralTargetSubject;
             break;
           case $scope.REFERRAL_TYPE.SOCIAL_SHARE:
-            text = "https://mycvtracker.com/referral/social-share?ref=";
-            tt = referral.referralTargetSubject;
+            text = "https://mycvtracker.com/network-share.html?ref=";
             break;
           default:
             text = "https://mycvtracker.com/topcvreviews.html?ref=";
-            tt = referral.referralDetails;
             break;
         }
-        if (!tt) tt = "";
+        if (!subject) subject = "";
 
-        tt = tt.replace(/  +/g, " ").replaceAll(" ", "-");
+        subject = subject.replace(/  +/g, " ").replaceAll(" ", "-");
 
-        return text + link + "&title=" + encodeURIComponent(tt);
-      };
+        return text + link + (!!subject ? "&title=" + encodeURIComponent(subject) : "");
+      }
 
       $scope.copyLink = function (referral) {
         var text = $scope.getReferralLink(referral);

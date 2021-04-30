@@ -22,7 +22,8 @@
     "MyCvTracker.pages.groupdata",
     "MyCvTracker.pages.jobs",
     "MyCvTracker.pages.jobList",
-    "MyCvTracker.pages.targetResumeDetail"
+    "MyCvTracker.pages.targetResumeDetail",
+    "MyCvTracker.pages.socialRegistrations"
   ])
     .run(run);
 
@@ -88,11 +89,14 @@
         var cvwritingPage = next.endsWith("/cvwritingpackages.html");
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
+        var networkSharePage = next.endsWith("/network-share.html");
 
         if (frontPage) {
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
         } else if (jobSpecPage) {
           window.location.href = Utilities.baseUrl() + "/job-spec.html";
+        } else if (networkSharePage) {
+          window.location.href = Utilities.baseUrl() + "/network-share.html";
         } else if (forwardPage) {
           window.location.href = Utilities.baseUrl() + "/forward.html";
         } else if (activatePage) {

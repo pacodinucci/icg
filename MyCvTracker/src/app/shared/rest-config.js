@@ -368,6 +368,17 @@ angular.module("MyCvTracker.shared")
 
           return RESTSvc.post(url, request);
         },
+        shareSocialToParentLink : function (
+          url,
+          id
+        ) {
+          // url = url + "?referralLink=" + parentLink;
+          var request = {
+            "registrationId": id
+          }
+
+          return RESTSvc.post(url, request);
+        },
         updateResumeInterview : function (
           url,
           id,
@@ -478,6 +489,10 @@ angular.module("MyCvTracker.shared")
           url = url + "?token="+ token;
           return RESTSvc.get(url);
         },
+        getSocialRegistrationList : function (url, link) {
+          url = url.replace("{referralLink}", link);
+          return RESTSvc.get(url);
+        }
       };
 
       return RestConfig;
