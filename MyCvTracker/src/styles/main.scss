@@ -392,3 +392,88 @@
   }
 }
 // end list jobs page
+
+// resume preview page
+#job-resume-preview-page {
+  .section-title {
+    padding-bottom: 1em;
+
+    .location {
+      padding-top: 0.5em;
+      color: #9099ad;
+    }
+  }
+
+  .resume-preview-iframe {
+    iframe {
+      border: none;
+    }
+  }
+
+  .list-reviews {
+    padding-top: 2em;
+
+    .reviews-panel {
+      padding: 2em;
+      background-color: #FFF;
+      border-radius: 2px;
+
+      .panel-title {
+        padding-bottom: 1.5em;
+        font-size: 18px;
+      }
+    }
+
+    .a-review {
+      .review-container {
+        margin-bottom: 1.5em;
+        padding-bottom: 1.5em;
+        border-bottom: solid 1px #CCC;
+      }
+
+      .reviewer {
+        padding-bottom: 1em;
+
+        .email {
+          color: #337ab7;
+        }
+
+        .datetime {
+          margin-top: 0.3em;
+          font-family: 'museo_slab500';
+          color: #9099ad;
+        }
+      }
+
+      &:last-of-type {
+        .review-container {
+          margin-bottom: 0;
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .writing-review {
+    padding-top: 2em;
+
+    .writing-panel {
+      padding: 2em;
+      background-color: #FFF;
+      border-radius: 2px;
+
+      .panel-title {
+        padding-bottom: 1.5em;
+        font-size: 18px;
+      }
+    }
+
+    .review-form {
+      .form-row {
+        margin-bottom: 1em;
+      }
+    }
+  }
+}
+// end resume preview page

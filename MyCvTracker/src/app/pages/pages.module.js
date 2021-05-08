@@ -23,7 +23,8 @@
     "MyCvTracker.pages.jobs",
     "MyCvTracker.pages.jobList",
     "MyCvTracker.pages.targetResumeDetail",
-    "MyCvTracker.pages.socialRegistrations"
+    "MyCvTracker.pages.socialRegistrations",
+    "MyCvTracker.pages.jobResumePreview"
   ])
     .run(run);
 
@@ -61,6 +62,7 @@
           "/activateOut",
           "/jobs",
           "/jobs-list",
+          "/job-resume-preview",
           "/target-resume-detail",
           "/viewJob",
           "/findjobs",
