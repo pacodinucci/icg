@@ -502,11 +502,11 @@ angular.module("MyCvTracker.shared")
         },
         leaveResumeReview : function(url, resumeAccessToken, email, review) {
           return RESTSvc.post(url, {
-            resumeAccessToken,
-            email,
+            resumeAccessToken : resumeAccessToken,
+            email : email,
             fistName : "",
             lastName : "",
-            review
+            review : review
           });
         }
       };
