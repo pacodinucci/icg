@@ -492,6 +492,22 @@ angular.module("MyCvTracker.shared")
         getSocialRegistrationList : function (url, link) {
           url = url.replace("{referralLink}", link);
           return RESTSvc.get(url);
+        },
+        getJobSpecDetailFromAccessToken : function(url, accessToken) {
+           url = url + "?accessToken=" + accessToken;
+          return RESTSvc.get(url);
+        },
+        getResumeReviews : function(url) {
+          return RESTSvc.get(url);
+        },
+        leaveResumeReview : function(url, resumeAccessToken, email, review) {
+          return RESTSvc.post(url, {
+            resumeAccessToken,
+            email,
+            fistName : "",
+            lastName : "",
+            review
+          });
         }
       };
 

@@ -3,44 +3,81 @@
   ng-controller="JobResumePreviewCtrl">
   <div class="body-section">
     <div class="section-content">
-      <div class="section-title">
-        <h4>Fullstack Developer</h4>
+      <div
+        class="section-title"
+        ng-if="resumePreview.tokenValid === true">
+        <h4 ng-bind="jobDetail.referralTargetSubject"></h4>
         <div class="location">
-          Location: Ha Noi
+          Location: {{ jobDetail.jobLocation }}
         </div>
       </div>
 
-      <div class="resume-preview-iframe">
+      <div
+        class="resume-preview-iframe"
+        ng-if="resumePreview.tokenValid === true">
         <iframe
-          src="https://view.officeapps.live.com/op/embed.aspx?src=https://mycvtracker.com:8080/user/previewResume?accessToken=eda8873fe10443518ad1e22cec51827a"
+          ng-src="{{ trustSrc(resumePreview.url) }}"
           width="100%"
           height="400"></iframe>
       </div>
 
-      <div class="writing-review">
+      <div
+        class="writing-review"
+        ng-if="resumePreview.tokenValid === true">
         <div class="writing-panel">
           <div class="panel-title">
             Leave a review
           </div>
-
-          <div class="review-form">
+          <div class="review-form" ng-if="!writingForm.submitted && !writingForm.expired">
             <div class="form-row">
               <input
+                ng-disabled="writingForm.submitting"
+                ng-model="writingForm.email"
                 class="form-control"
                 type="text"
                 placeholder="Enter your email" />
             </div>
             <div class="form-row">
-              <textarea class="form-control" placeholder="Enter your review"></textarea>
+              <textarea
+                maxlength="500"
+                ng-disabled="writingForm.submitting"
+                ng-model="writingForm.content"
+                class="form-control"
+                placeholder="Enter your review"></textarea>
+            </div>
+            <div class="form-row" ng-if="writingForm.emailInvalid || writingForm.contentInvalid">
+              <div class="text-danger" ng-if="writingForm.emailInvalid">
+                Email is invalid.
+              </div>
+              <div class="text-danger" ng-if="writingForm.contentInvalid">
+                Review content is required.
+              </div>
             </div>
             <div class="form-row">
-              <button type="button" class="btn btn-primary">Submit My Review</button>
+              <button
+                ng-disabled="writingForm.submitting"
+                type="button"
+                class="btn btn-primary" ng-click="submitReview()">
+                {{ !writingForm.submitting ? "Submit My Review" : "Submitting In Progress" }}
+              </button>
+            </div>
+          </div>
+          <div
+            class="writing-notify-message"
+            ng-if="writingForm.submitted || writingForm.expired">
+            <div class="text-danger" ng-if="writingForm.expired">
+              Access token has recently expired. Please ask for new access link to review.
+            </div>
+            <div class="text-success" ng-if="writingForm.submitted">
+              Your review has been submitted successfully. Thanks for your contribution.
             </div>
           </div>
         </div>
       </div>
 
-      <div class="list-reviews">
+      <div
+        class="list-reviews"
+        ng-if="resumePreview.tokenValid === true">
         <div class="reviews-panel">
           <div class="panel-title">
             List of reviews
@@ -48,51 +85,23 @@
 
           <div class="panel-content">
             <div class="reviews">
-              <div class="a-review">
+              <div
+                ng-repeat="aReview in listReviews track by aReview.id"
+                class="a-review">
                 <div class="review-container">
                   <div class="reviewer">
-                    <div class="email">
-                      longnguyentpvt@gmail.com
+                    <div
+                      class="email"
+                      ng-bind="aReview.feedbackUserEmail">
                     </div>
-                    <div class="datetime">
-                      07 Oct, 2021
+                    <div
+                      class="datetime"
+                      ng-bind="formatDateTime(aReview.uploadedAt)">
                     </div>
                   </div>
 
                   <div class="review-content">
-                    <p>
-                      Fusce commodo nisl ac aliquam volutpat. Quisque ac tellus magna. Cras dignissim lorem vel ante
-                      auctor tempor. Sed venenatis elit quis aliquet vulputate. Aliquam eget turpis metus.
-                      <br />
-                      <br />
-                      Nullam rutrum, mi ac mollis sodales, neque nunc sodales erat, pellentesque lobortis quam leo a
-                      ante. Curabitur pellentesque, lacus id venenatis pretium, nulla quam imperdiet nisi, non iaculis
-                      magna dolor at ante.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="a-review">
-                <div class="review-container">
-                  <div class="reviewer">
-                    <div class="email">
-                      longnguyentpvt@gmail.com
-                    </div>
-                    <div class="datetime">
-                      07 Oct, 2021
-                    </div>
-                  </div>
-
-                  <div class="review-content">
-                    <p>
-                      Fusce commodo nisl ac aliquam volutpat. Quisque ac tellus magna. Cras dignissim lorem vel ante
-                      auctor tempor. Sed venenatis elit quis aliquet vulputate. Aliquam eget turpis metus.
-                      <br />
-                      <br />
-                      Nullam rutrum, mi ac mollis sodales, neque nunc sodales erat, pellentesque lobortis quam leo a
-                      ante. Curabitur pellentesque, lacus id venenatis pretium, nulla quam imperdiet nisi, non iaculis
-                      magna dolor at ante.
+                    <p ng-bind="aReview.resumeReview">
                     </p>
                   </div>
                 </div>
@@ -100,6 +109,12 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div
+        class="text-danger token-error"
+        ng-if="resumePreview.tokenValid === false">
+        Access token has been expired.
       </div>
     </div>
   </div>

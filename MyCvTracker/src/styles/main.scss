@@ -452,6 +452,12 @@
           border-bottom: none;
         }
       }
+
+      .review-content {
+        p {
+          white-space: pre-wrap;
+        }
+      }
     }
   }
 
@@ -474,6 +480,14 @@
         margin-bottom: 1em;
       }
     }
+
+    .writing-notify-message {
+      padding: 2em 0;
+    }
+  }
+
+  .token-error {
+    margin-top: 4em;
   }
 }
 // end resume preview page

@@ -104,10 +104,11 @@ angular.module("MyCvTracker.pages.referredResumes")
       $scope.openPreviewResume = function (id, fileType) {
         service.getResumeToken(id, referralLink)
           .then(function (data) {
-            var url = "https://mycvtracker.com:8080/user/previewResume?accessToken=" + data.token;
-            if (fileType !== "application/pdf") {
-              url = "https://view.officeapps.live.com/op/embed.aspx?src=" + url;
-            }
+            // var url = "https://mycvtracker.com:8080/user/previewResume?accessToken=" + data.token;
+            // if (fileType !== "application/pdf") {
+            //   url = "https://view.officeapps.live.com/op/embed.aspx?src=" + url;
+            // }
+            var url =  "/job-resume-preview?id=" + id + "&accessToken=" + data.token + "&fileType=" + (fileType === "application/pdf" ? "pdf" : "doc");
 
             const link = document.createElement('a');
             link.href = url;
