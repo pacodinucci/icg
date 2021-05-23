@@ -6,7 +6,7 @@
       <div
         class="section-title"
         ng-if="resumePreview.tokenValid === true">
-        <h4 ng-bind="jobDetail.referralTargetSubject"></h4>
+        <h4 ng-bind="jobDetail.jobTitle"></h4>
         <div class="location">
           Location: {{ jobDetail.jobLocation }}
         </div>
@@ -22,13 +22,47 @@
       </div>
 
       <div
+        class="writing-review extend-preview">
+        <div class="writing-panel">
+          <div ng-if="!extendForm.submitted && !extendForm.failed">
+            <div class="text-primary">
+              Would you like to extend this resume preview?
+            </div>
+            <br />
+            <div>
+              <button
+                ng-disabled="extendForm.submitting"
+                class="btn btn-primary"
+                ng-click="extendPreview()">
+                {{ !extendForm.submitting ? "Extend" : "Extending..." }}
+              </button>
+            </div>
+          </div>
+          <div ng-if="extendForm.submitted">
+            <div class="text-success">
+              Your preview has been extended successfully.<br/>
+              Let share your resume preview to get more reviews.
+            </div>
+          </div>
+          <div ng-if="extendForm.failed">
+            <div class="text-error">
+              Extending the resume preview has failed due to some reasons.<br/>
+              Please contact us for more information.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
         class="writing-review"
-        ng-if="resumePreview.tokenValid === true">
+        ng-if="resumePreview.tokenValid === true && !jobDetail.isExtend">
         <div class="writing-panel">
           <div class="panel-title">
             Leave a review
           </div>
-          <div class="review-form" ng-if="!writingForm.submitted && !writingForm.expired">
+          <div
+            class="review-form"
+            ng-if="!writingForm.submitted && !writingForm.expired">
             <div class="form-row">
               <input
                 ng-disabled="writingForm.submitting"
@@ -45,11 +79,17 @@
                 class="form-control"
                 placeholder="Enter your review"></textarea>
             </div>
-            <div class="form-row" ng-if="writingForm.emailInvalid || writingForm.contentInvalid">
-              <div class="text-danger" ng-if="writingForm.emailInvalid">
+            <div
+              class="form-row"
+              ng-if="writingForm.emailInvalid || writingForm.contentInvalid">
+              <div
+                class="text-danger"
+                ng-if="writingForm.emailInvalid">
                 Email is invalid.
               </div>
-              <div class="text-danger" ng-if="writingForm.contentInvalid">
+              <div
+                class="text-danger"
+                ng-if="writingForm.contentInvalid">
                 Review content is required.
               </div>
             </div>
@@ -57,7 +97,8 @@
               <button
                 ng-disabled="writingForm.submitting"
                 type="button"
-                class="btn btn-primary" ng-click="submitReview()">
+                class="btn btn-primary"
+                ng-click="submitReview()">
                 {{ !writingForm.submitting ? "Submit My Review" : "Submitting In Progress" }}
               </button>
             </div>
@@ -65,10 +106,14 @@
           <div
             class="writing-notify-message"
             ng-if="writingForm.submitted || writingForm.expired">
-            <div class="text-danger" ng-if="writingForm.expired">
+            <div
+              class="text-danger"
+              ng-if="writingForm.expired">
               Access token has recently expired. Please ask for new access link to review.
             </div>
-            <div class="text-success" ng-if="writingForm.submitted">
+            <div
+              class="text-success"
+              ng-if="writingForm.submitted">
               Your review has been submitted successfully. Thanks for your contribution.
             </div>
           </div>

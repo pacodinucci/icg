@@ -108,7 +108,7 @@ angular.module("MyCvTracker.pages.referredResumes")
             // if (fileType !== "application/pdf") {
             //   url = "https://view.officeapps.live.com/op/embed.aspx?src=" + url;
             // }
-            var url =  "/job-resume-preview?id=" + id + "&accessToken=" + data.token + "&fileType=" + (fileType === "application/pdf" ? "pdf" : "doc");
+            var url =  "/job-resume-preview?accessToken=" + data.token;
 
             const link = document.createElement('a');
             link.href = url;

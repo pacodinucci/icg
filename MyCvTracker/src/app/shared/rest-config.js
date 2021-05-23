@@ -493,16 +493,30 @@ angular.module("MyCvTracker.shared")
           url = url.replace("{referralLink}", link);
           return RESTSvc.get(url);
         },
-        getJobSpecDetailFromAccessToken : function(url, accessToken) {
-           url = url + "?accessToken=" + accessToken;
+        getJobSpecDetailFromAccessToken : function(url, accessToken, previewToken, extendToken) {
+          var param = "";
+          if (!!accessToken) {
+            param = "accessToken=" + accessToken;
+          } else if (!!previewToken) {
+            param = "token=" + previewToken;
+          } else if (!!extendToken) {
+            param = "extendToken=" + extendToken;
+          }
+
+           url = url + "?" + param;
           return RESTSvc.get(url);
+        }, extendResumePreviewFromToken : function(url, token) {
+          return RESTSvc.post(url, {
+            token : token
+          });
         },
         getResumeReviews : function(url) {
           return RESTSvc.get(url);
         },
-        leaveResumeReview : function(url, resumeAccessToken, email, review) {
+        leaveResumeReview : function(url, resumeAccessToken, previewToken, email, review) {
           return RESTSvc.post(url, {
-            resumeAccessToken : resumeAccessToken,
+            resumeAccessToken : !!resumeAccessToken ? resumeAccessToken : null,
+            previewToken : !!previewToken ? previewToken : null,
             email : email,
             fistName : "",
             lastName : "",
