@@ -22,6 +22,7 @@
       </div>
 
       <div
+        ng-if="!!jobDetail.isExtend"
         class="writing-review extend-preview">
         <div class="writing-panel">
           <div ng-if="!extendForm.submitted && !extendForm.failed">
