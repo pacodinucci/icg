@@ -875,6 +875,17 @@ header{
     padding: 0 2em;
     margin: 0;
     margin-top: 1em;
+
+    .job-detail {
+      a {
+        color: #FFF !important;
+        text-decoration: underline !important;
+      }
+
+      > p {
+        white-space: pre-wrap;
+      }
+    }
   }
 
   h4 {
