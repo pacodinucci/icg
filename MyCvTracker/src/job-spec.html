@@ -1361,6 +1361,10 @@
                 .html(jobTitle);
               $("#job-spec-box .job-detail")
                 .html(data.referralDetails);
+
+              setTimeout(function() {
+                $("#job-spec-box .job-detail a").attr("target", "_blank");
+              }, 300);
             }
           });
         }
