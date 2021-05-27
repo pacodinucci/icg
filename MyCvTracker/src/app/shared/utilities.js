@@ -277,6 +277,7 @@ angular.module('MyCvTracker.shared')
                     message: 'You have sucessfully rejected this job.'
                 },
                 newReferralLinkSuccessMsg : "New referral link has been generated",
+                editReferralLinkSuccessMsg : "The referral link has been updated successfully",
                 referralLinkCopySuccessMsg : "Copied",
                 deleteReferralLinkSuccessMsg : "Referral link has been deleted successfully."
             };
@@ -567,6 +568,10 @@ angular.module('MyCvTracker.shared')
                 },
 
                 getReferralLinkNewUrl: function () {
+                    return Constants.baseUrl + Constants.apis.newReferralLink.url;
+                },
+
+                getReferralLinkEditUrl: function () {
                     return Constants.baseUrl + Constants.apis.newReferralLink.url;
                 },
 

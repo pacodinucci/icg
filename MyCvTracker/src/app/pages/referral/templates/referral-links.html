@@ -36,14 +36,15 @@
                 <div class="info-col flex-fill">
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.TEXT_LINK || !referral.referralType"
-                    class="context-name">
+                    class="context-name"
+                    ng-click="openNewReferralLinkModal(referral)">
                     <span ng-if="referral.referralDetails.length">{{referral.referralDetails}}</span>
                     <span ng-if="!referral.referralDetails.length">-</span>
                   </div>
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE"
                     class="context-name"
-                    ng-click="openReferralDescriptionModal(referral.referralDetails)">
+                    ng-click="openNewReferralLinkModal(referral)">
                     <a href="#">
                       <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
                       <span ng-if="!referral.referralTargetSubject.length">Social Description</span>
@@ -52,7 +53,7 @@
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
                     class="context-name"
-                    ng-click="openReferralDescriptionModal(referral.referralDetails, referral.referralTargetEmail)">
+                    ng-click="openNewReferralLinkModal(referral)">
                     <a href="#">
                       <span ng-if="!referral.referralTargetSubject.length">Job Description</span>
                       <span ng-if="referral.referralTargetSubject.length">{{ referral.referralTargetSubject }}</span>

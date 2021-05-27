@@ -58,14 +58,16 @@ angular.module("MyCvTracker.pages.referral")
         }
       };
       $scope.newReferralForm = {
-        type : "JOB_SPEC",
-        context : null,
+        type : $scope.REFERRAL_TYPE.JOB_SPEC,
+        isChildRef : false,
+        editing : false,
         description : null,
         title : null,
         email : null,
         location : null,
         jobType : null,
         generating : false,
+        editingReferral : {},
         REFERRAL_TYPE : {}
       };
       $scope.deletingReferralLink = "";
@@ -85,7 +87,19 @@ angular.module("MyCvTracker.pages.referral")
         }
       };
 
-      $scope.openNewReferralLinkModal = function () {
+      $scope.openNewReferralLinkModal = function (referral) {
+        $scope.newReferralForm.editing = !!referral;
+        if (!!referral) {
+          $scope.newReferralForm.description = referral.referralDetails;
+          $scope.newReferralForm.type = referral.referralType;
+          $scope.newReferralForm.title = referral.referralTargetSubject;
+          $scope.newReferralForm.email = referral.referralTargetEmail;
+          $scope.newReferralForm.location = referral.jobLocation;
+          $scope.newReferralForm.jobType = referral.jobType;
+          $scope.newReferralForm.editingReferral = referral;
+          $scope.newReferralForm.isChildRef = referral.parentReferralLink !== referral.referralLink;
+        }
+
         $scope.referralModal = ReferralSvc.getNewReferralLinkModal($scope, "ReferalModalCtrl");
       };
 
@@ -121,7 +135,15 @@ angular.module("MyCvTracker.pages.referral")
       $scope.closeModal = function () {
         // console.log($scope.referralModal);
         $scope.referralModal.dismiss();
-        $scope.newReferralForm.context = null;
+        $scope.newReferralForm.editing = false;
+        $scope.newReferralForm.description = null;
+        $scope.newReferralForm.title = null;
+        $scope.newReferralForm.email = null;
+        $scope.newReferralForm.location = null;
+        $scope.newReferralForm.jobType = null;
+        $scope.newReferralForm.generating = false;
+        $scope.newReferralForm.isChildRef = false;
+        $scope.newReferralForm.editingReferral = {};
         $scope.referral.selectedDescription = null;
         $scope.referral.selectedTargetEmail = null;
         $scope.referral.shareReferral.generating = false;
@@ -139,6 +161,10 @@ angular.module("MyCvTracker.pages.referral")
       };
 
       $scope.generateLink = function () {
+        if ($scope.newReferralForm.isChildRef) {
+          return;
+        }
+
         $scope.newReferralForm.generating = true;
 
         var context = "";
@@ -147,7 +173,7 @@ angular.module("MyCvTracker.pages.referral")
           title = "", location = "", jobType = "";
         switch (type) {
           case $scope.REFERRAL_TYPE.TEXT_LINK:
-            context = $scope.newReferralForm.context;
+            context = $scope.newReferralForm.description;
             break;
           case  $scope.REFERRAL_TYPE.JOB_SPEC:
             context = $scope.newReferralForm.description;
@@ -172,14 +198,32 @@ angular.module("MyCvTracker.pages.referral")
               toastr.success(msg, "Success");
             });
         } else {
-          ReferralSvc.generateLink(context, type, title, email, jobType, location)
-            .then(function () {
-              $scope.newReferralForm.generating = false;
-              $scope.closeModal();
-              $scope.loadListReferralLinks();
-              var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
-              toastr.success(msg, "Success");
-            });
+          if (!$scope.newReferralForm.editing) {
+            ReferralSvc.generateLink(context, type, title, email, jobType, location)
+              .then(function () {
+                $scope.newReferralForm.generating = false;
+                $scope.closeModal();
+                $scope.loadListReferralLinks();
+                var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
+                toastr.success(msg, "Success");
+              });
+          } else {
+            var referralLink = $scope.newReferralForm.editingReferral.referralLink;
+            ReferralSvc.editRefLink(referralLink, title, context, jobType, location)
+              .then(function () {
+                $scope.newReferralForm.editingReferral.referralTargetSubject = title;
+                $scope.newReferralForm.editingReferral.referralDetails = context;
+                $scope.newReferralForm.editingReferral.jobType = jobType;
+                $scope.newReferralForm.editingReferral.jobLocation = location;
+
+                $scope.newReferralForm.generating = false;
+                $scope.closeModal();
+
+                var msg = Utilities.getAlerts("editReferralLinkSuccessMsg");
+                toastr.success(msg, "Success");
+              });
+
+          }
         }
       };
 

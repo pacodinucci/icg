@@ -314,6 +314,24 @@ angular.module("MyCvTracker.shared")
 
           return RESTSvc.post(url, request);
         },
+        editReferralLink : function (
+          url,
+          referralLink,
+          description,
+          referralTargetSubject,
+          jobType,
+          jobLocation
+        ) {
+          var request = {
+            referralLink : referralLink,
+            referralDetails : description,
+            referralTargetSubject : referralTargetSubject,
+            jobType : jobType,
+            jobLocation : jobLocation
+          }
+
+          return RESTSvc.put(url, request);
+        },
         generateReferralLinkForUser : function (
           url,
           userEmail,

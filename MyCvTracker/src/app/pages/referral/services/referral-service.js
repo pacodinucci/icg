@@ -23,6 +23,10 @@ angular.module("MyCvTracker.pages.referral")
           var url = utilities.getReferralLinkNewUrl();
           return RestConfig.generateReferralLink(url, name, type, title, email, jobType, location);
         },
+        editRefLink : function(referralLink, title, description, jobType, location) {
+          var url = utilities.getReferralLinkEditUrl();
+          return RestConfig.editReferralLink(url, referralLink, description, title, jobType, location);
+        },
         generateLinkForUser : function(name, email, type, title, targetEmail, jobType, location) {
           var url = utilities.getReferralLinkNewUrlForUser();
           return RestConfig.generateReferralLinkForUser(url, email, name, type, title, targetEmail, jobType, location);
