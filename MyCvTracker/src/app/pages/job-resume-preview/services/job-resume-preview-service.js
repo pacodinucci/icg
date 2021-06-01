@@ -13,22 +13,22 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       var utilities = $injector.get("Utilities");
 
       return {
-        getJobDetail: function(accessToken, previewToken, extendToken) {
+        getJobDetail: function(accessToken, previewToken, extendToken, originalToken, extendOriginalToken) {
           var url = Constants.baseUrl + "/user/resume/ref/detail";
-          return RestConfig.getJobSpecDetailFromAccessToken(url, accessToken, previewToken, extendToken);
+          return RestConfig.getJobSpecDetailFromAccessToken(url, accessToken, previewToken, extendToken, originalToken, extendOriginalToken);
         },
         getResumeReviews: function(resumeId) {
           var url = Constants.baseUrl + "/user/resume/" + resumeId + "/reviews/list";
           return RestConfig.getResumeReviews(url);
         },
-        extendResumePreview: function(token) {
+        extendResumePreview: function(token, originalToken) {
           var url = Constants.baseUrl + "/user/resume/preview/extend";
-          return RestConfig.extendResumePreviewFromToken(url, token);
+          return RestConfig.extendResumePreviewFromToken(url, token, originalToken);
         },
-        submitResumeReview: function(accessToken, previewToken, email, review) {
+        submitResumeReview: function(accessToken, previewToken, originalToken, email, review) {
           var url = Constants.baseUrl + "/user/resume/review/new";
 
-          return RestConfig.leaveResumeReview(url, accessToken, previewToken, email, review);
+          return RestConfig.leaveResumeReview(url, accessToken, previewToken, originalToken, email, review);
         }
       };
     }

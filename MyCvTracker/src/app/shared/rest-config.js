@@ -511,7 +511,7 @@ angular.module("MyCvTracker.shared")
           url = url.replace("{referralLink}", link);
           return RESTSvc.get(url);
         },
-        getJobSpecDetailFromAccessToken : function(url, accessToken, previewToken, extendToken) {
+        getJobSpecDetailFromAccessToken : function(url, accessToken, previewToken, extendToken, originalToken, extendOriginalToken) {
           var param = "";
           if (!!accessToken) {
             param = "accessToken=" + accessToken;
@@ -519,22 +519,28 @@ angular.module("MyCvTracker.shared")
             param = "token=" + previewToken;
           } else if (!!extendToken) {
             param = "extendToken=" + extendToken;
+          } else if (!!originalToken) {
+            param = "originalToken=" + originalToken;
+          } else if (!!extendOriginalToken) {
+            param = "extendOriginalToken=" + extendOriginalToken;
           }
 
            url = url + "?" + param;
           return RESTSvc.get(url);
-        }, extendResumePreviewFromToken : function(url, token) {
+        }, extendResumePreviewFromToken : function(url, token, originalToken) {
           return RESTSvc.post(url, {
-            token : token
+            token : !!token ? token : null,
+            originalToken : !!originalToken ? originalToken : null
           });
         },
         getResumeReviews : function(url) {
           return RESTSvc.get(url);
         },
-        leaveResumeReview : function(url, resumeAccessToken, previewToken, email, review) {
+        leaveResumeReview : function(url, resumeAccessToken, previewToken, originalToken, email, review) {
           return RESTSvc.post(url, {
             resumeAccessToken : !!resumeAccessToken ? resumeAccessToken : null,
             previewToken : !!previewToken ? previewToken : null,
+            originalToken : !!originalToken ? originalToken : null,
             email : email,
             fistName : "",
             lastName : "",

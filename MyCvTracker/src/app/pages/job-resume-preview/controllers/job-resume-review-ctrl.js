@@ -26,7 +26,9 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       var mainSvc = $injector.get("JobResumePreviewService");
       var accessToken = "",
         previewToken = "",
-        extendToken = "";
+        extendToken = "",
+        originalToken = "",
+        extendOriginalToken = "";
       var fileType = "";
       var resumeId = "";
 
@@ -56,23 +58,23 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       $scope.listReviews = [];
 
       $scope.loadJobSpec = function () {
-        mainSvc.getJobDetail(accessToken, previewToken, extendToken)
-          .then(function (data) {
-            $scope.jobDetail = data;
-            fileType = data.fileType;
-            resumeId = data.resumeId;
-            $scope.resumePreview.tokenValid = true;
-            $scope.loadPreview();
+          mainSvc.getJobDetail(accessToken, previewToken, extendToken, originalToken, extendOriginalToken)
+            .then(function (data) {
+              $scope.jobDetail = data;
+              fileType = data.fileType;
+              resumeId = data.resumeId;
+              $scope.resumePreview.tokenValid = true;
+              $scope.loadPreview();
 
-            if (!extendToken) {
-              $scope.loadListReviews();
-            } else {
-              $scope.jobDetail["isExtend"] = true;
-            }
-          })
-          .catch(function () {
-            $scope.resumePreview.tokenValid = false;
-          });
+              if (!extendToken && !extendOriginalToken) {
+                $scope.loadListReviews();
+              } else {
+                $scope.jobDetail["isExtend"] = true;
+              }
+            })
+            .catch(function () {
+              $scope.resumePreview.tokenValid = false;
+            });
       };
 
       $scope.loadPreview = function () {
@@ -83,6 +85,10 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           param = "token=" + previewToken;
         } else if (!!extendToken) {
           param = "extendToken=" + extendToken;
+        } else if (!!originalToken) {
+          param = "originalToken=" + originalToken;
+        } else if (!!extendOriginalToken) {
+          param = "extendOriginalToken=" + extendOriginalToken;
         }
         var url = "https://mycvtracker.com:8080/user/previewResume?" + param;
         if (fileType !== "application/pdf") {
@@ -99,18 +105,20 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           });
       };
 
-      $scope.extendPreview = function() {
+      $scope.extendPreview = function () {
         $scope.extendForm.submitting = true;
-        mainSvc.extendResumePreview(extendToken).then(function () {
-          $scope.extendForm.submitted = true;
-          $scope.extendForm.failed = false;
-          $scope.extendForm.submitting = false;
-        }).catch(function() {
-          $scope.extendForm.submitted = false;
-          $scope.extendForm.failed = true;
-          $scope.extendForm.submitting = false;
-        });
-      }
+        mainSvc.extendResumePreview(extendToken, extendOriginalToken)
+          .then(function () {
+            $scope.extendForm.submitted = true;
+            $scope.extendForm.failed = false;
+            $scope.extendForm.submitting = false;
+          })
+          .catch(function () {
+            $scope.extendForm.submitted = false;
+            $scope.extendForm.failed = true;
+            $scope.extendForm.submitting = false;
+          });
+      };
 
       $scope.submitReview = function () {
         var email = $scope.writingForm.email;
@@ -123,7 +131,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
 
         if (!emailInvalid && !contentInvalid) {
           $scope.writingForm.submitting = true;
-          mainSvc.submitResumeReview(accessToken, previewToken, email, content)
+          mainSvc.submitResumeReview(accessToken, previewToken, originalToken, email, content)
             .then(function () {
               $scope.writingForm.submitted = true;
               $scope.writingForm.submitting = false;
@@ -153,6 +161,12 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         }
         if (!!params.extendToken) {
           extendToken = params.extendToken;
+        }
+        if (!!params.originalToken) {
+          originalToken = params.originalToken;
+        }
+        if (!!params.extendOriginalToken) {
+          extendOriginalToken = params.extendOriginalToken;
         }
 
         // load job spec from access token

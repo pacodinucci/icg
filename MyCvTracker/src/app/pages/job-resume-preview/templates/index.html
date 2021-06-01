@@ -6,8 +6,8 @@
       <div
         class="section-title"
         ng-if="resumePreview.tokenValid === true">
-        <h4 ng-bind="jobDetail.jobTitle"></h4>
-        <div class="location">
+        <h4 ng-bind="jobDetail.jobTitle" ng-if="!!jobDetail.jobTitle"></h4>
+        <div class="location" ng-if="!!jobDetail.jobLocation">
           Location: {{ jobDetail.jobLocation }}
         </div>
       </div>
