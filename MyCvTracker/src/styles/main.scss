@@ -461,6 +461,56 @@
     }
   }
 
+  .reply-summary {
+    margin-top: 15px;
+
+    i {
+      margin-left: 15px;
+      margin-right: 15px;
+      transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+    }
+
+    .text {
+      font-size: 13px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .list-reply {
+    font-size: 13px;
+    padding-left: 40px;
+    padding-top: 12px;
+
+    .a-reply {
+      margin-bottom: 15px;
+      font-family: 'museo_slab500';
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .user {
+        color: #337ab7;
+      }
+
+      .content {
+        padding: 5px 0;
+      }
+
+      .date {
+        color: #9099ad;
+      }
+    }
+  }
+
   .writing-review {
     padding-top: 2em;
 

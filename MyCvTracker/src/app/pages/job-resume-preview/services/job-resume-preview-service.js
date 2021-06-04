@@ -29,7 +29,16 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           var url = Constants.baseUrl + "/user/resume/review/new";
 
           return RestConfig.leaveResumeReview(url, accessToken, previewToken, originalToken, email, review);
-        }
+        },
+        submitReviewComment : function(reviewId, content) {
+          var url = Constants.baseUrl + "/user/resume/review/reply";
+
+          return RestConfig.leaveReviewComment(url, reviewId, content);
+        },
+        getReviewComments: function(reviewId) {
+          var url = Constants.baseUrl + "/user/reviews/" + reviewId + "/reply/list";
+          return RestConfig.getReviewComments(url);
+        },
       };
     }
   ]);

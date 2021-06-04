@@ -6,8 +6,12 @@
       <div
         class="section-title"
         ng-if="resumePreview.tokenValid === true">
-        <h4 ng-bind="jobDetail.jobTitle" ng-if="!!jobDetail.jobTitle"></h4>
-        <div class="location" ng-if="!!jobDetail.jobLocation">
+        <h4
+          ng-bind="jobDetail.jobTitle"
+          ng-if="!!jobDetail.jobTitle"></h4>
+        <div
+          class="location"
+          ng-if="!!jobDetail.jobLocation">
           Location: {{ jobDetail.jobLocation }}
         </div>
       </div>
@@ -41,13 +45,15 @@
           </div>
           <div ng-if="extendForm.submitted">
             <div class="text-success">
-              Your preview has been extended successfully.<br/>
+              Your preview has been extended successfully.
+              <br />
               Let share your resume preview to get more reviews.
             </div>
           </div>
           <div ng-if="extendForm.failed">
             <div class="text-error">
-              Extending the resume preview has failed due to some reasons.<br/>
+              Extending the resume preview has failed due to some reasons.
+              <br />
               Please contact us for more information.
             </div>
           </div>
@@ -135,20 +141,47 @@
                 ng-repeat="aReview in listReviews track by aReview.id"
                 class="a-review">
                 <div class="review-container">
-                  <div class="reviewer">
-                    <div
-                      class="email"
-                      ng-bind="aReview.feedbackUserEmail">
+                  <div>
+                    <div class="reviewer">
+                      <div
+                        class="email"
+                        ng-bind="aReview.feedbackUserEmail">
+                      </div>
+                      <div
+                        class="datetime"
+                        ng-bind="formatDateTime(aReview.uploadedAt)">
+                      </div>
                     </div>
-                    <div
-                      class="datetime"
-                      ng-bind="formatDateTime(aReview.uploadedAt)">
+
+                    <div class="review-content">
+                      <p ng-bind="aReview.resumeReview">
+                      </p>
+                    </div>
+
+                    <div class="reply-summary">
+                      <i class="fas fa-level-up-alt"></i>
+                      <span
+                        class="text"
+                        ng-click="activeReply(aReview)">{{ !!aReview.noOfReply ? aReview.noOfReply : 0 }} comments - Reply</span>
                     </div>
                   </div>
-
-                  <div class="review-content">
-                    <p ng-bind="aReview.resumeReview">
-                    </p>
+                  <div
+                    class="list-reply"
+                    ng-if="!!aReview.replyActive">
+                    <div class="a-reply reply-comment"
+                         ng-repeat="aComment in aReview.listReply track by aComment.id">
+                      <div class="user" ng-bind="aComment.userId !== resumePreview.rqUserId ? aComment.userEmail : 'You'"></div>
+                      <div class="content" ng-bind="aComment.replyContent"></div>
+                      <div class="date" ng-bind="formatDateTime(aComment.uploadedAt)"></div>
+                    </div>
+                    <div class="a-reply reply-input">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter to leave comment"
+                        ng-keydown="$event.keyCode === 13 && writeReviewComment(aReview)"
+                        ng-model="aReview.replyContent" />
+                    </div>
                   </div>
                 </div>
               </div>

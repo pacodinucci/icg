@@ -34,8 +34,14 @@ angular.module("MyCvTracker.pages.jobResumePreview")
 
       $scope.resumePreview = {
         tokenValid : null,
-        url : null
+        url : null,
+        rqUserId : 0
       };
+
+      var userDetail = Authorization.getUserDetails();
+      if (!!userDetail) {
+        $scope.resumePreview.rqUserId = userDetail.id;
+      }
 
       $scope.jobDetail = {};
 
@@ -142,6 +148,50 @@ angular.module("MyCvTracker.pages.jobResumePreview")
             });
         }
       };
+
+      $scope.activeReply = function(review) {
+        if (!review["replyActive"]) {
+          review.listReply = [];
+          review["replyActive"] = true;
+
+          var reviewId = review.id;
+
+          // load list comments
+          mainSvc.getReviewComments(reviewId)
+            .then(function (data) {
+              review.listReply = data;
+            });
+        }
+      }
+
+      $scope.writeReviewComment = function(review) {
+        if (!review.inReviewSubmitting) {
+          review.inReviewSubmitting = true;
+          var reviewId = review.id;
+          var content = review.replyContent;
+
+          if (!!content) {
+            review.replyContent = "";
+
+            mainSvc.submitReviewComment(reviewId, content)
+              .then(function (data) {
+                data.userEmail = "You";
+                review.listReply.push(data);
+
+                var noReply = review.noOfReply;
+                if (!noReply) noReply = 0;
+                noReply++;
+                review.noOfReply = noReply;
+
+                review.inReviewSubmitting = false;
+              })
+              .catch(function () {
+                toastr.error("You are not authorized to leave a comment!");
+                review.inReviewSubmitting = false;
+              });
+          }
+        }
+      }
 
       $scope.trustSrc = function (src) {
         return $sce.trustAsResourceUrl(src);

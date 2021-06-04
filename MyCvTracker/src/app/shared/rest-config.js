@@ -536,6 +536,9 @@ angular.module("MyCvTracker.shared")
         getResumeReviews : function(url) {
           return RESTSvc.get(url);
         },
+        getReviewComments : function(url) {
+          return RESTSvc.get(url);
+        },
         leaveResumeReview : function(url, resumeAccessToken, previewToken, originalToken, email, review) {
           return RESTSvc.post(url, {
             resumeAccessToken : !!resumeAccessToken ? resumeAccessToken : null,
@@ -546,7 +549,12 @@ angular.module("MyCvTracker.shared")
             lastName : "",
             review : review
           });
-        }
+        }, leaveReviewComment : function(url, reviewId, content) {
+          return RESTSvc.post(url, {
+            reviewId : reviewId,
+            content : content
+          });
+        },
       };
 
       return RestConfig;
