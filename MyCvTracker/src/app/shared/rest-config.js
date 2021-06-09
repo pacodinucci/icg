@@ -555,6 +555,12 @@ angular.module("MyCvTracker.shared")
             content : content
           });
         },
+        listingResumes : function (url) {
+          return RESTSvc.get(url);
+        },
+        toggleResumeListing: function(url) {
+          return RESTSvc.put(url);
+        }
       };
 
       return RestConfig;

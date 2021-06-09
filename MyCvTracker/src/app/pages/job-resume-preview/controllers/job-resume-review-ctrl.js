@@ -31,6 +31,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         extendOriginalToken = "";
       var fileType = "";
       var resumeId = "";
+      var userEmail = "";
 
       $scope.resumePreview = {
         tokenValid : null,
@@ -41,18 +42,20 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       var userDetail = Authorization.getUserDetails();
       if (!!userDetail) {
         $scope.resumePreview.rqUserId = userDetail.id;
+        userEmail = userDetail.email;
       }
 
       $scope.jobDetail = {};
 
       $scope.writingForm = {
-        email : "",
+        email : userEmail,
         content : "",
         submitting : false,
         submitted : false,
         expired : false,
         emailInvalid : false,
-        contentInvalid : false
+        contentInvalid : false,
+        inAuth : !!userEmail
       };
 
       $scope.extendForm = {

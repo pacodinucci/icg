@@ -1,0 +1,60 @@
+<section
+  id="resumes-listing-page"
+  ng-controller="ResumesListingCtrl">
+  <div class="body-section">
+    <div class="section-content">
+      <div class="section-title">
+        <h3>Resumes</h3>
+      </div>
+
+      <div class="resumes-list-result">
+        <div class="row">
+          <div
+            ng-repeat="aResume in listResumes track by aResume.id"
+            class="col-xs-12 col-md-3">
+            <div
+              ba-panel
+              ba-panel-class="xsmall-panel light-text resume-panel">
+              <div class="resume-title">
+                <a
+                  ng-href="/job-resume-preview?previewToken={{ aResume.previewToken }}"
+                  ng-bind="aResume.resumeName"
+                  target="_blank"></a>
+              </div>
+
+              <div class="owner" ng-bind="aResume.ownerEmail"></div>
+
+              <div
+                class="tile-datetime">Uploaded at {{ getFormattedPostDate(aResume.uploadedAt) }}
+              </div>
+
+              <div
+                class="listing-status"
+                ng-if="!!loadInfo.isAdmin || !!loadInfo.isReviewer">
+                <label
+                  ng-class="['switch',(aResume.listingActive ? 'active': '')]"
+                  ng-click="toggleListingActive(aResume)">
+                  <span class="slider round"></span>
+                </label>
+
+                <label class="switch-label">
+                  {{ !aResume.listingActive ? "Not listed" : "Listed" }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="more-ctrl"
+          ng-if="loadInfo.hasNext && !loadInfo.loading">
+          <button
+            class="btn btn-primary"
+            ng-click="loadMore()">
+            Load More
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

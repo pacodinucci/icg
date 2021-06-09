@@ -641,6 +641,14 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.referredResumesList.url;
                 },
 
+                getListingResumeUrl: function () {
+                    return Constants.baseUrl + "/user/active-resumes/list";
+                },
+
+                updateListingResumeStatusUrl: function () {
+                    return Constants.baseUrl + "/user/resumes/{resumeId}/listing-status";
+                },
+
                 getTargetResumeDetailUrl: function (id) {
                     var url = Constants.baseUrl + Constants.apis.targetResumeDetailLink.url;
                     return url.replace("{id}", id);

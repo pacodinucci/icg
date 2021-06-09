@@ -72,7 +72,7 @@
             ng-if="!writingForm.submitted && !writingForm.expired">
             <div class="form-row">
               <input
-                ng-disabled="writingForm.submitting"
+                ng-disabled="writingForm.submitting || writingForm.inAuth"
                 ng-model="writingForm.email"
                 class="form-control"
                 type="text"

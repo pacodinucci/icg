@@ -24,7 +24,8 @@
     "MyCvTracker.pages.jobList",
     "MyCvTracker.pages.targetResumeDetail",
     "MyCvTracker.pages.socialRegistrations",
-    "MyCvTracker.pages.jobResumePreview"
+    "MyCvTracker.pages.jobResumePreview",
+    "MyCvTracker.pages.resumeListing"
   ])
     .run(run);
 
@@ -66,6 +67,7 @@
           "/target-resume-detail",
           "/viewJob",
           "/findjobs",
+          "/resumes-list",
           "/terms"
         ];
         var restrictedPage = publicPages.indexOf($location.path()) === -1;

@@ -19,6 +19,7 @@ angular.module("MyCvTracker.pages.account")
       Authorization
     ) {
       var isAdmin = Authorization.getUserRole() === "ADMIN";
+      var isReviewer = Authorization.getUserRole() === "REVIEWER";
 
       var pieColor = baUtil.hexToRGB(baConfig.colors.defaultText, 0.2);
       $scope.charts = [
@@ -38,10 +39,17 @@ angular.module("MyCvTracker.pages.account")
         // },
         {
           color : pieColor,
+          description : "Resume List",
+          link : "resumes-list",
+          icon : "resume",
+          showMenu : isReviewer || isAdmin
+        },
+        {
+          color : pieColor,
           description : "Resume Management",
           link : "resumes",
           icon : "resume",
-          showMenu : true
+          showMenu : !isReviewer
         },
         {
           color : pieColor,
@@ -140,7 +148,7 @@ angular.module("MyCvTracker.pages.account")
               $scope.settings.emailAddress = response.emailAddress;
 
               angular.forEach($scope.settings.emailSubscribes, function (state) {
-                if (state.emailType == "tracking") {
+                if (state.emailType === "tracking") {
                   $scope.settings.tracking = state.subscribe;
                 } else {
                   $scope.settings.notification = state.subscribe;
