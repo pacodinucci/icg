@@ -129,14 +129,20 @@
 
       <div
         class="list-reviews"
-        ng-if="resumePreview.tokenValid === true && listReviews.length > 0">
+        ng-if="resumePreview.tokenValid === true">
         <div class="reviews-panel">
           <div class="panel-title">
             List of reviews
           </div>
 
           <div class="panel-content">
-            <div class="reviews">
+            <div class="login-asking" ng-if="resumePreview.rqUserId <= 0">
+              Please <a ng-href="/login?redirect={{ resumePreview.loginRedirect }}">sign in</a> to see your reviews.
+            </div>
+            <div class="no-review-notify" ng-if="resumePreview.rqUserId > 0 && listReviews.length === 0">
+              There is no reviews yet
+            </div>
+            <div class="reviews" ng-if="listReviews.length > 0">
               <div
                 ng-repeat="aReview in listReviews track by aReview.id"
                 class="a-review">

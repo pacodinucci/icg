@@ -18,7 +18,8 @@
   						<li><a href=""><span><i class="fab fa-facebook-f"></i></span></a></li>
   						<li><a href=""><span><i class="fab fa-twitter"></i></span></a></li>
   						<li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
-  						<li ng-if="!$isAuthenticated"><a href="/login">Login</a></li>
+  						<li ng-if="!$isAuthenticated && !headerLoginRedirect"><a href="/login">Login</a></li>
+  						<li ng-if="!$isAuthenticated && !!headerLoginRedirect"><a ng-href="/login?redirect={{ headerLoginRedirect }}">Login</a></li>
   						<li ng-if="!$isAuthenticated" class="signupButton"><a href="/register"><span class="btn-style">Sign Up</span></a></li>
   					</ul>
             <!-- </div> -->

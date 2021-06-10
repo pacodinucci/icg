@@ -36,7 +36,8 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       $scope.resumePreview = {
         tokenValid : null,
         url : null,
-        rqUserId : 0
+        rqUserId : 0,
+        loginRedirect : ""
       };
 
       var userDetail = Authorization.getUserDetails();
@@ -205,6 +206,10 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       };
 
       $scope.init = function () {
+        var searchQuery = window.location.search;
+        var pathName = window.location.pathname;
+        var currentUrl = pathName + searchQuery;
+
         var params = $location.search();
         if (!!params.accessToken) {
           accessToken = params.accessToken;
@@ -222,9 +227,16 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           extendOriginalToken = params.extendOriginalToken;
         }
 
+        $scope.resumePreview.loginRedirect = currentUrl;
+        $rootScope.headerLoginRedirect = currentUrl;
+
         // load job spec from access token
         $scope.loadJobSpec();
       };
+
+      $scope.$on("$destroy", function() {
+        $rootScope.headerLoginRedirect = "";
+      });
 
       $scope.init();
     }
