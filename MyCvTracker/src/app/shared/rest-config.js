@@ -536,6 +536,9 @@ angular.module("MyCvTracker.shared")
         getResumeReviews : function(url) {
           return RESTSvc.get(url);
         },
+        getReviewDetail : function(url) {
+          return RESTSvc.get(url);
+        },
         getReviewComments : function(url) {
           return RESTSvc.get(url);
         },
@@ -549,11 +552,16 @@ angular.module("MyCvTracker.shared")
             lastName : "",
             review : review
           });
-        }, leaveReviewComment : function(url, reviewId, content) {
-          return RESTSvc.post(url, {
+        }, leaveReviewComment : function(url, reviewId, content, reviewToken) {
+          var data = {
             reviewId : reviewId,
             content : content
-          });
+          };
+
+          if (!!reviewToken) {
+            data["reviewToken"] = reviewToken;
+          }
+          return RESTSvc.post(url, data);
         },
         listingResumes : function (url) {
           return RESTSvc.get(url);

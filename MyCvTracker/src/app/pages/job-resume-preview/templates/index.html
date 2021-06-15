@@ -22,7 +22,7 @@
         <iframe
           ng-src="{{ trustSrc(resumePreview.url) }}"
           width="100%"
-          height="400"></iframe>
+          height="600"></iframe>
       </div>
 
       <div
@@ -62,7 +62,7 @@
 
       <div
         class="writing-review"
-        ng-if="resumePreview.tokenValid === true && !jobDetail.isExtend">
+        ng-if="resumePreview.tokenValid === true && !jobDetail.isExtend && !resumePreview.withReviewToken">
         <div class="writing-panel">
           <div class="panel-title">
             Leave a review
@@ -136,13 +136,27 @@
           </div>
 
           <div class="panel-content">
-            <div class="login-asking" ng-if="resumePreview.rqUserId <= 0">
-              Please <a ng-href="/login?redirect={{ resumePreview.loginRedirect }}">sign in</a> to see your reviews.
+            <div
+              class="login-asking"
+              ng-if="resumePreview.rqUserId <= 0 && (!resumePreview.withReviewToken || !!resumePreview.reviewTokenExpired)">
+              <div ng-if="!!resumePreview.reviewTokenExpired" class="text-danger">
+                Review access token has expired.
+              </div>
+              <br/>
+              <div>
+                Please
+                <a ng-href="/login?redirect={{ resumePreview.loginRedirect }}">sign in</a>
+                to see your reviews.
+              </div>
             </div>
-            <div class="no-review-notify" ng-if="resumePreview.rqUserId > 0 && listReviews.length === 0">
+            <div
+              class="no-review-notify"
+              ng-if="resumePreview.rqUserId > 0 && listReviews.length === 0">
               There is no reviews yet
             </div>
-            <div class="reviews" ng-if="listReviews.length > 0">
+            <div
+              class="reviews"
+              ng-if="listReviews.length > 0">
               <div
                 ng-repeat="aReview in listReviews track by aReview.id"
                 class="a-review">
@@ -174,11 +188,18 @@
                   <div
                     class="list-reply"
                     ng-if="!!aReview.replyActive">
-                    <div class="a-reply reply-comment"
-                         ng-repeat="aComment in aReview.listReply track by aComment.id">
-                      <div class="user" ng-bind="aComment.userId !== resumePreview.rqUserId ? aComment.userEmail : 'You'"></div>
-                      <div class="content" ng-bind="aComment.replyContent"></div>
-                      <div class="date" ng-bind="formatDateTime(aComment.uploadedAt)"></div>
+                    <div
+                      class="a-reply reply-comment"
+                      ng-repeat="aComment in aReview.listReply track by aComment.id">
+                      <div
+                        class="user"
+                        ng-bind="aComment.userId !== resumePreview.rqUserId ? aComment.userEmail : 'You'"></div>
+                      <div
+                        class="content"
+                        ng-bind="aComment.replyContent"></div>
+                      <div
+                        class="date"
+                        ng-bind="formatDateTime(aComment.uploadedAt)"></div>
                     </div>
                     <div class="a-reply reply-input">
                       <input

@@ -21,6 +21,10 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           var url = Constants.baseUrl + "/user/resume/" + resumeId + "/reviews/list";
           return RestConfig.getResumeReviews(url);
         },
+        getReview: function(token) {
+          var url = Constants.baseUrl + "/user/resume/review/detail?token=" + token;
+          return RestConfig.getReviewDetail(url);
+        },
         extendResumePreview: function(token, originalToken) {
           var url = Constants.baseUrl + "/user/resume/preview/extend";
           return RestConfig.extendResumePreviewFromToken(url, token, originalToken);
@@ -30,13 +34,13 @@ angular.module("MyCvTracker.pages.jobResumePreview")
 
           return RestConfig.leaveResumeReview(url, accessToken, previewToken, originalToken, email, review);
         },
-        submitReviewComment : function(reviewId, content) {
+        submitReviewComment : function(reviewId, content, reviewToken) {
           var url = Constants.baseUrl + "/user/resume/review/reply";
 
-          return RestConfig.leaveReviewComment(url, reviewId, content);
+          return RestConfig.leaveReviewComment(url, reviewId, content, reviewToken);
         },
-        getReviewComments: function(reviewId) {
-          var url = Constants.baseUrl + "/user/reviews/" + reviewId + "/reply/list";
+        getReviewComments: function(reviewId, reviewToken) {
+          var url = Constants.baseUrl + "/user/reviews/" + reviewId + "/reply/list" + (!!reviewToken ? ("?reviewToken=" + reviewToken) : "");
           return RestConfig.getReviewComments(url);
         },
       };

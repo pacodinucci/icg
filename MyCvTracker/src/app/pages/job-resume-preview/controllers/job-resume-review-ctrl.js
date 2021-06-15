@@ -32,12 +32,15 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       var fileType = "";
       var resumeId = "";
       var userEmail = "";
+      var reviewToken = "";
 
       $scope.resumePreview = {
         tokenValid : null,
         url : null,
         rqUserId : 0,
-        loginRedirect : ""
+        loginRedirect : "",
+        withReviewToken : false,
+        reviewTokenExpired : false
       };
 
       var userDetail = Authorization.getUserDetails();
@@ -68,23 +71,27 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       $scope.listReviews = [];
 
       $scope.loadJobSpec = function () {
-          mainSvc.getJobDetail(accessToken, previewToken, extendToken, originalToken, extendOriginalToken)
-            .then(function (data) {
-              $scope.jobDetail = data;
-              fileType = data.fileType;
-              resumeId = data.resumeId;
-              $scope.resumePreview.tokenValid = true;
-              $scope.loadPreview();
+        mainSvc.getJobDetail(accessToken, previewToken, extendToken, originalToken, extendOriginalToken)
+          .then(function (data) {
+            $scope.jobDetail = data;
+            fileType = data.fileType;
+            resumeId = data.resumeId;
+            $scope.resumePreview.tokenValid = true;
+            $scope.loadPreview();
 
-              if (!extendToken && !extendOriginalToken) {
+            if (!extendToken && !extendOriginalToken) {
+              if (!reviewToken) {
                 $scope.loadListReviews();
               } else {
-                $scope.jobDetail["isExtend"] = true;
+                $scope.loadReviewByToken();
               }
-            })
-            .catch(function () {
-              $scope.resumePreview.tokenValid = false;
-            });
+            } else {
+              $scope.jobDetail["isExtend"] = true;
+            }
+          })
+          .catch(function () {
+            $scope.resumePreview.tokenValid = false;
+          });
       };
 
       $scope.loadPreview = function () {
@@ -112,6 +119,17 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         mainSvc.getResumeReviews(resumeId)
           .then(function (data) {
             $scope.listReviews = data;
+          });
+      };
+
+      $scope.loadReviewByToken = function () {
+        mainSvc.getReview(reviewToken)
+          .then(function (data) {
+            $scope.listReviews.push(data);
+          })
+          .catch(function () {
+            reviewToken = null;
+            $scope.resumePreview.reviewTokenExpired = true;
           });
       };
 
@@ -153,7 +171,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         }
       };
 
-      $scope.activeReply = function(review) {
+      $scope.activeReply = function (review) {
         if (!review["replyActive"]) {
           review.listReply = [];
           review["replyActive"] = true;
@@ -161,14 +179,14 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           var reviewId = review.id;
 
           // load list comments
-          mainSvc.getReviewComments(reviewId)
+          mainSvc.getReviewComments(reviewId, reviewToken)
             .then(function (data) {
               review.listReply = data;
             });
         }
-      }
+      };
 
-      $scope.writeReviewComment = function(review) {
+      $scope.writeReviewComment = function (review) {
         if (!review.inReviewSubmitting) {
           review.inReviewSubmitting = true;
           var reviewId = review.id;
@@ -177,7 +195,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           if (!!content) {
             review.replyContent = "";
 
-            mainSvc.submitReviewComment(reviewId, content)
+            mainSvc.submitReviewComment(reviewId, content, reviewToken)
               .then(function (data) {
                 data.userEmail = "You";
                 review.listReply.push(data);
@@ -195,7 +213,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
               });
           }
         }
-      }
+      };
 
       $scope.trustSrc = function (src) {
         return $sce.trustAsResourceUrl(src);
@@ -207,6 +225,19 @@ angular.module("MyCvTracker.pages.jobResumePreview")
 
       $scope.init = function () {
         var searchQuery = window.location.search;
+        var reviewTokenIdx = searchQuery.indexOf("&accToken=");
+        if (reviewTokenIdx > 0) {
+          var newQuery = searchQuery.substring(0, reviewTokenIdx);
+          var leftPart = searchQuery.substring(reviewTokenIdx + 1);
+          var nextQueryIdx = leftPart.indexOf("&");
+          var nextQuery = "";
+          if (nextQueryIdx > 0) {
+            nextQuery = leftPart.substring(nextQueryIdx);
+          }
+
+          searchQuery = newQuery + nextQuery;
+        }
+
         var pathName = window.location.pathname;
         var currentUrl = pathName + searchQuery;
 
@@ -226,15 +257,22 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         if (!!params.extendOriginalToken) {
           extendOriginalToken = params.extendOriginalToken;
         }
+        if (!!params.accToken) {
+          reviewToken = params.accToken;
+        }
 
         $scope.resumePreview.loginRedirect = currentUrl;
         $rootScope.headerLoginRedirect = currentUrl;
+
+        if (!!reviewToken) {
+          $scope.resumePreview.withReviewToken = true;
+        }
 
         // load job spec from access token
         $scope.loadJobSpec();
       };
 
-      $scope.$on("$destroy", function() {
+      $scope.$on("$destroy", function () {
         $rootScope.headerLoginRedirect = "";
       });
 
