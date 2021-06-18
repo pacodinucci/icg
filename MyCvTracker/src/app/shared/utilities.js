@@ -279,7 +279,9 @@ angular.module('MyCvTracker.shared')
                 newReferralLinkSuccessMsg : "New referral link has been generated",
                 editReferralLinkSuccessMsg : "The referral link has been updated successfully",
                 referralLinkCopySuccessMsg : "Copied",
-                deleteReferralLinkSuccessMsg : "Referral link has been deleted successfully."
+                deleteReferralLinkSuccessMsg : "Referral link has been deleted successfully.",
+                extendResumeSuccessMessage : "Resume preview has been extended successfully.",
+                extendResumeSuccessFail : "Extending resume has failed!",
             };
 
             var Utilities = {

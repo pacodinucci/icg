@@ -1,0 +1,39 @@
+<form
+  name="extendResumeForm"
+  ng-submit="extendResume()"
+  novalidate>
+  <div id="admin-resume-extending-modal">
+    <div class="modal-header">
+      <h4 class="modal-title">Extending resume</h4>
+    </div>
+    <div class="modal-body">
+      <h5>How many days do you want to extend?</h5>
+      <br />
+      <div class="form-group day-input-group">
+        <input
+          ng-disabled="extendForm.extending"
+          ng-model="extendForm.days"
+          ng-min="1"
+          type="number"
+          placeholder="No of days"
+          class="form-control"
+          ng-required="true" />
+      </div>
+      <div class="modal-footer clearfix">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          ng-disabled="extendResumeForm.$invalid || extendForm.extending">
+          {{ extendForm.extending ? "Extending..." : "Extend" }}
+        </button>
+        <button
+          ng-click="closeModal()"
+          ng-disabled="extendForm.extending"
+          type="button"
+          class="btn btn-secondary">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -532,6 +532,12 @@ angular.module("MyCvTracker.shared")
             token : !!token ? token : null,
             originalToken : !!originalToken ? originalToken : null
           });
+        }, extendResumePreviewForAdmin : function(url, resumeId, original, extendDays) {
+          return RESTSvc.post(url, {
+            resumeId : resumeId,
+            original : original,
+            extendDays : extendDays
+          });
         },
         getResumeReviews : function(url) {
           return RESTSvc.get(url);

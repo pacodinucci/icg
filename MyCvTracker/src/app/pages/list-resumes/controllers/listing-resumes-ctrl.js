@@ -26,6 +26,7 @@ angular.module("MyCvTracker.pages.resumeListing")
       var role = !!userDetail ? Authorization.getUserRole() : "";
       var isAdmin =  role=== "ADMIN";
       var isReviewer =  role=== "REVIEWER";
+      var isManagement = isAdmin || isReviewer;
 
       $scope.listResumes = [];
       $scope.loadInfo = {
@@ -33,7 +34,15 @@ angular.module("MyCvTracker.pages.resumeListing")
         hasNext : false,
         loading : false,
         isAdmin : isAdmin,
-        isReviewer : isReviewer
+        isReviewer : isReviewer,
+        isManagement : isManagement
+      };
+      $scope.extendModal = null;
+      $scope.extendForm = {
+        days : 7,
+        extendOriginal : false,
+        resume : null,
+        extending : false
       };
 
       $scope.getResume = function () {
@@ -50,7 +59,9 @@ angular.module("MyCvTracker.pages.resumeListing")
               }
 
               for (var i = 0; i < len; i++) {
-                $scope.listResumes.push(rpData[i]);
+                var resume = rpData[i];
+                initExpiration(resume);
+                $scope.listResumes.push(resume);
               }
 
               $scope.loadInfo.hasNext = hasNext;
@@ -97,10 +108,117 @@ angular.module("MyCvTracker.pages.resumeListing")
         return "";
       };
 
+      $scope.getFormattedDate = function (utc) {
+        if (!!utc) {
+          var dateObj = new Date(utc);
+
+          var date = dateObj.getDate();
+          date = date < 10 ? ("0" + date) : ("" + date);
+          var month = dateObj.getMonth() + 1;
+          month = month < 10 ? ("0" + month) : ("" + month);
+          var hour = dateObj.getHours();
+          hour = hour < 10 ? ("0" + hour) : ("" + hour);
+          var minutes = dateObj.getMinutes();
+          minutes = minutes < 10 ? ("0" + minutes) : ("" + minutes);
+          return date + "/" + month + "/" + dateObj.getFullYear();
+        }
+
+        return "";
+      };
+
+      function isExpired(date) {
+        var now = new Date();
+        return (!!date && now.getTime() > date.getTime());
+      }
+
+      function initExpiration(resume) {
+        var maskedExpiresAt = resume.previewExpiresAt;
+        var originalExpiresAt = resume.originalPreviewExpiresAt;
+
+        if (!!maskedExpiresAt) {
+          var dateObj = new Date(maskedExpiresAt);
+          resume.maskedExpired = isExpired(dateObj);
+        }
+
+        if (!!originalExpiresAt) {
+          var dateObj = new Date(originalExpiresAt);
+          resume["originalExpired"] = isExpired(dateObj);
+        }
+      }
+
+      function extendResumeDays(resume, noOfDays, extendOriginal) {
+        var now = new Date();
+        var maskedExpiresAt = resume.previewExpiresAt;
+        var originalExpiresAt = resume.originalPreviewExpiresAt;
+
+        var dateObj = null;
+        if (!extendOriginal) {
+           dateObj = new Date(maskedExpiresAt);
+        } else {
+          dateObj = new Date(originalExpiresAt);
+        }
+
+        if (now.getTime() > dateObj.getTime()) {
+          dateObj = now;
+        }
+
+        dateObj.setDate(dateObj.getDate() + noOfDays);
+        if (!extendOriginal) {
+          resume.previewExpiresAt = dateObj.toISOString();
+        } else {
+          resume.originalPreviewExpiresAt = dateObj.toISOString();
+        }
+        initExpiration(resume);
+      }
+
+      $scope.openExtendModal = function(resume, original) {
+        $scope.extendForm.resume = resume;
+        $scope.extendForm.extendOriginal = original;
+        $scope.extendModal = mainSvc.getAdminExtendResumeModal($scope, "ReferalModalCtrl");
+      }
+
+      $scope.closeModal = function () {
+        $scope.extendModal.dismiss();
+        $scope.extendForm.days = 7;
+        $scope.extendForm.extending = false;
+        $scope.extendForm.resume = null;
+      }
+
+      $scope.extendResume = function() {
+        $scope.extendForm.extending = true;
+        var resume = $scope.extendForm.resume;
+        var resumeId = resume.id;
+        var extendOriginal = $scope.extendForm.extendOriginal;
+        var extendDays = $scope.extendForm.days;
+        mainSvc.extendResumePreview(resumeId, extendOriginal, extendDays).then(function() {
+          extendResumeDays(resume, extendDays, extendOriginal);
+          $scope.closeModal();
+          var msg = Utilities.getAlerts("extendResumeSuccessMessage");
+          toastr.success(msg, "Success");
+        }).catch(function() {
+          $scope.closeModal();
+          var msg = Utilities.getAlerts("extendResumeSuccessFail");
+          toastr.error(msg, "Error");
+        });
+      }
+
       $scope.init = function () {
         $scope.getResume();
       };
 
       $scope.init();
+    }
+  ]);
+
+angular.module("MyCvTracker.pages.resumeListing")
+  .controller("ExtendResumeModalCtrl", [
+    "$scope",
+    "$injector",
+    function (
+      $scope,
+      $injector
+    ) {
+      var utilities = $injector.get("Utilities");
+
     }
   ]);

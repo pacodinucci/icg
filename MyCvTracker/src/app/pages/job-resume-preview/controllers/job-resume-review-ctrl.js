@@ -33,21 +33,29 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       var resumeId = "";
       var userEmail = "";
       var reviewToken = "";
+      var loadedPdf = null;
+      var pdfViewerHeight = window.innerHeight - 100;
+
+      var userDetail = Authorization.getUserDetails();
+      var isReplyAble = true;
+      var rqUserId = 0;
+      if (!!userDetail) {
+        rqUserId = userDetail.id;
+        userEmail = userDetail.email;
+        var role = userDetail.userRole;
+        isReplyAble = role !== "ADMIN" && role !== "REVIEWER";
+      }
 
       $scope.resumePreview = {
         tokenValid : null,
         url : null,
-        rqUserId : 0,
+        rqUserId : rqUserId,
         loginRedirect : "",
         withReviewToken : false,
-        reviewTokenExpired : false
+        reviewTokenExpired : false,
+        pdfViewerHeight : pdfViewerHeight,
+        isReplyAble : isReplyAble
       };
-
-      var userDetail = Authorization.getUserDetails();
-      if (!!userDetail) {
-        $scope.resumePreview.rqUserId = userDetail.id;
-        userEmail = userDetail.email;
-      }
 
       $scope.jobDetail = {};
 
@@ -90,6 +98,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
             }
           })
           .catch(function () {
+            $scope.resumePreview.pdfViewerHeight = 0;
             $scope.resumePreview.tokenValid = false;
           });
       };
@@ -107,9 +116,11 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         } else if (!!extendOriginalToken) {
           param = "extendOriginalToken=" + extendOriginalToken;
         }
-        var url = "https://mycvtracker.com:8080/user/previewResume?" + param;
+        var url = "";
         if (fileType !== "application/pdf") {
           url = "https://view.officeapps.live.com/op/embed.aspx?src=" + url;
+        } else {
+          url = "https://mycvtracker.com/pdf-viewer.html?pdf=https://mycvtracker.com:8080/user/previewResume?" + param;
         }
 
         $scope.resumePreview.url = url;
@@ -267,6 +278,9 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         if (!!reviewToken) {
           $scope.resumePreview.withReviewToken = true;
         }
+
+        // var iframeE = document.querySelector(".resume-preview-iframe iframe");
+        // iframeE.setAttribute("height", pdfViewerHeight + "px");
 
         // load job spec from access token
         $scope.loadJobSpec();

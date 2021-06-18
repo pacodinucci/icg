@@ -3,10 +3,12 @@ angular.module("MyCvTracker.pages.resumeListing")
     "toastr",
     "RestConfig",
     "$injector",
+    "Constants",
     function (
       toastr,
       RestConfig,
-      $injector
+      $injector,
+      Constants
     ) {
       var utilities = $injector.get("Utilities");
 
@@ -23,6 +25,19 @@ angular.module("MyCvTracker.pages.resumeListing")
           url = url.replace("{resumeId}", resumeId);
 
           return RestConfig.toggleResumeListing(url);
+        },
+        getAdminExtendResumeModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/list-resumes/templates/extend-resume-modal.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
+        }, extendResumePreview: function(resumeId, original, extendDays) {
+          var url = Constants.baseUrl + "/user/resume/preview/extend";
+          return RestConfig.extendResumePreviewForAdmin(url, resumeId, original, extendDays);
         }
       };
     }

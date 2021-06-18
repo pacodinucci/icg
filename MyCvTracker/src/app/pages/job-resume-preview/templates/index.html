@@ -18,13 +18,22 @@
 
       <div
         class="resume-preview-iframe"
-        ng-if="resumePreview.tokenValid === true">
+        ng-style="{ height: (resumePreview.pdfViewerHeight + 'px') }">
         <iframe
           ng-src="{{ trustSrc(resumePreview.url) }}"
           width="100%"
-          height="600"></iframe>
+          height="100%"></iframe>
       </div>
 
+      <!--      <div id="pdf-viewer">-->
+      <!--        <div class="pdf-viewer-container">-->
+      <!--          <div class="page-viewer"></div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+      <!--      <div id="viewerContainer">-->
+      <!--        <div id="viewer" class="pdfViewer"></div>-->
+      <!--      </div>-->
       <div
         ng-if="!!jobDetail.isExtend"
         class="writing-review extend-preview">
@@ -139,10 +148,12 @@
             <div
               class="login-asking"
               ng-if="resumePreview.rqUserId <= 0 && (!resumePreview.withReviewToken || !!resumePreview.reviewTokenExpired)">
-              <div ng-if="!!resumePreview.reviewTokenExpired" class="text-danger">
+              <div
+                ng-if="!!resumePreview.reviewTokenExpired"
+                class="text-danger">
                 Review access token has expired.
               </div>
-              <br/>
+              <br />
               <div>
                 Please
                 <a ng-href="/login?redirect={{ resumePreview.loginRedirect }}">sign in</a>
@@ -178,7 +189,7 @@
                       </p>
                     </div>
 
-                    <div class="reply-summary">
+                    <div class="reply-summary" ng-if="resumePreview.isReplyAble">
                       <i class="fas fa-level-up-alt"></i>
                       <span
                         class="text"
@@ -208,6 +219,9 @@
                         placeholder="Enter to leave comment"
                         ng-keydown="$event.keyCode === 13 && writeReviewComment(aReview)"
                         ng-model="aReview.replyContent" />
+                      <div class="send-btn" ng-click="writeReviewComment(aReview)">
+                        <a href="#">Send</a>
+                      </div>
                     </div>
                   </div>
                 </div>

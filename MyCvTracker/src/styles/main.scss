@@ -138,6 +138,7 @@
     }
   }
 }
+
 // end referral section
 
 // user management
@@ -146,7 +147,6 @@
     padding-top: 0.3em;
     padding-bottom: 1.5em;
   }
-
 
 
   .identify-filter {
@@ -161,13 +161,13 @@
     margin-bottom: 1em;
 
     .top-info {
-      display: -webkit-box!important;
-      display: -ms-flexbox!important;
-      display: flex!important;
+      display: -webkit-box !important;
+      display: -ms-flexbox !important;
+      display: flex !important;
 
       .left-identify {
-        -ms-flex: 1 1 auto!important;
-        flex: 1 1 auto!important;
+        -ms-flex: 1 1 auto !important;
+        flex: 1 1 auto !important;
       }
     }
 
@@ -272,7 +272,7 @@
 
     @media (max-width: 1199.98px) {
       .filter-col {
-        -webkit-box-flex: 0  !important;;
+        -webkit-box-flex: 0 !important;;
         -ms-flex: 0 0 50% !important;
         flex: 0 0 50% !important;;
         max-width: 50% !important;;
@@ -344,7 +344,7 @@
       &:hover {
         .job-panel {
           .title {
-            color:#337ab7
+            color: #337ab7
           }
         }
       }
@@ -391,6 +391,7 @@
     padding-top: 2.4em;
   }
 }
+
 // end list jobs page
 
 // resume preview page
@@ -405,6 +406,8 @@
   }
 
   .resume-preview-iframe {
+    display: block;
+
     iframe {
       border: none;
     }
@@ -519,6 +522,28 @@
         color: #9099ad;
       }
     }
+
+    .reply-input {
+      position: relative;
+
+      input {
+        padding-right: 50px;
+      }
+
+      .send-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-right: 10px;
+        padding-left: 5px;
+
+
+        a {
+          text-decoration: none;
+          line-height: 35px;
+        }
+      }
+    }
   }
 
   .writing-review {
@@ -550,6 +575,7 @@
     margin-top: 4em;
   }
 }
+
 // end resume preview page
 
 #resumes-listing-page {
@@ -578,14 +604,66 @@
       white-space: nowrap;
     }
 
-    .tile-datetime {
+    .detail-row {
+      > .row {
+        margin: -5px;
 
-      color: #9099ad;
-      font-family: 'museo_slab500';
+        > div {
+          padding: 5px;
+        }
+      }
     }
 
-    .listing-status {
-      margin-top: 12px;
+    .detail-info {
+      .info-label {
+        margin-bottom: 5px;
+      }
+
+      .info-val {
+        color: #9099ad;
+
+        &.text-danger {
+          color: #a94442;
+        }
+      }
+
+      &.listing-ctrl {
+        padding: 5px 0;
+      }
+    }
+
+    .panel-body {
+      position: relative;
+    }
+
+    .menu-ctrl {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
+      .dropdown-menu {
+        padding: .5rem 0;
+      }
+
+      .dropdown-item {
+        display: block;
+        width: 100%;
+        padding: .8rem 1.5rem;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+        text-decoration: none;
+
+        &:hover {
+          color: #16181b;
+          text-decoration: none;
+          background-color: #f8f9fa;
+        }
+      }
     }
 
     label {
@@ -661,5 +739,13 @@
   .more-ctrl {
     margin-top: 10px;
     text-align: center;
+  }
+}
+
+#admin-resume-extending-modal {
+  .day-input-group {
+    .form-control {
+      width: 150px;
+    }
   }
 }

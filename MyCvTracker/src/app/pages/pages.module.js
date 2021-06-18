@@ -51,7 +51,8 @@
 
     $rootScope.$on(
       "$locationChangeSuccess",
-      function (event,
+      function (
+        event,
         next,
         current
       ) {
@@ -93,12 +94,15 @@
         var cvwritingPage = next.endsWith("/cvwritingpackages.html");
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
+        var pdfViewerPage = next.endsWith("/pdf-viewer.html");
         var networkSharePage = next.endsWith("/network-share.html");
 
         if (frontPage) {
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
         } else if (jobSpecPage) {
           window.location.href = Utilities.baseUrl() + "/job-spec.html";
+        } else if (pdfViewerPage) {
+          window.location.href = Utilities.baseUrl() + "/pdf-viewer.html";
         } else if (networkSharePage) {
           window.location.href = Utilities.baseUrl() + "/network-share.html";
         } else if (forwardPage) {
