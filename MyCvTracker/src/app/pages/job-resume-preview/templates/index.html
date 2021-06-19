@@ -189,7 +189,7 @@
                       </p>
                     </div>
 
-                    <div class="reply-summary" ng-if="resumePreview.isReplyAble">
+                    <div class="reply-summary">
                       <i class="fas fa-level-up-alt"></i>
                       <span
                         class="text"
@@ -212,7 +212,7 @@
                         class="date"
                         ng-bind="formatDateTime(aComment.uploadedAt)"></div>
                     </div>
-                    <div class="a-reply reply-input">
+                    <div class="a-reply reply-input"  ng-if="!!resumePreview.withReviewToken || !resumePreview.isAdminUser">
                       <input
                         type="text"
                         class="form-control"

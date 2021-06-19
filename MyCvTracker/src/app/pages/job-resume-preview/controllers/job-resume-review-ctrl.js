@@ -33,17 +33,16 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       var resumeId = "";
       var userEmail = "";
       var reviewToken = "";
-      var loadedPdf = null;
       var pdfViewerHeight = window.innerHeight - 100;
 
       var userDetail = Authorization.getUserDetails();
-      var isReplyAble = true;
       var rqUserId = 0;
+      var isAdminUser = false;
       if (!!userDetail) {
         rqUserId = userDetail.id;
         userEmail = userDetail.email;
         var role = userDetail.userRole;
-        isReplyAble = role !== "ADMIN" && role !== "REVIEWER";
+        isAdminUser = role === "ADMIN";
       }
 
       $scope.resumePreview = {
@@ -54,7 +53,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         withReviewToken : false,
         reviewTokenExpired : false,
         pdfViewerHeight : pdfViewerHeight,
-        isReplyAble : isReplyAble
+        isAdminUser : isAdminUser
       };
 
       $scope.jobDetail = {};
@@ -219,7 +218,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
                 review.inReviewSubmitting = false;
               })
               .catch(function () {
-                toastr.error("You are not authorized to leave a comment!");
+                toastr.error("You are not authorized to reply to this thread!");
                 review.inReviewSubmitting = false;
               });
           }
