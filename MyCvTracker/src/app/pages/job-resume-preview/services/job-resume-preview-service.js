@@ -43,6 +43,11 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           var url = Constants.baseUrl + "/user/reviews/" + reviewId + "/reply/list" + (!!reviewToken ? ("?reviewToken=" + reviewToken) : "");
           return RestConfig.getReviewComments(url);
         },
+        maskExtraTextsInResume : function(resumeId, texts) {
+          var url = Constants.baseUrl + "/user/resume/edit/text-mask";
+
+          return RestConfig.maskTextsInResume(url, resumeId, texts);
+        }
       };
     }
   ]);

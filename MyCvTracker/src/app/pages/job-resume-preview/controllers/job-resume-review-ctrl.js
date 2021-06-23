@@ -37,23 +37,26 @@ angular.module("MyCvTracker.pages.jobResumePreview")
 
       var userDetail = Authorization.getUserDetails();
       var rqUserId = 0;
-      var isAdminUser = false;
+      var isAdminUser = false, isReviewer = false;
       if (!!userDetail) {
         rqUserId = userDetail.id;
         userEmail = userDetail.email;
         var role = userDetail.userRole;
         isAdminUser = role === "ADMIN";
+        isReviewer = role === "REVIEWER";
       }
 
       $scope.resumePreview = {
         tokenValid : null,
         url : null,
+        urlCdt : 0,
         rqUserId : rqUserId,
         loginRedirect : "",
         withReviewToken : false,
         reviewTokenExpired : false,
         pdfViewerHeight : pdfViewerHeight,
-        isAdminUser : isAdminUser
+        isAdminUser : isAdminUser,
+        isReviewer : isReviewer
       };
 
       $scope.jobDetail = {};
@@ -73,6 +76,11 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         submitting : false,
         submitted : false,
         failed : false
+      };
+
+      $scope.maskingForm = {
+        submitting : false,
+        texts : ""
       };
 
       $scope.listReviews = [];
@@ -123,6 +131,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         }
 
         $scope.resumePreview.url = url;
+        $scope.resumePreview.urlCdt = new Date().getTime();
       };
 
       $scope.loadListReviews = function () {
@@ -225,8 +234,29 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         }
       };
 
-      $scope.trustSrc = function (src) {
-        return $sce.trustAsResourceUrl(src);
+      $scope.maskText = function() {
+        if (!!$scope.maskingForm.submitting) return;
+        $scope.maskingForm.submitting = true;
+        var textsStr = $scope.maskingForm.texts;
+        var texts = textsStr.split(",");
+
+        mainSvc.maskExtraTextsInResume(resumeId, texts)
+          .then(function () {
+            $scope.resumePreview.urlCdt = new Date().getTime();
+            toastr.success("Resume has been masked successfully!");
+            $scope.maskingForm.submitting = false;
+          })
+          .catch(function () {
+            toastr.error("Masking resume has failed!");
+            $scope.maskingForm.submitting = false;
+          });
+
+        $scope.resumePreview.urlCdt = new Date().getTime();
+        $scope.maskingForm.submitting = false;
+      }
+
+      $scope.trustSrc = function (src, cdt) {
+        return $sce.trustAsResourceUrl((src + "&cdt=" + cdt));
       };
 
       $scope.formatDateTime = function (utcStr) {

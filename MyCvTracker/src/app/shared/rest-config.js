@@ -568,6 +568,13 @@ angular.module("MyCvTracker.shared")
             data["reviewToken"] = reviewToken;
           }
           return RESTSvc.post(url, data);
+        }, maskTextsInResume : function(url, resumeId, texts) {
+          var data = {
+            resumeId : resumeId,
+            texts : texts
+          };
+
+          return RESTSvc.post(url, data);
         },
         listingResumes : function (url) {
           return RESTSvc.get(url);

@@ -507,15 +507,15 @@
             pdfTitle = info.Title;
           }
 
-          if (pdfTitle) {
-            self.setTitle(pdfTitle + " - " + document.title);
-          }
+          // if (pdfTitle) {
+          //   self.setTitle(pdfTitle + " - " + document.title);
+          // }
         });
       },
 
       setTitle: function pdfViewSetTitle(title) {
-        document.title = title;
-        document.getElementById("title").textContent = title;
+        // document.title = title;
+        // document.getElementById("title").textContent = title;
       },
 
       error: function pdfViewError(message, moreInfo) {

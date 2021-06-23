@@ -20,7 +20,7 @@
         class="resume-preview-iframe"
         ng-style="{ height: (resumePreview.pdfViewerHeight + 'px') }">
         <iframe
-          ng-src="{{ trustSrc(resumePreview.url) }}"
+          ng-src="{{ trustSrc(resumePreview.url, resumePreview.urlCdt) }}"
           width="100%"
           height="100%"></iframe>
       </div>
@@ -64,6 +64,33 @@
               Extending the resume preview has failed due to some reasons.
               <br />
               Please contact us for more information.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="writing-review">
+        <div class="writing-panel">
+          <div class="panel-title">
+            Resume masking
+          </div>
+          <div class="review-form">
+            <div class="form-row">
+              <input
+                ng-disabled="maskingForm.submitting"
+                ng-model="maskingForm.texts"
+                class="form-control"
+                type="text"
+                placeholder="Enter texts you want to mask" />
+            </div>
+            <div class="form-row">
+              <button
+                ng-disabled="maskingForm.submitting"
+                ng-click="maskText()"
+                type="button"
+                class="btn btn-primary">
+                Mask Resume
+              </button>
             </div>
           </div>
         </div>
@@ -212,14 +239,18 @@
                         class="date"
                         ng-bind="formatDateTime(aComment.uploadedAt)"></div>
                     </div>
-                    <div class="a-reply reply-input"  ng-if="!!resumePreview.withReviewToken || !resumePreview.isAdminUser">
+                    <div
+                      class="a-reply reply-input"
+                      ng-if="!!resumePreview.withReviewToken || !resumePreview.isAdminUser">
                       <input
                         type="text"
                         class="form-control"
                         placeholder="Enter to leave comment"
                         ng-keydown="$event.keyCode === 13 && writeReviewComment(aReview)"
                         ng-model="aReview.replyContent" />
-                      <div class="send-btn" ng-click="writeReviewComment(aReview)">
+                      <div
+                        class="send-btn"
+                        ng-click="writeReviewComment(aReview)">
                         <a href="#">Send</a>
                       </div>
                     </div>
