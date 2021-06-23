@@ -89,7 +89,7 @@
                 ng-click="maskText()"
                 type="button"
                 class="btn btn-primary">
-                Mask Resume
+                {{ !!maskingForm.submitting ? "Masking Resume..." : "Mask Resume" }}
               </button>
             </div>
           </div>

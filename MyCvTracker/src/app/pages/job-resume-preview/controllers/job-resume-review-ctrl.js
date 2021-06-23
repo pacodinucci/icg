@@ -125,7 +125,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         }
         var url = "";
         if (fileType !== "application/pdf") {
-          url = "https://view.officeapps.live.com/op/embed.aspx?src=" + url;
+          url = "https://view.officeapps.live.com/op/embed.aspx?src=https://mycvtracker.com:8080/user/previewResume?" + param;
         } else {
           url = "https://mycvtracker.com/pdf-viewer.html?pdf=https://mycvtracker.com:8080/user/previewResume?" + param;
         }
@@ -243,6 +243,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         mainSvc.maskExtraTextsInResume(resumeId, texts)
           .then(function () {
             $scope.resumePreview.urlCdt = new Date().getTime();
+            $scope.maskingForm.texts = "";
             toastr.success("Resume has been masked successfully!");
             $scope.maskingForm.submitting = false;
           })
@@ -256,7 +257,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       }
 
       $scope.trustSrc = function (src, cdt) {
-        return $sce.trustAsResourceUrl((src + "&cdt=" + cdt));
+        return $sce.trustAsResourceUrl((src + "%26cdt=" + cdt));
       };
 
       $scope.formatDateTime = function (utcStr) {
