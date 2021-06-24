@@ -330,7 +330,7 @@
 					var userId = $scope.user.id;
 					var resumeTitle = $scope.resumeTitle;
 					var resumeType = $scope.resumeType;
-					if(file != null && file.size>=500000){
+					if(file != null && file.size>=5000000){
 						$scope.addAlert(Utilities.getAlerts('InputFileInputSizeValidation'));
 						$scope.myFile=null;
 						return false;
