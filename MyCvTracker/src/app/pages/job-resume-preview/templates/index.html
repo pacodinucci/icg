@@ -168,7 +168,7 @@
         ng-if="resumePreview.tokenValid === true">
         <div class="reviews-panel">
           <div class="panel-title">
-            List of reviews
+            List of reviews ({{ resumePreview.noOfReviews }})
           </div>
 
           <div class="panel-content">
@@ -189,8 +189,13 @@
             </div>
             <div
               class="no-review-notify"
-              ng-if="resumePreview.rqUserId > 0 && listReviews.length === 0">
-              There is no reviews yet
+              ng-if="resumePreview.rqUserId > 0 && listReviews.length === 0 && resumePreview.noOfReviews > 0">
+              You have no reviews on this resume yet.
+            </div>
+            <div
+              class="no-review-notify"
+              ng-if="resumePreview.rqUserId > 0 && listReviews.length === 0 && resumePreview.noOfReviews === 0">
+              There is no reviews yet.
             </div>
             <div
               class="reviews"

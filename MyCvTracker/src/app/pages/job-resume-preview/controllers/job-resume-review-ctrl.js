@@ -56,7 +56,8 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         reviewTokenExpired : false,
         pdfViewerHeight : pdfViewerHeight,
         isAdminUser : isAdminUser,
-        isReviewer : isReviewer
+        isReviewer : isReviewer,
+        noOfReviews : 0
       };
 
       $scope.jobDetail = {};
@@ -92,6 +93,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
             fileType = data.fileType;
             resumeId = data.resumeId;
             $scope.resumePreview.tokenValid = true;
+            $scope.resumePreview.noOfReviews = data.noOfReviews;
             $scope.loadPreview();
 
             if (!extendToken && !extendOriginalToken) {
