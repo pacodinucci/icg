@@ -25,7 +25,7 @@
             },
 
             fileUpload: {
-                fileSizeLimitInByte : 500000
+                fileSizeLimitInByte : 5000000
             },
 
             jobsSearchCriteriaType: {
