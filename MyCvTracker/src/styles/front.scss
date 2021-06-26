@@ -64,6 +64,7 @@ body {
 
 .section-1 {
   min-height: 600px;
+
   > h1 {
     font-size: 3.5em;
     text-align: center;
@@ -73,14 +74,17 @@ body {
 .section-2 {
   background: url('../assets/img/homepage/bground.png');
   padding: 30px 15px;
+
   > {
     h1 {
       text-align: center;
       color: #fff;
       font-size: 3.5em;
     }
+
     .row > .col-md-4 {
       text-align: center;
+
       > {
         p > .img-circle {
           font-size: 5em;
@@ -88,6 +92,7 @@ body {
           padding: 70px 70px;
           color: #586f82;
         }
+
         h3, h4 {
           color: #fff;
         }
@@ -104,16 +109,19 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
   min-height: 600px;
+
   > .container > h1 {
     text-align: center;
     font-size: 3.5em;
   }
 }
+
 .errorStyle {
-  color:red;
+  color: red;
   position: absolute;
   margin-top: -15px;
 }
+
 .blue-heading {
   color: #64B1F2;
 }
@@ -131,10 +139,12 @@ body {
   background: url('../assets/img/homepage/contact.jpg');
   background-size: 100% 100%;
   min-height: 550px;
+
   > .contact-cover {
     background-color: #000;
     min-height: inherit;
     opacity: 0.8;
+
     > .container > h1 {
       color: #fff;
       font-size: 3.5em;
@@ -220,9 +230,11 @@ a.social-links {
   background-color: #333;
   border: 4px solid #444;
   padding: 12px;
+
   .simplemodal-data {
     padding: 8px;
   }
+
   code {
     background: #141414;
     border-left: 3px solid #65B43D;
@@ -232,8 +244,10 @@ a.social-links {
     margin-bottom: 12px;
     padding: 4px 6px 6px;
   }
+
   a {
     color: #ddd;
+
     &.modalCloseImg {
       background: url(../assets/img/homepage/x.png) no-repeat;
       width: 25px;
@@ -246,17 +260,19 @@ a.social-links {
       cursor: pointer;
     }
   }
+
   h3 {
     color: #84b8d9;
   }
 }
 
 /* Custom css */
-body{
+body {
   margin: 0px;
   padding: 0px;
   font-family: 'museo700';
 }
+
 @font-face {
   font-family: 'museo700';
   src: url('../assets/fonts/museo_700-webfont.woff2') format('woff2'),
@@ -265,6 +281,7 @@ body{
   font-style: normal;
 
 }
+
 @font-face {
   font-family: 'museo_slab500';
   src: url('../assets/fonts/museo_slab_500.woff2') format('woff2'),
@@ -274,70 +291,84 @@ body{
 
 }
 
-h1,h2,h3,h4,h5,h6{
+h1, h2, h3, h4, h5, h6 {
   margin: 0px;
   padding: 0px;
   font-family: 'museo700';
 }
-p{
+
+p {
   margin: 0px;
   padding: 0px;
   font-family: 'museo_slab500';
   font-size: 14px;
 }
-ul{
+
+ul {
   list-style-type: none;
   padding: 0px;
 }
-a{
+
+a {
   text-decoration: none;
   font-family: 'museo_slab500';
 }
-a:hover{
+
+a:hover {
   text-decoration: none;
 }
-img{
+
+img {
   max-width: 100%;
 }
-.white-font{
+
+.white-font {
   color: #fff !important;
 }
+
 /* Title starts */
-.title{
+.title {
   font-size: 36px;
   text-align: center;
   margin: 0px auto;
   padding-bottom: 30px;
   max-width: 500px;
 }
-.title hr{
+
+.title hr {
   width: 50px;
   border-color: #c0c2c6;
 }
+
 /* title ends*/
 /*modal starts*/
-.modal-body{
+.modal-body {
   padding: 30px;
 }
-.modal-body h1{
+
+.modal-body h1 {
   font-family: 'museo700';
   color: #5d9cc0;
   padding-bottom: 10px;
   font-size: 44px;
 }
-.modal-body h3{
+
+.modal-body h3 {
   color: #878787;
   padding-bottom: 15px;
 }
-.modal-body h2{
+
+.modal-body h2 {
   color: #2f3542;
   font-size: 30px;
 }
-.modal-body p{
+
+.modal-body p {
   font-size: 17px;
   padding-top: 10px;
 }
-.modal-body .img{
+
+.modal-body .img {
   margin-top: 10px;
   float: left;
   width: 75%;
@@ -352,14 +383,15 @@ img{
   }
 }
 
-.modal-body input[type=email]{
+.modal-body input[type=email] {
   min-height: 45px;
   margin-top: 10px;
   border: 2px solid #ccc;
   font-size: 14px;
   font-family: 'museo_slab500';
 }
-.modal-body input[type=text]{
+
+.modal-body input[type=text] {
   min-height: 45px;
   margin-top: 20px;
   border: 2px solid #ccc;
@@ -367,14 +399,16 @@ img{
   font-family: 'museo_slab500';
   margin-bottom: 20px;
 }
-.modal-body input[type=file]{
+
+.modal-body input[type=file] {
   min-height: 45px;
   border: 2px solid #ccc;
   font-size: 14px;
   font-family: 'museo_slab500';
   margin-bottom: 35px;
 }
-.modal-body input[type=checkbox]{
+
+.modal-body input[type=checkbox] {
   float: left;
   width: 20px;
   height: 20px;
@@ -382,63 +416,75 @@ img{
   margin-right: 10px;
   margin-bottom: 5px;
 }
-.check-box{
+
+.check-box {
   font-size: 14px !important;
   margin-top: 5px;
 
 }
+
 /* Header starts */
-header{
+header {
   width: 100%;
   background: #1e222c;
   min-height: 50px;
   padding: 15px 0px;
 }
-.logo img{
+
+.logo img {
   width: 175px;
 }
-.upper-nav{
+
+.upper-nav {
   float: right;
 }
-.upper-nav li{
+
+.upper-nav li {
   display: inline-block;
   margin-top: 15px;
   padding: 0px 10px;
 }
-.upper-nav li a{
+
+.upper-nav li a {
   color: #fff;
   font-size: 14px;
 }
-.upper-nav li a .btn-style{
+
+.upper-nav li a .btn-style {
   background: #3492be;
   padding: 7px 25px;
 }
-.upper-nav li a .btn-style:hover{
+
+.upper-nav li a .btn-style:hover {
   color: #3492be;
   background: #fff;
 }
-.upper-nav li a:hover{
+
+.upper-nav li a:hover {
   color: #3492be;
   transition: 0.5s linear;
 }
 
 /* main images type */
 
-.main-img{
+.main-img {
   width: 100%;
   background: url('../assets/img/front/main-img.jpg') no-repeat;
   min-height: 500px;
   background-size: cover;
   padding: 100px 0px;
 }
-.main-img h3{
+
+.main-img h3 {
   color: #fff;
 }
-.main-img h5{
+
+.main-img h5 {
   color: #fff;
   margin-top: 10px;
 }
-.upload-btn{
+
+.upload-btn {
   position: relative;
   width: 170px;
   height: 170px;
@@ -448,7 +494,8 @@ header{
   padding-bottom: 100px;
 
 }
-.layer{
+
+.layer {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -459,99 +506,116 @@ header{
   border-radius: 50%;
   animation: animation linear 1s infinite alternate;
 }
-@keyframes animation{
-  0%{
+
+@keyframes animation {
+  0% {
     transform: scale(0.7);
   }
-  100%{
+  100% {
     transform: scale(1.1);
   }
 }
-.up-btn{
+
+.up-btn {
   background-color: transparent;
   border: none;
 }
-.up-btn:focus{
+
+.up-btn:focus {
   outline: none;
 }
+
 .imagediv {
-  float:left;
-  margin-top:50px;
+  float: left;
+  margin-top: 50px;
 }
+
 .imagediv .showonhover {
-  background:red;
-  padding:20px;
-  opacity:0.9;
-  color:white;
+  background: red;
+  padding: 20px;
+  opacity: 0.9;
+  color: white;
   width: 100%;
-  display:block;
-  text-align:center;
-  cursor:pointer;
+  display: block;
+  text-align: center;
+  cursor: pointer;
 }
-.file-image{
+
+.file-image {
   position: absolute;
   left: 25px;
   top: 25px;
   cursor: pointer;
-  z-index: 999
-;
+  z-index: 999;
 }
+
 /* How it works */
-.work-step{
+.work-step {
   width: 100%;
   padding: 100px 0px;
 }
-.step-content h3{
+
+.step-content h3 {
   font-weight: 100;
   font-size: 18px;
   text-align: center;
   padding: 10px 0px 20px 0px;
   color: #1e222c;
 }
-.step-content p{
+
+.step-content p {
   font-size: 14px;
   text-align: justify;
 }
+
 /* services starts */
-.services{
+.services {
   width: 100%;
   background: #1e222c;
   padding: 100px 0px;
 }
-.services .step-box{
+
+.services .step-box {
   padding: 10px 0px;
 }
-.services .step-content h3{
+
+.services .step-content h3 {
   color: #3d7f9f;
   padding: 40px 0px 25px 0px;
 }
-.services .step-content p{
+
+.services .step-content p {
   color: #fff;
 }
+
 /* query form */
-.query-form{
+.query-form {
   width: 100%;
   padding: 100px 0px;
 }
-.query-form input[type=text]{
+
+.query-form input[type=text] {
   font-family: 'museo_slab500';
   font-size: 14px;
   width: 100%;
   margin-top: 10px;
 }
-.query-form input[type=email]{
+
+.query-form input[type=email] {
   font-family: 'museo_slab500';
   font-size: 14px;
   width: 100%;
   margin-top: 10px;
 }
-.query-form textarea{
+
+.query-form textarea {
   font-family: 'museo_slab500';
   font-size: 14px;
   width: 100%;
   margin-top: 10px;
 }
-.query-form input[type=submit]{
+
+.query-form input[type=submit] {
   font-family: 'museo_slab500';
   font-size: 14px;
   margin: 0px auto;
@@ -559,7 +623,8 @@ header{
   background-color: #489dc4;
   border-color: #489dc4;
 }
-.query-form input[type=submit]:hover{
+
+.query-form input[type=submit]:hover {
   background-color: #fff;
   border-color: #489dc4;
   color: #489dc4;
@@ -567,19 +632,21 @@ header{
 
 /* newsletter starts*/
 
-.newsletter{
+.newsletter {
   width: 100%;
   padding: 100px 0px;
   background: #489dc4;
 }
-.newsletter h3{
+
+.newsletter h3 {
   text-align: center;
   color: #fff;
   font-size: 16px;
   font-family: 'museo_slab500';
   padding-bottom: 20px;
 }
-.newsletter input[type=email]{
+
+.newsletter input[type=email] {
   font-family: 'museo_slab500';
   font-size: 14px;
   width: 80%;
@@ -588,7 +655,8 @@ header{
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-.newsletter input[type=submit]{
+
+.newsletter input[type=submit] {
   font-family: 'museo_slab500';
   width: 20%;
   height: 35px;
@@ -597,54 +665,73 @@ header{
   border-bottom-left-radius: 0px;
   font-size: 14px;
 }
-.newsletter input[type=submit]:hover{
+
+.newsletter input[type=submit]:hover {
   color: #1e222c;
-  background : #fff;
+  background: #fff;
   border-color: #fff;
 }
+
 /* footer starts */
-.footer{
+.footer {
   width: 100%;
   min-height: 50px;
   padding: 50px 0px 20px 0px;
   background: #1e222c;
   text-align: center;
 }
-.footer img{
+
+.footer img {
   margin-bottom: 10px;
 }
-.footer p{
+
+.footer p {
   color: #fff;
   margin: 5px 0px;
 }
-.footer .copyright{
+
+.footer .copyright {
   color: #9099ad;
 }
-.footer-social{
+
+.footer-social {
   margin-top: 20px;
 }
-.footer-social li{
+
+.footer-social li {
   display: inline-block;
   margin: 0px 10px;
 }
-.footer-social li a{
+
+.footer-social li a {
   color: #9099ad;
 }
-.footer-social li a:hover{
+
+.footer-social li a:hover {
   color: #489dc4;
 }
-.blink{
+
+.blink {
   padding: 15px;
 }
-.downloadBlinkSpan{
+
+.downloadBlinkSpan {
   font-size: 14px;
   animation: blink 1s linear infinite;
 }
-@keyframes blink{
-  0%{opacity: 0;}
-  50%{opacity: .5;}
-  100%{opacity: 1;}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
+
 .boxborder {
   background: rgba(6, 16, 53, 0.6);
   border: 2px dashed rgba(244, 244, 247, 0.6);
@@ -654,7 +741,7 @@ header{
 }
 
 /*media query starts*/
-@media (min-width: 576px){
+@media (min-width: 576px) {
   .modal-dialog {
     max-width: 675px;
     margin: 1.75rem auto;
@@ -667,27 +754,29 @@ header{
   }
 
 }
+
 @media only screen and (max-width: 768px) {
   .main-img {
     min-height: 300px;
     padding: 50px 0px;
   }
   .boxborder {
-    background: rgba(9,20,59,0.6);
+    background: rgba(9, 20, 59, 0.6);
     border: 2px dashed rgba(244, 244, 247, 0.6);
     color: #fff;
     margin-left: 18%;
     width: 66%;
   }
 }
+
 @media only screen and (max-width: 767px) {
-  .logo{
+  .logo {
     text-align: center;
   }
   .upper-nav {
     float: inherit;
   }
-  .m-align{
+  .m-align {
     text-align: center;
   }
   .newsletter input[type=email] {
@@ -696,14 +785,14 @@ header{
   .newsletter input[type=submit] {
     width: 25%;
   }
-  .modal-dialog{
+  .modal-dialog {
     max-width: 100% !important;
   }
   .modal-body .img {
     float: inherit;
     width: 100%;
   }
-  .modal-body .btn-primary{
+  .modal-body .btn-primary {
     position: inherit;
     margin-top: 20px;
     float: right;
@@ -739,7 +828,7 @@ header{
 
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
   .offset-lg-2 {
     margin-left: 16.666667%;
   }
@@ -756,13 +845,15 @@ header{
     width: 100%;
   }
 }
+
 .download {
   position: absolute;
   bottom: 15px;
-  padding: 13px 30px!important;
+  padding: 13px 30px !important;
   left: 0px;
-  font-size:16px;
+  font-size: 16px;
 }
+
 #loader {
   position: absolute;
   left: 50%;
@@ -781,22 +872,33 @@ header{
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
+
 .uploadBtn {
-  height:45px;
+  height: 45px;
   border: 2px solid #ccc;
   border-right: 0px;
 }
+
 .inputGroup {
   margin-top: -17px
 }
+
 @media (min-width: 320px) and (max-width: 480px) {
 
   .inputGroup {
@@ -807,7 +909,7 @@ header{
 
 .textUploadCV {
   margin-top: 30px;
-  font-size:30px;
+  font-size: 30px;
   animation: blinker 2s ease-in infinite alternate;
   color: white;
 }
@@ -821,12 +923,14 @@ header{
 /* Job Spec */
 #job-spec-page {
   .errorStyle {
-    color:red;
+    color: red;
     position: static;
     margin-top: 0px;
   }
 
   #job-spec-container {
+    padding-top: 30px;
+
     .btn {
       margin: 0.5em;
     }
@@ -980,6 +1084,14 @@ header{
         }
       }
     }
+  }
+}
+
+#text-link-preview {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  iframe {
+    border: none
   }
 }
 /* End Job Spec */

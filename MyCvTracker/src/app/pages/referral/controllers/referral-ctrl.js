@@ -62,6 +62,7 @@ angular.module("MyCvTracker.pages.referral")
         isChildRef : false,
         editing : false,
         description : null,
+        previewLink : null,
         title : null,
         email : null,
         location : null,
@@ -170,11 +171,8 @@ angular.module("MyCvTracker.pages.referral")
         var context = "";
         var type = $scope.newReferralForm.type;
         var email = "",
-          title = "", location = "", jobType = "";
+          title = "", location = "", jobType = "", previewLink = "";
         switch (type) {
-          case $scope.REFERRAL_TYPE.TEXT_LINK:
-            context = $scope.newReferralForm.description;
-            break;
           case  $scope.REFERRAL_TYPE.JOB_SPEC:
             context = $scope.newReferralForm.description;
             title = $scope.newReferralForm.title;
@@ -185,6 +183,11 @@ angular.module("MyCvTracker.pages.referral")
           case  $scope.REFERRAL_TYPE.SOCIAL_SHARE:
             context = $scope.newReferralForm.description;
             title = $scope.newReferralForm.title;
+            break;
+          case $scope.REFERRAL_TYPE.TEXT_LINK:
+            context = $scope.newReferralForm.description;
+            title = $scope.newReferralForm.title;
+            previewLink = $scope.newReferralForm.previewLink;
             break;
         }
 
@@ -199,7 +202,7 @@ angular.module("MyCvTracker.pages.referral")
             });
         } else {
           if (!$scope.newReferralForm.editing) {
-            ReferralSvc.generateLink(context, type, title, email, jobType, location)
+            ReferralSvc.generateLink(context, type, title, email, jobType, location, previewLink)
               .then(function () {
                 $scope.newReferralForm.generating = false;
                 $scope.closeModal();
@@ -209,7 +212,7 @@ angular.module("MyCvTracker.pages.referral")
               });
           } else {
             var referralLink = $scope.newReferralForm.editingReferral.referralLink;
-            ReferralSvc.editRefLink(referralLink, title, context, jobType, location)
+            ReferralSvc.editRefLink(referralLink, title, context, jobType, location, previewLink)
               .then(function () {
                 $scope.newReferralForm.editingReferral.referralTargetSubject = title;
                 $scope.newReferralForm.editingReferral.referralDetails = context;
@@ -288,7 +291,7 @@ angular.module("MyCvTracker.pages.referral")
             text = "https://mycvtracker.com/network-share.html?ref=";
             break;
           default:
-            text = "https://mycvtracker.com/topcvreviews.html?ref=";
+            text = "https://mycvtracker.com/context-link.html?ref=";
             break;
         }
         if (!subject) subject = "";

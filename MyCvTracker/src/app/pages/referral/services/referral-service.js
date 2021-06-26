@@ -19,17 +19,17 @@ angular.module("MyCvTracker.pages.referral")
           var url = utilities.getReferralLinkListUrlOfUser();
           return RestConfig.getReferralLinksOfUser(url, userId);
         },
-        generateLink : function(name, type, title, email, jobType, location) {
+        generateLink : function(name, type, title, email, jobType, location, previewLink) {
           var url = utilities.getReferralLinkNewUrl();
-          return RestConfig.generateReferralLink(url, name, type, title, email, jobType, location);
+          return RestConfig.generateReferralLink(url, name, type, title, email, jobType, location, previewLink);
         },
-        editRefLink : function(referralLink, title, description, jobType, location) {
+        editRefLink : function(referralLink, title, description, jobType, location, previewLink) {
           var url = utilities.getReferralLinkEditUrl();
-          return RestConfig.editReferralLink(url, referralLink, description, title, jobType, location);
+          return RestConfig.editReferralLink(url, referralLink, description, title, jobType, location, previewLink);
         },
-        generateLinkForUser : function(name, email, type, title, targetEmail, jobType, location) {
+        generateLinkForUser : function(name, email, type, title, targetEmail, jobType, location, previewLink) {
           var url = utilities.getReferralLinkNewUrlForUser();
-          return RestConfig.generateReferralLinkForUser(url, email, name, type, title, targetEmail, jobType, location);
+          return RestConfig.generateReferralLinkForUser(url, email, name, type, title, targetEmail, jobType, location, previewLink);
         },
         shareReferralLink : function(refCode) {
           var url = utilities.getShareReferralLinkUrl();

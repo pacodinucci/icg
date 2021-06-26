@@ -27,22 +27,32 @@
           <option ng-value="REFERRAL_TYPE.SOCIAL_SHARE">Social</option>
         </select>
       </div>
-      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">
-        <label class="control-label">Referral Context</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter context name"
-          ng-model="newReferralForm.description"
-          ng-required="true" />
-      </div>
-      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC || newReferralForm.type === REFERRAL_TYPE.SOCIAL_SHARE">
+<!--      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">-->
+<!--        <label class="control-label">Referral Context</label>-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          class="form-control"-->
+<!--          placeholder="Enter context name"-->
+<!--          ng-model="newReferralForm.description"-->
+<!--          ng-required="true" />-->
+<!--      </div>-->
+      <div class="form-group">
         <label class="control-label">Title</label>
         <input
           type="text"
           class="form-control"
           placeholder="Enter title"
           ng-model="newReferralForm.title"
+          ng-required="true" />
+      </div>
+      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">
+        <label class="control-label">Profile link</label>
+        <input
+          type="text"
+          class="form-control"
+          ng-maxlength="250"
+          placeholder="Enter your profile link"
+          ng-model="newReferralForm.previewLink"
           ng-required="true" />
       </div>
       <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
@@ -73,7 +83,7 @@
           ng-model="newReferralForm.location"
           ng-required="true" />
       </div>
-      <div class="form-group" ng-if="newReferralForm.type !== REFERRAL_TYPE.TEXT_LINK">
+      <div class="form-group">
         <label class="control-label">Description</label>
         <ng-ckeditor
           ng-model="newReferralForm.description"

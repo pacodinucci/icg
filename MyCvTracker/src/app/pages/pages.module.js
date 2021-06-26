@@ -96,11 +96,14 @@
         var jobSpecPage = next.endsWith("/job-spec.html");
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
         var networkSharePage = next.endsWith("/network-share.html");
+        var contextLinkPage = next.endsWith("/context-link.html");
 
         if (frontPage) {
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
         } else if (jobSpecPage) {
           window.location.href = Utilities.baseUrl() + "/job-spec.html";
+        } else if (contextLinkPage) {
+          window.location.href = Utilities.baseUrl() + "/context-link.html";
         } else if (pdfViewerPage) {
           window.location.href = Utilities.baseUrl() + "/pdf-viewer.html";
         } else if (networkSharePage) {

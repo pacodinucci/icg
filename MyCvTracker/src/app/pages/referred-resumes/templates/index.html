@@ -64,7 +64,7 @@
                   <i class="fas fa-search"></i>
                 </a>
                 <a
-                  ng-if="ableToShare(aResume.sharedWith)"
+                  ng-if="referredResumes.detail.referralType === 'JOB_SPEC' && ableToShare(aResume.sharedWith)"
                   href="#"
                   ng-attr-title='{{ isShareToTarget(aResume.sharedWith) ? "Share to target" : "Share to parent"}}'
                   ng-click="openShareResumeModal(aResume)">
