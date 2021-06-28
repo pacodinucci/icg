@@ -37,30 +37,21 @@
                 <div class="info-col flex-fill">
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.TEXT_LINK || !referral.referralType"
-                    class="context-name"
-                    ng-click="openNewReferralLinkModal(referral)">
-                    <a href="#">
+                    class="context-name">
                       <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
                       <span ng-if="!referral.referralTargetSubject.length">-</span>
-                    </a>
                   </div>
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE"
-                    class="context-name"
-                    ng-click="openNewReferralLinkModal(referral)">
-                    <a href="#">
+                    class="context-name">
                       <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
                       <span ng-if="!referral.referralTargetSubject.length">Social Description</span>
-                    </a>
                   </div>
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
-                    class="context-name"
-                    ng-click="openNewReferralLinkModal(referral)">
-                    <a href="#">
+                    class="context-name">
                       <span ng-if="!referral.referralTargetSubject.length">Job Description</span>
                       <span ng-if="referral.referralTargetSubject.length">{{ referral.referralTargetSubject }}</span>
-                    </a>
                   </div>
                   <div
                     class="referral-type"
@@ -86,13 +77,18 @@
                 </div>
               </div>
 
-              <div
-                ng-bind="getReferralLink(referral)"
-                class="link">
+              <div class="link">
+                <a ng-href="{{ getReferralLink(referral) }}" target="_blank">{{ getReferralLink(referral) }}</a>
               </div>
 
               <div class="ctrls">
                 <div class="ctrls-container d-flex align-items-center">
+                  <a
+                    ng-click="openNewReferralLinkModal(referral)"
+                    title="List resumes">
+                    <i class="fas fa-edit"></i>
+                  </a>
+
                   <a
                     href="#"
                     title="Copy"
