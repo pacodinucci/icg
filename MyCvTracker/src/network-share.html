@@ -604,8 +604,6 @@
         </div>
       </div>
     </div>
-
-
     <!-- modal four -->
     <div
       class="modal fade bs-example-modal-lg"
@@ -622,7 +620,9 @@
           <div class="modal-body">
             <h3>Success</h3>
             <h2>Congratulation!</h2>
-            <p>You have applied successfully. You will start receiving email notification shortly.</p>
+            <p>
+              We have received your details and you will receive full details on your email shortly.
+            </p>
             <div class="img">
               <img src="assets/img/front/step-3.jpg">
             </div>
@@ -693,6 +693,7 @@
               </button>
 
               <button
+                style="margin-left: 10px"
                 class="btn btn-danger">
                 Continue as Normal User
               </button>
@@ -813,6 +814,32 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="modal fade bs-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+      id="referral-bounty-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h2>What is referral bounty?</h2>
+            <p>
+              ....
+            </p>
+            <br />
+            <div class="next">
+              <button
+                class="btn btn-primary">
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- modal ends -->
 
     <!-- wrapper ends -->
@@ -820,8 +847,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <script src="https://rawgithub.com/CodeSeven/toastr/master/toastr.js"></script>
-
-
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemodal/1.4.4/jquery.simplemodal.min.js"></script> -->
 
     <!-- <script type="text/javascript" src="js/custom.js"></script> -->
@@ -984,14 +1009,22 @@
 
       $(".generate-btn")
         .click(function () {
-          var token = localStorage.getItem("token");
-          if (!!token) {
-            window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
-          } else {
+          $("#referral-bounty-modal").modal("show");
+        });
+
+      $("#referral-bounty-modal .btn-primary").click(function() {
+        var token = localStorage.getItem("token");
+        if (!!token) {
+          window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+        } else {
+          $("#referral-bounty-modal")
+            .modal("hide");
+          setTimeout(function() {
             $("#referral-modal-auth")
               .modal("show");
-          }
-        });
+          }, 500);
+        }
+      });
 
       var socialWindow = null;
       $("#social-selection-modal .fb-btn")
@@ -1062,6 +1095,7 @@
           $("#social-selection-modal")
             .modal("show");
         });
+
 
       $("#sendEmail")
         .click(function () {

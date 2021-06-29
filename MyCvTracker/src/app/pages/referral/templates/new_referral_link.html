@@ -1,4 +1,5 @@
 <form
+  id="new-referral-form"
   name="newReferralLinkForm"
   ng-submit="generateLink()"
   novalidate>
@@ -11,8 +12,12 @@
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>
-    <h4 class="modal-title" ng-if="!newReferralForm.editing">Generate Referral Link</h4>
-    <h4 class="modal-title" ng-if="newReferralForm.editing">Edit Referral Link</h4>
+    <h4
+      class="modal-title"
+      ng-if="!newReferralForm.editing">Generate Referral Link</h4>
+    <h4
+      class="modal-title"
+      ng-if="newReferralForm.editing">Edit Referral Link</h4>
   </div>
   <div>
     <div class="modal-body">
@@ -27,60 +32,78 @@
           <option ng-value="REFERRAL_TYPE.SOCIAL_SHARE">Social</option>
         </select>
       </div>
-<!--      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">-->
-<!--        <label class="control-label">Referral Context</label>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          class="form-control"-->
-<!--          placeholder="Enter context name"-->
-<!--          ng-model="newReferralForm.description"-->
-<!--          ng-required="true" />-->
-<!--      </div>-->
+      <!--      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">-->
+      <!--        <label class="control-label">Referral Context</label>-->
+      <!--        <input-->
+      <!--          type="text"-->
+      <!--          class="form-control"-->
+      <!--          placeholder="Enter context name"-->
+      <!--          ng-model="newReferralForm.description"-->
+      <!--          ng-required="true" />-->
+      <!--      </div>-->
       <div class="form-group">
         <label class="control-label">Title</label>
         <input
           type="text"
           class="form-control"
           placeholder="Enter title"
+          name="title"
           ng-model="newReferralForm.title"
           ng-required="true" />
       </div>
-      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">
+      <div
+        class="form-group"
+        ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">
         <label class="control-label">Profile link</label>
         <input
           type="text"
           class="form-control"
           ng-maxlength="250"
+          name="previewLink"
           placeholder="Enter your profile link"
           ng-model="newReferralForm.previewLink"
           ng-required="true" />
+        <div
+          class="text-danger error-row"
+          ng-if="newReferralForm.previewLinkInvalid">
+          Link is invalid
+        </div>
       </div>
-      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
+      <div
+        class="form-group"
+        ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
         <label class="control-label">Email</label>
         <input
           ng-disabled="newReferralForm.editing"
           type="text"
           class="form-control"
           placeholder="Enter email"
+          name="email"
           ng-model="newReferralForm.email"
           ng-required="true" />
       </div>
-      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
+      <div
+        class="form-group"
+        ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
         <label class="control-label">Job type</label>
         <input
           type="text"
           class="form-control"
           placeholder="Fulltime, partime, remote, ..."
           ng-model="newReferralForm.jobType"
+          name="jobType"
           ng-required="true" />
       </div>
-      <div class="form-group" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
+      <div
+        class="form-group"
+        ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
         <label class="control-label">Location</label>
         <input
           type="text"
           class="form-control"
           placeholder="Enter location"
           ng-model="newReferralForm.location"
+          name="location"
           ng-required="true" />
       </div>
       <div class="form-group">
@@ -88,11 +111,13 @@
         <ng-ckeditor
           ng-model="newReferralForm.description"
           remove-buttons="Image"
-          remove-plugins="iframe,flash,smiley" >
+          remove-plugins="iframe,flash,smiley">
         </ng-ckeditor>
       </div>
     </div>
-    <div class="modal-footer clearfix" ng-if="!newReferralForm.isChildRef">
+    <div
+      class="modal-footer clearfix"
+      ng-if="!newReferralForm.isChildRef">
       <button
         type="submit"
         class="btn btn-primary btn-block"

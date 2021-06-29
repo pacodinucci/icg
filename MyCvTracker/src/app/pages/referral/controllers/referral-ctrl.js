@@ -68,8 +68,10 @@ angular.module("MyCvTracker.pages.referral")
         location : null,
         jobType : null,
         generating : false,
+        previewLinkInvalid : false,
         editingReferral : {},
-        REFERRAL_TYPE : {}
+        REFERRAL_TYPE : {},
+        showError : false
       };
       $scope.deletingReferralLink = "";
       $scope.inDeletingReferral = false;
@@ -97,6 +99,7 @@ angular.module("MyCvTracker.pages.referral")
           $scope.newReferralForm.email = referral.referralTargetEmail;
           $scope.newReferralForm.location = referral.jobLocation;
           $scope.newReferralForm.jobType = referral.jobType;
+          $scope.newReferralForm.previewLink = referral.previewLink;
           $scope.newReferralForm.editingReferral = referral;
           $scope.newReferralForm.isChildRef = referral.parentReferralLink !== referral.referralLink;
         }
@@ -142,6 +145,7 @@ angular.module("MyCvTracker.pages.referral")
         $scope.newReferralForm.email = null;
         $scope.newReferralForm.location = null;
         $scope.newReferralForm.jobType = null;
+        $scope.newReferralForm.previewLink = null;
         $scope.newReferralForm.generating = false;
         $scope.newReferralForm.isChildRef = false;
         $scope.newReferralForm.editingReferral = {};
@@ -161,6 +165,12 @@ angular.module("MyCvTracker.pages.referral")
         }
       };
 
+      function isUrlValid(userInput) {
+        var regexQuery = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$";
+        var url = new RegExp(regexQuery,"i");
+        return url.test(userInput);
+      }
+
       $scope.generateLink = function () {
         if ($scope.newReferralForm.isChildRef) {
           return;
@@ -172,6 +182,7 @@ angular.module("MyCvTracker.pages.referral")
         var type = $scope.newReferralForm.type;
         var email = "",
           title = "", location = "", jobType = "", previewLink = "";
+        var previewLinkInvalid = false;
         switch (type) {
           case  $scope.REFERRAL_TYPE.JOB_SPEC:
             context = $scope.newReferralForm.description;
@@ -188,7 +199,15 @@ angular.module("MyCvTracker.pages.referral")
             context = $scope.newReferralForm.description;
             title = $scope.newReferralForm.title;
             previewLink = $scope.newReferralForm.previewLink;
+
+            previewLinkInvalid = !previewLink || !isUrlValid(previewLink);
+            $scope.newReferralForm.previewLinkInvalid = previewLinkInvalid;
             break;
+        }
+
+        if (previewLinkInvalid) {
+          $scope.newReferralForm.generating = false;
+          return;
         }
 
         if (!!userId) {
