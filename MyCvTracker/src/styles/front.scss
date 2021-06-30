@@ -1118,3 +1118,11 @@ header {
     display: block;
   }
 }
+
+#profile-preview-step {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}

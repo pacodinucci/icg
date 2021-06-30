@@ -52,17 +52,17 @@
           ng-required="true" />
       </div>
       <div
-        class="form-group"
-        ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">
-        <label class="control-label">Profile link</label>
+        class="form-group">
+        <label class="control-label" ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">Profile link (Optional)</label>
+        <label class="control-label" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">Profile link (Optional)</label>
+        <label class="control-label" ng-if="newReferralForm.type === REFERRAL_TYPE.SOCIAL_SHARE">Event link (Optional)</label>
         <input
           type="text"
           class="form-control"
           ng-maxlength="250"
           name="previewLink"
-          placeholder="Enter your profile link"
-          ng-model="newReferralForm.previewLink"
-          ng-required="true" />
+          placeholder="Enter link"
+          ng-model="newReferralForm.previewLink" />
         <div
           class="text-danger error-row"
           ng-if="newReferralForm.previewLinkInvalid">
@@ -110,7 +110,6 @@
         <label class="control-label">Description</label>
         <ng-ckeditor
           ng-model="newReferralForm.description"
-          remove-buttons="Image"
           remove-plugins="iframe,flash,smiley">
         </ng-ckeditor>
       </div>
