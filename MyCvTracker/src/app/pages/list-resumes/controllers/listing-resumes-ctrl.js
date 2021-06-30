@@ -49,11 +49,11 @@ angular.module("MyCvTracker.pages.resumeListing")
         $scope.loadInfo.loading = true;
 
         var page = $scope.loadInfo.page;
-        mainSvc.listResumes(page, NO_RECORDS + 1)
+        mainSvc.listResumes(page, NO_RECORDS)
           .then(function (rpData) {
             var len = rpData.length;
             if (len > 0) {
-              var hasNext = len > NO_RECORDS;
+              var hasNext = len >= NO_RECORDS;
               if (hasNext) {
                 len = NO_RECORDS;
               }

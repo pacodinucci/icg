@@ -286,7 +286,8 @@ angular.module("MyCvTracker.shared")
         getCitiesList : function (url) {
           return RESTSvc.get(url);
         },
-        getReferralLinks : function (url) {
+        getReferralLinks : function (url, page, noOfRecords) {
+          url = url + "?page=" + page + "&noOfRecords=" + noOfRecords;
           return RESTSvc.get(url);
         },
         getReferralLinksOfUser : function (url, userId) {
@@ -301,7 +302,9 @@ angular.module("MyCvTracker.shared")
           referralTargetEmail,
           jobType,
           jobLocation,
-          previewLink
+          previewLink,
+          refPublic,
+          bountyEnabled
         ) {
           var request = {
             referralDetails : contextName,
@@ -311,7 +314,9 @@ angular.module("MyCvTracker.shared")
             referralTargetEmail : referralTargetEmail,
             jobType : jobType,
             jobLocation : jobLocation,
-            previewLink : previewLink
+            previewLink : previewLink,
+            refPublic : refPublic,
+            bountyEnable : bountyEnabled
           }
 
           return RESTSvc.post(url, request);
@@ -323,7 +328,7 @@ angular.module("MyCvTracker.shared")
           referralTargetSubject,
           jobType,
           jobLocation,
-          previewLink
+          previewLink, refPublic, bountyEnabled
         ) {
           var request = {
             referralLink : referralLink,
@@ -331,7 +336,9 @@ angular.module("MyCvTracker.shared")
             referralTargetSubject : referralTargetSubject,
             jobType : jobType,
             jobLocation : jobLocation,
-            previewLink : previewLink
+            previewLink : previewLink,
+            refPublic : refPublic,
+            bountyEnable : bountyEnabled
           }
 
           return RESTSvc.put(url, request);

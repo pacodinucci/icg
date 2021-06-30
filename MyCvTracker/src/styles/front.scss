@@ -933,6 +933,10 @@ header {
 
     .btn {
       margin: 0.5em;
+
+      &.deactive {
+        display: none;
+      }
     }
   }
 

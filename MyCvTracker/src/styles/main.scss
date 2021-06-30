@@ -57,6 +57,30 @@
       font-family: 'museo_slab500';
     }
 
+    .list-status {
+      margin-top: 0.8rem;
+
+      .ref-status {
+        display: inline-block;
+        margin-right: 20px;
+
+        .status-color {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          vertical-align: middle;
+          border-radius: 50%;
+          margin-right: 5px;
+          background-color: #dfe3ec;
+
+          &.enabled {
+            background-color: #337ab7;
+          }
+        }
+      }
+
+    }
+
     .ctrls {
       color: #337ab7;
       cursor: pointer;

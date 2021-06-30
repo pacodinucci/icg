@@ -338,7 +338,7 @@
                     url: '/user/getCitiesList'
                 },
                 referralList : {
-            	      url : "/links/myreferrals"
+            	      url : "/links/referrals"
                 },
                 referralListOfOther : {
                     url : "/links/referrals"

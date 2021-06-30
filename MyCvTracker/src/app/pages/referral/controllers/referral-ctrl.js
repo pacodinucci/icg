@@ -19,6 +19,7 @@ angular.module("MyCvTracker.pages.referral")
       $location
     ) {
       var JOB_STATUS = Constants.jobAppStatus;
+      var NO_RECORDS = 12;
 
       $scope.REFERRAL_TYPE = {
         TEXT_LINK : "TEXT_LINK",
@@ -33,9 +34,15 @@ angular.module("MyCvTracker.pages.referral")
       var userId = 0;
       var userEmail = "",
         parentLink = "";
+      var userDetail = Authorization.getUserDetails();
+      var role = !!userDetail ? Authorization.getUserRole() : "";
+      var isAdmin =  role === "ADMIN";
+      var isReviewer =  role === "REVIEWER";
+      var isManagement = isAdmin || isReviewer;
 
       $scope.referralModal = {};
       $scope.referral = {
+        isManagement : isManagement,
         links : [],
         modal : null,
         selectedDescription : "",
@@ -55,7 +62,10 @@ angular.module("MyCvTracker.pages.referral")
           referral : null,
           sharing : false,
           success : false
-        }
+        },
+        page : 1,
+        listing : false,
+        hasNext : false
       };
       $scope.newReferralForm = {
         type : $scope.REFERRAL_TYPE.JOB_SPEC,
@@ -67,6 +77,8 @@ angular.module("MyCvTracker.pages.referral")
         email : null,
         location : null,
         jobType : null,
+        refPublic : false,
+        bountyEnable : false,
         generating : false,
         previewLinkInvalid : false,
         editingReferral : {},
@@ -76,19 +88,46 @@ angular.module("MyCvTracker.pages.referral")
       $scope.deletingReferralLink = "";
       $scope.inDeletingReferral = false;
 
+      $scope.reloadListReferralLinks = function() {
+        $scope.referral.page = 1;
+        $scope.referral.links = [];
+        $scope.referral.hasNext = true;
+
+        $scope.loadListReferralLinks();
+      }
+
       $scope.loadListReferralLinks = function () {
         if (!!userId) {
-          ReferralSvc.getListReferralLinksOfUser(userId)
-            .then(function (rpData) {
-              $scope.referral.links = rpData;
-            });
+          // ReferralSvc.getListReferralLinksOfUser(userId)
+          //   .then(function (rpData) {
+          //     $scope.referral.links = rpData;
+          //   });
         } else {
-          ReferralSvc.getListReferralLinks()
-            .then(function (rpData) {
-              $scope.referral.links = rpData;
-            });
+          if (!$scope.referral.listing) {
+            $scope.referral.listing = true;
+            var page = $scope.referral.page;
+
+            ReferralSvc.getListReferralLinks(page, NO_RECORDS)
+              .then(function (rpData) {
+                var newLinks = rpData;
+                var noRecords = newLinks.length;
+                var hasNext = noRecords >= NO_RECORDS;
+
+                for (var i = 0, len = Math.min(NO_RECORDS, noRecords); i < len; i++) {
+                  $scope.referral.links.push(newLinks[i]);
+                }
+
+                $scope.referral.hasNext = hasNext;
+                $scope.referral.listing = false;
+              });
+          }
         }
       };
+
+      $scope.loadNextPage = function() {
+        $scope.referral.page++;
+        $scope.loadListReferralLinks();
+      }
 
       $scope.openNewReferralLinkModal = function (referral) {
         $scope.newReferralForm.editing = !!referral;
@@ -100,6 +139,8 @@ angular.module("MyCvTracker.pages.referral")
           $scope.newReferralForm.location = referral.jobLocation;
           $scope.newReferralForm.jobType = referral.jobType;
           $scope.newReferralForm.previewLink = referral.previewLink;
+          $scope.newReferralForm.bountyEnable = referral.bountyEnable;
+          $scope.newReferralForm.refPublic = referral.refPublic;
           $scope.newReferralForm.editingReferral = referral;
           $scope.newReferralForm.isChildRef = referral.parentReferralLink !== referral.referralLink;
         }
@@ -146,6 +187,8 @@ angular.module("MyCvTracker.pages.referral")
         $scope.newReferralForm.location = null;
         $scope.newReferralForm.jobType = null;
         $scope.newReferralForm.previewLink = null;
+        $scope.newReferralForm.bountyEnable = false;
+        $scope.newReferralForm.refPublic = false;
         $scope.newReferralForm.generating = false;
         $scope.newReferralForm.isChildRef = false;
         $scope.newReferralForm.editingReferral = {};
@@ -167,7 +210,7 @@ angular.module("MyCvTracker.pages.referral")
 
       function isUrlValid(userInput) {
         var regexQuery = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$";
-        var url = new RegExp(regexQuery,"i");
+        var url = new RegExp(regexQuery, "i");
         return url.test(userInput);
       }
 
@@ -181,7 +224,12 @@ angular.module("MyCvTracker.pages.referral")
         var context = "";
         var type = $scope.newReferralForm.type;
         var email = "",
-          title = "", location = "", jobType = "", previewLink = "";
+          title = "",
+          location = "",
+          jobType = "",
+          previewLink = "",
+          refPublic = false,
+          bountyEnable = false;
         switch (type) {
           case  $scope.REFERRAL_TYPE.JOB_SPEC:
             context = $scope.newReferralForm.description;
@@ -190,12 +238,15 @@ angular.module("MyCvTracker.pages.referral")
             location = $scope.newReferralForm.location;
             jobType = $scope.newReferralForm.jobType;
             previewLink = $scope.newReferralForm.previewLink;
+            refPublic = $scope.newReferralForm.refPublic;
+            bountyEnable = $scope.newReferralForm.bountyEnable;
 
             break;
           case  $scope.REFERRAL_TYPE.SOCIAL_SHARE:
             context = $scope.newReferralForm.description;
             title = $scope.newReferralForm.title;
             previewLink = $scope.newReferralForm.previewLink;
+            bountyEnable = $scope.newReferralForm.bountyEnable;
 
             break;
           case $scope.REFERRAL_TYPE.TEXT_LINK:
@@ -214,32 +265,34 @@ angular.module("MyCvTracker.pages.referral")
         }
 
         if (!!userId) {
-          ReferralSvc.generateLinkForUser(context, userEmail, type, title, email, jobType, location)
-            .then(function () {
-              $scope.newReferralForm.generating = false;
-              $scope.closeModal();
-              $scope.loadListReferralLinks();
-              var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
-              toastr.success(msg, "Success");
-            });
+          // ReferralSvc.generateLinkForUser(context, userEmail, type, title, email, jobType, location)
+          //   .then(function () {
+          //     $scope.newReferralForm.generating = false;
+          //     $scope.closeModal();
+          //     $scope.loadListReferralLinks();
+          //     var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
+          //     toastr.success(msg, "Success");
+          //   });
         } else {
           if (!$scope.newReferralForm.editing) {
-            ReferralSvc.generateLink(context, type, title, email, jobType, location, previewLink)
+            ReferralSvc.generateLink(context, type, title, email, jobType, location, previewLink, refPublic, bountyEnable)
               .then(function () {
                 $scope.newReferralForm.generating = false;
                 $scope.closeModal();
-                $scope.loadListReferralLinks();
+                $scope.reloadListReferralLinks();
                 var msg = Utilities.getAlerts("newReferralLinkSuccessMsg");
                 toastr.success(msg, "Success");
               });
           } else {
             var referralLink = $scope.newReferralForm.editingReferral.referralLink;
-            ReferralSvc.editRefLink(referralLink, title, context, jobType, location, previewLink)
+            ReferralSvc.editRefLink(referralLink, title, context, jobType, location, previewLink, refPublic, bountyEnable)
               .then(function () {
                 $scope.newReferralForm.editingReferral.referralTargetSubject = title;
                 $scope.newReferralForm.editingReferral.referralDetails = context;
                 $scope.newReferralForm.editingReferral.jobType = jobType;
                 $scope.newReferralForm.editingReferral.jobLocation = location;
+                $scope.newReferralForm.editingReferral.refPublic = refPublic;
+                $scope.newReferralForm.editingReferral.bountyEnable = bountyEnable;
 
                 $scope.newReferralForm.generating = false;
                 $scope.closeModal();
@@ -288,7 +341,7 @@ angular.module("MyCvTracker.pages.referral")
         link,
         parentLink
       ) {
-        var path = type ===  $scope.REFERRAL_TYPE.SOCIAL_SHARE ? "/social-registrations" : "/referred-resumes";
+        var path = type === $scope.REFERRAL_TYPE.SOCIAL_SHARE ? "/social-registrations" : "/referred-resumes";
         var url = path + "?referralLink=" + link;
         if (!!parentLink && parentLink !== link) url = url + "&parentLink=" + parentLink;
 
@@ -300,10 +353,14 @@ angular.module("MyCvTracker.pages.referral")
         var link = referral.referralLink;
         var tt = referral.referralTargetSubject;
 
-       return $scope.getRefLink(refType, link, tt);
+        return $scope.getRefLink(refType, link, tt);
       };
 
-      $scope.getRefLink = function(refType, link, subject) {
+      $scope.getRefLink = function (
+        refType,
+        link,
+        subject
+      ) {
         var text = "";
         switch (refType) {
           case $scope.REFERRAL_TYPE.JOB_SPEC:
@@ -318,10 +375,11 @@ angular.module("MyCvTracker.pages.referral")
         }
         if (!subject) subject = "";
 
-        subject = subject.replace(/  +/g, " ").replaceAll(" ", "-");
+        subject = subject.replace(/  +/g, " ")
+          .replaceAll(" ", "-");
 
         return text + link + (!!subject ? "&title=" + encodeURIComponent(subject) : "");
-      }
+      };
 
       $scope.copyLink = function (referral) {
         var text = $scope.getReferralLink(referral);

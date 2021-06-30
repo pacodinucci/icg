@@ -11,21 +11,21 @@ angular.module("MyCvTracker.pages.referral")
       var utilities = $injector.get("Utilities");
 
       return {
-        getListReferralLinks : function () {
+        getListReferralLinks : function (page, noOfRecords) {
           var url = utilities.getReferralLinkListUrl();
-          return RestConfig.getReferralLinks(url);
+          return RestConfig.getReferralLinks(url, page, noOfRecords);
         },
         getListReferralLinksOfUser : function (userId) {
           var url = utilities.getReferralLinkListUrlOfUser();
           return RestConfig.getReferralLinksOfUser(url, userId);
         },
-        generateLink : function(name, type, title, email, jobType, location, previewLink) {
+        generateLink : function(name, type, title, email, jobType, location, previewLink, refPublic, bountyEnabled) {
           var url = utilities.getReferralLinkNewUrl();
-          return RestConfig.generateReferralLink(url, name, type, title, email, jobType, location, previewLink);
+          return RestConfig.generateReferralLink(url, name, type, title, email, jobType, location, previewLink, refPublic, bountyEnabled);
         },
-        editRefLink : function(referralLink, title, description, jobType, location, previewLink) {
+        editRefLink : function(referralLink, title, description, jobType, location, previewLink, refPublic, bountyEnabled) {
           var url = utilities.getReferralLinkEditUrl();
-          return RestConfig.editReferralLink(url, referralLink, description, title, jobType, location, previewLink);
+          return RestConfig.editReferralLink(url, referralLink, description, title, jobType, location, previewLink, refPublic, bountyEnabled);
         },
         generateLinkForUser : function(name, email, type, title, targetEmail, jobType, location, previewLink) {
           var url = utilities.getReferralLinkNewUrlForUser();

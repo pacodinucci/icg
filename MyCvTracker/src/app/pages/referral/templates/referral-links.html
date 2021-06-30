@@ -2,10 +2,12 @@
   id="referral"
   ng-controller="ReferralCtrl">
   <div class="body-section setting-section">
-    <h4 class="section-name">Referral link</h4>
+    <h4 class="section-name">List of referrals</h4>
 
     <div class="section-content">
-      <div class="card referral-setting-card">
+      <div
+        class="card referral-setting-card"
+        ng-if="!!referral.isManagement">
         <div class="card-body">
           <p class="link-explanation">
             This section generates referral links for our portal users. At present it can generate job referral ,social
@@ -38,20 +40,20 @@
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.TEXT_LINK || !referral.referralType"
                     class="context-name">
-                      <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
-                      <span ng-if="!referral.referralTargetSubject.length">-</span>
+                    <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
+                    <span ng-if="!referral.referralTargetSubject.length">-</span>
                   </div>
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE"
                     class="context-name">
-                      <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
-                      <span ng-if="!referral.referralTargetSubject.length">Social Description</span>
+                    <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
+                    <span ng-if="!referral.referralTargetSubject.length">Social Description</span>
                   </div>
                   <div
                     ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
                     class="context-name">
-                      <span ng-if="!referral.referralTargetSubject.length">Job Description</span>
-                      <span ng-if="referral.referralTargetSubject.length">{{ referral.referralTargetSubject }}</span>
+                    <span ng-if="!referral.referralTargetSubject.length">Job Description</span>
+                    <span ng-if="referral.referralTargetSubject.length">{{ referral.referralTargetSubject }}</span>
                   </div>
                   <div
                     class="referral-type"
@@ -78,7 +80,21 @@
               </div>
 
               <div class="link">
-                <a ng-href="{{ getReferralLink(referral) }}" target="_blank">{{ getReferralLink(referral) }}</a>
+                <a
+                  ng-href="{{ getReferralLink(referral) }}"
+                  target="_blank">{{ getReferralLink(referral) }}
+                </a>
+              </div>
+
+              <div class="list-status">
+                <div class="ref-status">
+                  <span ng-class="['status-color', referral.bountyEnable ? 'enabled' : '' ]"></span>
+                  {{ referral.referralType === REFERRAL_TYPE.TEXT_LINK ? "No bounty" : "Bounty disabled" }}
+                </div>
+                <div class="ref-status" ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC">
+                  <span ng-class="['status-color', referral.refPublic ? 'enabled' : '' ]"></span>
+                  Published
+                </div>
               </div>
 
               <div class="ctrls">
@@ -111,6 +127,20 @@
                   </a>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="row"
+          ng-if="!referral.listing && referral.hasNext">
+          <div
+            class="col-12">
+            <div class="text-center">
+              <button
+                ng-click="loadNextPage()"
+                class="btn btn-primary">
+                Load More
+              </button>
             </div>
           </div>
         </div>

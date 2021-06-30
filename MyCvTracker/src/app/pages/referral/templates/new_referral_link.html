@@ -113,6 +113,18 @@
           remove-plugins="iframe,flash,smiley">
         </ng-ckeditor>
       </div>
+      <div
+        ng-if="newReferralForm.type !== REFERRAL_TYPE.TEXT_LINK"
+        class="row">
+        <div class="form-group col-xs-6">
+          <input type="checkbox" ng-model="newReferralForm.bountyEnable" />
+          <label class="form-check-label">Bounty enabled</label>
+        </div>
+        <div class="form-group col-xs-6" ng-if="newReferralForm.type === REFERRAL_TYPE.JOB_SPEC">
+          <input type="checkbox" ng-model="newReferralForm.refPublic" />
+          <label class="form-check-label">Listing published</label>
+        </div>
+      </div>
     </div>
     <div
       class="modal-footer clearfix"
