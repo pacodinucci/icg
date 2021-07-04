@@ -87,16 +87,17 @@ angular.module("MyCvTracker.pages.referredResumes")
       $scope.downloadMyResume = function (id) {
         service.getResumeToken(id, referralLink)
           .then(function (data) {
-            var url = "https://mycvtracker.com:8080/user/downloadResume?accessToken=" + data.token;
-
-            const link = document.createElement('a');
-            link.href = url;
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            toastr.success(Utilities.getAlerts("resumeDownloadSuccess").message);
-
-            link.remove();
+          console.log("token", data.token);
+            // var url = "https://mycvtracker.com:8080/user/downloadResume?accessToken=" + data.token;
+            //
+            // const link = document.createElement('a');
+            // link.href = url;
+            // link.target = '_blank';
+            // document.body.appendChild(link);
+            // link.click();
+            // toastr.success(Utilities.getAlerts("resumeDownloadSuccess").message);
+            //
+            // link.remove();
           }, function () {
           });
       };

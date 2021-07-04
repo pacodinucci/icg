@@ -142,7 +142,7 @@ angular.module("MyCvTracker.pages.referral")
           $scope.newReferralForm.bountyEnable = referral.bountyEnable;
           $scope.newReferralForm.refPublic = referral.refPublic;
           $scope.newReferralForm.editingReferral = referral;
-          $scope.newReferralForm.isChildRef = referral.parentReferralLink !== referral.referralLink;
+          $scope.newReferralForm.isChildRef = !!referral.parentReferralId;
         }
 
         $scope.referralModal = ReferralSvc.getNewReferralLinkModal($scope, "ReferalModalCtrl");
@@ -328,7 +328,7 @@ angular.module("MyCvTracker.pages.referral")
 
         ReferralSvc.deleteReferralLink($scope.deletingReferralLink)
           .then(function () {
-            $scope.loadListReferralLinks();
+            $scope.reloadListReferralLinks();
             $scope.inDeletingReferral = false;
             $scope.closeModal();
             var msg = Utilities.getAlerts("deleteReferralLinkSuccessMsg");

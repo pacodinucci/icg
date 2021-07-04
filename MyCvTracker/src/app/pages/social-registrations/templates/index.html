@@ -25,16 +25,17 @@
             ba-panel-class="xsmall-panel light-text resume-panel social-panel">
             <div class="tile-title">
               <h3
-                class="resume-title" ng-bind="aResume.userEmail">longnguyen@gm.com</h3>
+                class="resume-title" ng-bind="aResume.userEmail"></h3>
               <hr class="resumeSeprator">
-              <div class="linked-in-url" >
-                <a ng-href="{{ aResume.linkUrl }}">{{ aResume.linkUrl }}</a>
-              </div>
+<!--              <div class="linked-in-url" >-->
+<!--                <a ng-href="{{ aResume.linkUrl }}">{{ aResume.linkUrl }}</a>-->
+<!--              </div>-->
               <div
                 class="tile-datetime"
                 ng-bind="formatDateTime(aResume.registeredAt)"></div>
               <div class="controls">
                 <span ng-if="aResume.sharedWith === SHARED_LEVEL.PARENT" class="badge badge-info">Shared</span>
+                <span ng-if="aResume.sharedWith !== SHARED_LEVEL.PARENT" class="badge badge-info">Applied</span>
                 <a
                   ng-if="ableToShare(aResume.sharedWith)"
                   href="#"
