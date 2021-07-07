@@ -26,6 +26,11 @@ angular.module("MyCvTracker.pages.referral")
         JOB_SPEC : "JOB_SPEC",
         SOCIAL_SHARE : "SOCIAL_SHARE"
       };
+      $scope.PREVIEW_TYPE = {
+        NONE : "NONE",
+        WEB_PAGE_URL : "WEB_PAGE_URL",
+        FILE : "FILE"
+      };
 
       var Utilities = $injector.get("Utilities");
       var AccountSvc = $injector.get("AccountSvc");
@@ -72,11 +77,13 @@ angular.module("MyCvTracker.pages.referral")
         isChildRef : false,
         editing : false,
         description : null,
-        previewLink : null,
         title : null,
         email : null,
         location : null,
         jobType : null,
+        previewType : $scope.PREVIEW_TYPE.WEB_PAGE_URL,
+        previewLink : null,
+        previewFile : null,
         refPublic : false,
         bountyEnable : false,
         generating : false,
@@ -186,7 +193,9 @@ angular.module("MyCvTracker.pages.referral")
         $scope.newReferralForm.email = null;
         $scope.newReferralForm.location = null;
         $scope.newReferralForm.jobType = null;
+        $scope.newReferralForm.previewType = $scope.PREVIEW_TYPE.WEB_PAGE_URL;
         $scope.newReferralForm.previewLink = null;
+        $scope.newReferralForm.previewFile = null;
         $scope.newReferralForm.bountyEnable = false;
         $scope.newReferralForm.refPublic = false;
         $scope.newReferralForm.generating = false;
@@ -228,30 +237,32 @@ angular.module("MyCvTracker.pages.referral")
           location = "",
           jobType = "",
           previewLink = "",
+          previewFile = null,
+          previewType = $scope.PREVIEW_TYPE.NONE,
           refPublic = false,
           bountyEnable = false;
         switch (type) {
           case  $scope.REFERRAL_TYPE.JOB_SPEC:
-            context = $scope.newReferralForm.description;
-            title = $scope.newReferralForm.title;
             email = $scope.newReferralForm.email;
             location = $scope.newReferralForm.location;
             jobType = $scope.newReferralForm.jobType;
-            previewLink = $scope.newReferralForm.previewLink;
-            refPublic = $scope.newReferralForm.refPublic;
-            bountyEnable = $scope.newReferralForm.bountyEnable;
-
             break;
           case  $scope.REFERRAL_TYPE.SOCIAL_SHARE:
-            context = $scope.newReferralForm.description;
-            title = $scope.newReferralForm.title;
-            previewLink = $scope.newReferralForm.previewLink;
-            bountyEnable = $scope.newReferralForm.bountyEnable;
-
             break;
           case $scope.REFERRAL_TYPE.TEXT_LINK:
-            context = $scope.newReferralForm.description;
-            title = $scope.newReferralForm.title;
+            break;
+        }
+
+        title = $scope.newReferralForm.title;
+        context = $scope.newReferralForm.description;
+        refPublic = $scope.newReferralForm.refPublic;
+        bountyEnable = $scope.newReferralForm.bountyEnable;
+        previewType = $scope.newReferralForm.previewType;
+        switch (previewType) {
+          case $scope.PREVIEW_TYPE.FILE:
+            previewFile = $scope.newReferralForm.previewFile;
+            break;
+          case $scope.PREVIEW_TYPE.WEB_PAGE_URL:
             previewLink = $scope.newReferralForm.previewLink;
             break;
         }
@@ -275,7 +286,7 @@ angular.module("MyCvTracker.pages.referral")
           //   });
         } else {
           if (!$scope.newReferralForm.editing) {
-            ReferralSvc.generateLink(context, type, title, email, jobType, location, previewLink, refPublic, bountyEnable)
+            ReferralSvc.generateLink(context, type, title, email, jobType, location, refPublic, bountyEnable, previewType, previewLink, previewFile)
               .then(function () {
                 $scope.newReferralForm.generating = false;
                 $scope.closeModal();
@@ -300,7 +311,6 @@ angular.module("MyCvTracker.pages.referral")
                 var msg = Utilities.getAlerts("editReferralLinkSuccessMsg");
                 toastr.success(msg, "Success");
               });
-
           }
         }
       };
@@ -419,7 +429,7 @@ angular.module("MyCvTracker.pages.referral")
     }
   ]);
 
-angular.module("MyCvTracker.pages.resumes")
+angular.module("MyCvTracker.pages.referral")
   .controller("ReferalModalCtrl", [
     "$scope",
     "$injector",
@@ -431,3 +441,35 @@ angular.module("MyCvTracker.pages.resumes")
 
     }
   ]);
+
+angular.module('MyCvTracker.pages.referral')
+  .directive('previewFileModel', ['$parse','$injector','Constants', function ($parse,$injector,Constants) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        var model = $parse(attrs.previewFileModel);
+        var modelSetter = model.assign;
+        var Utilities = $injector.get('Utilities');
+
+        element.bind('change', function(){
+          scope.$apply(function(){
+            modelSetter(scope, element[0].files[0]);
+            var file = scope.newReferralForm.previewFile;
+            // var validExts = ["application/pdf", "image/jpeg", "image/png"];
+            // var fileExt = file.type;
+            var input = $("#fileUpload");
+            // if (validExts.indexOf(fileExt) < 0) {
+            //   alert("Wrong file");
+            //   scope.newReferralForm.previewFile=null;
+            //   return false;
+            // }
+            //
+            // if(file.size>=Constants.fileUpload.fileSizeLimitInByte){
+            //   scope.newReferralForm.previewFile
+            //   return false;
+            // }
+          });
+        });
+      }
+    };
+  }])

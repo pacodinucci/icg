@@ -286,12 +286,19 @@ angular.module("MyCvTracker.shared")
         getCitiesList : function (url) {
           return RESTSvc.get(url);
         },
-        getReferralLinks : function (url, page, noOfRecords) {
+        getReferralLinks : function (
+          url,
+          page,
+          noOfRecords
+        ) {
           url = url + "?page=" + page + "&noOfRecords=" + noOfRecords;
           return RESTSvc.get(url);
         },
-        getReferralLinksOfUser : function (url, userId) {
-          url = url + "?userId="+ userId;
+        getReferralLinksOfUser : function (
+          url,
+          userId
+        ) {
+          url = url + "?userId=" + userId;
           return RESTSvc.get(url);
         },
         generateReferralLink : function (
@@ -302,24 +309,37 @@ angular.module("MyCvTracker.shared")
           referralTargetEmail,
           jobType,
           jobLocation,
-          previewLink,
           refPublic,
-          bountyEnabled
+          bountyEnabled,
+          previewType,
+          previewLink,
+          previewFile
         ) {
-          var request = {
-            referralDetails : contextName,
-            referralLink : "",
-            referralType : referralType,
-            referralTargetSubject : referralTargetSubject,
-            referralTargetEmail : referralTargetEmail,
-            jobType : jobType,
-            jobLocation : jobLocation,
-            previewLink : previewLink,
-            refPublic : refPublic,
-            bountyEnable : bountyEnabled
+          var request = new FormData();
+          request.append("referralDetails", contextName);
+          request.append("referralType", referralType);
+          request.append("referralTargetSubject", referralTargetSubject);
+          if (!!referralTargetEmail) {
+            request.append("referralTargetEmail", referralTargetEmail);
           }
-
-          return RESTSvc.post(url, request);
+          if (!!jobType) {
+            request.append("jobType", jobType);
+          }
+          if (!!jobLocation) {
+            request.append("jobLocation", jobLocation);
+          }
+          if (!!previewType) {
+            request.append("previewType", previewType);
+          }
+          if (!!previewLink) {
+            request.append("previewLink", previewLink);
+          }
+          if (!!previewFile) {
+            request.append("previewFile", previewFile);
+          }
+          request.append("refPublic", refPublic);
+          request.append("bountyEnabled", bountyEnabled);
+          return RESTSvc.form(url, request, true);
         },
         editReferralLink : function (
           url,
@@ -328,7 +348,9 @@ angular.module("MyCvTracker.shared")
           referralTargetSubject,
           jobType,
           jobLocation,
-          previewLink, refPublic, bountyEnabled
+          previewLink,
+          refPublic,
+          bountyEnabled
         ) {
           var request = {
             referralLink : referralLink,
@@ -339,7 +361,7 @@ angular.module("MyCvTracker.shared")
             previewLink : previewLink,
             refPublic : refPublic,
             bountyEnable : bountyEnabled
-          }
+          };
 
           return RESTSvc.put(url, request);
         },
@@ -363,7 +385,7 @@ angular.module("MyCvTracker.shared")
             jobType : jobType,
             jobLocation : jobLocation,
             previewLink : previewLink
-          }
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -373,7 +395,7 @@ angular.module("MyCvTracker.shared")
         ) {
           var request = {
             referralLink : refCode
-          }
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -383,8 +405,8 @@ angular.module("MyCvTracker.shared")
         ) {
           // url = url + "?referralLink=" + parentLink;
           var request = {
-            "resumeId": id
-          }
+            "resumeId" : id
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -394,8 +416,8 @@ angular.module("MyCvTracker.shared")
         ) {
           // url = url + "?referralLink=" + parentLink;
           var request = {
-            "resumeId": id
-          }
+            "resumeId" : id
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -405,8 +427,8 @@ angular.module("MyCvTracker.shared")
         ) {
           // url = url + "?referralLink=" + parentLink;
           var request = {
-            "registrationId": id
-          }
+            "registrationId" : id
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -417,9 +439,9 @@ angular.module("MyCvTracker.shared")
         ) {
           // url = url + "?referralLink=" + parentLink;
           var request = {
-            "id": id,
+            "id" : id,
             "resumeStatus" : resumeStatus
-          }
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -430,9 +452,9 @@ angular.module("MyCvTracker.shared")
         ) {
           // url = url + "?referralLink=" + parentLink;
           var request = {
-            "id": id,
+            "id" : id,
             "resumeStatus" : resumeStatus
-          }
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -444,10 +466,10 @@ angular.module("MyCvTracker.shared")
         ) {
           // url = url + "?referralLink=" + parentLink;
           var request = {
-            "id": id,
+            "id" : id,
             "resumeStatus" : resumeStatus,
             "targetAccessToken" : targetAccessToken
-          }
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -459,10 +481,10 @@ angular.module("MyCvTracker.shared")
         ) {
           // url = url + "?referralLink=" + parentLink;
           var request = {
-            "id": id,
+            "id" : id,
             "resumeStatus" : resumeStatus,
             "targetAccessToken" : targetAccessToken
-          }
+          };
 
           return RESTSvc.post(url, request);
         },
@@ -481,50 +503,81 @@ angular.module("MyCvTracker.shared")
           // url = url + "?referralLink=" + parentLink;
           var request = {
             "referralLink" : referralLink,
-            "resumeId": id
-          }
+            "resumeId" : id
+          };
 
           return RESTSvc.post(url, request);
         },
-        getAuthUsers : function(url) {
+        getAuthUsers : function (url) {
           return RESTSvc.get(url);
         },
-        deleteUserAccount : function(url, id) {
+        deleteUserAccount : function (
+          url,
+          id
+        ) {
           url = url.replace("{userId}", id);
           return RESTSvc.delete(url);
         },
-        getAuthUserByEmail : function(url, email) {
+        getAuthUserByEmail : function (
+          url,
+          email
+        ) {
           url = url + "?email=" + email;
           return RESTSvc.get(url);
         },
-        getReferralContent : function (url, link) {
+        getReferralContent : function (
+          url,
+          link
+        ) {
           url = url.replace("{referralLink}", link);
           return RESTSvc.get(url);
         },
-        getReferredResumeList : function (url, link) {
-          url = url + "?referralLink="+ link;
+        getReferredResumeList : function (
+          url,
+          link
+        ) {
+          url = url + "?referralLink=" + link;
           return RESTSvc.get(url);
         },
-        getChildRefLinkList : function (url, link) {
-          url = url + "?parentRefLink="+ link;
+        getChildRefLinkList : function (
+          url,
+          link
+        ) {
+          url = url + "?parentRefLink=" + link;
           return RESTSvc.get(url);
         },
-        getReferralDetails : function (url, refCode) {
-          url = url + "?referralLink="+ refCode;
+        getReferralDetails : function (
+          url,
+          refCode
+        ) {
+          url = url + "?referralLink=" + refCode;
           return RESTSvc.get(url);
         },
         getJobSpecList : function (url) {
           return RESTSvc.get(url);
         },
-        getTargetResumeDetail : function (url, token) {
-          url = url + "?token="+ token;
+        getTargetResumeDetail : function (
+          url,
+          token
+        ) {
+          url = url + "?token=" + token;
           return RESTSvc.get(url);
         },
-        getSocialRegistrationList : function (url, link) {
+        getSocialRegistrationList : function (
+          url,
+          link
+        ) {
           url = url.replace("{referralLink}", link);
           return RESTSvc.get(url);
         },
-        getJobSpecDetailFromAccessToken : function(url, accessToken, previewToken, extendToken, originalToken, extendOriginalToken) {
+        getJobSpecDetailFromAccessToken : function (
+          url,
+          accessToken,
+          previewToken,
+          extendToken,
+          originalToken,
+          extendOriginalToken
+        ) {
           var param = "";
           if (!!accessToken) {
             param = "accessToken=" + accessToken;
@@ -538,30 +591,48 @@ angular.module("MyCvTracker.shared")
             param = "extendOriginalToken=" + extendOriginalToken;
           }
 
-           url = url + "?" + param;
+          url = url + "?" + param;
           return RESTSvc.get(url);
-        }, extendResumePreviewFromToken : function(url, token, originalToken) {
+        },
+        extendResumePreviewFromToken : function (
+          url,
+          token,
+          originalToken
+        ) {
           return RESTSvc.post(url, {
             token : !!token ? token : null,
             originalToken : !!originalToken ? originalToken : null
           });
-        }, extendResumePreviewForAdmin : function(url, resumeId, original, extendDays) {
+        },
+        extendResumePreviewForAdmin : function (
+          url,
+          resumeId,
+          original,
+          extendDays
+        ) {
           return RESTSvc.post(url, {
             resumeId : resumeId,
             original : original,
             extendDays : extendDays
           });
         },
-        getResumeReviews : function(url) {
+        getResumeReviews : function (url) {
           return RESTSvc.get(url);
         },
-        getReviewDetail : function(url) {
+        getReviewDetail : function (url) {
           return RESTSvc.get(url);
         },
-        getReviewComments : function(url) {
+        getReviewComments : function (url) {
           return RESTSvc.get(url);
         },
-        leaveResumeReview : function(url, resumeAccessToken, previewToken, originalToken, email, review) {
+        leaveResumeReview : function (
+          url,
+          resumeAccessToken,
+          previewToken,
+          originalToken,
+          email,
+          review
+        ) {
           return RESTSvc.post(url, {
             resumeAccessToken : !!resumeAccessToken ? resumeAccessToken : null,
             previewToken : !!previewToken ? previewToken : null,
@@ -571,7 +642,13 @@ angular.module("MyCvTracker.shared")
             lastName : "",
             review : review
           });
-        }, leaveReviewComment : function(url, reviewId, content, reviewToken) {
+        },
+        leaveReviewComment : function (
+          url,
+          reviewId,
+          content,
+          reviewToken
+        ) {
           var data = {
             reviewId : reviewId,
             content : content
@@ -581,7 +658,12 @@ angular.module("MyCvTracker.shared")
             data["reviewToken"] = reviewToken;
           }
           return RESTSvc.post(url, data);
-        }, maskTextsInResume : function(url, resumeId, texts) {
+        },
+        maskTextsInResume : function (
+          url,
+          resumeId,
+          texts
+        ) {
           var data = {
             resumeId : resumeId,
             texts : texts
@@ -592,7 +674,7 @@ angular.module("MyCvTracker.shared")
         listingResumes : function (url) {
           return RESTSvc.get(url);
         },
-        toggleResumeListing: function(url) {
+        toggleResumeListing : function (url) {
           return RESTSvc.put(url);
         }
       };
