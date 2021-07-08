@@ -95,6 +95,7 @@ angular.module("MyCvTracker.pages.referral")
         showError : false
       };
       $scope.deletingReferralLink = "";
+      $scope.deletingReferralIdx = -1;
       $scope.inDeletingReferral = false;
 
       $scope.reloadListReferralLinks = function () {
@@ -161,8 +162,9 @@ angular.module("MyCvTracker.pages.referral")
         $scope.referralModal = ReferralSvc.getNewReferralLinkModal($scope, "ReferalModalCtrl");
       };
 
-      $scope.openDeleteReferralLinkModal = function (referralLink) {
+      $scope.openDeleteReferralLinkModal = function (referralLink, idx) {
         $scope.deletingReferralLink = referralLink;
+        $scope.deletingReferralIdx = idx;
         $scope.referralModal = ReferralSvc.getDeleteReferralLinkModal($scope, "ReferalModalCtrl");
       };
 
@@ -218,6 +220,8 @@ angular.module("MyCvTracker.pages.referral")
         $scope.referral.shareResume.success = false;
         $scope.referral.shareResume.referral = null;
         $scope.deletingReferralLink = "";
+        $scope.deletingReferralIdx = -1;
+        $scope.inDeletingReferral = false;
 
         if (!!parentLink) {
           $location.url("/referral");
@@ -281,7 +285,11 @@ angular.module("MyCvTracker.pages.referral")
             previewFileInvalidType = previewFileCheck;
             previewFile = $scope.newReferralForm.previewFile;
             if (!!previewFile) {
-              var validExts = ["application/pdf", "image/jpeg", "image/png"];
+              var validExts = [
+                "application/pdf",
+                "image/jpeg",
+                "image/png"
+              ];
               var fileType = previewFile.type;
 
               previewFileInvalidSize = previewFile.size > 5000000;
@@ -390,11 +398,16 @@ angular.module("MyCvTracker.pages.referral")
 
         ReferralSvc.deleteReferralLink($scope.deletingReferralLink)
           .then(function () {
-            $scope.reloadListReferralLinks();
+            $scope.referral.links.splice($scope.deletingReferralIdx, 1);
             $scope.inDeletingReferral = false;
             $scope.closeModal();
             var msg = Utilities.getAlerts("deleteReferralLinkSuccessMsg");
             toastr.success(msg, "Success");
+          })
+          .catch(function () {
+            toastr.error("Deleting the referral has failed!", "Error");
+            $scope.inDeletingReferral = false;
+            $scope.closeModal();
           });
       };
 
@@ -499,7 +512,8 @@ angular.module("MyCvTracker.pages.referral")
     "$parse",
     "$injector",
     "Constants",
-    function ($parse,
+    function (
+      $parse,
       $injector,
       Constants
     ) {
