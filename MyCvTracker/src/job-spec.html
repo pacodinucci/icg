@@ -182,7 +182,7 @@
     <div id="profile-preview-step" class="work-step">
       <div class="container">
         <div class="title">
-          <a href="#"><h2>Profile Preview</h2></a>
+          <a href="#"><h2>Hiring Company Details</h2></a>
         </div>
         <div id="text-link-preview">
         </div>
@@ -1425,7 +1425,7 @@
                   var fileLink = "https://mycvtracker.com:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
                   var fileType = data.previewFileType;
                   if (fileType === "application/pdf") {
-                    var iframeUrl = "https://mycvtracker.com/pdf-viewer.html?pdf=" + fileLink;
+                    var iframeUrl = "http://localhost:3000/pdf-viewer.html?pdf=" + fileLink;
                     previewHtml = "<iframe src='" + iframeUrl + "' width='100%' height='" + pdfViewerHeight + "'></iframe>";
                   } else {
                     previewHtml = "<img src='" + fileLink + "' style='width: 100%; height: auto' />";
