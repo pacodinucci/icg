@@ -87,24 +87,24 @@
               </div>
 
               <div class="list-status">
-                <div class="ref-status">
+                <div class="ref-status" ng-if="referral.referralType !== REFERRAL_TYPE.TEXT_LINK">
                   <span ng-class="['status-color', referral.bountyEnable ? 'enabled' : '' ]"></span>
-                  <span style="vertical-align: middle">{{ referral.referralType === REFERRAL_TYPE.TEXT_LINK ? "No bounty" : "Bounty disabled" }}</span>
+                  <span style="vertical-align: middle">{{ referral.bountyEnable ? "Bounty enabled" : "Bounty disabled" }}</span>
                 </div>
-                <div class="ref-status" ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC">
-                  <span ng-class="['status-color', referral.refPublic ? 'enabled' : '' ]"></span>
-                  <span style="vertical-align: middle">Published</span>
+                <div class="ref-status">
+                  <span ng-class="['status-color', (referral.refPublic || referral.referralType !== REFERRAL_TYPE.JOB_SPEC) ? 'enabled' : '' ]"></span>
+                  <span style="vertical-align: middle">{{ (referral.refPublic || referral.referralType !== REFERRAL_TYPE.JOB_SPEC) ? "Published" : "Not published" }}</span>
                 </div>
               </div>
 
               <div class="ctrls">
                 <div class="ctrls-container d-flex align-items-center">
-<!--                  <a-->
-<!--                    ng-if="!referral.parentReferralId"-->
-<!--                    ng-click="openNewReferralLinkModal(referral)"-->
-<!--                    title="Edit referral">-->
-<!--                    <i class="fas fa-edit"></i>-->
-<!--                  </a>-->
+                  <a
+                    ng-if="!referral.parentReferralId"
+                    ng-click="openNewReferralLinkModal(referral)"
+                    title="Edit referral">
+                    <i class="fas fa-edit"></i>
+                  </a>
 
                   <a
                     href="#"

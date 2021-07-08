@@ -310,7 +310,7 @@ angular.module("MyCvTracker.shared")
           jobType,
           jobLocation,
           refPublic,
-          bountyEnabled,
+          bountyEnable,
           previewType,
           previewLink,
           previewFile
@@ -338,8 +338,8 @@ angular.module("MyCvTracker.shared")
             request.append("previewFile", previewFile);
           }
           request.append("refPublic", refPublic);
-          request.append("bountyEnabled", bountyEnabled);
-          return RESTSvc.form(url, request, true);
+          request.append("bountyEnable", bountyEnable);
+          return RESTSvc.formPost(url, request);
         },
         editReferralLink : function (
           url,
@@ -348,22 +348,34 @@ angular.module("MyCvTracker.shared")
           referralTargetSubject,
           jobType,
           jobLocation,
-          previewLink,
           refPublic,
-          bountyEnabled
+          bountyEnable,
+          previewType,
+          previewLink,
+          previewFile
         ) {
-          var request = {
-            referralLink : referralLink,
-            referralDetails : description,
-            referralTargetSubject : referralTargetSubject,
-            jobType : jobType,
-            jobLocation : jobLocation,
-            previewLink : previewLink,
-            refPublic : refPublic,
-            bountyEnable : bountyEnabled
-          };
+          var request = new FormData();
+          request.append("referralLink", referralLink);
+          request.append("referralTargetSubject", referralTargetSubject);
+          if (!!jobType) {
+            request.append("jobType", jobType);
+          }
+          if (!!jobLocation) {
+            request.append("jobLocation", jobLocation);
+          }
+          if (!!previewType) {
+            request.append("previewType", previewType);
+          }
+          if (!!previewLink) {
+            request.append("previewLink", previewLink);
+          }
+          if (!!previewFile) {
+            request.append("previewFile", previewFile);
+          }
+          request.append("refPublic", refPublic);
+          request.append("bountyEnable", bountyEnable);
 
-          return RESTSvc.put(url, request);
+          return RESTSvc.formPut(url, request);
         },
         generateReferralLinkForUser : function (
           url,

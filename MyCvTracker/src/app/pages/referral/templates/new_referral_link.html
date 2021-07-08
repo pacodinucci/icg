@@ -133,10 +133,10 @@
       </div>
       <div class="form-group" ng-if="newReferralForm.previewType === PREVIEW_TYPE.WEB_PAGE_URL">
         <label
-          class="control-label"
-          ng-if="newReferralForm.type === REFERRAL_TYPE.TEXT_LINK">Enter link
+          class="control-label">Enter link
         </label>
         <input
+          ng-required="true"
           type="text"
           class="form-control"
           ng-maxlength="250"
@@ -154,11 +154,16 @@
           class="control-label">Select your file
         </label>
         <input type="file" class="form-control" placeholder="Upload file" preview-file-model="newReferralForm.previewFile"  accept=".pdf,.jpg,.png" id="fileUpload"/>
-<!--        <div-->
-<!--          class="text-danger error-row"-->
-<!--          ng-if="newReferralForm.previewLinkInvalid">-->
-<!--          Link is invalid-->
-<!--        </div>-->
+        <div
+          class="text-danger error-row"
+          ng-if="newReferralForm.previewFileInvalidSize">
+          File size must be less than 5mb
+        </div>
+        <div
+          class="text-danger error-row"
+          ng-if="newReferralForm.previewFileInvalidType">
+          File is required and allow only pdf, jpeg, png.
+        </div>
       </div>
       <div
         ng-if="newReferralForm.type !== REFERRAL_TYPE.TEXT_LINK"

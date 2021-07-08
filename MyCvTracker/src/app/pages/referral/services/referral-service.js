@@ -23,9 +23,9 @@ angular.module("MyCvTracker.pages.referral")
           var url = utilities.getReferralLinkNewUrl();
           return RestConfig.generateReferralLink(url, name, type, title, email, jobType, location, refPublic, bountyEnabled, previewType, previewLink, previewFile);
         },
-        editRefLink : function(referralLink, title, description, jobType, location, previewLink, refPublic, bountyEnabled) {
+        editRefLink : function(referralLink, title, description, jobType, location, refPublic, bountyEnabled, previewType, previewLink, previewFile) {
           var url = utilities.getReferralLinkEditUrl();
-          return RestConfig.editReferralLink(url, referralLink, description, title, jobType, location, previewLink, refPublic, bountyEnabled);
+          return RestConfig.editReferralLink(url, referralLink, description, title, jobType, location, refPublic, bountyEnabled, previewType, previewLink, previewFile);
         },
         generateLinkForUser : function(name, email, type, title, targetEmail, jobType, location, previewLink) {
           var url = utilities.getReferralLinkNewUrlForUser();
