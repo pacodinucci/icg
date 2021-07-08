@@ -185,7 +185,6 @@
           <a href="#"><h2>Profile Preview</h2></a>
         </div>
         <div id="text-link-preview">
-          <iframe src="" width="100%" height="400"></iframe>
         </div>
       </div>
     </div>
@@ -1409,19 +1408,39 @@
               $("#job-spec-box .job-detail")
                 .html(data.referralDetails);
 
-              var previewLink = data.previewLink;
-              if (!!data.previewLink) {
-                $("#profile-preview-step").addClass("active");
+              var previewType = data.previewType;
+              if (previewType !== "NONE") {
+                var pdfViewerHeight = window.innerHeight - 100;
+                $("#profile-preview-step")
+                  .addClass("active");
 
-                setTimeout(function() {
-                  $("#text-link-preview iframe").attr("src", previewLink);
-                }, 300);
+                var previewHtml = "";
+                if (previewType === "WEB_PAGE_URL") {
+                  var previewLink = data.previewLink;
+                  previewHtml = "<iframe src='" + previewLink + "' width='100%' height='" + pdfViewerHeight + "'></iframe>";
+                  // setTimeout(function () {
+                  //   $("#text-link-preview").html()
+                  // }, 200);
+                } else {
+                  var fileLink = "https://mycvtracker.com:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
+                  var fileType = data.previewFileType;
+                  if (fileType === "application/pdf") {
+                    var iframeUrl = "https://mycvtracker.com/pdf-viewer.html?pdf=" + fileLink;
+                    previewHtml = "<iframe src='" + iframeUrl + "' width='100%' height='" + pdfViewerHeight + "'></iframe>";
+                  } else {
+                    previewHtml = "<img src='" + fileLink + "' style='width: 100%; height: auto' />";
+                  }
+                }
+
+                setTimeout(function () {
+                  $("#text-link-preview")
+                    .html(previewHtml);
+                }, 200);
               }
 
               if (!data.bountyEnable) {
                 $("#job-spec-container .generate-btn").addClass("deactive");
               }
-
               setTimeout(function() {
                 $("#job-spec-box .job-detail a").attr("target", "_blank");
               }, 300);

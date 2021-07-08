@@ -179,13 +179,14 @@
     </div>
     <!-- upload image ends -->
 
-    <div id="profile-preview-step" class="work-step">
+    <div
+      id="profile-preview-step"
+      class="work-step">
       <div class="container">
         <div class="title">
           <a href="#"><h2>Event Preview</h2></a>
         </div>
         <div id="text-link-preview">
-          <iframe src="" width="100%" height="400"></iframe>
         </div>
       </div>
     </div>
@@ -478,9 +479,11 @@
                   name="email"
                   class="form-control"
                   placeholder="Your email">
-                <br/>
+                <br />
                 <div class="input-group inputGroup">
-								<span class="input-group-btn" style=" display: none">
+								<span
+                  class="input-group-btn"
+                  style=" display: none">
 									<button
                     class="btn btn-default uploadBtn"
                     id="openFileExplorer"
@@ -503,23 +506,38 @@
                   style="display: none;" />
                 <div
                   class="errorStyle"
-                  id="emailError"><strong>Error</strong> Email is
-									required.</div>
+                  id="emailError">
+                  <strong>Error</strong>
+                  Email is
+                  required.
+                </div>
                 <div
                   class="errorStyle"
-                  id="resumeRefError"><strong>Error</strong>User link is required.</div>
+                  id="resumeRefError">
+                  <strong>Error</strong>
+                  User link is required.
+                </div>
                 <div
                   class="errorStyle"
-                  id="sizeError"><strong>Error</strong> File size limit
-									exceeded.</div>
+                  id="sizeError">
+                  <strong>Error</strong>
+                  File size limit
+                  exceeded.
+                </div>
                 <div
                   class="errorStyle"
-                  id="noFileError"><strong>Error</strong> Please upload a
-									file.</div>
+                  id="noFileError">
+                  <strong>Error</strong>
+                  Please upload a
+                  file.
+                </div>
                 <div
                   class="errorStyle"
-                  id="fileExtError1"><strong>Error</strong> Please upload a PDF, Doc,
-									 Docx file only</div>
+                  id="fileExtError1">
+                  <strong>Error</strong>
+                  Please upload a PDF, Doc,
+                  Docx file only
+                </div>
                 <input
                   type="checkbox"
                   id="checkbox1"
@@ -745,7 +763,9 @@
             </div>
 
             <div class="result">
-              <div class="desc">Please check your email and activate your account.Here is unique link to share with your network.</div>
+              <div class="desc">Please check your email and activate your account.Here is unique link to share with your
+                network.
+              </div>
               <a
                 href="#"
                 class="ref-link"></a>
@@ -798,21 +818,24 @@
                 <a
                   href="#"
                   class="btn btn-primary fb-btn">
-                  <i class="fab fa-facebook-f"></i> Facebook
+                  <i class="fab fa-facebook-f"></i>
+                  Facebook
                 </a>
               </div>
               <div class="a-btn">
                 <a
                   href="#"
                   class="btn btn-primary tw-btn">
-                  <i class="fab fa-twitter"></i> Twitter
+                  <i class="fab fa-twitter"></i>
+                  Twitter
                 </a>
               </div>
               <div class="a-btn">
                 <a
                   href="#"
                   class="btn btn-primary ld-btn">
-                  <i class="fab fa-linkedin-in"></i> Linked
+                  <i class="fab fa-linkedin-in"></i>
+                  Linked
                 </a>
               </div>
             </div>
@@ -1015,23 +1038,25 @@
 
       $(".generate-btn")
         .click(function () {
-          $("#referral-bounty-modal").modal("show");
+          $("#referral-bounty-modal")
+            .modal("show");
         });
 
-      $("#referral-bounty-modal .btn-primary").click(function() {
-        window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
-        // var token = localStorage.getItem("token");
-        // if (!!token) {
-        //   window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
-        // } else {
-        //   $("#referral-bounty-modal")
-        //     .modal("hide");
-        //   setTimeout(function() {
-        //     $("#referral-modal-auth")
-        //       .modal("show");
-        //   }, 500);
-        // }
-      });
+      $("#referral-bounty-modal .btn-primary")
+        .click(function () {
+          window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+          // var token = localStorage.getItem("token");
+          // if (!!token) {
+          //   window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+          // } else {
+          //   $("#referral-bounty-modal")
+          //     .modal("hide");
+          //   setTimeout(function() {
+          //     $("#referral-modal-auth")
+          //       .modal("show");
+          //   }, 500);
+          // }
+        });
 
       var socialWindow = null;
       $("#social-selection-modal .fb-btn")
@@ -1130,7 +1155,8 @@
             var authInfo = JSON.parse(authInfoStr);
             var authEmail = authInfo.email;
             if (!!authEmail) {
-              $("#eCVemail").val(authEmail);
+              $("#eCVemail")
+                .val(authEmail);
             }
           }
           utility.hideDOMS();
@@ -1313,7 +1339,7 @@
                   $("#referral-modal-1")
                     .addClass("success");
                   $("#referral-modal-1 .ref-link")
-                    .html("https://mycvtracker.com/job-spec.html?ref=" + data.referralLink+ "&title=" + data.referralTargetSubject);
+                    .html("https://mycvtracker.com/job-spec.html?ref=" + data.referralLink + "&title=" + data.referralTargetSubject);
 
                   $(this)
                     .html("Generate");
@@ -1350,17 +1376,39 @@
               $("#job-spec-box .job-detail")
                 .html(data.referralDetails);
 
-              var previewLink = data.previewLink;
-              if (!!data.previewLink) {
-                $("#profile-preview-step").addClass("active");
+              var previewType = data.previewType;
+              if (previewType !== "NONE") {
+                var pdfViewerHeight = window.innerHeight - 100;
+                $("#profile-preview-step")
+                  .addClass("active");
 
-                setTimeout(function() {
-                  $("#text-link-preview iframe").attr("src", previewLink);
-                }, 300);
+                var previewHtml = "";
+                if (previewType === "WEB_PAGE_URL") {
+                  var previewLink = data.previewLink;
+                  previewHtml = "<iframe src='" + previewLink + "' width='100%' height='" + pdfViewerHeight + "'></iframe>";
+                  // setTimeout(function () {
+                  //   $("#text-link-preview").html()
+                  // }, 200);
+                } else {
+                  var fileLink = "https://mycvtracker.com:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
+                  var fileType = data.previewFileType;
+                  if (fileType === "application/pdf") {
+                    var iframeUrl = "https://mycvtracker.com/pdf-viewer.html?pdf=" + fileLink;
+                    previewHtml = "<iframe src='" + iframeUrl + "' width='100%' height='" + pdfViewerHeight + "'></iframe>";
+                  } else {
+                    previewHtml = "<img src='" + fileLink + "' style='width: 100%; height: auto' />";
+                  }
+                }
+
+                setTimeout(function () {
+                  $("#text-link-preview")
+                    .html(previewHtml);
+                }, 200);
               }
 
               if (!data.bountyEnable) {
-                $("#job-spec-container .generate-btn").addClass("deactive");
+                $("#job-spec-container .generate-btn")
+                  .addClass("deactive");
               }
 
               setTimeout(function () {
@@ -1399,17 +1447,23 @@
           var expires = "expires=" + d.toUTCString();
           document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+
         var cookieAcc = getCookie("cookieAcc");
 
-        $( "body" ).append( "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>" );
+        $("body")
+          .append(
+            "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>");
         if (cookieAcc !== "1") {
-          $("#cookie-confirm-popup").addClass("active");
+          $("#cookie-confirm-popup")
+            .addClass("active");
         }
 
-        $("#cookie-confirm-popup .btn-primary").on("click", function() {
-          setCookie("cookieAcc", "1", 7);
-          $("#cookie-confirm-popup").removeClass("active");
-        });
+        $("#cookie-confirm-popup .btn-primary")
+          .on("click", function () {
+            setCookie("cookieAcc", "1", 7);
+            $("#cookie-confirm-popup")
+              .removeClass("active");
+          });
       });
     </script>
 
