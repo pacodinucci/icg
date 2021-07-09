@@ -38,22 +38,9 @@
               <div class="d-flex">
                 <div class="info-col flex-fill">
                   <div
-                    ng-if="referral.referralType === REFERRAL_TYPE.TEXT_LINK || !referral.referralType"
                     class="context-name">
                     <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
                     <span ng-if="!referral.referralTargetSubject.length">-</span>
-                  </div>
-                  <div
-                    ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE"
-                    class="context-name">
-                    <span ng-if="referral.referralTargetSubject.length">{{referral.referralTargetSubject}}</span>
-                    <span ng-if="!referral.referralTargetSubject.length">Social Description</span>
-                  </div>
-                  <div
-                    ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
-                    class="context-name">
-                    <span ng-if="!referral.referralTargetSubject.length">Job Description</span>
-                    <span ng-if="referral.referralTargetSubject.length">{{ referral.referralTargetSubject }}</span>
                   </div>
                   <div
                     class="referral-type"
@@ -70,6 +57,11 @@
                     ng-if="referral.referralType === REFERRAL_TYPE.SOCIAL_SHARE">
                     Social Share
                   </div>
+                    <div
+                      class="referral-type"
+                      ng-if="referral.referralType === REFERRAL_TYPE.CV_BOX">
+                      Cv Box
+                    </div>
                 </div>
 
                 <div
@@ -87,7 +79,7 @@
               </div>
 
               <div class="list-status">
-                <div class="ref-status" ng-if="referral.referralType !== REFERRAL_TYPE.TEXT_LINK">
+                <div class="ref-status" ng-if="referral.referralType !== REFERRAL_TYPE.TEXT_LINK && referral.referralType !== REFERRAL_TYPE.CV_BOX">
                   <span ng-class="['status-color', referral.bountyEnable ? 'enabled' : '' ]"></span>
                   <span style="vertical-align: middle">{{ referral.bountyEnable ? "Bounty enabled" : "Bounty disabled" }}</span>
                 </div>

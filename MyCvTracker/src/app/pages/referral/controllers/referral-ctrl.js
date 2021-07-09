@@ -24,7 +24,8 @@ angular.module("MyCvTracker.pages.referral")
       $scope.REFERRAL_TYPE = {
         TEXT_LINK : "TEXT_LINK",
         JOB_SPEC : "JOB_SPEC",
-        SOCIAL_SHARE : "SOCIAL_SHARE"
+        SOCIAL_SHARE : "SOCIAL_SHARE",
+        CV_BOX : "CV_BOX"
       };
       $scope.PREVIEW_TYPE = {
         NONE : "NONE",
@@ -141,6 +142,15 @@ angular.module("MyCvTracker.pages.referral")
         $scope.referral.page++;
         $scope.loadListReferralLinks();
       };
+
+      $scope.newReferralTypeChanged = function() {
+        var type = $scope.newReferralForm.type;
+        if (type === $scope.REFERRAL_TYPE.CV_BOX) {
+          $scope.newReferralForm.previewType = $scope.PREVIEW_TYPE.NONE;
+        } else {
+          $scope.newReferralForm.previewType = $scope.PREVIEW_TYPE.WEB_PAGE_URL;
+        }
+      }
 
       $scope.openNewReferralLinkModal = function (referral) {
         $scope.newReferralForm.editing = !!referral;
@@ -416,7 +426,18 @@ angular.module("MyCvTracker.pages.referral")
         link,
         parentLink
       ) {
-        var path = type === $scope.REFERRAL_TYPE.SOCIAL_SHARE ? "/social-registrations" : "/referred-resumes";
+        var path = "";
+        switch (type) {
+          case $scope.REFERRAL_TYPE.SOCIAL_SHARE:
+            path = "/social-registrations";
+            break;
+          case $scope.REFERRAL_TYPE.CV_BOX:
+            path = "/cvbox";
+            break;
+          default:
+            path = "/referred-resumes";
+            break;
+        }
         var url = path + "?referralLink=" + link;
         if (!!parentLink && parentLink !== link) url = url + "&parentLink=" + parentLink;
 
@@ -443,6 +464,9 @@ angular.module("MyCvTracker.pages.referral")
             break;
           case $scope.REFERRAL_TYPE.SOCIAL_SHARE:
             text = "https://mycvtracker.com/network-share.html?ref=";
+            break;
+          case $scope.REFERRAL_TYPE.CV_BOX:
+            text = "https://mycvtracker.com/cv-box.html?ref=";
             break;
           default:
             text = "https://mycvtracker.com/context-link.html?ref=";
