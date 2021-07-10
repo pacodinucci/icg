@@ -115,6 +115,12 @@
       }
     }
 
+    .resume-title {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
     .tile-filename,
     .tile-datetime {
       font-family: 'museo_slab500';
@@ -124,6 +130,10 @@
       margin-top: 1.5rem;
       margin-bottom: 0.8rem;
       font-size: 14px;
+    }
+
+    .tile-user-email {
+      margin-bottom: 5px;
     }
 
     .linked-in-url {
@@ -778,4 +788,18 @@
   .error-row {
     margin-top: 5px;
   }
+}
+
+#cv-box-selection-modal {
+
+  .form-check {
+    .form-check-input {
+      vertical-align: middle;
+    }
+
+    label {
+      vertical-align: middle;
+    }
+  }
+
 }

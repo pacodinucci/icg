@@ -38,6 +38,25 @@ angular.module("MyCvTracker.pages.resumeListing")
         }, extendResumePreview: function(resumeId, original, extendDays) {
           var url = Constants.baseUrl + "/user/resume/preview/extend";
           return RestConfig.extendResumePreviewForAdmin(url, resumeId, original, extendDays);
+        },
+        getCvBoxSelectionModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/list-resumes/templates/cv-box-selection-modal.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
+        }, findCvBoxByName : function (
+          name
+        ) {
+          return RestConfig.findCvBox(name);
+        }, addResumeToCvBox : function (
+          referralId,
+          resumeId
+        ) {
+          return RestConfig.addResumeToCvBox(referralId, resumeId);
         }
       };
     }

@@ -44,6 +44,14 @@ angular.module("MyCvTracker.pages.resumeListing")
         resume : null,
         extending : false
       };
+      $scope.cvBoxForm = {
+        resume : null,
+        selectedReferralId : -1,
+        findingBox : false,
+        foundBoxes : null,
+        boxName : "",
+        addingToBox : false
+      }
 
       $scope.getResume = function () {
         $scope.loadInfo.loading = true;
@@ -89,6 +97,36 @@ angular.module("MyCvTracker.pages.resumeListing")
         $scope.loadInfo.page++;
         $scope.getResume();
       };
+
+      $scope.findCvBox = function() {
+        if ($scope.cvBoxForm.findingBox) return;
+
+        $scope.cvBoxForm.findingBox = true;
+        $scope.cvBoxForm.foundBoxes = [];
+        $scope.cvBoxForm.selectedReferralId = -1;
+        var name = $scope.cvBoxForm.boxName;
+
+        mainSvc.findCvBoxByName(name).then(function(data) {
+          $scope.cvBoxForm.foundBoxes = data;
+          $scope.cvBoxForm.findingBox = false;
+        });
+      }
+
+      $scope.addCvToBox = function() {
+        if ($scope.cvBoxForm.addingToBox) return;
+
+        $scope.cvBoxForm.addingToBox = true;
+        var selectedReferralId = $scope.cvBoxForm.selectedReferralId;
+        var resumeId = $scope.cvBoxForm.resume.id;
+
+        mainSvc.addResumeToCvBox(selectedReferralId, resumeId).then(function() {
+          toastr.success("Resume has been added to cv box successfully.");
+          $scope.closeModal();
+        }).catch(function() {
+          toastr.error("Adding resume to cv box has failed!");
+          $scope.closeModal();
+        });
+      }
 
       $scope.getFormattedPostDate = function (utc) {
         if (!!utc) {
@@ -177,11 +215,23 @@ angular.module("MyCvTracker.pages.resumeListing")
         $scope.extendModal = mainSvc.getAdminExtendResumeModal($scope, "ReferalModalCtrl");
       }
 
+      $scope.openAddToCvBoxModal = function(resume) {
+        $scope.cvBoxForm.resume = resume;
+        $scope.extendModal = mainSvc.getCvBoxSelectionModal($scope, "ReferalModalCtrl");
+      }
+
       $scope.closeModal = function () {
         $scope.extendModal.dismiss();
         $scope.extendForm.days = 7;
         $scope.extendForm.extending = false;
         $scope.extendForm.resume = null;
+        $scope.cvBoxForm = {
+          resume : null,
+          selectedReferralId : -1,
+          findingBox : false,
+          foundBoxes : null,
+          boxName : ""
+        }
       }
 
       $scope.extendResume = function() {

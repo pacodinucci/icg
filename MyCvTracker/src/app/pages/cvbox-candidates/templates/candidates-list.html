@@ -1,10 +1,54 @@
 <section
-  id="cvbox-candidates-section"
+  id="referral"
   ng-controller="CvBoxCtrl">
-  <div class="body-section setting-section">
-    <h4 class="section-name">List of resumes</h4>
+  <div class="body-section list-resumes-section">
 
     <div class="section-content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text spec-detail-panel">
+            <h4 ng-bind="cvboxDetail.referralTargetSubject">...</h4>
+
+            <div class="target-email">
+              List of candidates
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-3"
+             ng-repeat="aResume in candidates track by aResume.resumeId">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3
+                class="resume-title" ng-bind="aResume.resumeName">...</h3>
+            </div>
+            <hr class="resumeSeprator">
+            <div class="tile-user-email text-primary" ng-bind="aResume.userEmail">
+              ...
+            </div>
+            <div
+              class="tile-datetime"
+              ng-bind="formatDateTime(aResume.uploadedAt)">07/10/1993</div>
+
+            <div class="controls">
+              <a
+                href="#"
+                title="Preview" ng-click="openPreviewResume(aResume)">
+                <i class="fas fa-search"></i>
+              </a>
+              <a
+                href="#"
+                title="Remove candidate" ng-click="openRemoveModal(aResume, $index)">
+                <i class="fas fa-user-minus"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

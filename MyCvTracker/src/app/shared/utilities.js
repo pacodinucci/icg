@@ -643,6 +643,22 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.referredResumesList.url;
                 },
 
+                getCvBoxCandidateListUrl: function () {
+                    return Constants.baseUrl + "/cvbox/candidates/list";
+                },
+
+                findCvBoxListUrl: function () {
+                    return Constants.baseUrl + "/simple-cvbox/find";
+                },
+
+                getRemovingCandidateUrl: function () {
+                    return Constants.baseUrl + "/cvbox/unregister/resume";
+                },
+
+                getAddingCandidateUrl: function () {
+                    return Constants.baseUrl + "/cvbox/register/resume";
+                },
+
                 getListingResumeUrl: function () {
                     return Constants.baseUrl + "/user/active-resumes/list";
                 },

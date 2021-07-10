@@ -98,6 +98,7 @@
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
         var networkSharePage = next.endsWith("/network-share.html");
         var contextLinkPage = next.endsWith("/context-link.html");
+        var cvBoxFrontPage = next.endsWith("/cv-box.html");
 
         if (frontPage) {
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
@@ -109,6 +110,8 @@
           window.location.href = Utilities.baseUrl() + "/pdf-viewer.html";
         } else if (networkSharePage) {
           window.location.href = Utilities.baseUrl() + "/network-share.html";
+        } else if (cvBoxFrontPage) {
+          window.location.href = Utilities.baseUrl() + "/cv-box.html";
         } else if (forwardPage) {
           window.location.href = Utilities.baseUrl() + "/forward.html";
         } else if (activatePage) {

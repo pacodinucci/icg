@@ -1,0 +1,58 @@
+<div id="cv-box-selection-modal">
+  <div class="modal-header">
+    <h4 class="modal-title">Add to CV Box</h4>
+  </div>
+  <div class="modal-body">
+    <div class="search-box">
+      <div class="form-group">
+        <label>Enter name to find Cv Box</label>
+        <input
+          ng-model="cvBoxForm.boxName"
+          ng-keypress="$event.keyCode === 13 && findCvBox()"
+          type="text"
+          class="form-control" />
+      </div>
+    </div>
+    <div class="cv-box-result">
+      <div ng-if="cvBoxForm.findingBox">
+        Loading...
+      </div>
+      <div ng-if="!cvBoxForm.findingBox && cvBoxForm.foundBoxes !== null">
+        <div ng-if="cvBoxForm.foundBoxes.length === 0">
+          No Cv Box found
+        </div>
+        <div class="form-group" ng-repeat="aBox in cvBoxForm.foundBoxes track by aBox.id">
+          <div class="form-check">
+            <input
+              ng-model="cvBoxForm.selectedReferralId"
+              class="form-check-input"
+              type="radio"
+              name="selectedReferralId"
+              ng-value="aBox.id"
+              checked>
+            <label
+              class="form-check-label" ng-bind="aBox.title">
+              ...
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      ng-disabled="cvBoxForm.selectedReferralId < 0 || !!cvBoxForm.addingToBox"
+      ng-click="addCvToBox()"
+      type="button"
+      class="btn btn-primary">
+      Add
+    </button>
+    <button
+      ng-click="closeModal()"
+      type="button"
+      class="btn btn-secondary">
+      Cancel
+    </button>
+  </div>
+</div>

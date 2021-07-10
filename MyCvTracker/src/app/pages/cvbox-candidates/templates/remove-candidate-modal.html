@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title">Remove candidate</h4>
+</div>
+<div class="modal-body">
+  <h5>Would you like to continue removing this resume from the cv box?</h5>
+  <br/>
+  <br/>
+</div>
+<div
+  class="modal-footer clearfix">
+  <button
+    ng-disabled="removingInfo.removing"
+    ng-bind="removingInfo.removing ? 'Removing...' : 'Continue'"
+    ng-click="removeCandidate()"
+    type="button"
+    class="btn btn-primary">
+    Continue
+  </button>
+  <button
+    ng-disabled="removingInfo.removing"
+    ng-click="closeModal()"
+    type="button"
+    class="btn btn-secondary">
+    Cancel
+  </button>
+</div>

@@ -8,6 +8,7 @@ angular.module("MyCvTracker.shared")
       RESTSvc,
       $injector
     ) {
+      var utilities = $injector.get("Utilities");
 
       var RestConfig = {
         doLogin : function (
@@ -551,6 +552,24 @@ angular.module("MyCvTracker.shared")
           url = url + "?referralLink=" + link;
           return RESTSvc.get(url);
         },
+        getBoxCandidates : function (
+          referralLink
+        ) {
+          var url = utilities.getCvBoxCandidateListUrl();
+          url = url + "?referralLink=" + referralLink;
+          return RESTSvc.get(url);
+        },
+        removeCandidateFromBox : function (
+          resumeId,
+          referralId
+        ) {
+          var data = {
+            resumeId : resumeId,
+            referralId : referralId
+          }
+          var url = utilities.getRemovingCandidateUrl();
+          return RESTSvc.post(url, data);
+        },
         getChildRefLinkList : function (
           url,
           link
@@ -688,6 +707,18 @@ angular.module("MyCvTracker.shared")
         },
         toggleResumeListing : function (url) {
           return RESTSvc.put(url);
+        },
+        findCvBox : function(name) {
+          var url = utilities.findCvBoxListUrl() + "?name=" + name;
+          return RESTSvc.get(url);
+        },
+        addResumeToCvBox : function(referralId, resumeId) {
+          var data = {
+            referralId : referralId,
+            resumeId : resumeId
+          }
+          var url = utilities.getAddingCandidateUrl();
+          return RESTSvc.post(url, data);
         }
       };
 
