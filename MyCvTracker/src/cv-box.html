@@ -1452,8 +1452,9 @@
                   minutes = minutes < 10 ? ("0" + minutes) : ("" + minutes);
                   var dateStr = date + "/" + month + "/" + dateObj.getFullYear();
 
+                  var previewHref = "/job-resume-preview?previewToken=" + resume.previewToken;
                   var resumeHtml = "<div class='col-xs-12 col-md-4'>" +
-                    "<a href=''>" +
+                    "<a href='" + previewHref + "'>" +
                     "<div class='card resume-card'>" +
                     "<div class='card-body'>" +
                     "<div class='resume-name text-truncate'>" +
