@@ -194,6 +194,38 @@ a.social-links {
   }
 }
 
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  text-decoration: none;
+  color: #333;
+
+  .card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .banner {
     background: #F5F1ED;
@@ -1150,5 +1182,20 @@ header {
 
   &.active {
     display: block;
+  }
+
+  .resume-card {
+    .resume-name {
+      font-family: 'museo700';
+    }
+
+    .uploaded-date {
+      color: #9099ad;
+    }
+
+    .user-email,
+    .uploaded-date {
+      margin-top: 5px;
+    }
   }
 }

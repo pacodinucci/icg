@@ -173,13 +173,14 @@
     </div>
     <!-- upload image ends -->
 
-    <div id="profile-preview-step" class="work-step active">
+    <div
+      id="profile-preview-step"
+      class="work-step active">
       <div class="container">
         <div class="title">
           <a href="#"><h2>List of Candidates</h2></a>
         </div>
-        <div id="text-link-preview">
-        </div>
+        <div id="list-of-candidates">No resumes added</div>
       </div>
     </div>
 
@@ -463,7 +464,7 @@
           <div class="modal-body">
             <h3>Step 2</h3>
             <h2>Please provide email in case you are new user. My CV Tracker platform applies tracking
-            to your CV.</h2>
+              to your CV.</h2>
 
             <div class="img">
               <form onload="hideDOMS();">
@@ -505,24 +506,39 @@
                   style="display: none;" />
                 <div
                   class="errorStyle"
-                  id="emailError"><strong>Error</strong> Email is
-									required.</div>
+                  id="emailError">
+                  <strong>Error</strong>
+                  Email is
+                  required.
+                </div>
                 <div
                   class="errorStyle"
-                  id="resumeRefError"><strong>Error</strong> Resume refrence is
-									required.</div>
+                  id="resumeRefError">
+                  <strong>Error</strong>
+                  Resume refrence is
+                  required.
+                </div>
                 <div
                   class="errorStyle"
-                  id="sizeError"><strong>Error</strong> File size limit
-									exceeded.</div>
+                  id="sizeError">
+                  <strong>Error</strong>
+                  File size limit
+                  exceeded.
+                </div>
                 <div
                   class="errorStyle"
-                  id="noFileError"><strong>Error</strong> Please upload a
-									file.</div>
+                  id="noFileError">
+                  <strong>Error</strong>
+                  Please upload a
+                  file.
+                </div>
                 <div
                   class="errorStyle"
-                  id="fileExtError1"><strong>Error</strong> Please upload a PDF, Doc,
-									 Docx file only</div>
+                  id="fileExtError1">
+                  <strong>Error</strong>
+                  Please upload a PDF, Doc,
+                  Docx file only
+                </div>
                 <input
                   type="checkbox"
                   id="checkbox1"
@@ -773,7 +789,9 @@
             </div>
 
             <div class="result">
-              <div class="desc">Please check your email and activate your account.Here is unique link to share with your network.</div>
+              <div class="desc">Please check your email and activate your account.Here is unique link to share with your
+                network.
+              </div>
               <a
                 href="#"
                 class="ref-link"></a>
@@ -826,21 +844,24 @@
                 <a
                   href="#"
                   class="btn btn-primary fb-btn">
-                  <i class="fab fa-facebook-f"></i> Facebook
+                  <i class="fab fa-facebook-f"></i>
+                  Facebook
                 </a>
               </div>
               <div class="a-btn">
                 <a
                   href="#"
                   class="btn btn-primary tw-btn">
-                  <i class="fab fa-twitter"></i> Twitter
+                  <i class="fab fa-twitter"></i>
+                  Twitter
                 </a>
               </div>
               <div class="a-btn">
                 <a
                   href="#"
                   class="btn btn-primary ld-btn">
-                  <i class="fab fa-linkedin-in"></i> Linked
+                  <i class="fab fa-linkedin-in"></i>
+                  Linked
                 </a>
               </div>
             </div>
@@ -1020,23 +1041,25 @@
 
       $(".generate-btn")
         .click(function () {
-          $("#referral-bounty-modal").modal("show");
+          $("#referral-bounty-modal")
+            .modal("show");
         });
 
-      $("#referral-bounty-modal .btn-primary").click(function() {
-        window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
-        // var token = localStorage.getItem("token");
-        // if (!!token) {
-        //   window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
-        // } else {
-        //   $("#referral-bounty-modal")
-        //     .modal("hide");
-        //   setTimeout(function() {
-        //     $("#referral-modal-auth")
-        //       .modal("show");
-        //   }, 500);
-        // }
-      });
+      $("#referral-bounty-modal .btn-primary")
+        .click(function () {
+          window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+          // var token = localStorage.getItem("token");
+          // if (!!token) {
+          //   window.location.href = "/login?redirect=/referral?parentLink=" + refCode;
+          // } else {
+          //   $("#referral-bounty-modal")
+          //     .modal("hide");
+          //   setTimeout(function() {
+          //     $("#referral-modal-auth")
+          //       .modal("show");
+          //   }, 500);
+          // }
+        });
 
       var socialWindow = null;
       $("#social-selection-modal .fb-btn")
@@ -1134,7 +1157,8 @@
             var authInfo = JSON.parse(authInfoStr);
             var authEmail = authInfo.email;
             if (!!authEmail) {
-              $("#eCVemail").val(authEmail);
+              $("#eCVemail")
+                .val(authEmail);
             }
           }
           utility.hideDOMS();
@@ -1365,7 +1389,7 @@
                   $("#referral-modal-1")
                     .addClass("success");
                   $("#referral-modal-1 .ref-link")
-                    .html("https://mycvtracker.com/job-spec.html?ref=" + data.referralLink+ "&title=" + data.referralTargetSubject);
+                    .html("https://mycvtracker.com/job-spec.html?ref=" + data.referralLink + "&title=" + data.referralTargetSubject);
 
                   $(this)
                     .html("Generate");
@@ -1403,6 +1427,55 @@
                 .html(data.referralDetails);
             }
           });
+
+          $.ajax({
+            url : "https://mycvtracker.com:8080/cvbox/candidates/list?referralLink=" + refCode,
+            type : "GET",
+            dataType : "json",
+            contentType : "application/json",
+            success : function (data) {
+              var noResumes = data.length;
+              if (noResumes > 0) {
+                var html = "";
+                for (var i = 0; i < noResumes; i++) {
+                  var resume = data[i];
+                  var utc = resume.uploadedAt;
+                  var dateObj = new Date(utc);
+
+                  var date = dateObj.getDate();
+                  date = date < 10 ? ("0" + date) : ("" + date);
+                  var month = dateObj.getMonth() + 1;
+                  month = month < 10 ? ("0" + month) : ("" + month);
+                  var hour = dateObj.getHours();
+                  hour = hour < 10 ? ("0" + hour) : ("" + hour);
+                  var minutes = dateObj.getMinutes();
+                  minutes = minutes < 10 ? ("0" + minutes) : ("" + minutes);
+                  var dateStr = date + "/" + month + "/" + dateObj.getFullYear();
+
+                  var resumeHtml = "<div class='col-xs-12 col-md-4'>" +
+                    "<a href=''>" +
+                    "<div class='card resume-card'>" +
+                    "<div class='card-body'>" +
+                    "<div class='resume-name text-truncate'>" +
+                    resume.resumeName +
+                    "</div>" +
+                    "<div class='user-email'>" +
+                    resume.userEmail +
+                    "</div>" +
+                    "<div class='uploaded-date'>" +
+                    "Uploaded at " + dateStr +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</a>" +
+                    "</div>";
+                  html += resumeHtml;
+                }
+
+                $("#list-of-candidates").html("<div class='row'>" + html + "</div>");
+              }
+            }
+          });
         }
       });
 
@@ -1433,17 +1506,23 @@
           var expires = "expires=" + d.toUTCString();
           document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+
         var cookieAcc = getCookie("cookieAcc");
 
-        $( "body" ).append( "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>" );
+        $("body")
+          .append(
+            "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>");
         if (cookieAcc !== "1") {
-          $("#cookie-confirm-popup").addClass("active");
+          $("#cookie-confirm-popup")
+            .addClass("active");
         }
 
-        $("#cookie-confirm-popup .btn-primary").on("click", function() {
-          setCookie("cookieAcc", "1", 7);
-          $("#cookie-confirm-popup").removeClass("active");
-        });
+        $("#cookie-confirm-popup .btn-primary")
+          .on("click", function () {
+            setCookie("cookieAcc", "1", 7);
+            $("#cookie-confirm-popup")
+              .removeClass("active");
+          });
       });
     </script>
 
