@@ -4,19 +4,6 @@
   <div class="body-section">
     <div class="section-content">
       <div
-        class="section-title"
-        ng-if="resumePreview.tokenValid === true">
-        <h4
-          ng-bind="jobDetail.jobTitle"
-          ng-if="!!jobDetail.jobTitle"></h4>
-        <div
-          class="location"
-          ng-if="!!jobDetail.jobLocation">
-          Location: {{ jobDetail.jobLocation }}
-        </div>
-      </div>
-
-      <div
         class="resume-preview-iframe"
         ng-style="{ height: (resumePreview.pdfViewerHeight + 'px') }">
         <iframe
