@@ -1,0 +1,58 @@
+<div id="categorizing-job-modal">
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      ng-click="closeModal()">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h4
+      class="modal-title">Update job category</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row" ng-repeat="category in jobCategorizingForm.categories track by category.categoryId">
+      <label class="col-xs-12 col-md-3 col-form-label">
+        Category {{ $index + 1 }}
+      </label>
+      <div class="col-xs-12 col-md-7">
+        <div class="category-name">
+          {{ category.name }}
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-2 icon-col">
+        <i class="fas fa-trash text-danger" ng-click="removeCategoryFromList($index)"></i>
+      </div>
+    </div>
+
+    <div class="add-form">
+      <div class="form-group">
+        <select class="form-control" ng-model="jobCategorizingForm.newCategoryId">
+          <option value="">Choose category to add</option>
+          <option ng-repeat="category in ::jobCategorizingForm.defaultCategories track by category.id" ng-value="::category.id">
+            {{ ::category.name }}
+          </option>
+        </select>
+      </div>
+      <div class="add-control">
+        <a href="#" ng-click="addCategoryToList()">Add More</a>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      type="submit"
+      class="btn btn-primary">
+      Update
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      ng-click="closeModal()">
+      Cancel
+    </button>
+  </div>
+</div>
+

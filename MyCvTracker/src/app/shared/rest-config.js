@@ -719,6 +719,10 @@ angular.module("MyCvTracker.shared")
           }
           var url = utilities.getAddingCandidateUrl();
           return RESTSvc.post(url, data);
+        }, listSkillCategories : function () {
+          var url = utilities.getListingSkillCategoriesUrl();
+
+          return RESTSvc.get(url);
         }
       };
 

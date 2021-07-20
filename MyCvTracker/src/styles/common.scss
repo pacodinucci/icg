@@ -92,4 +92,10 @@ a.btn.btn-default {
     margin-bottom: 0;
     margin-top: 2px;
   }
+
+  .col-form-label {
+    margin: 0 !important;
+    padding-top: calc(.8rem + 1px);
+    padding-bottom: calc(.8rem + 1px);
+  }
 }

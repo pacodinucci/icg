@@ -765,6 +765,10 @@ angular.module('MyCvTracker.shared')
                     $location.path('collectCV');
                 },
 
+                getListingSkillCategoriesUrl: function () {
+                    return Constants.baseUrl + "/tech-categories/list";
+                },
+
                 baseUrl: function () {
                     var pathparts = location.pathname.split('/');
                     if (location.host.indexOf('localhost') !== -1) {

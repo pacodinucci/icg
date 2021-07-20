@@ -78,7 +78,19 @@ angular.module("MyCvTracker.pages.referral")
         deleteReferralLink : function(referralLink) {
           var url = utilities.getDeleteReferralUrl();
           return RestConfig.deleteReferralLink(url, referralLink);
-        }
+        },
+        getUpdatingJobSkillsModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/referral/templates/categorizing-modal.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
+        }, getListSkillCategories : function() {
+          return RestConfig.listSkillCategories();
+        },
       };
     }
   ]);

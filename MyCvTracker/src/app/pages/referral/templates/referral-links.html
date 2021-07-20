@@ -106,18 +106,46 @@
                   </a>
 
                   <a
-                    ng-href="{{getResumesLink(referral.referralType, referral.referralLink, referral.parentReferralId)}}"
-                    title="List resumes">
-                    <i class="fas fa-list-alt"></i>
-                  </a>
-
-                  <a
                     class="trash-ctrl"
                     href="#"
                     title="Delete"
                     ng-click="openDeleteReferralLinkModal(referral.referralLink, $index)">
                     <i class="fas fa-trash"></i>
                   </a>
+                </div>
+              </div>
+
+              <div class="menu-ctrl">
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a
+                      ng-href="{{getResumesLink(referral.referralType, referral.referralLink, referral.parentReferralId)}}"
+                      class="dropdown-item"
+                      href="#">
+                      {{ referral.referralType !== REFERRAL_TYPE.SOCIAL_SHARE ? "Referred resumes" : "Applications" }}
+                    </a>
+                    <a
+                      ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
+                      class="dropdown-item"
+                      href="#">
+                      Matching resumes
+                    </a>
+                    <a
+                      ng-click="openUpdateSkillModal()"
+                      ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
+                      class="dropdown-item"
+                      href="#">
+                      Categorize Skill
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
