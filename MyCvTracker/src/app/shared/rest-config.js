@@ -545,6 +545,13 @@ angular.module("MyCvTracker.shared")
           url = url.replace("{referralLink}", link);
           return RESTSvc.get(url);
         },
+        getMatchingResumesOfJob : function (
+          link
+        ) {
+          var url = utilities.getMatchingResumeListUrl();
+          url = url.replace("{referralLink}", link);
+          return RESTSvc.get(url);
+        },
         getReferredResumeList : function (
           url,
           link
@@ -723,6 +730,30 @@ angular.module("MyCvTracker.shared")
           var url = utilities.getListingSkillCategoriesUrl();
 
           return RESTSvc.get(url);
+        }, listCategoriesOfJob : function (referralLink) {
+          var url = utilities.getListingJobCategoriesUrl();
+          url = url.replace("{referralLink}", referralLink);
+
+          return RESTSvc.get(url);
+        }, listCategoriesOfResume : function (resumeId) {
+          var url = utilities.getListingResumeCategoriesUrl();
+          url = url.replace("{resumeId}", resumeId);
+
+          return RESTSvc.get(url);
+        }, updateJobSkillCategories : function (jobId, categoryIds) {
+          var url = utilities.getUpdatingJobCategoriesUrl();
+
+          return RESTSvc.post(url, {
+            jobId : jobId,
+            categoryIds : categoryIds
+          });
+        }, updateResumeSkillCategories : function (resumeId, categoryIds) {
+          var url = utilities.getUpdatingResumeCategoriesUrl();
+
+          return RESTSvc.post(url, {
+            resumeId : resumeId,
+            categoryIds : categoryIds
+          });
         }
       };
 

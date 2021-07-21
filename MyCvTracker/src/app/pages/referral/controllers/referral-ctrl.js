@@ -96,9 +96,11 @@ angular.module("MyCvTracker.pages.referral")
         showError : false
       };
       $scope.jobCategorizingForm = {
+        jobId : null,
         defaultCategories : [],
         categories : [],
-        newCategoryId : null
+        newCategoryId : null,
+        updating : false
       }
 
       $scope.deletingReferralLink = "";
@@ -208,24 +210,11 @@ angular.module("MyCvTracker.pages.referral")
           });
       };
 
-      $scope.openUpdateSkillModal = function () {
-        $scope.jobCategorizingForm.categories = [
-          {
-            "categoryId": 6,
-            "name": "JavaScript",
-            "categorizedAt": "2021-07-20T09:42:12"
-          },
-          {
-            "categoryId": 12,
-            "name": "Java",
-            "categorizedAt": "2021-07-20T09:42:12"
-          },
-          {
-            "categoryId": 15,
-            "name": "React",
-            "categorizedAt": "2021-07-20T09:42:12"
-          }
-        ];
+      $scope.openUpdateSkillModal = function (id, referralLink) {
+        ReferralSvc.getJobCategories(referralLink).then(function(data) {
+          $scope.jobCategorizingForm.categories = data;
+        });
+        $scope.jobCategorizingForm.jobId = id;
         $scope.referralModal = ReferralSvc.getUpdatingJobSkillsModal($scope, "ReferalModalCtrl");
       };
 
@@ -237,6 +226,15 @@ angular.module("MyCvTracker.pages.referral")
         var newCategoryId = $scope.jobCategorizingForm.newCategoryId;
         if (!newCategoryId) return;
         newCategoryId = parseInt(newCategoryId);
+
+        // check whether new category exist
+        for (var i = 0, len = $scope.jobCategorizingForm.categories.length; i < len; i++) {
+          var category = $scope.jobCategorizingForm.categories[i];
+          if (newCategoryId === category.categoryId) {
+            $scope.jobCategorizingForm.newCategoryId = null;
+            return;
+          }
+        }
 
         var categories = $scope.jobCategorizingForm.defaultCategories;
         for (var i = 0, len = categories.length; i < len; i++) {
@@ -255,6 +253,25 @@ angular.module("MyCvTracker.pages.referral")
         }
       }
 
+      $scope.categorizeJob = function() {
+        if ($scope.jobCategorizingForm.updating) return;
+        $scope.jobCategorizingForm.updating = true;
+
+        var jobId = $scope.jobCategorizingForm.jobId;
+        var categoryIds = [];
+        var categories = $scope.jobCategorizingForm.categories;
+        for (let i = 0, len = categories.length; i < len; i++) {
+          categoryIds.push(categories[i].categoryId);
+        }
+
+        ReferralSvc.categorizeJobSkills(jobId, categoryIds).then(function() {
+          toastr.success("Job has been updated successfully.", "Success");
+          $scope.closeModal();
+        }).catch(function() {
+          toastr.error("Updating job has failed!", "Failed");
+          $scope.closeModal();
+        });
+      }
 
       $scope.closeModal = function () {
         // console.log($scope.referralModal);
@@ -286,6 +303,9 @@ angular.module("MyCvTracker.pages.referral")
         $scope.deletingReferralLink = "";
         $scope.deletingReferralIdx = -1;
         $scope.jobCategorizingForm.categories = [];
+        $scope.jobCategorizingForm.jobId = null;
+        $scope.jobCategorizingForm.newCategoryId = null;
+        $scope.jobCategorizingForm.updating = false;
         $scope.inDeletingReferral = false;
 
         if (!!parentLink) {

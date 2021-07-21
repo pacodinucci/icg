@@ -28,7 +28,7 @@
                 class="resume-title"
                 ng-bind="aResume.resumeTitle"></h3>
               <hr class="resumeSeprator">
-              <div class="tile-filename">
+              <div class="tile-filename" ng-if="!referredResumes.matchingType">
                   <span
                     class="badge badge-warning"
                     ng-if="aResume.resumeStatus === JOB_STATUS.APPLIED_JOB">Job Applied</span>
@@ -46,6 +46,9 @@
                   ng-if="aResume.resumeStatus === JOB_STATUS.SELECTED_FOR_JOB">Selected for job</span>
                 <span ng-if="aResume.sharedWith === SHARED_LEVEL.PARENT" class="badge badge-info">Shared To Parent</span>
                 <span ng-if="aResume.sharedWith === SHARED_LEVEL.JOB_POSTER" class="badge badge-info">Shared To Poster</span>
+              </div>
+              <div class="user-email">
+                Owner: {{ aResume.ownerEmail }}
               </div>
               <div
                 class="tile-datetime"

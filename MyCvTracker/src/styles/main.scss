@@ -164,6 +164,13 @@
       font-size: 14px;
     }
 
+    .user-email {
+      margin-bottom: 0.3em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
     .tile-user-email {
       margin-bottom: 5px;
     }

@@ -51,7 +51,14 @@ angular.module("MyCvTracker.pages.resumeListing")
         foundBoxes : null,
         boxName : "",
         addingToBox : false
-      }
+      };
+      $scope.jobCategorizingForm = {
+        resumeId : null,
+        defaultCategories : [],
+        categories : [],
+        newCategoryId : null,
+        updating : false
+      };
 
       $scope.getResume = function () {
         $scope.loadInfo.loading = true;
@@ -220,6 +227,14 @@ angular.module("MyCvTracker.pages.resumeListing")
         $scope.extendModal = mainSvc.getCvBoxSelectionModal($scope, "ReferalModalCtrl");
       }
 
+      $scope.openUpdateSkillModal = function (id) {
+        mainSvc.getResumeCategories(id).then(function(data) {
+          $scope.jobCategorizingForm.categories = data;
+        });
+        $scope.jobCategorizingForm.resumeId = id;
+        $scope.extendModal = mainSvc.getUpdatingResumeSkillModal($scope, "ReferalModalCtrl");
+      };
+
       $scope.closeModal = function () {
         $scope.extendModal.dismiss();
         $scope.extendForm.days = 7;
@@ -231,7 +246,11 @@ angular.module("MyCvTracker.pages.resumeListing")
           findingBox : false,
           foundBoxes : null,
           boxName : ""
-        }
+        };
+        $scope.jobCategorizingForm.categories = [];
+        $scope.jobCategorizingForm.resumeId = null;
+        $scope.jobCategorizingForm.newCategoryId = null;
+        $scope.jobCategorizingForm.updating = false;
       }
 
       $scope.extendResume = function() {
@@ -252,8 +271,68 @@ angular.module("MyCvTracker.pages.resumeListing")
         });
       }
 
+      $scope.removeCategoryFromList = function(idx) {
+        $scope.jobCategorizingForm.categories.splice(idx, 1);
+      }
+
+      $scope.addCategoryToList = function() {
+        var newCategoryId = $scope.jobCategorizingForm.newCategoryId;
+        if (!newCategoryId) return;
+        newCategoryId = parseInt(newCategoryId);
+
+        // check whether new category exist
+        for (var i = 0, len = $scope.jobCategorizingForm.categories.length; i < len; i++) {
+          var category = $scope.jobCategorizingForm.categories[i];
+          if (newCategoryId === category.categoryId) {
+            $scope.jobCategorizingForm.newCategoryId = null;
+            return;
+          }
+        }
+
+        var categories = $scope.jobCategorizingForm.defaultCategories;
+        for (var i = 0, len = categories.length; i < len; i++) {
+          var category = categories[i];
+          var id = category.id;
+          var name = category.name;
+
+          if (id === newCategoryId) {
+            $scope.jobCategorizingForm.categories.push({
+              categoryId : id,
+              name : name
+            });
+            $scope.jobCategorizingForm.newCategoryId = null;
+            break;
+          }
+        }
+      }
+
+      $scope.categorizeJob = function() {
+        if ($scope.jobCategorizingForm.updating) return;
+        $scope.jobCategorizingForm.updating = true;
+
+        var resumeId = $scope.jobCategorizingForm.resumeId;
+        var categoryIds = [];
+        var categories = $scope.jobCategorizingForm.categories;
+        for (let i = 0, len = categories.length; i < len; i++) {
+          categoryIds.push(categories[i].categoryId);
+        }
+
+        mainSvc.categorizeResumeSkills(resumeId, categoryIds).then(function() {
+          toastr.success("Resume has been updated successfully.", "Success");
+          $scope.closeModal();
+        }).catch(function() {
+          toastr.error("Updating resume has failed!", "Failed");
+          $scope.closeModal();
+        });
+      }
+
       $scope.init = function () {
         $scope.getResume();
+
+        mainSvc.getListSkillCategories()
+          .then(function (data) {
+            $scope.jobCategorizingForm.defaultCategories = data;
+          });
       };
 
       $scope.init();

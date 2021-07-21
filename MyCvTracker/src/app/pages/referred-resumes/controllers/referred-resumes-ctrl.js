@@ -38,7 +38,8 @@ angular.module("MyCvTracker.pages.referredResumes")
         sharingSuccess : false,
         updateSttInput : "select",
         isChildRef : false,
-        detail : {}
+        detail : {},
+        matchingType : false
       };
 
       $scope.loadRefContent = function(refCode) {
@@ -49,6 +50,16 @@ angular.module("MyCvTracker.pages.referredResumes")
 
       $scope.loadListReferredResumes = function (refCode) {
         service.getReferredResumes(refCode)
+          .then(function (rpData) {
+            if (rpData && rpData.length > 0) {
+              var oldList = $scope.referredResumes.list;
+              $scope.referredResumes.list = oldList.concat(rpData);
+            }
+          });
+      };
+
+      $scope.loadListMatchingResumes = function (refCode) {
+        service.getMatchingResumes(refCode)
           .then(function (rpData) {
             if (rpData && rpData.length > 0) {
               var oldList = $scope.referredResumes.list;
@@ -125,6 +136,10 @@ angular.module("MyCvTracker.pages.referredResumes")
       }
 
       $scope.ableToShare = function (sharedLevel) {
+        if ($scope.referredResumes.matchingType) {
+          return false;
+        }
+
         if ($scope.referredResumes.isChildRef) {
           return sharedLevel === null;
         } else {
@@ -133,6 +148,10 @@ angular.module("MyCvTracker.pages.referredResumes")
       };
 
       $scope.ableToUpdate = function (sharedLevel, resumeStatus) {
+        if ($scope.referredResumes.matchingType) {
+          return false;
+        }
+
         return $scope.ableToShare(sharedLevel) && (resumeStatus === $scope.JOB_STATUS.APPLIED_JOB || resumeStatus === $scope.JOB_STATUS.SELECTED_FOR_INTERVIEW ||
           resumeStatus === $scope.JOB_STATUS.SELECTED_FOR_INTERVIEW);
       };
@@ -212,9 +231,18 @@ angular.module("MyCvTracker.pages.referredResumes")
         referralLink = params.referralLink;
         parentLink = params.parentLink;
 
+        var type = params.type;
+        var matchingType = type === "matching";
+        $scope.referredResumes.matchingType = matchingType;
+
         $scope.referredResumes.isChildRef = !!parentLink;
-        $scope.loadListReferredResumes(referralLink);
         $scope.loadRefContent(referralLink);
+
+        if (!matchingType) {
+          $scope.loadListReferredResumes(referralLink);
+        } else {
+          $scope.loadListMatchingResumes(referralLink);
+        }
       };
 
       $scope.init();

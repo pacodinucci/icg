@@ -48,6 +48,18 @@ angular.module("MyCvTracker.pages.resumeListing")
           };
 
           return $injector.get('$uibModal').open(modalOpts);
+        },
+        getUpdatingResumeSkillModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/list-resumes/templates/categorizing-modal.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
+        }, getListSkillCategories : function() {
+          return RestConfig.listSkillCategories();
         }, findCvBoxByName : function (
           name
         ) {
@@ -57,6 +69,10 @@ angular.module("MyCvTracker.pages.resumeListing")
           resumeId
         ) {
           return RestConfig.addResumeToCvBox(referralId, resumeId);
+        }, getResumeCategories : function(resumeId) {
+          return RestConfig.listCategoriesOfResume(resumeId);
+        }, categorizeResumeSkills : function(resumeId, categoryIds) {
+          return RestConfig.updateResumeSkillCategories(resumeId, categoryIds);
         }
       };
     }

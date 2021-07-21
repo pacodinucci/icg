@@ -134,12 +134,13 @@
                     </a>
                     <a
                       ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
+                      ng-href="{{getResumesLink(referral.referralType, referral.referralLink, referral.parentReferralId) + '&type=matching'}}"
                       class="dropdown-item"
                       href="#">
                       Matching resumes
                     </a>
                     <a
-                      ng-click="openUpdateSkillModal()"
+                      ng-click="openUpdateSkillModal(referral.id, referral.referralLink)"
                       ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
                       class="dropdown-item"
                       href="#">

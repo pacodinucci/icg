@@ -90,7 +90,11 @@ angular.module("MyCvTracker.pages.referral")
           return $injector.get('$uibModal').open(modalOpts);
         }, getListSkillCategories : function() {
           return RestConfig.listSkillCategories();
-        },
+        }, getJobCategories : function(referralLink) {
+          return RestConfig.listCategoriesOfJob(referralLink);
+        }, categorizeJobSkills : function(jobId, categoryIds) {
+          return RestConfig.updateJobSkillCategories(jobId, categoryIds);
+        }
       };
     }
   ]);

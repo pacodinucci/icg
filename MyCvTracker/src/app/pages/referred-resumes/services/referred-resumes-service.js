@@ -19,6 +19,9 @@ angular.module("MyCvTracker.pages.referredResumes")
           var url = utilities.getReferredResumeListUrl();
           return RestConfig.getReferredResumeList(url, referralLink);
         },
+        getMatchingResumes: function(referralLink) {
+          return RestConfig.getMatchingResumesOfJob(referralLink);
+        },
         getChildLinks: function(parentLink) {
           var url = utilities.getChildRefLinks();
           return RestConfig.getChildRefLinkList(url, parentLink);

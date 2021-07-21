@@ -643,6 +643,10 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + Constants.apis.referredResumesList.url;
                 },
 
+                getMatchingResumeListUrl: function () {
+                    return Constants.baseUrl + "/job/{referralLink}/matching-resumes";
+                },
+
                 getCvBoxCandidateListUrl: function () {
                     return Constants.baseUrl + "/cvbox/candidates/list";
                 },
@@ -764,11 +768,21 @@ angular.module('MyCvTracker.shared')
                 collectCV: function () {
                     $location.path('collectCV');
                 },
-
                 getListingSkillCategoriesUrl: function () {
                     return Constants.baseUrl + "/tech-categories/list";
                 },
-
+                getListingJobCategoriesUrl: function () {
+                    return Constants.baseUrl + "/job/{referralLink}/skill-categories";
+                },
+                getListingResumeCategoriesUrl: function () {
+                    return Constants.baseUrl + "/resume/{resumeId}/skill-categories";
+                },
+                getUpdatingJobCategoriesUrl: function () {
+                    return Constants.baseUrl + "/tech-skill/categorize/job";
+                },
+                getUpdatingResumeCategoriesUrl: function () {
+                    return Constants.baseUrl + "/tech-skill/categorize/resume";
+                },
                 baseUrl: function () {
                     var pathparts = location.pathname.split('/');
                     if (location.host.indexOf('localhost') !== -1) {
