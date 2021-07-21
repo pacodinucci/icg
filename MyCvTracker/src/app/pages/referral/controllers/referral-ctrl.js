@@ -260,7 +260,7 @@ angular.module("MyCvTracker.pages.referral")
         var jobId = $scope.jobCategorizingForm.jobId;
         var categoryIds = [];
         var categories = $scope.jobCategorizingForm.categories;
-        for (let i = 0, len = categories.length; i < len; i++) {
+        for (var i = 0, len = categories.length; i < len; i++) {
           categoryIds.push(categories[i].categoryId);
         }
 

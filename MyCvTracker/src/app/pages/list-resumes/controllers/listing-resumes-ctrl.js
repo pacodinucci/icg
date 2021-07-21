@@ -313,7 +313,7 @@ angular.module("MyCvTracker.pages.resumeListing")
         var resumeId = $scope.jobCategorizingForm.resumeId;
         var categoryIds = [];
         var categories = $scope.jobCategorizingForm.categories;
-        for (let i = 0, len = categories.length; i < len; i++) {
+        for (var i = 0, len = categories.length; i < len; i++) {
           categoryIds.push(categories[i].categoryId);
         }
 
