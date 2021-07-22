@@ -20,7 +20,7 @@ angular.module("MyCvTracker.pages.resumeListing")
     ) {
       var NO_RECORDS = 24;
       var Utilities = $injector.get("Utilities");
-      var mainSvc = $injector.get("ResumesListingService");
+      skill-category-list
 
       var userDetail = Authorization.getUserDetails();
       var role = !!userDetail ? Authorization.getUserRole() : "";

@@ -1,0 +1,85 @@
+<div id="categorizing-job-modal">
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      ng-click="closeModal()">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h4
+      class="modal-title">New category</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <label class="col-xs-12 col-md-3 col-form-label">
+        Name
+      </label>
+      <div class="col-xs-12 col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter name of category" />
+      </div>
+    </div>
+    <span class="separator"></span>
+    <div class="form-group row" ng-repeat="skill in newCategoryForm.skills track by ::skill.id">
+      <label class="col-xs-12 col-md-3 col-form-label">
+        Rank {{ $index + 1 }}
+      </label>
+      <div class="col-xs-12 col-md-7">
+        <div class="category-name" ng-bind="::skill.name"></div>
+      </div>
+      <div class="col-xs-12 col-md-2 icon-col">
+        <i class="fas fa-trash text-danger" ng-click="removeSkillFromCategory($index)"></i>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-xs-12 col-md-3 col-form-label">
+        Add skill
+      </label>
+      <div class="col-xs-12 col-md-7">
+        <div class="suggestion-input-container">
+          <input
+            ng-model="newCategoryForm.skillNameSearch"
+            ng-change="findSuggestionItems()"
+            ng-focus="focusSuggestionInput()"
+            ng-blur="leaveSuggestionInput()"
+            type="text"
+            class="form-control"
+            placeholder="Name of skill" />
+          <div ng-class="['suggestion-list', (newCategoryForm.suggestFocused ? 'focused' : '')]">
+            <ul>
+              <li ng-repeat="item in newCategoryForm.suggestionItems track by ::item.id">
+                <div class="item"
+                     ng-click="selectSuggestion(item)"
+                     ng-bind="::item.name" ></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-2 icon-col">
+        <i
+          class="fas fa-plus-square text-primary"
+          ng-click="applySkillToCategory()"></i>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      type="button"
+      ng-click="categorizeJob()"
+      class="btn btn-primary">
+      Create
+    </button>
+    <button
+      ng-click="closeModal()"
+      type="button"
+      class="btn btn-secondary">
+      Cancel
+    </button>
+  </div>
+</div>

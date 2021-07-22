@@ -26,7 +26,8 @@
     "MyCvTracker.pages.socialRegistrations",
     "MyCvTracker.pages.jobResumePreview",
     "MyCvTracker.pages.resumeListing",
-    "MyCvTracker.pages.cvBoxCandidates"
+    "MyCvTracker.pages.cvBoxCandidates",
+    "MyCvTracker.pages.skillCategory"
   ])
     .run(run);
 

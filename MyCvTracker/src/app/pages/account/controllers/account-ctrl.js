@@ -109,6 +109,13 @@ angular.module("MyCvTracker.pages.account")
         },
         {
           color : pieColor,
+          description : "Categories & Skills",
+          link : "skill-category-list",
+          icon : "resume",
+          showMenu : isReviewer || isAdmin
+        },
+        {
+          color : pieColor,
           description : "Settings",
           link : "settings",
           icon : "settings",

@@ -860,4 +860,53 @@
   .add-control {
     text-align: left;
   }
+
+  .separator {
+    display: block;
+    border-bottom: solid 1px #e5e5e5;
+    margin-bottom: 1em;
+  }
+
+  .suggestion-input-container {
+    position: relative;
+
+    .suggestion-list {
+      display: none;
+      position: absolute;
+      top: 33px;
+      left: 0;
+      right: 0;
+      background-color: #FFF;
+      border-top: solid 2px #2e6da4;
+      box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
+
+      ul {
+        margin : 0;
+        overflow: auto;
+        max-height: 160px;
+      }
+
+      .item {
+        padding: 8px 12px;
+        height: 32px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        font-family: 'museo_slab500';
+
+        &:hover {
+          background: rgba(0,0,0,.04);
+        }
+      }
+
+      &.focused {
+        display: block;
+      }
+    }
+
+    //input.form-control:focus ~ .suggestion-list {
+    //  display: block;
+    //}
+  }
 }
