@@ -20,7 +20,7 @@ angular.module("MyCvTracker.pages.resumeListing")
     ) {
       var NO_RECORDS = 24;
       var Utilities = $injector.get("Utilities");
-      skill-category-list
+      var mainSvc = $injector.get("ResumesListingService");
 
       var userDetail = Authorization.getUserDetails();
       var role = !!userDetail ? Authorization.getUserRole() : "";
@@ -54,10 +54,7 @@ angular.module("MyCvTracker.pages.resumeListing")
       };
       $scope.jobCategorizingForm = {
         resumeId : null,
-        defaultCategories : [],
-        categories : [],
-        newCategoryId : null,
-        updating : false
+        skills : []
       };
 
       $scope.getResume = function () {
@@ -229,9 +226,8 @@ angular.module("MyCvTracker.pages.resumeListing")
 
       $scope.openUpdateSkillModal = function (id) {
         mainSvc.getResumeCategories(id).then(function(data) {
-          $scope.jobCategorizingForm.categories = data;
+          $scope.jobCategorizingForm.skills = data;
         });
-        $scope.jobCategorizingForm.resumeId = id;
         $scope.extendModal = mainSvc.getUpdatingResumeSkillModal($scope, "ReferalModalCtrl");
       };
 
@@ -247,10 +243,7 @@ angular.module("MyCvTracker.pages.resumeListing")
           foundBoxes : null,
           boxName : ""
         };
-        $scope.jobCategorizingForm.categories = [];
-        $scope.jobCategorizingForm.resumeId = null;
-        $scope.jobCategorizingForm.newCategoryId = null;
-        $scope.jobCategorizingForm.updating = false;
+        $scope.jobCategorizingForm.skills = [];
       }
 
       $scope.extendResume = function() {

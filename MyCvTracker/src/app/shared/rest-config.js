@@ -726,8 +726,30 @@ angular.module("MyCvTracker.shared")
           }
           var url = utilities.getAddingCandidateUrl();
           return RESTSvc.post(url, data);
+        }, addNewSkill: function(name) {
+          var url = utilities.getAddingSkillUrl();
+
+          return RESTSvc.post(url, {
+            name : name
+          });
+        }, addNewCategorySkill: function(name, skillIds) {
+          var url = utilities.getAddingCategorySkillUrl();
+
+          return RESTSvc.post(url, {
+            name : name,
+            skillIds : skillIds
+          });
+        }, listSkills : function () {
+          var url = utilities.getListingSkillUrl();
+
+          return RESTSvc.get(url);
         }, listSkillCategories : function () {
           var url = utilities.getListingSkillCategoriesUrl();
+
+          return RESTSvc.get(url);
+        }, listSkillsOfCategory : function(categoryId) {
+          var url = utilities.getListingSkillOfCategoryUrl();
+          url = url.replace("{categoryId}", categoryId);
 
           return RESTSvc.get(url);
         }, listCategoriesOfJob : function (referralLink) {

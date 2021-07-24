@@ -1,0 +1,32 @@
+<div id="creating-skill-modal">
+  <div class="modal-header">
+    <h4
+      class="modal-title">New skill</h4>
+  </div>
+  <div class="modal-body">
+    <div>
+      <br/>
+      <div>
+        This will create new skill <span class="text-primary">{{ addingSkillForm.name }}</span> before adding to category.
+        <br/> <br/>
+        Would you like to continue on this?
+      </div>
+      <br/>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      ng-disabled="addingSkillForm.adding"
+      type="button"
+      class="btn btn-danger" ng-click="registerNewSkill()">
+      {{ addingSkillForm.adding ? "Creating..." : "Continue" }}
+    </button>
+    <button
+      ng-disabled="addingSkillForm.adding"
+      type="button"
+      class="btn btn-secondary" ng-click="closeConfirmModal()">
+      Cancel
+    </button>
+  </div>
+</div>

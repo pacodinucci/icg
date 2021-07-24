@@ -18,6 +18,8 @@
       </label>
       <div class="col-xs-12 col-md-9">
         <input
+          ng-maxlength="100"
+          ng-model="newCategoryForm.name"
           type="text"
           class="form-control"
           placeholder="Enter name of category" />
@@ -43,6 +45,7 @@
         <div class="suggestion-input-container">
           <input
             ng-model="newCategoryForm.skillNameSearch"
+            ng-maxlength="100"
             ng-change="findSuggestionItems()"
             ng-focus="focusSuggestionInput()"
             ng-blur="leaveSuggestionInput()"
@@ -70,12 +73,14 @@
   <div
     class="modal-footer clearfix">
     <button
+      ng-disabled="newCategoryForm.creating"
       type="button"
-      ng-click="categorizeJob()"
+      ng-click="registerCategory()"
       class="btn btn-primary">
-      Create
+      {{ !newCategoryForm.creating ? "Create" : "Creating..." }}
     </button>
     <button
+      ng-disabled="newCategoryForm.creating"
       ng-click="closeModal()"
       type="button"
       class="btn btn-secondary">

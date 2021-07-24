@@ -1,0 +1,25 @@
+<div id="category-skill-listing-modal">
+  <div class="modal-header">
+    <h4
+      class="modal-title">List skills</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row" ng-repeat="skill in categorySkillModal.skills track by ::skill.id">
+      <div class="col-xs-12 col-md-3">
+        Rank {{ $index + 1 }}
+      </div>
+      <div class="col-xs-12 col-md-7">
+        <div class="skill-name" ng-bind="::skill.name"></div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      ng-disabled="addingSkillForm.adding"
+      type="button"
+      class="btn btn-secondary" ng-click="closeModal()">
+      Cancel
+    </button>
+  </div>
+</div>

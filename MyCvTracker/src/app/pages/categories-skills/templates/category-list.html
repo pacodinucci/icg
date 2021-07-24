@@ -1,5 +1,60 @@
 <section
   id="categories-listing-page"
   ng-controller="CategoriesListingCtrl">
-  Hello
+  <div class="body-section setting-section">
+    <div class="section-content">
+      <div
+        class="card">
+        <div class="card-body">
+          <p class="link-explanation">
+            Duis leo ante, vulputate at nunc non, maximus ultrices metus.
+          </p>
+          <br />
+          <div>
+            <div class="setting-btn">
+              <button
+                type="button"
+                class="btn btn-danger"
+                ng-click="openNewCategoryModal()">
+                New Category
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+      <div class="category-skill-list">
+        <div class="row">
+          <div
+            ng-repeat="category in skillCategories track by ::category.id"
+            class="col-12 col-md-4 col">
+            <div class="card category-card">
+              <div class="card-body">
+                <div class="name" ng-bind="::category.name">
+                </div>
+                <div class="date">
+                  Id: {{ category.id }}
+                </div>
+                <div class="ctrls">
+                  <a href="#" title="Skill List" ng-click="openModalShowingCategorySkills(category.id)">
+                    <i class="fas fa-clipboard-list"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-4">
+
+          </div>
+          <div
+            class="col-12 col-md-4">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

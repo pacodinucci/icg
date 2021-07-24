@@ -768,14 +768,26 @@ angular.module('MyCvTracker.shared')
                 collectCV: function () {
                     $location.path('collectCV');
                 },
+                getAddingSkillUrl : function() {
+                    return Constants.baseUrl + "/tech-skill/new";
+                },
+                getAddingCategorySkillUrl : function() {
+                    return Constants.baseUrl + "/skill-category/new";
+                },
                 getListingSkillCategoriesUrl: function () {
                     return Constants.baseUrl + "/tech-categories/list";
+                },
+                getListingSkillUrl: function () {
+                    return Constants.baseUrl + "/tech-skills/list";
+                },
+                getListingSkillOfCategoryUrl: function () {
+                    return Constants.baseUrl + "/skill-category/{categoryId}/skill-list";
                 },
                 getListingJobCategoriesUrl: function () {
                     return Constants.baseUrl + "/job/{referralLink}/skill-categories";
                 },
                 getListingResumeCategoriesUrl: function () {
-                    return Constants.baseUrl + "/resume/{resumeId}/skill-categories";
+                    return Constants.baseUrl + "/resume/{resumeId}/skills";
                 },
                 getUpdatingJobCategoriesUrl: function () {
                     return Constants.baseUrl + "/tech-skill/categorize/job";

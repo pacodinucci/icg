@@ -910,3 +910,45 @@
     //}
   }
 }
+
+#categories-listing-page {
+  .category-skill-list {
+    .row {
+      margin: -15px;
+
+      .col {
+        padding: 15px;
+      }
+    }
+  }
+
+  .category-card {
+    position: relative;
+    padding-right: 10px;
+
+    .name {
+      margin-bottom: 0.8em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .date {
+      font-family: 'museo_slab500';
+      color: #9099ad;
+    }
+
+    .ctrls {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      margin-top: -7px;
+    }
+  }
+}
+
+#category-skill-listing-modal {
+  .skill-name {
+    color: #9099ad;
+  }
+}
