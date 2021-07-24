@@ -91,7 +91,7 @@ angular.module("MyCvTracker.pages.skillCategory")
           foundItems = defaultSkills.slice(0, 10);
         } else {
           var noFound = 0;
-          for (let i = 0, len = defaultSkills.length; i < len; i++) {
+          for (var i = 0, len = defaultSkills.length; i < len; i++) {
             var skill = defaultSkills[i];
             var idx = skill.compareName.indexOf(nameSearch);
 
@@ -120,7 +120,7 @@ angular.module("MyCvTracker.pages.skillCategory")
         // $scope.subModal = mainSvc.getCreatingCategoryModal($scope, "SkillCategoryModalCtrl");
         var nameSearch =  $scope.newCategoryForm.skillNameSearch;
         var compareName = nameSearch.toLowerCase();
-        for (let i = 0, len = defaultSkills.length; i < len; i++) {
+        for (var i = 0, len = defaultSkills.length; i < len; i++) {
           var skill = defaultSkills[i];
           if (skill.compareName === compareName) {
             $scope.newCategoryForm.skills.push(skill);
@@ -217,7 +217,7 @@ angular.module("MyCvTracker.pages.skillCategory")
 
         mainSvc.getListSkills()
           .then(function (data) {
-            for (let i = 0, len = data.length; i < len; i++) {
+            for (var i = 0, len = data.length; i < len; i++) {
               var skill = data[i];
               skill.compareName = skill.name.toLowerCase();
             }
