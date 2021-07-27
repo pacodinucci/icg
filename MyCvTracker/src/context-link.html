@@ -73,7 +73,7 @@
             tabindex="0"
             onclick="catapultAcceptCookies();">Okay, thank you</button></span>
         </div>
-        <!-- custom wrapper class --></div>;
+        <!-- custom wrapper class --></div>
     </script>
 
 
@@ -140,14 +140,11 @@
         id="job-spec-container">
         <div class="row">
           <div align="center">
-            <h3>Uploading your cv here to get your resume reviewed by this person or company</h3>
+            <h3>Uploading your cv here to get your resume reviewed by <span class="job-title">...</span></h3>
             <br>
           </div>
           <div class="clearfix"></div>
           <div id="job-spec-box">
-            <h4>
-              <span class="job-title">...</span>
-            </h4>
             <!-- can we have box border to some other colour of white -->
             <div
               class="boxborder"
@@ -1138,7 +1135,7 @@
             contentType : "application/json",
             success : function (data) {
               jobTitle = data.referralTargetSubject;
-              $("#job-spec-box .job-title")
+              $(".job-title")
                 .html(jobTitle);
               $("#job-spec-box .job-detail")
                 .html(data.referralDetails);
