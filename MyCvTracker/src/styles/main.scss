@@ -171,6 +171,11 @@
       overflow: hidden;
     }
 
+    .matching-percent {
+      margin-bottom: 0.3em;
+      font-family: 'museo_slab500';
+    }
+
     .tile-user-email {
       margin-bottom: 5px;
     }
@@ -908,6 +913,15 @@
     //input.form-control:focus ~ .suggestion-list {
     //  display: block;
     //}
+  }
+
+  .modal-footer {
+    .note {
+      margin-bottom: 1em;
+      font-size: 12px;
+      font-family: 'museo_slab500';
+      color: #9099ad;
+    }
   }
 }
 

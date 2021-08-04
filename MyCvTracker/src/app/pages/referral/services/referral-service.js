@@ -94,6 +94,8 @@ angular.module("MyCvTracker.pages.referral")
           return RestConfig.listCategoriesOfJob(referralLink);
         }, categorizeJobSkills : function(jobId, categoryIds) {
           return RestConfig.updateJobSkillCategories(jobId, categoryIds);
+        }, buildSmartCategories : function(jobId) {
+          return RestConfig.getSmartCategoriesOfJob(jobId);
         }
       };
     }

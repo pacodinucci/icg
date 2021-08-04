@@ -41,6 +41,9 @@ angular.module("MyCvTracker.pages.referredResumes")
         detail : {},
         matchingType : false
       };
+      $scope.matchingModal = {
+        skills : []
+      };
 
       $scope.loadRefContent = function(refCode) {
         service.getReferralDetail(refCode).then(function (rpData) {
@@ -171,6 +174,15 @@ angular.module("MyCvTracker.pages.referredResumes")
         }
       };
 
+      $scope.openMatchingSkillModal = function (matchingId) {
+        service.getMatchingSkills(matchingId)
+          .then(function (data) {
+            $scope.matchingModal.skills = data;
+          });
+
+        $scope.resumesModal = service.getMatchingSkillsOfResumeModal($scope, "ReferalModalCtrl");
+      };
+
       $scope.shareReferredResumes = function () {
         var resume = $scope.referredResumes.shareResume;
         var id = resume.id;
@@ -218,12 +230,21 @@ angular.module("MyCvTracker.pages.referredResumes")
           });
       };
 
+      $scope.getMatchPercentage = function(noOfMatch, noOfSkills) {
+        if (noOfSkills > 0) {
+          return Math.round(noOfMatch / noOfSkills * 100);
+        }
+
+        return 0;
+      }
+
       $scope.closeModal = function () {
         $scope.resumesModal.dismiss();
         $scope.referredResumes.shareId = null;
         $scope.referredResumes.sharing = false;
         $scope.referredResumes.sharingSuccess = false;
         $scope.referredResumes.updateSttInput = "select";
+        $scope.matchingModal.skills = [];
       };
 
       $scope.init = function () {

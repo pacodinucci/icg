@@ -18,6 +18,7 @@
           </div>
         </div>
         <div
+          ng-if="!referredResumes.matchingType"
           ng-repeat="aResume in referredResumes.list track by aResume.id"
           class="col-xs-12 col-md-3">
           <div
@@ -28,7 +29,7 @@
                 class="resume-title"
                 ng-bind="aResume.resumeTitle"></h3>
               <hr class="resumeSeprator">
-              <div class="tile-filename" ng-if="!referredResumes.matchingType">
+              <div class="tile-filename">
                   <span
                     class="badge badge-warning"
                     ng-if="aResume.resumeStatus === JOB_STATUS.APPLIED_JOB">Job Applied</span>
@@ -49,6 +50,60 @@
               </div>
               <div class="user-email">
                 Owner: {{ aResume.ownerEmail }}
+              </div>
+              <div
+                class="tile-datetime"
+                ng-bind="formatDateTime(aResume.uploadedAt)"></div>
+              <div class="controls">
+                <a
+                  href="#"
+                  title="Download"
+                  ng-click="downloadMyResume(aResume.id)">
+                  <i class="fa fa-download"></i>
+                </a>
+                <a
+                  href="#"
+                  title="Preview"
+                  ng-click="openPreviewResume(aResume.id, aResume.fileType)">
+                  <i class="fas fa-search"></i>
+                </a>
+                <a
+                  ng-if="referredResumes.detail.referralType === 'JOB_SPEC' && ableToShare(aResume.sharedWith)"
+                  href="#"
+                  ng-attr-title='{{ isShareToTarget(aResume.sharedWith) ? "Share to target" : "Share to parent"}}'
+                  ng-click="openShareResumeModal(aResume)">
+                  <i class="fas fa-external-link-square-alt"></i>
+                </a>
+                <a
+                  ng-if="ableToUpdate(aResume.sharedWith, aResume.resumeStatus)"
+                  href="#"
+                  title="Update Status"
+                  ng-click="openStatusModal(aResume)">
+                  <i class="fas fa-edit"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          ng-if="referredResumes.matchingType"
+          ng-repeat="aMatchingResume in referredResumes.list track by aMatchingResume.id"
+          ng-init="aResume = aMatchingResume.resumeDetail"
+          class="col-xs-12 col-md-3">
+          <div
+            ba-panel
+            ba-panel-class="xsmall-panel light-text resume-panel">
+            <div class="tile-title">
+              <h3
+                class="resume-title"
+                ng-bind="aResume.resumeTitle ? aResume.resumeTitle : '-'"></h3>
+              <hr class="resumeSeprator">
+              <div class="user-email">
+                Owner: {{ aResume.ownerEmail }}
+              </div>
+              <div class="matching-percent">
+                <a href="#" ng-click="openMatchingSkillModal(aMatchingResume.id)">Matching {{ getMatchPercentage(aMatchingResume.noOfMatching, aResume.noOfSkills) }}% skills</a>
               </div>
               <div
                 class="tile-datetime"

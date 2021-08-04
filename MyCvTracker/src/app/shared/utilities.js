@@ -647,6 +647,10 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + "/job/{referralLink}/matching-resumes";
                 },
 
+                getSkillsOfMatching: function () {
+                    return Constants.baseUrl + "/match-skills/{matchingId}/list";
+                },
+
                 getCvBoxCandidateListUrl: function () {
                     return Constants.baseUrl + "/cvbox/candidates/list";
                 },
@@ -788,6 +792,9 @@ angular.module('MyCvTracker.shared')
                 },
                 getListingResumeCategoriesUrl: function () {
                     return Constants.baseUrl + "/resume/{resumeId}/skills";
+                },
+                getSmartJobCategoriesUrl: function () {
+                    return Constants.baseUrl + "/tech-skill/job/{jobId}/smart-categorize";
                 },
                 getUpdatingJobCategoriesUrl: function () {
                     return Constants.baseUrl + "/tech-skill/categorize/job";

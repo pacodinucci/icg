@@ -1,0 +1,27 @@
+<div id="categorizing-job-modal">
+  <div class="modal-header">
+    <h4
+      class="modal-title">Matching skills</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row" ng-repeat="skill in matchingModal.skills track by ::skill.id">
+      <div class="col-xs-12 col-md-3 col-form-label">
+        Skill {{ $index + 1 }}
+      </div>
+      <div class="col-xs-12 col-md-7">
+        <div class="category-name">
+          {{ ::skill.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      ng-click="closeModal()">
+      Cancel
+    </button>
+  </div>
+</div>

@@ -97,10 +97,12 @@ angular.module("MyCvTracker.pages.referral")
       };
       $scope.jobCategorizingForm = {
         jobId : null,
+        referralLink : null,
         defaultCategories : [],
         categories : [],
         newCategoryId : null,
-        updating : false
+        updating : false,
+        smartBuilding : false
       }
 
       $scope.deletingReferralLink = "";
@@ -215,6 +217,7 @@ angular.module("MyCvTracker.pages.referral")
           $scope.jobCategorizingForm.categories = data;
         });
         $scope.jobCategorizingForm.jobId = id;
+        $scope.jobCategorizingForm.referralLink = referralLink;
         $scope.referralModal = ReferralSvc.getUpdatingJobSkillsModal($scope, "ReferalModalCtrl");
       };
 
@@ -251,6 +254,27 @@ angular.module("MyCvTracker.pages.referral")
             break;
           }
         }
+      }
+
+      $scope.buildSmartCategories = function() {
+        if ($scope.jobCategorizingForm.smartBuilding) return;
+        $scope.jobCategorizingForm.smartBuilding = true;
+
+        var jobId = $scope.jobCategorizingForm.jobId;
+        ReferralSvc.buildSmartCategories(jobId).then(function(data) {
+          if (data.length > 0) {
+            $scope.jobCategorizingForm.categories = [];
+
+            for (var i = 0; i < data.length; i++) {
+              var newCat = data[i];
+              $scope.jobCategorizingForm.categories.push(newCat);
+            }
+          } else {
+            toastr.error("No global category fit to the resume!", "Notify")
+          }
+
+          $scope.jobCategorizingForm.smartBuilding = false;
+        });
       }
 
       $scope.categorizeJob = function() {
@@ -304,8 +328,10 @@ angular.module("MyCvTracker.pages.referral")
         $scope.deletingReferralIdx = -1;
         $scope.jobCategorizingForm.categories = [];
         $scope.jobCategorizingForm.jobId = null;
+        $scope.jobCategorizingForm.referralLink = null;
         $scope.jobCategorizingForm.newCategoryId = null;
         $scope.jobCategorizingForm.updating = false;
+        $scope.jobCategorizingForm.smartBuilding = false;
         $scope.inDeletingReferral = false;
 
         if (!!parentLink) {

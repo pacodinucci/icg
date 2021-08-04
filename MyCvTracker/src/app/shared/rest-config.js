@@ -521,6 +521,13 @@ angular.module("MyCvTracker.shared")
 
           return RESTSvc.post(url, request);
         },
+        getListMatchingSkills : function (
+          matchingId
+        ) {
+          var url = utilities.getSkillsOfMatching();
+          url = url.replace("{matchingId}", matchingId);
+          return RESTSvc.get(url);
+        },
         getAuthUsers : function (url) {
           return RESTSvc.get(url);
         },
@@ -776,6 +783,11 @@ angular.module("MyCvTracker.shared")
             resumeId : resumeId,
             categoryIds : categoryIds
           });
+        }, getSmartCategoriesOfJob : function (jobId) {
+          var url = utilities.getSmartJobCategoriesUrl();
+          url = url.replace("{jobId}", jobId);
+
+          return RESTSvc.post(url);
         }
       };
 

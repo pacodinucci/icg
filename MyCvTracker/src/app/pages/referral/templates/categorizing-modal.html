@@ -45,6 +45,16 @@
   </div>
   <div
     class="modal-footer clearfix">
+    <div class="note">
+      Smart categories ...  laoreet fringilla elit imperdiet id. Sed non volutpat urna. Nam a consectetur diam. Mauris vitae lorem in nibh suscipit ultrices vitae ut nulla.
+    </div>
+    <button
+      ng-disabled="jobCategorizingForm.smartBuilding"
+      type="submit"
+      ng-click="buildSmartCategories()"
+      class="btn btn-danger">
+      {{ jobCategorizingForm.smartBuilding ? "Building Smart Categories..." : "Build Smart Categories" }}
+    </button>
     <button
       type="submit"
       ng-click="categorizeJob()"

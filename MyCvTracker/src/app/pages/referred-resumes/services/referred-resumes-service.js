@@ -52,6 +52,16 @@ angular.module("MyCvTracker.pages.referredResumes")
 
           return $injector.get('$uibModal').open(modalOpts);
         },
+        getMatchingSkillsOfResumeModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/referred-resumes/templates/list-matching-skills-modal.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
+        },
         getInterviewResumeModal: function (scope, ctrlName) {
           var modalOpts = {
             templateUrl: 'app/pages/referred-resumes/templates/update-resume-interview.html',
@@ -75,6 +85,9 @@ angular.module("MyCvTracker.pages.referredResumes")
         getResumeToken: function(id, referralLink) {
           var url = utilities.getResumeTokenUrl();
           return RestConfig.getResumeTokenToPreview(url, referralLink, id);
+        },
+        getMatchingSkills: function(matchingId) {
+          return RestConfig.getListMatchingSkills(matchingId);
         }
       };
     }
