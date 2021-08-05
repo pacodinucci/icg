@@ -356,6 +356,7 @@ angular.module("MyCvTracker.shared")
           previewFile
         ) {
           var request = new FormData();
+          request.append("referralDetails", description);
           request.append("referralLink", referralLink);
           request.append("referralTargetSubject", referralTargetSubject);
           if (!!jobType) {
