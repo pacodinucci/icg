@@ -88,6 +88,16 @@ angular.module("MyCvTracker.pages.referral")
           };
 
           return $injector.get('$uibModal').open(modalOpts);
+        },
+        getBuildingSmartCategoryModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/referral/templates/building-smart-category-modal.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
         }, getListSkillCategories : function() {
           return RestConfig.listSkillCategories();
         }, getJobCategories : function(referralLink) {
@@ -96,6 +106,8 @@ angular.module("MyCvTracker.pages.referral")
           return RestConfig.updateJobSkillCategories(jobId, categoryIds);
         }, buildSmartCategories : function(jobId) {
           return RestConfig.getSmartCategoriesOfJob(jobId);
+        }, newCategory : function(name, skillIds) {
+          return RestConfig.addNewCategorySkill(name, skillIds);
         }
       };
     }

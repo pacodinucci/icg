@@ -31,7 +31,9 @@
         New Category
       </label>
       <div class="col-xs-12 col-md-7">
-        <select class="form-control" ng-model="jobCategorizingForm.newCategoryId">
+        <select class="form-control"
+                ng-disabled="jobCategorizingForm.smartBuilding || jobCategorizingForm.updating"
+                ng-model="jobCategorizingForm.newCategoryId">
           <option value="">Choose category to add</option>
           <option ng-repeat="category in ::jobCategorizingForm.defaultCategories track by category.id" ng-value="::category.id">
             {{ ::category.name }}
@@ -49,13 +51,14 @@
       Smart categories ...  laoreet fringilla elit imperdiet id. Sed non volutpat urna. Nam a consectetur diam. Mauris vitae lorem in nibh suscipit ultrices vitae ut nulla.
     </div>
     <button
-      ng-disabled="jobCategorizingForm.smartBuilding"
+      ng-disabled="jobCategorizingForm.smartBuilding || jobCategorizingForm.updating"
       type="submit"
       ng-click="buildSmartCategories()"
       class="btn btn-danger">
-      {{ jobCategorizingForm.smartBuilding ? "Building Smart Categories..." : "Build Smart Categories" }}
+      {{ jobCategorizingForm.smartBuilding ? "Building Smart Category..." : "Build Smart Category" }}
     </button>
     <button
+      ng-disabled="jobCategorizingForm.smartBuilding || jobCategorizingForm.updating"
       type="submit"
       ng-click="categorizeJob()"
       class="btn btn-primary">
