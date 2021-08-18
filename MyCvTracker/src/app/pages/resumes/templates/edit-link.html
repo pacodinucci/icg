@@ -1,0 +1,33 @@
+<form name="editLinkSubmitForm" novalidate ng-submit="checkPreviewId()">
+  <div class="modal-header">
+    <h4 class="modal-title">Edit preview link</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="control-label">Short Preview Id</div>
+      <input type="text" class="form-control"
+             ng-change="editLinkForm.inUse = false"
+             ng-disabled="editLinkForm.editing"
+             ng-pattern="'^[a-zA-Z0-9_-]+$'"
+             ng-model="editLinkForm.linkId"
+             ng-required="true"
+             maxlength="250"/>
+
+      <div class="text-secondary mt-1" style="color: #9099ad; margin-top: 10px; font-family: 'museo_slab500';">
+        Note: Link contains only characters, number and underscore, hyphen.
+      </div>
+    </div>
+    <div class="text-danger" ng-if="editLinkForm.inUse">
+      This link id is already in use.
+    </div>
+  </div>
+  <div class="modal-footer clearfix">
+    <button type="submit" class="btn btn-primary"
+            ng-disabled="editLinkSubmitForm.$invalid || editLinkForm.editing">
+      {{ editLinkForm.editing ? "Editing" : "Edit" }}
+    </button>
+    <button type="button" class="btn btn-secondary" ng-click="closeModal()">
+      Cancel
+    </button>
+  </div>
+</form>

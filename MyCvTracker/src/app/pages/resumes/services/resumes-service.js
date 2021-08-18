@@ -1,115 +1,169 @@
+angular.module("MyCvTracker.pages.resumes")
 
+  .factory("ResumesSvc", [
+    "toastr",
+    "RestConfig",
+    "$injector",
 
-    angular.module('MyCvTracker.pages.resumes')
+    function (
+      toastr,
+      RestConfig,
+      $injector
+    ) {
 
-    	.factory('ResumesSvc', ['toastr', 'RestConfig', '$injector',
+      var Utilities = $injector.get("Utilities");
 
-            function (toastr, RestConfig, $injector) {
+      return {
 
-                var Utilities = $injector.get('Utilities');
+        getAllMyResumes : function (userId) {
 
-            	return  {
+          var url = Utilities.getAllMyResumesUrl();
+          return RestConfig.getMyResumes(url);
+        },
+        getMyResumes : function (userId) {
 
-                    getAllMyResumes: function (userId) {
+          var url = Utilities.getMyResumesUrl();
+          return RestConfig.getMyResumes(url);
+        },
 
-                        var url = Utilities.getAllMyResumesUrl();
-                        return RestConfig.getMyResumes(url);
-                    },
-                    getMyResumes: function (userId) {
+        getOtherResumes : function (
+          userId,
+          userEmailAddress
+        ) {
 
-                        var url = Utilities.getMyResumesUrl();
-                        return RestConfig.getMyResumes(url);
-                    },
+          var url = Utilities.getOtherResumesUrl() + "?userEmailAddress=" + userEmailAddress;
+          return RestConfig.getMyResumes(url);
+        },
 
-                    getOtherResumes: function (userId,userEmailAddress) {
+        saveMyResume : function (userResumeOb) {
 
-                        var url = Utilities.getOtherResumesUrl() + "?userEmailAddress="+ userEmailAddress ;
-                        return RestConfig.getMyResumes(url);
-                    },
+          var url = Utilities.getSaveResumesUrl();
+          return RestConfig.saveMyResume(url, userResumeOb);
+        },
+        deleteMyResume : function (requestObj) {
 
-                    saveMyResume: function (userResumeOb) {
+          var url = Utilities.geDeleteResumesUrl();
+          return RestConfig.deleteMyResume(url, requestObj);
+        },
 
-                        var url = Utilities.getSaveResumesUrl();
-                        return RestConfig.saveMyResume(url, userResumeOb);                        
-                    },
-                    deleteMyResume: function (requestObj) {
+        checkResumePreviewLink : function (id) {
+          return RestConfig.checkUniquePreviewLink(id);
+        },
 
-                        var url = Utilities.geDeleteResumesUrl();
-                        return RestConfig.deleteMyResume(url, requestObj);
-                    },
-                    
-                    findMyResume: function (id) {
+        updateResumeLink : function (resumeId, linkId, type) {
+          return RestConfig.updateResumePreviewLink(resumeId, linkId, type);
+        },
 
-                    	var url = Utilities.getFindResumeUrl() + id;
-                        return RestConfig.findMyResumes(url);                        
-                    },
-                    
-                    downloadMyResume: function (id) {
+        findMyResume : function (id) {
 
-                    	var url = Utilities.getDownloadResumeUrl() + id;
-                    	return RestConfig.downloadMyResume(url);           
-                    },
+          var url = Utilities.getFindResumeUrl() + id;
+          return RestConfig.findMyResumes(url);
+        },
 
-                    getQuickUploadResumeModal: function (scope, ctrlName) {
+        downloadMyResume : function (id) {
 
-                        var modalOpts = {
-                            templateUrl: 'app/pages/resumes/templates/quick_upload_resume.html',
-                            controller: ctrlName,
-                            scope: scope
-                        };
+          var url = Utilities.getDownloadResumeUrl() + id;
+          return RestConfig.downloadMyResume(url);
+        },
 
-                        return $injector.get('$uibModal').open(modalOpts);
-                    },
-                    getNewResumeModal: function (scope, ctrlName) {
+        getQuickUploadResumeModal : function (
+          scope,
+          ctrlName
+        ) {
 
-                        var modalOpts = {
-                            templateUrl: 'app/pages/resumes/templates/new_resume.html',
-                            controller: ctrlName,
-                            scope: scope
-                        };
+          var modalOpts = {
+            templateUrl : "app/pages/resumes/templates/quick_upload_resume.html",
+            controller : ctrlName,
+            scope : scope
+          };
 
-                        return $injector.get('$uibModal').open(modalOpts);
-                    },
-                  getPushResumeModal: function (scope, ctrlName) {
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        },
+        getNewResumeModal : function (
+          scope,
+          ctrlName
+        ) {
 
-                      var modalOpts = {
-                          templateUrl: 'app/pages/resumes/templates/push_resume_modal.html',
-                          controller: ctrlName,
-                          scope: scope
-                      };
+          var modalOpts = {
+            templateUrl : "app/pages/resumes/templates/new_resume.html",
+            controller : ctrlName,
+            scope : scope
+          };
 
-                      return $injector.get('$uibModal').open(modalOpts);
-                  },
-                  getGmailAuthenticationAdviceModal: function (scope, ctrlName) {
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        },
+        getPushResumeModal : function (
+          scope,
+          ctrlName
+        ) {
 
-                      var modalOpts = {
-                          templateUrl: 'app/pages/resumes/templates/authentication_advice_modal.html',
-                          controller: ctrlName,
-                          scope: scope
-                      };
+          var modalOpts = {
+            templateUrl : "app/pages/resumes/templates/push_resume_modal.html",
+            controller : ctrlName,
+            scope : scope
+          };
 
-                      return $injector.get('$uibModal').open(modalOpts);
-                  },
-                    getEditResumeModal: function (scope, ctrlName) {
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        },
+        getGmailAuthenticationAdviceModal : function (
+          scope,
+          ctrlName
+        ) {
 
-                        var modalOpts = {
-                            templateUrl: 'app/pages/resumes/templates/edit_resume.html',
-                            controller: ctrlName,
-                            scope: scope
-                        };
+          var modalOpts = {
+            templateUrl : "app/pages/resumes/templates/authentication_advice_modal.html",
+            controller : ctrlName,
+            scope : scope
+          };
 
-                        return $injector.get('$uibModal').open(modalOpts);
-                    },
-                    getWarningModal: function (scope, ctrlName) {
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        },
+        getEditResumeModal : function (
+          scope,
+          ctrlName
+        ) {
 
-                        var modalOpts = {
-                            templateUrl: 'app/pages/resumes/templates/warning.html',
-                            controller: ctrlName,
-                            scope: scope
-                        };
+          var modalOpts = {
+            templateUrl : "app/pages/resumes/templates/edit_resume.html",
+            controller : ctrlName,
+            scope : scope
+          };
 
-                        return $injector.get('$uibModal').open(modalOpts);
-                    }
-            	}; 
-            }
-        ]);
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        },
+        getWarningModal : function (
+          scope,
+          ctrlName
+        ) {
+
+          var modalOpts = {
+            templateUrl : "app/pages/resumes/templates/warning.html",
+            controller : ctrlName,
+            scope : scope
+          };
+
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        },
+        getEditPreviewLinkModal : function (
+          scope,
+          ctrlName
+        ) {
+
+          var modalOpts = {
+            templateUrl : "app/pages/resumes/templates/edit-link.html",
+            controller : ctrlName,
+            scope : scope
+          };
+
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        }
+      };
+    }
+  ]);

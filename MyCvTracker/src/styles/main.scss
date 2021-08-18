@@ -703,6 +703,17 @@
         &.text-danger {
           color: #a94442;
         }
+
+        &.preview-link {
+          a {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: bottom;
+            max-width: 100%;
+          }
+        }
       }
 
       &.listing-ctrl {
@@ -757,13 +768,11 @@
       margin-bottom: 0;
     }
 
-
     .switch input {
       opacity: 0;
       width: 0;
       height: 0;
     }
-
 
     .slider {
       position: absolute;

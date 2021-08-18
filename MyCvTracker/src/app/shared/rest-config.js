@@ -74,6 +74,24 @@ angular.module("MyCvTracker.shared")
         ) {
           return RESTSvc.delete(url, id);
         },
+        checkUniquePreviewLink : function (
+          id
+        ) {
+          var url = utilities.getCheckResumeLinkUrl() + "?id=" + id;
+          return RESTSvc.get(url);
+        },
+        updateResumePreviewLink : function (
+          resumeId,
+          linkId,
+          type
+        ) {
+          var url = utilities.getUpdateResumeLinkUrl();
+          return RESTSvc.put(url, {
+            resumeId : resumeId,
+            linkId : linkId,
+            type : type
+          });
+        },
 
         saveResumeTrackRequest : function (
           url,
@@ -581,7 +599,7 @@ angular.module("MyCvTracker.shared")
           var data = {
             resumeId : resumeId,
             referralId : referralId
-          }
+          };
           var url = utilities.getRemovingCandidateUrl();
           return RESTSvc.post(url, data);
         },
@@ -622,7 +640,8 @@ angular.module("MyCvTracker.shared")
           previewToken,
           extendToken,
           originalToken,
-          extendOriginalToken
+          extendOriginalToken,
+          previewLinkId
         ) {
           var param = "";
           if (!!accessToken) {
@@ -635,6 +654,8 @@ angular.module("MyCvTracker.shared")
             param = "originalToken=" + originalToken;
           } else if (!!extendOriginalToken) {
             param = "extendOriginalToken=" + extendOriginalToken;
+          } else if (!!previewLinkId) {
+            param = "linkId=" + previewLinkId;
           }
 
           url = url + "?" + param;
@@ -723,68 +744,90 @@ angular.module("MyCvTracker.shared")
         toggleResumeListing : function (url) {
           return RESTSvc.put(url);
         },
-        findCvBox : function(name) {
+        findCvBox : function (name) {
           var url = utilities.findCvBoxListUrl() + "?name=" + name;
           return RESTSvc.get(url);
         },
-        addResumeToCvBox : function(referralId, resumeId) {
+        addResumeToCvBox : function (
+          referralId,
+          resumeId
+        ) {
           var data = {
             referralId : referralId,
             resumeId : resumeId
-          }
+          };
           var url = utilities.getAddingCandidateUrl();
           return RESTSvc.post(url, data);
-        }, addNewSkill: function(name) {
+        },
+        addNewSkill : function (name) {
           var url = utilities.getAddingSkillUrl();
 
           return RESTSvc.post(url, {
             name : name
           });
-        }, addNewCategorySkill: function(name, skillIds) {
+        },
+        addNewCategorySkill : function (
+          name,
+          skillIds
+        ) {
           var url = utilities.getAddingCategorySkillUrl();
 
           return RESTSvc.post(url, {
             name : name,
             skillIds : skillIds
           });
-        }, listSkills : function () {
+        },
+        listSkills : function () {
           var url = utilities.getListingSkillUrl();
 
           return RESTSvc.get(url);
-        }, listSkillCategories : function () {
+        },
+        listSkillCategories : function () {
           var url = utilities.getListingSkillCategoriesUrl();
 
           return RESTSvc.get(url);
-        }, listSkillsOfCategory : function(categoryId) {
+        },
+        listSkillsOfCategory : function (categoryId) {
           var url = utilities.getListingSkillOfCategoryUrl();
           url = url.replace("{categoryId}", categoryId);
 
           return RESTSvc.get(url);
-        }, listCategoriesOfJob : function (referralLink) {
+        },
+        listCategoriesOfJob : function (referralLink) {
           var url = utilities.getListingJobCategoriesUrl();
           url = url.replace("{referralLink}", referralLink);
 
           return RESTSvc.get(url);
-        }, listCategoriesOfResume : function (resumeId) {
+        },
+        listCategoriesOfResume : function (resumeId) {
           var url = utilities.getListingResumeCategoriesUrl();
           url = url.replace("{resumeId}", resumeId);
 
           return RESTSvc.get(url);
-        }, updateJobSkillCategories : function (jobId, categoryIds) {
+        },
+        updateJobSkillCategories : function (
+          jobId,
+          categoryIds
+        ) {
           var url = utilities.getUpdatingJobCategoriesUrl();
 
           return RESTSvc.post(url, {
             jobId : jobId,
             categoryIds : categoryIds
           });
-        }, updateResumeSkillCategories : function (resumeId, categoryIds) {
+        },
+        updateResumeSkillCategories : function (
+          resumeId,
+          categoryIds
+        ) {
           var url = utilities.getUpdatingResumeCategoriesUrl();
 
           return RESTSvc.post(url, {
             resumeId : resumeId,
             categoryIds : categoryIds
           });
-        }, getSmartCategoriesOfJob : function (jobId) {
+        },
+        getSmartCategoriesOfJob : function (jobId) {
           var url = utilities.getSmartJobCategoriesUrl();
           url = url.replace("{jobId}", jobId);
 

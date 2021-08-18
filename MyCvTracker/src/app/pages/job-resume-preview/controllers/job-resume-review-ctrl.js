@@ -28,7 +28,8 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         previewToken = "",
         extendToken = "",
         originalToken = "",
-        extendOriginalToken = "";
+        extendOriginalToken = "",
+      previewLinkId = "";
       var fileType = "";
       var resumeId = "";
       var userEmail = "";
@@ -87,11 +88,24 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       $scope.listReviews = [];
 
       $scope.loadJobSpec = function () {
-        mainSvc.getJobDetail(accessToken, previewToken, extendToken, originalToken, extendOriginalToken)
+        mainSvc.getJobDetail(accessToken, previewToken, extendToken, originalToken, extendOriginalToken, previewLinkId)
           .then(function (data) {
             $scope.jobDetail = data;
             fileType = data.fileType;
             resumeId = data.resumeId;
+            if (!!previewLinkId) {
+              var maskedLinkId = data.maskedLinkId;
+              var originalLinkId = data.originalLinkId;
+              var dataMaskedToken = data.maskedToken;
+              var dataOriginalToken = data.originalToken;
+
+              if (previewLinkId === maskedLinkId) {
+                previewToken = dataMaskedToken;
+              } else if (previewLinkId === originalLinkId) {
+                originalToken = dataOriginalToken;
+              }
+            }
+
             $scope.resumePreview.tokenValid = true;
             $scope.resumePreview.noOfReviews = data.noOfReviews;
             $scope.loadPreview();
@@ -282,6 +296,10 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         }
 
         var pathName = window.location.pathname;
+        var linkIdIdx = pathName.indexOf("/resumes/");
+        if (linkIdIdx >= 0) {
+          previewLinkId = pathName.substring(linkIdIdx + 9);
+        }
         var currentUrl = pathName + searchQuery;
 
         var params = $location.search();

@@ -13,9 +13,9 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       var utilities = $injector.get("Utilities");
 
       return {
-        getJobDetail: function(accessToken, previewToken, extendToken, originalToken, extendOriginalToken) {
+        getJobDetail: function(accessToken, previewToken, extendToken, originalToken, extendOriginalToken, previewLinkId) {
           var url = Constants.baseUrl + "/user/resume/ref/detail";
-          return RestConfig.getJobSpecDetailFromAccessToken(url, accessToken, previewToken, extendToken, originalToken, extendOriginalToken);
+          return RestConfig.getJobSpecDetailFromAccessToken(url, accessToken, previewToken, extendToken, originalToken, extendOriginalToken, previewLinkId);
         },
         getResumeReviews: function(resumeId) {
           var url = Constants.baseUrl + "/user/resume/" + resumeId + "/reviews/list";

@@ -697,6 +697,12 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + "/social-registration/share-with-parent";
                 },
 
+                getUpdateResumeLinkUrl: function () {
+                    return Constants.baseUrl + "/user/resume/preview/link-id";
+                },
+                getCheckResumeLinkUrl: function () {
+                    return Constants.baseUrl + "/user/resume/preview/link/check";
+                },
 
                 gotoFrontPage: function () {
                     $location.path('base.front');

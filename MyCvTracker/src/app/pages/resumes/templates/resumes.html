@@ -1,47 +1,199 @@
-<section id="resumes" ng-controller="ResumesCtrl">
-	<div class="row form-group">
-		<div class="col-sm-12">
-			<div class="clearfix">
-				<div class="pull-right">
-					<button class="btn btn-primary" ng-click="addNewResumeModel()">
-						<i class="fa fa-plus"></i>
-						<span>Add</span>
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div ng-hide="checkUserRole()">
-			<input type="text" class="form-control" placeholder="resumeLookUp" ng-model="resumeLookUp" ng-required="false" />
-			<button type="button" class="btn btn-primary btn-block" ng-click="loadResume(resumeLookUp)">Resume LookUp</button>
-			<br/>
-			<br/>
-		</div>
+<section
+  id="resumes-listing-page"
+  ng-controller="ResumesCtrl"
+  xmlns="http://www.w3.org/1999/html">
+  <div class="row form-group">
+    <div class="col-sm-12">
+      <div class="clearfix">
+        <div class="pull-right">
+          <button
+            class="btn btn-primary"
+            ng-click="addNewResumeModel()">
+            <i class="fa fa-plus"></i>
+            <span>Add</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-		<div class="col-md-12 col-md-3" ng-repeat="resume in user.myResumes">
-			<a class="tile-item">
-				<span><a href="" class="fa fa-download" ng-click="openDownloadResumeModel(resume.id)"></a></span>
-				<span><a href="" class="fa fa-times" ng-click="openDeleteResumeModel(resume.id,resume.resumeName)"></a></span>
-				<span><a href="" class="fa fa-cloud-upload" ng-click="openPushResumeModel(resume.id, resume.resumeName)"></a></span>
-					<!--<a href="" class="fa fa-pencil" ng-click="openEditResumeModel(resume.id)">Edit</a>--></span>
+  <div ng-hide="checkUserRole()">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="resumeLookUp"
+      ng-model="resumeLookUp"
+      ng-required="false" />
+    <button
+      type="button"
+      class="btn btn-primary btn-block"
+      ng-click="loadResume(resumeLookUp)">Resume LookUp
+    </button>
+    <br />
+    <br />
+  </div>
 
-				<div ba-panel ba-panel-class="xsmall-panel light-text">
-					<div class="tile-title">
-						<h3 ng-bind="resume.resumeTitle" class="resume-title"></h3>
-					</div>
-					<hr class="resumeSeprator">
-					<div class="tile-title">
-						<h3 ng-bind="resume.resumeName" class="resume-name"></h3>
-					</div>
-					<hr class="resumeSeprator">
-					<div class="tile-text">
-						<!--<h5 ng-bind="resume.resumeType"></h5>-->
-						<h5 ng-bind="resume.uploadedAt"></h5>
-					</div>
-				</div>
-			</a>
+  <div class="resumes-list-result">
+    <div class="row">
+      <div
+        class="col-xs-12 col-md-6"
+        ng-repeat="aResume in user.myResumes track by aResume.id">
+        <div
+          ba-panel
+          ba-panel-class="xsmall-panel light-text resume-panel">
+          <div class="resume-title">
+            <a
+              ng-href="/job-resume-preview?previewToken={{ aResume.previewToken }}"
+              ng-bind="aResume.resumeName"
+              target="_blank"></a>
+          </div>
 
-		</div>
-	</div>
+          <div class="detail-row">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <div class="detail-info">
+                  <div class="info-label">
+                    {{ !!aResume.originalExpired ? "Original expired at" : "Original expires at" }}
+
+                  </div>
+                  <div ng-class="['info-val',(!!aResume.originalExpired ? 'text-danger' : '')]">
+                    {{ !!aResume.originalPreviewExpiresAt ? getFormattedDate(aResume.originalPreviewExpiresAt) : "-" }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-md-6">
+                <div class="detail-info">
+                  <div class="info-label">
+                    {{ !!aResume.maskedExpired ? "Masked expired at" : "Masked expires at" }}
+                  </div>
+                  <div ng-class="['info-val',(!!aResume.maskedExpired ? 'text-danger' : '')]">
+                    {{ !!aResume.previewExpiresAt ? getFormattedDate(aResume.previewExpiresAt) : "-" }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-md-6">
+                <div class="detail-info">
+                  <div class="info-label">
+                    Masked link
+                  </div>
+                  <div class="info-val preview-link">
+                    <a
+                      target="_blank"
+                      ng-href="https://mycvtracker.com/resumes/{{ aResume.maskedLinkId }}"
+                      ng-if="!!aResume.maskedLinkId">
+                      {{ aResume.maskedLinkId }}
+                    </a>
+                    <span ng-if="!aResume.maskedLinkId">
+                      n/a
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-md-6">
+                <div class="detail-info">
+                  <div class="info-label">
+                    Original link
+                  </div>
+                  <div class="info-val preview-link">
+                    <a
+                      target="_blank"
+                      ng-href="https://mycvtracker.com/resumes/{{ aResume.originalLinkId }}"
+                      ng-if="!!aResume.originalLinkId">
+                      {{ aResume.originalLinkId }}
+                    </a>
+                    <span
+                      href=""
+                      ng-if="!aResume.originalLinkId">
+                      n/a
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-md-6">
+                <div class="detail-info">
+                  <div class="info-label">
+                    Uploaded at
+                  </div>
+                  <div class="info-val">
+                    {{ getFormattedPostDate(aResume.uploadedAt) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-ctrl">
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-secondary dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-bars"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a
+                  ng-click="openEditPreviewLink(aResume, 'MASKED')"
+                  class="dropdown-item"
+                  href="#">Edit masked link
+                </a>
+                <a
+                  ng-click="openEditPreviewLink(aResume, 'ORIGINAL')"
+                  class="dropdown-item"
+                  href="#">Edit original link
+                </a>
+                <a
+                  ng-click="openDownloadResumeModel(aResume.id)"
+                  class="dropdown-item"
+                  href="#">Download
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--        <a class="tile-item">-->
+        <!--          <span><a-->
+        <!--            href=""-->
+        <!--            class="fa fa-download"-->
+        <!--            ng-click="openDownloadResumeModel(resume.id)"></a></span>-->
+        <!--          <span><a-->
+        <!--            href=""-->
+        <!--            class="fa fa-times"-->
+        <!--            ng-click="openDeleteResumeModel(resume.id,resume.resumeName)"></a></span>-->
+        <!--          <span><a-->
+        <!--            href=""-->
+        <!--            class="fa fa-cloud-upload"-->
+        <!--            ng-click="openPushResumeModel(resume.id, resume.resumeName)"></a></span>-->
+        <!--          &lt;!&ndash;<a href="" class="fa fa-pencil" ng-click="openEditResumeModel(resume.id)">Edit</a>&ndash;&gt;</span>-->
+
+        <!--          <div-->
+        <!--            ba-panel-->
+        <!--            ba-panel-class="xsmall-panel light-text">-->
+        <!--            <div class="tile-title">-->
+        <!--              <h3-->
+        <!--                ng-bind="resume.resumeTitle"-->
+        <!--                class="resume-title"></h3>-->
+        <!--            </div>-->
+        <!--            <hr class="resumeSeprator">-->
+        <!--            <div class="tile-title">-->
+        <!--              <h3-->
+        <!--                ng-bind="resume.resumeName"-->
+        <!--                class="resume-name"></h3>-->
+        <!--            </div>-->
+        <!--            <hr class="resumeSeprator">-->
+        <!--            <div class="tile-text">-->
+        <!--              &lt;!&ndash;<h5 ng-bind="resume.resumeType"></h5>&ndash;&gt;-->
+        <!--              <h5 ng-bind="resume.uploadedAt"></h5>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </a>-->
+
+      </div>
+    </div>
+  </div>
 </section>
