@@ -55,6 +55,46 @@
                   <div class="col-xs-12 col-md-6">
                     <div class="detail-info">
                       <div class="info-label">
+                        Original link
+                      </div>
+                      <div class="info-val preview-link">
+                        <a
+                          target="_blank"
+                          ng-href="https://mycvtracker.com/resumes/{{ aResume.originalLinkId }}"
+                          ng-if="!!aResume.originalLinkId">
+                          {{ aResume.originalLinkId }}
+                        </a>
+                        <span
+                          href=""
+                          ng-if="!aResume.originalLinkId">
+                      n/a
+                    </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-md-6">
+                    <div class="detail-info">
+                      <div class="info-label">
+                        Masked link
+                      </div>
+                      <div class="info-val preview-link">
+                        <a
+                          target="_blank"
+                          ng-href="https://mycvtracker.com/resumes/{{ aResume.maskedLinkId }}"
+                          ng-if="!!aResume.maskedLinkId">
+                          {{ aResume.maskedLinkId }}
+                        </a>
+                        <span ng-if="!aResume.maskedLinkId">
+                      n/a
+                    </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-md-6">
+                    <div class="detail-info">
+                      <div class="info-label">
                         Uploaded at
                       </div>
                       <div class="info-val">
