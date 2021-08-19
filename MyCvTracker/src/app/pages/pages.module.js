@@ -74,7 +74,7 @@
           "/resumes-list",
           "/terms"
         ];
-        var restrictedPage = publicPages.indexOf($location.path()) === -1;
+        var restrictedPage = publicPages.indexOf($location.path()) === -1 && $location.path().indexOf("/resumes/") === -1;
         $rootScope.loginModal = false;
         // console.log(event);
         // console.log(next);
