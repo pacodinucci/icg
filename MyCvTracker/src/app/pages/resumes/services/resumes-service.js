@@ -66,6 +66,11 @@ angular.module("MyCvTracker.pages.resumes")
           return RestConfig.downloadMyResume(url);
         },
 
+        getResumeToken: function(id, referralLink) {
+          var url = Utilities.getResumeTokenUrl();
+          return RestConfig.getResumeTokenToPreview(url, referralLink, id);
+        },
+
         getQuickUploadResumeModal : function (
           scope,
           ctrlName

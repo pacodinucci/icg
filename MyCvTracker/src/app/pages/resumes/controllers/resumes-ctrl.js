@@ -435,11 +435,21 @@ angular.module("MyCvTracker.pages.resumes")
           });
       };
       //Download Resume Function
-      $scope.downloadMyResume = function () {
-        var id = $scope.id;
-        ResumesSvc.downloadMyResume(id);
-        $scope.closeModal();
-        toastr.success(Utilities.getAlerts("resumeDownloadSuccess").message);
+      $scope.downloadMyResume = function (id) {
+        ResumesSvc.getResumeToken(id)
+          .then(function (data) {
+            var url = "https://mycvtracker.com:8080/user/downloadResume?accessToken=" + data.token;
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            toastr.success(Utilities.getAlerts("resumeDownloadSuccess").message);
+
+            link.remove();
+          }, function () {
+          });
       };
       ////////////////////////////////////////////////////////////////////////////
       $scope.checkPreviewId = function() {
