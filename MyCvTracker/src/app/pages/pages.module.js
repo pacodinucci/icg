@@ -28,7 +28,8 @@
     "MyCvTracker.pages.resumeListing",
     "MyCvTracker.pages.cvBoxCandidates",
     "MyCvTracker.pages.skillCategory",
-    "MyCvTracker.pages.jobResumeLink"
+    "MyCvTracker.pages.jobResumeLink",
+    "MyCvTracker.pages.jobResumeLinkContext"
   ])
     .run(run);
 

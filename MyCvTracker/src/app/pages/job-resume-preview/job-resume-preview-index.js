@@ -39,3 +39,24 @@
       });
   }
 })();
+
+(function () {
+  "use strict";
+
+  angular.module("MyCvTracker.pages.jobResumeLinkContext", [])
+    .config(routeConfig);
+
+  /** @ngInject */
+  function routeConfig($stateProvider) {
+    $stateProvider
+      .state("jobResumeLinkContext", {
+        url : "/resumes/:linkId/:contextId",
+        templateUrl : "app/pages/job-resume-preview/templates/index.html",
+        title : "Resume Preview",
+        sidebarMeta : {
+          icon : "fa fa-book",
+          order : 5,
+        },
+      });
+  }
+})();

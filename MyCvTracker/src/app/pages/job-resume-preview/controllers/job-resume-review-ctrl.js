@@ -29,7 +29,8 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         extendToken = "",
         originalToken = "",
         extendOriginalToken = "",
-      previewLinkId = "";
+      previewLinkId = "",
+      previewContextId = "";
       var fileType = "";
       var resumeId = "";
       var userEmail = "";
@@ -139,6 +140,11 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         } else if (!!extendOriginalToken) {
           param = "extendOriginalToken=" + extendOriginalToken;
         }
+
+        if (!!previewContextId) {
+          param += "%26ctx=" + previewContextId;
+        }
+
         var url = "";
         if (fileType !== "application/pdf") {
           url = "https://view.officeapps.live.com/op/embed.aspx?src=https://mycvtracker.com:8080/user/previewResume?" + param;
@@ -298,7 +304,14 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         var pathName = window.location.pathname;
         var linkIdIdx = pathName.indexOf("/resumes/");
         if (linkIdIdx >= 0) {
-          previewLinkId = pathName.substring(linkIdIdx + 9);
+          var linkPath = pathName.substring(linkIdIdx + 9);
+          var ctxIdx = linkPath.indexOf("/");
+          if (ctxIdx > 0) {
+            previewLinkId = linkPath.substring(0, ctxIdx);
+            previewContextId = linkPath.substring(ctxIdx + 1);
+          } else {
+            previewLinkId = linkPath;
+          }
         }
         var currentUrl = pathName + searchQuery;
 
