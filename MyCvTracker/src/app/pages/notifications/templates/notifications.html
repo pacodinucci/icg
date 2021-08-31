@@ -11,6 +11,7 @@
                             <td><strong>Event Type</strong></td>
                             <td><strong>Notifications Count</strong></td>
                             <td><strong>Last Tracked Time</strong></td>
+                            <td><strong>Context</strong></td>
                             <td><strong>Actions</strong></td>
                         </tr>
                         <tr data-ng-repeat="notifications in user.myNotifications">
@@ -21,6 +22,7 @@
                             <td data-ng-bind="notifications.eventType"></td>
                             <td data-ng-bind="notifications.notificationsCount"></td>
                             <td data-ng-bind="notifications.lastTrackedTime"></td>
+                            <td data-ng-bind="notifications.trackingContext"></td>
                             <td>
                                 <div class="buttons">
                                     <!--<button data-ng-click="deleteNotification(notifications.id, $index)" class="btn btn-danger editable-table-button btn-xs">Delete</button>-->
@@ -34,4 +36,3 @@
             </div>
         </div>
 </section>
-      

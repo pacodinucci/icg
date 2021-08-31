@@ -4,25 +4,24 @@
 	    .controller('NotificationsCtrl', ['toastr', '$scope', '$injector', '$http', '$filter',
 
 	   function (toastr, $scope, $injector, $http, $filter) {
-	    	// Variables initialization 
+	    	// Variables initialization
 			var Utilities = $injector.get('Utilities');
 			var NotificationsSvc = $injector.get('NotificationsSvc');
-			
+
 			//Used scopes
 			$scope.user = {
 				myNotifications: [],
 				viewNotifications: []
 			};
-			
+
 			//Listing Notifications Function
 			$scope.getMyNotifications = function () {
 
 				$scope.user.myNotifications = [];
-					
+
 				NotificationsSvc.getMyNotifications().then(
 
 					function (notificationsData) {
-
 						notificationsData.forEach(function (notifications) {
 							notifications.lastTrackedTime = $filter('date')(new Date(notifications.lastTrackedTime), 'EEE,MMM dd yyyy HH:mm:ss');
 							$scope.user.myNotifications.push(notifications);
@@ -60,7 +59,7 @@
 
 		   //deleting Notifications Function
 			$scope.deleteNotification = function (notificationId, index) {
-				
+
 			var url = Utilities.getDeleteNotificationsUrl()+"?id="+notificationId;
 				$http.delete(url, {
 					transformRequest: angular.identity,
@@ -111,7 +110,7 @@
 	        link: function(scope, element, attrs) {
 	            var model = $parse(attrs.fileModel);
 	            var modelSetter = model.assign;
-	            
+
 	            element.bind('change', function(){
 	                scope.$apply(function(){
 	                    modelSetter(scope, element[0].files[0]);
