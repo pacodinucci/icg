@@ -63,7 +63,7 @@ angular.module("MyCvTracker.pages.account")
           description : "Group Data",
           link : "groupdata",
           icon : "groupdata",
-          showMenu : true
+          showMenu : (isAdmin || isReviewer)
         },
         {
           color : pieColor,

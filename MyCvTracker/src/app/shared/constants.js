@@ -142,7 +142,7 @@
                 },
 
                 saveResume: {
-                	url: '/user/saveResume'
+                	url: '/user/uploadQuickResume'
                 },
 
                 pushToDrive: {

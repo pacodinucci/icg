@@ -2,12 +2,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div ba-panel ba-panel-class="with-scroll">
-                    <table class="table table-bordered table-hover table-condensed">
+                    <table class="table table-bordered table-hover table-condensed" style="overflow: auto">
                         <tr>
-                            <td><strong>Recruiter</strong></td>
-                            <td><strong>Recruiter Email</strong></td>
-                            <td><strong>City</strong></td>
-                            <td><strong>Country</strong></td>
+                            <td><strong>Reference</strong></td>
+                            <td><strong>Name</strong></td>
+<!--                            <td><strong>Recruiter Email</strong></td>-->
+<!--                            <td><strong>City</strong></td>-->
+<!--                            <td><strong>Country</strong></td>-->
                             <td><strong>Event Type</strong></td>
                             <td><strong>Notifications Count</strong></td>
                             <td><strong>Last Tracked Time</strong></td>
@@ -16,9 +17,11 @@
                         </tr>
                         <tr data-ng-repeat="notifications in user.myNotifications">
                             <td data-ng-bind="notifications.recruiter"></td>
-                            <td data-ng-bind="notifications.recruiterEmail"></td>
-                            <td data-ng-bind="notifications.city"></td>
-                            <td data-ng-bind="notifications.country"></td>
+                            <td data-ng-bind="notifications.trackedResumeName"></td>
+<!--                            <td data-ng-bind="notifications.recruiter"></td>-->
+<!--                            <td data-ng-bind="notifications.recruiterEmail"></td>-->
+<!--                            <td data-ng-bind="notifications.city"></td>-->
+<!--                            <td data-ng-bind="notifications.country"></td>-->
                             <td data-ng-bind="notifications.eventType"></td>
                             <td data-ng-bind="notifications.notificationsCount"></td>
                             <td data-ng-bind="notifications.lastTrackedTime"></td>
@@ -26,7 +29,7 @@
                             <td>
                                 <div class="buttons">
                                     <!--<button data-ng-click="deleteNotification(notifications.id, $index)" class="btn btn-danger editable-table-button btn-xs">Delete</button>-->
-                                    <button data-ng-click="viewFullNotifications(notifications.id, true)" class="btn btn-primary editable-table-button btn-xs">Details</button>
+                                    <button data-ng-click="viewFullNotifications(notifications.id, true, notifications.notificationsCount, false)" class="btn btn-primary editable-table-button btn-xs">Details</button>
 
                                 </div>
                             </td>

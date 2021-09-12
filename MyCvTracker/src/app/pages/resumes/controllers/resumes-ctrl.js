@@ -64,7 +64,7 @@ angular.module("MyCvTracker.pages.resumes")
                 $scope.user.myResumes.push(resume);
               }
             }
-          )
+          );
       };
 
       function isExpired(date) {
@@ -196,10 +196,13 @@ angular.module("MyCvTracker.pages.resumes")
         $scope.modelMessage = Utilities.getAlerts("downloadModelMessage").message;
       };
 
-      $scope.openEditPreviewLink = function (resume, type) {
+      $scope.openEditPreviewLink = function (
+        resume,
+        type
+      ) {
         $scope.editLinkForm.selectedResume = resume;
         var linkId = "";
-        if (type === 'MASKED') {
+        if (type === "MASKED") {
           linkId = !!resume.maskedLinkId ? resume.maskedLinkId : "";
         } else {
           linkId = !!resume.originalLinkId ? resume.originalLinkId : "";
@@ -223,6 +226,7 @@ angular.module("MyCvTracker.pages.resumes")
         $scope.editLinkForm.type = null;
         $scope.editLinkForm.editing = false;
         $scope.editLinkForm.inUse = false;
+        $scope.formProcessing = false;
       };
       ///////////////////////////////////////////////////////////////////////////////////////////
       /*
@@ -247,20 +251,22 @@ angular.module("MyCvTracker.pages.resumes")
       //Save Resume Function, Used for both new and edit resume
       $scope.saveMyResume = function (
         file,
-        id,
-        userId,
         resumeTitle,
         resumeType
       ) {
-        $scope.formProcessing = true;
-        var fd = new FormData();
-        if (id != null) {
-          fd.append("id", id);
+        if ($scope.formProcessing) {
+          return;
         }
-        fd.append("userId", userId);
+        $scope.formProcessing = true;
+
+        var fd = new FormData();
+        const userEmail = $scope.user.email;
+        fd.append("userEmail", userEmail);
         fd.append("file", file);
-        fd.append("resumeTitle", resumeTitle);
+        fd.append("resumeReference", resumeTitle);
         fd.append("resumeType", resumeType);
+        fd.append("resumeReviewer", "randeep");
+
         //ResumesSvc.saveMyResume(fd).
         //This must be changed to call the service layer
         var url = Utilities.getSaveResumesUrl();
@@ -274,27 +280,13 @@ angular.module("MyCvTracker.pages.resumes")
             headers,
             config
           ) {
-            console.debug(data + "  " + status + " " + headers + "  " + config);
             $scope.closeModal();
             $rootScope.$broadcast("quickCV");
-            toastr.success(Utilities.getAlerts(id == null ? "resumeAddedSuccess" : "resumeEditSuccess").message);
+            toastr.success(Utilities.getAlerts("resumeAddedSuccess").message);
 
             data.uploadedAt = Utilities.getFormattedDate(data.uploadedAt);
-            if (id != null) {
-              angular.forEach(
-                $scope.user.myResumes,
-                function (
-                  obj,
-                  i
-                ) {
-                  if (id == obj.id) {
-                    $scope.user.myResumes[i] = data;
-                  }
-                }
-              );
-            } else {
-              $scope.user.myResumes.push(data);
-            }
+            $scope.user.myResumes.unshift(data);
+            $scope.formProcessing = false;
           })
           .error(function (
             data,
@@ -302,6 +294,7 @@ angular.module("MyCvTracker.pages.resumes")
             headers,
             config
           ) {
+            $scope.formProcessing = false;
             $scope.closeModal();
 
             if (data.message == "resumeSaveTitleDuplicatedError") {
@@ -315,7 +308,6 @@ angular.module("MyCvTracker.pages.resumes")
             } else {
               toastr.error(Utilities.getAlerts("defaultError"));
             }
-            console.debug(data + "  " + status + " " + headers + "  " + config);
           });
       };
 
@@ -440,9 +432,9 @@ angular.module("MyCvTracker.pages.resumes")
           .then(function (data) {
             var url = "https://mycvtracker.com:8080/user/downloadResume?accessToken=" + data.token;
 
-            const link = document.createElement('a');
+            const link = document.createElement("a");
             link.href = url;
-            link.target = '_blank';
+            link.target = "_blank";
             document.body.appendChild(link);
             link.click();
             toastr.success(Utilities.getAlerts("resumeDownloadSuccess").message);
@@ -452,7 +444,7 @@ angular.module("MyCvTracker.pages.resumes")
           });
       };
       ////////////////////////////////////////////////////////////////////////////
-      $scope.checkPreviewId = function() {
+      $scope.checkPreviewId = function () {
         if ($scope.editLinkForm.editing) return;
         $scope.editLinkForm.editing = true;
 
@@ -465,33 +457,37 @@ angular.module("MyCvTracker.pages.resumes")
         var resumeId = $scope.editLinkForm.selectedResume.id;
         var type = $scope.editLinkForm.type;
 
-        ResumesSvc.checkResumePreviewLink(linkId).then(function() {
-          $scope.editResumeLink();
-        }).catch(function() {
-          $scope.editLinkForm.inUse = true;
-          $scope.editLinkForm.editing = false;
-        });
-      }
+        ResumesSvc.checkResumePreviewLink(linkId)
+          .then(function () {
+            $scope.editResumeLink();
+          })
+          .catch(function () {
+            $scope.editLinkForm.inUse = true;
+            $scope.editLinkForm.editing = false;
+          });
+      };
 
-      $scope.editResumeLink = function() {
+      $scope.editResumeLink = function () {
         var linkId = $scope.editLinkForm.linkId;
         var resumeId = $scope.editLinkForm.selectedResume.id;
         var type = $scope.editLinkForm.type;
 
-        ResumesSvc.updateResumeLink(resumeId, linkId, type).then(function() {
-          if (type === 'MASKED') {
-            $scope.editLinkForm.selectedResume.maskedLinkId = linkId;
-          } else if (type === 'ORIGINAL') {
-            $scope.editLinkForm.selectedResume.originalLinkId = linkId;
-          }
+        ResumesSvc.updateResumeLink(resumeId, linkId, type)
+          .then(function () {
+            if (type === "MASKED") {
+              $scope.editLinkForm.selectedResume.maskedLinkId = linkId;
+            } else if (type === "ORIGINAL") {
+              $scope.editLinkForm.selectedResume.originalLinkId = linkId;
+            }
 
-          toastr.success("Preview link has been updated successfully.");
-          $scope.closeModal();
-        }).catch(function() {
-          toastr.error("Updating preview link has failed!", "Error");
-          $scope.closeModal();
-        });
-      }
+            toastr.success("Preview link has been updated successfully.");
+            $scope.closeModal();
+          })
+          .catch(function () {
+            toastr.error("Updating preview link has failed!", "Error");
+            $scope.closeModal();
+          });
+      };
 
       $scope.init = function () {
         $scope.getUserDetails();
@@ -521,8 +517,6 @@ angular.module("MyCvTracker.pages.resumes")
 
       $scope.saveResume = function () {
         var file = $scope.myFile;
-        var id = $scope.id;
-        var userId = $scope.user.id;
         var resumeTitle = $scope.resumeTitle;
         var resumeType = $scope.resumeType;
         if (file != null && file.size >= 5000000) {
@@ -531,7 +525,7 @@ angular.module("MyCvTracker.pages.resumes")
           return false;
         }
         if (file != null) {
-          $scope.saveMyResume(file, id, userId, resumeTitle, resumeType);
+          $scope.saveMyResume(file, resumeTitle, resumeType);
         } else {
           $scope.addAlert(Utilities.getAlerts("InputFileInputRequiredValidation"));
         }
@@ -555,7 +549,8 @@ angular.module("MyCvTracker.pages.resumes")
     "$parse",
     "$injector",
     "Constants",
-    function ($parse,
+    function (
+      $parse,
       $injector,
       Constants
     ) {

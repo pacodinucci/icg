@@ -3,28 +3,29 @@
         <i class="ion-information-circled modal-icon"></i><span>View Notifications</span>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-info" ng-click="$dismiss()">Go Back</button>
-        <button data-ng-click="viewFullNotifications(modalNotifications[1].id,false)" class="btn btn-info">Full Details</button>
+        <button type="button" class="btn btn-info" ng-click="closeModal()">Go Back</button>
+        <button ng-if="modalNotiCount > 5 && !isFullLoaded" data-ng-click="viewFullNotifications(modalNotifications[0].id, false, 0, true)" class="btn btn-info">Full Details</button>
     </div>
     <div class="modal-body text-center">
         <div class="horizontal-scroll">
             <table class="table table-hover">
                 <thead>
                 <tr class="black-muted-bg">
-                    <th>Recruiter</th>
-                    <th>Recruiter Email</th>
-                    <th>City</th>
-                    <th>Country</th>
+                    <th>Reference</th>
+                    <th>Name</th>
+<!--                    <th>City</th>-->
+<!--                    <th>Country</th>-->
                     <th>Last Tracked Time</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <tr data-ng-repeat="notifications in modalNotifications" class="no-top-border">
+                <tr data-ng-repeat="notifications in modalNotifications" class="no-top-border" style="text-align: left">
                     <td data-ng-bind="notifications.recruiter"></td>
-                    <td data-ng-bind="notifications.recruiterEmail"></td>
-                  ` <td data-ng-bind="notifications.city"></td>
-                    <td data-ng-bind="notifications.country"></td>
+                    <td data-ng-bind="notifications.trackedResumeName"></td>
+<!--                  ` <td data-ng-bind="notifications.city"></td>-->
+<!--                    <td data-ng-bind="notifications.country"></td>-->
                     <td data-ng-bind="notifications.lastTrackedTime"></td>
 
                     <td>
