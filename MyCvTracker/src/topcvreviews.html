@@ -73,10 +73,8 @@
             tabindex="0"
             onclick="catapultAcceptCookies();">Okay, thank you</button></span>
         </div>
-        <!-- custom wrapper class --></div>;
+        <!-- custom wrapper class --></div>
     </script>
-
-
   </head>
 
   <body>
@@ -85,14 +83,16 @@
     <!-- wrapper starts -->
     <!-- header starts -->
     <div id="loader"></div>
-    <header>
+    <header id="landing-top-header">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
             <div class="logo">
-              <img
-                src="assets/img/front/logo.png"
-                alt="">
+              <a href="/">
+                <img
+                  src="assets/img/front/logo.png"
+                  alt="">
+              </a>
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-12 m-align">
@@ -115,6 +115,47 @@
                 <a href="">
                   <span><i class="fab fa-instagram"></i></span>
                 </a>
+              </li>
+              <li>
+                <div class="dropdown">
+                  <div class="dropdown-toggle">
+                    CV Services
+                  </div>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <a
+                      class="dropdown-item"
+                      href="/free-cv-review-service.html">
+                      Free CV Review
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/free-cv-review-service.html">
+                      Quick Revamp
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/free-cv-review-service.html">
+                      Graduate CV
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/free-cv-review-service.html">
+                      Professional CV
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/free-cv-review-service.html">
+                      Career Shifting CV
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/free-cv-review-service.html">
+                      Executive Package
+                    </a>
+                  </div>
+                </div>
               </li>
               <li>
                 <a href="/jobs-list">Jobs</a>
@@ -1131,17 +1172,23 @@
           var expires = "expires=" + d.toUTCString();
           document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+
         var cookieAcc = getCookie("cookieAcc");
 
-        $( "body" ).append( "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>" );
+        $("body")
+          .append(
+            "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>");
         if (cookieAcc !== "1") {
-          $("#cookie-confirm-popup").addClass("active");
+          $("#cookie-confirm-popup")
+            .addClass("active");
         }
 
-        $("#cookie-confirm-popup .btn-primary").on("click", function() {
-          setCookie("cookieAcc", "1", 7);
-          $("#cookie-confirm-popup").removeClass("active");
-        });
+        $("#cookie-confirm-popup .btn-primary")
+          .on("click", function () {
+            setCookie("cookieAcc", "1", 7);
+            $("#cookie-confirm-popup")
+              .removeClass("active");
+          });
       });
     </script>
 

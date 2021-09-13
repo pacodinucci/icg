@@ -96,6 +96,7 @@
         var selfcomposePage = next.endsWith("/selfcompose.html");
         var termsPage = next.endsWith("/terms.html");
         var cvwritingPage = next.endsWith("/cvwritingpackages.html");
+        var freeCvReviewServicePage = next.endsWith("/free-cv-review-service.html");
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
@@ -129,6 +130,8 @@
           window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
         } else if (cvMarketingPage) {
           window.location.href = Utilities.baseUrl() + "/cvmarketing.html";
+        } else if (freeCvReviewServicePage) {
+          window.location.href = Utilities.baseUrl() + "/free-cv-review-service.html";
         } else if (restrictedPage && !$auth.isAuthenticated()) {
           $location.url("/login");
         } else if (isAuthPages && $auth.isAuthenticated()) {
