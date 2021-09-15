@@ -79,6 +79,9 @@ angular.module("MyCvTracker.pages.referral")
           var url = utilities.getDeleteReferralUrl();
           return RestConfig.deleteReferralLink(url, referralLink);
         },
+        findMatchingResumesInFolder : function(id) {
+          return RestConfig.scanMatchingResumesInFolder(id);
+        },
         getUpdatingJobSkillsModal: function (scope, ctrlName) {
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/categorizing-modal.html',
@@ -92,6 +95,16 @@ angular.module("MyCvTracker.pages.referral")
         getBuildingSmartCategoryModal: function (scope, ctrlName) {
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/building-smart-category-modal.html',
+            controller: ctrlName,
+            scope: scope,
+            backdrop: 'static'
+          };
+
+          return $injector.get('$uibModal').open(modalOpts);
+        },
+        getScanFolderResultModal: function (scope, ctrlName) {
+          var modalOpts = {
+            templateUrl: 'app/pages/referral/templates/matching-folder-resume.html',
             controller: ctrlName,
             scope: scope,
             backdrop: 'static'

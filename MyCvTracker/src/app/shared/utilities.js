@@ -651,6 +651,10 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + "/match-skills/{matchingId}/list";
                 },
 
+                findMatchingResumesInFolderUrl: function () {
+                    return Constants.baseUrl + "/job/{jobId}/bulk-folder-scan";
+                },
+
                 getCvBoxCandidateListUrl: function () {
                     return Constants.baseUrl + "/cvbox/candidates/list";
                 },
@@ -807,6 +811,12 @@ angular.module('MyCvTracker.shared')
                 },
                 getUpdatingResumeCategoriesUrl: function () {
                     return Constants.baseUrl + "/tech-skill/categorize/resume";
+                },
+                getBulkFolderListing: function () {
+                    return Constants.baseUrl + "/user/folder-resumes";
+                },
+                uploadFolderResumeUrl: function () {
+                    return Constants.baseUrl + "/user/bulk-folder/resume-upload";
                 },
                 baseUrl: function () {
                     var pathparts = location.pathname.split('/');

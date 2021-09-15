@@ -46,6 +46,12 @@ angular.module("MyCvTracker.pages.referral")
       var isReviewer = role === "REVIEWER";
       var isManagement = isAdmin || isReviewer;
 
+      var scanUserId = 0;
+      if (isAdmin || isReviewer) {
+        scanUserId = userDetail.id;
+      }
+      $scope.scanUserId = scanUserId;
+
       $scope.referralModal = {};
       $scope.buildModal = {};
 
@@ -112,6 +118,11 @@ angular.module("MyCvTracker.pages.referral")
         categoryName : "",
         rankOrder : 0,
         building : false
+      };
+
+      $scope.scanFolderModalForm = {
+        resumes : [],
+        loaded : false
       };
 
       $scope.deletingReferralLink = "";
@@ -454,6 +465,8 @@ angular.module("MyCvTracker.pages.referral")
         $scope.jobCategorizingForm.updating = false;
         $scope.jobCategorizingForm.smartBuilding = false;
         $scope.inDeletingReferral = false;
+        $scope.scanFolderModalForm.resumes = [];
+        $scope.scanFolderModalForm.loaded = false;
 
         if (!!parentLink) {
           $location.url("/referral");
@@ -675,6 +688,19 @@ angular.module("MyCvTracker.pages.referral")
         return url;
       };
 
+      $scope.scanResumeFolder = function(id) {
+        $scope.scanFolderModalForm.loaded = false;
+        $scope.openScanFolderResultModal();
+        ReferralSvc.findMatchingResumesInFolder(id).then(function(data) {
+          $scope.scanFolderModalForm.resumes = data;
+          $scope.scanFolderModalForm.loaded = true;
+        });
+      }
+
+      $scope.openScanFolderResultModal = function() {
+        $scope.referralModal = ReferralSvc.getScanFolderResultModal($scope, "ReferalModalCtrl");
+      }
+
       $scope.getReferralLink = function (referral) {
         var refType = referral.referralType;
         var link = referral.referralLink;
@@ -723,6 +749,10 @@ angular.module("MyCvTracker.pages.referral")
         toastr.success(msg, "Success");
         return result;
       };
+
+      $scope.getScanDownloadLink = function(name) {
+        return 'https://mycvtracker.com:8080/user/bulk-folder/download/' + scanUserId + '/' + name;
+      }
 
       $scope.init = function () {
         var params = $location.search();

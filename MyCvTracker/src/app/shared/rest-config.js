@@ -527,6 +527,11 @@ angular.module("MyCvTracker.shared")
           url = url + "?referralLink=" + referralLink;
           return RESTSvc.delete(url);
         },
+        scanMatchingResumesInFolder : function(id) {
+          var url = utilities.findMatchingResumesInFolderUrl();
+          url = url.replace("{jobId}", id);
+          return RESTSvc.get(url);
+        },
         getResumeTokenToPreview : function (
           url,
           referralLink,
@@ -832,6 +837,16 @@ angular.module("MyCvTracker.shared")
           url = url.replace("{jobId}", jobId);
 
           return RESTSvc.post(url);
+        },
+        getBulkFolderResumes: function() {
+          var url = utilities.getBulkFolderListing();
+          return RESTSvc.get(url);
+        },
+        uploadFolderResume: function(file) {
+          var url = utilities.uploadFolderResumeUrl();
+          var request = new FormData();
+          request.append("file", file);
+          return RESTSvc.formPost(url, request);
         }
       };
 

@@ -975,3 +975,24 @@
     color: #9099ad;
   }
 }
+
+#scanning-folder-modal {
+  .matching-resume {
+    display: flex;
+    -webkit-box-align: center!important;
+    -ms-flex-align: center!important;
+    align-items: center!important;
+
+    .detail {
+      -ms-flex: 1 1 auto!important;
+      flex: 1 1 auto!important;
+    }
+
+    .skills {
+      margin-top: 5px;
+      font-family: 'museo_slab500';
+      color: #9099ad;
+    }
+  }
+
+}

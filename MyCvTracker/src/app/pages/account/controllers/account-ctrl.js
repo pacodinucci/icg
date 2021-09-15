@@ -46,6 +46,13 @@ angular.module("MyCvTracker.pages.account")
         },
         {
           color : pieColor,
+          description : "Resume Folder",
+          link : "bulk-folder-resumes",
+          icon : "resume",
+          showMenu : isReviewer || isAdmin
+        },
+        {
+          color : pieColor,
           description : "Resume Management",
           link : "resumes",
           icon : "resume",

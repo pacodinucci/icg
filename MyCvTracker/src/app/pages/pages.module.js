@@ -29,7 +29,8 @@
     "MyCvTracker.pages.cvBoxCandidates",
     "MyCvTracker.pages.skillCategory",
     "MyCvTracker.pages.jobResumeLink",
-    "MyCvTracker.pages.jobResumeLinkContext"
+    "MyCvTracker.pages.jobResumeLinkContext",
+    "MyCvTracker.pages.bulkFolderResumes"
   ])
     .run(run);
 

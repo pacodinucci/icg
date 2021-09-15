@@ -1,0 +1,31 @@
+<form name="uploadResumeForm" novalidate ng-submit="uploadResume()">
+  <div class="modal-header">
+    <h4 class="modal-title">Upload Resume</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="control-label">Resume File <span class="file-size">(Max. file size upto 500KB)</span></div>
+      <input type="file" class="form-control" placeholder="Resume File" resume-file-model="uploadForm.resumeFile"  accept=".pdf,.docx" id="fileUpload" />
+      <div class="text-danger" style="margin-top: 10px" ng-if="uploadForm.invalidSize">
+        Invalid file size.
+      </div>
+      <div class="text-danger" style="margin-top: 10px" ng-if="uploadForm.invalidType">
+        Invalid file type.
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer clearfix">
+    <button
+      type="submit" class="btn btn-primary" ng-disabled="resumeForm.$invalid || !!uploading">
+      {{  !uploading ? "Upload" : "Uploading..." }}
+    </button>
+    <button
+      ng-disabled="!!uploading"
+      ng-click="closeModal()"
+      type="button" class="btn btn-danger">
+      Cancel
+    </button>
+  </div>
+</form>
