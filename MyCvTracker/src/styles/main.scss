@@ -976,6 +976,23 @@
   }
 }
 
+#uploading-bulk-resume-modal {
+  .upload-files {
+    .file-process {
+      margin-bottom: 15px;
+
+      .size {
+        color: #9099ad;
+        font-family: 'museo_slab500';
+      }
+
+      &:last-of-type {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+
 #scanning-folder-modal {
   .matching-resume {
     display: flex;
@@ -994,5 +1011,4 @@
       color: #9099ad;
     }
   }
-
 }

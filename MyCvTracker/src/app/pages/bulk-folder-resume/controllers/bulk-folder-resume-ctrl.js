@@ -26,8 +26,11 @@ angular.module("MyCvTracker.pages.bulkFolderResumes")
       $scope.uploading = false;
       $scope.uploadForm = {
         resumeFile : null,
+        resumeFiles : [],
+        errorMap : {},
         invalidSize : false,
-        invalidType : false
+        invalidType : false,
+        uploaded : false
       }
 
       $scope.listFolderResumes = function() {
@@ -40,52 +43,60 @@ angular.module("MyCvTracker.pages.bulkFolderResumes")
         $scope.bulkFolderModal = mainSvc.getUploadModal($scope, "BulkFolderResumeModalCtrl");
       }
 
+      var noOfUploading = 0;
+      var noOfUploaded = 0;
+      function onFileUploaded(name, err) {
+        console.log("error", name, err);
+        $scope.uploadForm.errorMap[name] = err;
+        noOfUploaded++;
+        console.log("noOfUploading", noOfUploading);
+        console.log("noOfUploaded", noOfUploaded);
+        if (noOfUploading === noOfUploaded) {
+          console.log("uploaded ne");
+          $scope.listFolderResumes();
+          $scope.uploading = false;
+          $scope.uploadForm.uploaded = true;
+        }
+      }
+
+      function callUploadingApi(rFile) {
+        var rName = rFile.name;
+        mainSvc.uploadResumeToFolder(rFile).then(function(data) {
+          onFileUploaded(rName, null);
+        }).catch(function(err) {
+          var msg = "Uploading resume has failed!"
+          var rp = err.response;
+          if (!!rp && !!rp.message) {
+            msg = rp.message;
+          }
+          onFileUploaded(rName, msg);
+        });
+      }
+
       $scope.uploadResume = function() {
-        var rFile = $scope.uploadForm.resumeFile;
-        if (rFile == null) {
+        var rFiles = $scope.uploadForm.resumeFiles;
+        noOfUploading = rFiles.length;
+        if (noOfUploading === 0) {
           return;
         }
 
         if ($scope.uploading) return;
         $scope.uploading = true;
-        var validExts = [
-          "application/pdf",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        ];
-        var fileType = rFile.type;
+        $scope.uploadForm.uploaded = false;
+        noOfUploaded = 0;
 
-        var invalidSize = rFile.size > 5000000;
-        var invalidType = validExts.indexOf(fileType) < 0;
-
-        $scope.uploadForm.invalidSize = invalidSize;
-        $scope.uploadForm.invalidType = invalidType;
-
-        if (invalidSize || invalidType) {
-          $scope.uploading = false;
-          return;
+        for (var k = 0; k < noOfUploading; k++) {
+          callUploadingApi(rFiles[k])
         }
-
-        mainSvc.uploadResumeToFolder(rFile).then(function(data) {
-          $scope.listFolderResumes();
-          toastr.success("Resume has been uploaded to bulk folder successfully.", "Success");
-          $scope.closeModal();
-        }).catch(function(err) {
-          var msg = "Uploading resume has failed!"
-          var rp = err.response;
-          if (!!rp && !!rp.message) {
-             msg = rp.message;
-          }
-
-          toastr.error(msg, "Error");
-          $scope.closeModal();
-        });
       }
 
       $scope.closeModal = function() {
         $scope.bulkFolderModal.dismiss();
-        $scope.uploadForm.resumeFile = null;
+        $scope.uploadForm.resumeFiles = [];
+        $scope.uploadForm.errorMap = {};
         $scope.uploadForm.invalidSize = false;
         $scope.uploadForm.invalidType = false;
+        $scope.uploadForm.uploaded = false;
         $scope.uploading = false;
       }
 
@@ -155,9 +166,40 @@ angular.module("MyCvTracker.pages.bulkFolderResumes")
 
           element.bind("change", function () {
             scope.$apply(function () {
-              modelSetter(scope, element[0].files[0]);
+              scope.uploadForm.errorMap = {};
               scope.uploadForm.invalidSize = false;
               scope.uploadForm.invalidType = false;
+              scope.uploadForm.resumeFiles = [];
+              scope.uploadForm.uploaded = false;
+
+              var files = element[0].files;
+              if (files.size > 10) return;
+
+              var invalidSize = false;
+              var invalidType = false;
+              for (var i = 0, len = files.length; i < len; i++) {
+                var validExts = [
+                  "application/pdf",
+                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                ];
+                var fileType = files[i].type;
+
+                invalidSize = files[i].size > 5000000;
+                invalidType = validExts.indexOf(fileType) < 0;
+
+                if (invalidSize || invalidType) {
+                  break;
+                }
+              }
+
+              scope.uploadForm.invalidSize = invalidSize;
+              scope.uploadForm.invalidType = invalidType;
+              if (!invalidSize && !invalidType) {
+                modelSetter(scope, element[0].files);
+              }
+
+              // scope.uploadForm.invalidSize = false;
+              // scope.uploadForm.invalidType = false;
               // var file = scope.myFile;
               // var validExts = [
               //   "application/pdf",
