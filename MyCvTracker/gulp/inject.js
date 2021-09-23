@@ -55,6 +55,12 @@ gulp.task('injectFront', ['stylesFront'], function () {
         paths: [path.join(conf.paths.src, '/topcvreviews.html'), path.join(conf.paths.src, '/job-spec.html'),
           path.join(conf.paths.src, '/free-cv-review-service.html'),
           path.join(conf.paths.src, '/quick-revamp.html'),
+          path.join(conf.paths.src, '/graduate-cv.html'),
+          path.join(conf.paths.src, '/professional-cv.html'),
+          path.join(conf.paths.src, '/career-shifting-cv.html'),
+          path.join(conf.paths.src, '/cover-letter.html'),
+          path.join(conf.paths.src, '/linked-profile-review.html'),
+          path.join(conf.paths.src, '/executive-cv-service.html'),
           path.join(conf.paths.src, '/pdf-viewer.html'), path.join(conf.paths.src, '/network-share.html'),
           path.join(conf.paths.src, '/context-link.html'), path.join(conf.paths.src, '/cv-box.html')]
     })

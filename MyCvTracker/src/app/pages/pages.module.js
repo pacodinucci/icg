@@ -76,7 +76,8 @@
           "/resumes-list",
           "/terms"
         ];
-        var restrictedPage = publicPages.indexOf($location.path()) === -1 && $location.path().indexOf("/resumes/") === -1;
+        var restrictedPage = publicPages.indexOf($location.path()) === -1 && $location.path()
+          .indexOf("/resumes/") === -1;
         $rootScope.loginModal = false;
         // console.log(event);
         // console.log(next);
@@ -99,6 +100,12 @@
         var cvwritingPage = next.endsWith("/cvwritingpackages.html");
         var freeCvReviewServicePage = next.endsWith("/free-cv-review-service.html");
         var landingQuickRevampPage = next.endsWith("/quick-revamp.html");
+        var landingGraduateCvPage = next.endsWith("/graduate-cv.html");
+        var landingProfessionalCvPage = next.endsWith("/professional-cv.html");
+        var landingCareerShiftingCvPage = next.endsWith("/career-shifting-cv.html");
+        var landingCoverLetterPage = next.endsWith("/cover-letter.html");
+        var landingLinkedInProfileReviewPage = next.endsWith("/linked-profile-review.html");
+        var landingExecutiveCvPage = next.endsWith("/executive-cv-service.html");
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
@@ -136,6 +143,18 @@
           window.location.href = Utilities.baseUrl() + "/free-cv-review-service.html";
         } else if (landingQuickRevampPage) {
           window.location.href = Utilities.baseUrl() + "/quick-revamp.html";
+        } else if (landingGraduateCvPage) {
+          window.location.href = Utilities.baseUrl() + "/graduate-cv.html";
+        } else if (landingProfessionalCvPage) {
+          window.location.href = Utilities.baseUrl() + "/professional-cv.html";
+        } else if (landingCareerShiftingCvPage) {
+          window.location.href = Utilities.baseUrl() + "/career-shifting-cv.html";
+        } else if (landingCoverLetterPage) {
+          window.location.href = Utilities.baseUrl() + "/cover-letter.html";
+        } else if (landingLinkedInProfileReviewPage) {
+          window.location.href = Utilities.baseUrl() + "/linked-profile-review.html";
+        } else if (landingExecutiveCvPage) {
+          window.location.href = Utilities.baseUrl() + "/executive-cv-service.html";
         } else if (restrictedPage && !$auth.isAuthenticated()) {
           $location.url("/login");
         } else if (isAuthPages && $auth.isAuthenticated()) {
