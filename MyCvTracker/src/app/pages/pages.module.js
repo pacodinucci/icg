@@ -98,14 +98,14 @@
         var selfcomposePage = next.endsWith("/selfcompose.html");
         var termsPage = next.endsWith("/terms.html");
         var cvwritingPage = next.endsWith("/cvwritingpackages.html");
-        var freeCvReviewServicePage = next.endsWith("/free-cv-review-service.html");
-        var landingQuickRevampPage = next.endsWith("/quick-revamp.html");
-        var landingGraduateCvPage = next.endsWith("/graduate-cv.html");
-        var landingProfessionalCvPage = next.endsWith("/professional-cv.html");
-        var landingCareerShiftingCvPage = next.endsWith("/career-shifting-cv.html");
-        var landingCoverLetterPage = next.endsWith("/cover-letter.html");
-        var landingLinkedInProfileReviewPage = next.endsWith("/linked-profile-review.html");
-        var landingExecutiveCvPage = next.endsWith("/executive-cv-service.html");
+        var freeCvReviewServicePage = next.endsWith("/cv-writing-page.html");
+        var landingQuickRevampPage = next.endsWith("/linkedin-profile-writing.html");
+        var landingGraduateCvPage = next.endsWith("/cover-letter-page.html");
+        var landingProfessionalCvPage = next.endsWith("/cv-writing-packages.html");
+        var landingCareerShiftingCvPage = next.endsWith("/cv-writing-package-2.html");
+        var landingCoverLetterPage = next.endsWith("/graduate-package-1.html");
+        var landingLinkedInProfileReviewPage = next.endsWith("/graduate-package-2.html");
+        var landingExecutiveCvPage = next.endsWith("/cv-writing-package-3.html");
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
@@ -140,21 +140,17 @@
         } else if (cvMarketingPage) {
           window.location.href = Utilities.baseUrl() + "/cvmarketing.html";
         } else if (freeCvReviewServicePage) {
-          window.location.href = Utilities.baseUrl() + "/free-cv-review-service.html";
+          window.location.href = Utilities.baseUrl() + "/cv-writing-page.html";
         } else if (landingQuickRevampPage) {
-          window.location.href = Utilities.baseUrl() + "/quick-revamp.html";
+          window.location.href = Utilities.baseUrl() + "/linkedin-profile-writing.html";
         } else if (landingGraduateCvPage) {
-          window.location.href = Utilities.baseUrl() + "/graduate-cv.html";
+          window.location.href = Utilities.baseUrl() + "/cover-letter-page.html";
         } else if (landingProfessionalCvPage) {
-          window.location.href = Utilities.baseUrl() + "/professional-cv.html";
-        } else if (landingCareerShiftingCvPage) {
-          window.location.href = Utilities.baseUrl() + "/career-shifting-cv.html";
+          window.location.href = Utilities.baseUrl() + "/cv-writing-packages.html";
         } else if (landingCoverLetterPage) {
-          window.location.href = Utilities.baseUrl() + "/cover-letter.html";
+          window.location.href = Utilities.baseUrl() + "/graduate-package-1.html";
         } else if (landingLinkedInProfileReviewPage) {
-          window.location.href = Utilities.baseUrl() + "/linked-profile-review.html";
-        } else if (landingExecutiveCvPage) {
-          window.location.href = Utilities.baseUrl() + "/executive-cv-service.html";
+          window.location.href = Utilities.baseUrl() + "/graduate-package-2.html";
         } else if (restrictedPage && !$auth.isAuthenticated()) {
           $location.url("/login");
         } else if (isAuthPages && $auth.isAuthenticated()) {
