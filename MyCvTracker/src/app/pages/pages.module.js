@@ -112,6 +112,7 @@
         var networkSharePage = next.endsWith("/network-share.html");
         var contextLinkPage = next.endsWith("/context-link.html");
         var cvBoxFrontPage = next.endsWith("/cv-box.html");
+        var cvHostingPage =  next.endsWith("/cvhosting.html");
 
         if (frontPage) {
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
@@ -135,7 +136,11 @@
           window.location.href = Utilities.baseUrl() + "/java_experts.html";
         } else if (termsPage) {
           window.location.href = Utilities.baseUrl() + "/terms.html";
-        } else if (cvwritingPage) {
+        }
+        else if (cvHostingPage) {
+           window.location.href = Utilities.baseUrl() + "/cvHostingPage.html";
+        }
+        else if (cvwritingPage) {
           window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
         } else if (cvMarketingPage) {
           window.location.href = Utilities.baseUrl() + "/cvmarketing.html";
