@@ -138,7 +138,7 @@
           window.location.href = Utilities.baseUrl() + "/terms.html";
         }
         else if (cvHostingPage) {
-           window.location.href = Utilities.baseUrl() + "/cvHostingPage.html";
+           window.location.href = Utilities.baseUrl() + "/cvhosting.html";
         }
         else if (cvwritingPage) {
           window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
