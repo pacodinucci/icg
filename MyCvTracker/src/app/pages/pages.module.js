@@ -113,6 +113,7 @@
         var contextLinkPage = next.endsWith("/context-link.html");
         var cvBoxFrontPage = next.endsWith("/cv-box.html");
         var cvHostingPage =  next.endsWith("/cvhosting.html");
+        var cvOffersPage =  next.endsWith("/cvoffers.html");
 
         if (frontPage) {
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
@@ -139,6 +140,9 @@
         }
         else if (cvHostingPage) {
            window.location.href = Utilities.baseUrl() + "/cvhosting.html";
+        }
+        else if (cvOffersPage) {
+             window.location.href = Utilities.baseUrl() + "/cvoffers.html";
         }
         else if (cvwritingPage) {
           window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
