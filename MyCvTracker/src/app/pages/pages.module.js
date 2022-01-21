@@ -108,6 +108,7 @@
         var landingExecutiveCvPage = next.endsWith("/cv-writing-package-3.html");
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
+        var jobkeywordsPage = next.endsWith("/jobkeywords-match.html");
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
         var networkSharePage = next.endsWith("/network-share.html");
         var contextLinkPage = next.endsWith("/context-link.html");
@@ -119,7 +120,11 @@
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
         } else if (jobSpecPage) {
           window.location.href = Utilities.baseUrl() + "/job-spec.html";
-        } else if (contextLinkPage) {
+        }
+        else if (jobkeywordsPage) {
+                  window.location.href = Utilities.baseUrl() + "/jobkeywords-match.html";
+        }
+         else if (contextLinkPage) {
           window.location.href = Utilities.baseUrl() + "/context-link.html";
         } else if (pdfViewerPage) {
           window.location.href = Utilities.baseUrl() + "/pdf-viewer.html";
