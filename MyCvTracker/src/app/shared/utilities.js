@@ -469,6 +469,9 @@ angular.module('MyCvTracker.shared')
                 getEditMembersUrl: function () {
                     return Constants.baseUrl + Constants.apis.editMembers.url;
                 },
+                getBulkUploadMembersUrl: function () {
+                    return Constants.baseUrl + Constants.apis.bulkUploadMembers.url;
+                },
                 getDeleteMembersUrl: function () {
                     return Constants.baseUrl + Constants.apis.deleteMembers.url;
                 },

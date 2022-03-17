@@ -190,6 +190,12 @@ angular.module("MyCvTracker.shared")
         ) {
           return RESTSvc.put(url, data);
         },
+        bulkUpload : function (
+          url,
+          data
+        ) {
+          return RESTSvc.put(url, data);
+        },
         getMembersList : function (
           url,
           data

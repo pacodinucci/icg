@@ -109,6 +109,7 @@
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
         var jobkeywordsPage = next.endsWith("/jobkeywords-match.html");
+        var paidInternships = next.endsWith("/how-to-get-paid-internships.html");
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
         var networkSharePage = next.endsWith("/network-share.html");
         var contextLinkPage = next.endsWith("/context-link.html");
@@ -148,6 +149,9 @@
         }
         else if (cvOffersPage) {
              window.location.href = Utilities.baseUrl() + "/cvoffers.html";
+        }
+        else if(paidInternships) {
+             window.location.href = Utilities.baseUrl() + "/how-to-get-paid-internships.html";
         }
         else if (cvwritingPage) {
           window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
