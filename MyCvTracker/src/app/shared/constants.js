@@ -142,7 +142,7 @@
                 },
 
                 saveResume: {
-                	url: '/user/saveResume'
+                	url: '/user/uploadQuickResume'
                 },
 
                 pushToDrive: {
@@ -213,6 +213,9 @@
                 },
                 editMembers : {
                     url : '/cvmarketdata/editMembers'
+                },
+                bulkUploadMembers : {
+                    url : '/cvmarketdata/addBulkMembers'
                 },
                 notes: {
                     url: '/user/notesList'

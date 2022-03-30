@@ -1,0 +1,50 @@
+<section
+  id="resumes-listing-page"
+  ng-controller="BulkFolderResumeCtrl">
+  <div class="row form-group">
+    <div class="col-sm-12">
+      <div class="clearfix">
+        <div class="pull-right">
+          <button
+            class="btn btn-primary"
+            ng-click="openNewResumeModal()">
+            <i class="fa fa-plus"></i>
+            <span>Add</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resumes-list-result">
+    <div class="row">
+      <div
+        class="col-xs-12 col-md-4" ng-repeat="aResume in resumes track by aResume.name">
+        <div
+          ba-panel
+          ba-panel-class="xsmall-panel light-text resume-panel">
+          <div class="resume-title" ng-bind="aResume.name"></div>
+
+          <div class="detail-row">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="detail-info">
+                  <div class="info-val">
+                    Uploaded at {{ getFormattedPostDate(aResume.uploadedDate) }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12">
+                <div class="ctrls">
+                  <a ng-href="{{ getDownloadLink(aResume.name) }}" target="_blank">
+                    <i class="fas fa-cloud-download-alt"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

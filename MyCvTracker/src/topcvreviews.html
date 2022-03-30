@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-52786419-3">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-52786419-3');
+</script><head>
     <title>My CV Tracker</title>
     <meta
       name="viewport"
@@ -20,6 +29,7 @@
     <link
       href="assets/img/homepage/favicon.ico"
       rel="shortcut icon" />
+    <link rel="image_src" href="assets/img/homepage/final-logo-3.png" />
 
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -73,10 +83,8 @@
             tabindex="0"
             onclick="catapultAcceptCookies();">Okay, thank you</button></span>
         </div>
-        <!-- custom wrapper class --></div>;
+        <!-- custom wrapper class --></div>
     </script>
-
-
   </head>
 
   <body>
@@ -85,17 +93,19 @@
     <!-- wrapper starts -->
     <!-- header starts -->
     <div id="loader"></div>
-    <header>
+    <header id="landing-top-header">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6 col-md-6 col-12">
+          <div class="col-md-4 col-12">
             <div class="logo">
-              <img
-                src="assets/img/front/logo.png"
-                alt="">
+              <a href="/">
+                <img
+                  src="assets/img/front/logo.png"
+                  alt="">
+              </a>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6 col-12 m-align">
+          <div class="col-md-8 col-12 m-align">
             <ul class="upper-nav">
               <li>
                 <a
@@ -116,6 +126,64 @@
                   <span><i class="fab fa-instagram"></i></span>
                 </a>
               </li>
+              <li>
+                <div class="dropdown">
+                  <div class="dropdown-toggle">
+                    CV Services
+                  </div>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <a
+                      class="dropdown-item"
+                      href="/cv-writing-page.html">
+                      CV Writing Page
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/linkedin-profile-writing.html">
+                      Linkedin Profile Writing
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/cover-letter-page.html">
+                      Cover Letter Page
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/cv-writing-packages.html">
+                      CV Writing Packages
+                    </a>
+
+                  </div>
+                </div>
+              </li>
+              <!--<li>
+                <div class="dropdown">
+                  <div class="dropdown-toggle">
+                    Other Services
+                  </div>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton">
+                    <a
+                      class="dropdown-item"
+                      href="/graduate-package-1.html">
+                      Graduate Package 1
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/graduate-package-2.html">
+                      Graduate Package 2
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="/cv-writing-page.html">
+                      CV Distribution Service
+                    </a>
+                  </div>
+                </div>
+              </li>-->
               <li>
                 <a href="/jobs-list">Jobs</a>
               </li>
@@ -140,8 +208,12 @@
       <div class="container">
         <div class="row">
           <div align="center">
-            <h3>Find out what happens to your CV when it leaves your mailbox</h3>
-            <h5>Upload your CV now and get your CV score and review reports.</h5>
+            <h3>We find matching jobs for your CV on your selected job boards(Indeed,LinkedIn etc.)</h3>
+            <br/>
+            <h3>We also Help you Tailor Your CV to get more Interviews.</h3>
+            <br/>
+            <h3>Use our tracking enabled CV service to keep track of your job search.</h3>
+            <h3>Join our two weeks trial work/Internship offer to help us match you for the right jobs in our Network.</h3>
             <br>
           </div>
           <div class="clearfix"></div>
@@ -149,9 +221,12 @@
             class="boxborder"
             align="center">
             <br />
-            <h5>Just a step away to
+            <h5>Get Matching Jobs in your Inbox.
               <br />
-              make your CV Magnetic
+              <h5>Add Tracking to Your CV for best Job Search Results.
+                <br />
+              <br />
+              Find Your CV Quality Score.
             </h5>
             <br>
             <div align="center">
@@ -181,14 +256,12 @@
       <div class="container">
         <div class="title">
           <a
-            href="https://youtu.be/kXDOr4Z7fTI"
+            href="https://www.youtube.com/watch?v=vzyaq5pNz_s"
             rel="noopener noreferrer"
             target="_blank"><h2>How it Works - Video Tutorial</h2></a>
-          <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/jpaEOV09e5U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          -->
           <br>
-          <p>Our platform uses email pixel tracking technology extended to word and pdf document.It is very safe and
-            used by lot of marketing firms to track emails.
+          <p>Our software platform keeps track of jobs posted on the popular job boards.We match your CV automatically and send you matching Job URLs.
+            Our team maintain extensive list of recruiters and advise you send your CV to them.It can really save lot of time and increase your chances to get Interviews.
           </p>
           <hr>
         </div>
@@ -209,8 +282,8 @@
             <div class="step-box">
               <img src="assets/img/front/step-2.jpg">
               <div class="step-content">
-                <h3>Tracking is enabled on Your CV</h3>
-                <p>Download Your tracking enabled CV and start applying jobs using it. Get Notified when recruiters open
+                <h3>Select Your Target Job Sector</h3>
+                <p>We match your CV and start sending you matching jobs and Recruiters Information. You can add tracking to your CV and Get Notified when recruiters open
                   it.</p>
               </div>
             </div>
@@ -219,8 +292,8 @@
             <div class="step-box">
               <img src="assets/img/front/step-3.jpg">
               <div class="step-content">
-                <h3>Apply on JobBoards With Tracking Enabled CV</h3>
-                <p>When Recruiter access your cv on Job Board you can get free tracking on your job applications.</p>
+                <h3>Find Jobs on our Job Board and apply with Tracking Enabled CV</h3>
+                <p>Recruiter access your cv on Job Board you can get free tracking on your job applications.</p>
               </div>
             </div>
           </div>
@@ -240,13 +313,13 @@
             <div class="step-box">
               <img src="assets/img/front/service-1.jpg">
               <div class="step-content">
-                <h3>Get a job-winning CV and fine your next role faster.</h3>
+                <h3>Get a job-winning CV and find your next role faster.</h3>
                 <p>With our CV-writing services, you&rsquo;ll get:
                   1:1 support from your professional writer.
                   A custom, modern, industry-specific CV that tells your career story.
                   Double the interviews, guaranteed!
                 </p>
-                <a href="/cvwritingpackages.html">Read More...</a>
+                <a href="/cv-writing-packages.html">Read More...</a>
 
               </div>
             </div>
@@ -255,13 +328,12 @@
             <div class="step-box">
               <img src="assets/img/front/service-2.jpg">
               <div class="step-content">
-                <h3>Market your CV to our
+                <h3>Host your CV with
                   <br>
-                  network of recruiters.
+                   private data masking.
                 </h3>
-                <p>Use our premium service to market your CV to our network of recruiters,companies and referral
-                  network to find your next role faster.</p>
-                <a href="/cvmarketing.html">Read More...</a>
+                <p>You can host your CV on our website and share the URL with anyone in secured manner.</p>
+                <a href="/cvhosting.html">Read More...</a>
               </div>
             </div>
           </div>
@@ -269,12 +341,12 @@
             <div class="step-box">
               <img src="assets/img/front/service-3.jpg">
               <div class="step-content">
-                <h3>Create notes
+                <h3>Get Real Hands On Experience
                   <br>
-                  for your job search.
+                  for getting the job.
                 </h3>
-                <p>Use Notes dashboard to keep track of your job search - No more keeping excel sheets and
-                  remembering information in your head.</p>
+                <p>We connect you to our partner companies those can offer you training to pick up right skills to get the Job.</p>
+                <a href="/cvoffers.html">Read More...</a>
               </div>
             </div>
           </div>
@@ -461,7 +533,7 @@
               notification.
               <br>
               <a
-                href="https://youtu.be/kXDOr4Z7fTI"
+                href="https://www.youtube.com/watch?v=vzyaq5pNz_s"
                 rel="noopener noreferrer"
                 target="_blank">Please refer this help Video.
               </a>
@@ -653,11 +725,11 @@
                 id="closeSuccess">Close
               </button>
             </div>
-            <div class="blink"><span class="downloadBlinkSpan"><button
+            <!--<div class="blink"><span class="downloadBlinkSpan"><button
               type="button"
               id="downloadCV"
               class="btn btn-link download">Download</button></span>
-            </div>
+            </div>-->
           </div>
         </div>
 
@@ -1131,17 +1203,23 @@
           var expires = "expires=" + d.toUTCString();
           document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+
         var cookieAcc = getCookie("cookieAcc");
 
-        $( "body" ).append( "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>" );
+        $("body")
+          .append(
+            "<div id=\"cookie-confirm-popup\"><div class=\"confirm-container\"><div class=\"container\"> This site uses cookies. <a href=\"/terms.html\">Find out more.</a> <button class=\"btn btn-primary\">Okay, thank you</button></div></div></div>");
         if (cookieAcc !== "1") {
-          $("#cookie-confirm-popup").addClass("active");
+          $("#cookie-confirm-popup")
+            .addClass("active");
         }
 
-        $("#cookie-confirm-popup .btn-primary").on("click", function() {
-          setCookie("cookieAcc", "1", 7);
-          $("#cookie-confirm-popup").removeClass("active");
-        });
+        $("#cookie-confirm-popup .btn-primary")
+          .on("click", function () {
+            setCookie("cookieAcc", "1", 7);
+            $("#cookie-confirm-popup")
+              .removeClass("active");
+          });
       });
     </script>
 

@@ -53,6 +53,19 @@ gulp.task('injectFront', ['stylesFront'], function () {
     return injectAlone({
         css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
         paths: [path.join(conf.paths.src, '/topcvreviews.html'), path.join(conf.paths.src, '/job-spec.html'),
+          path.join(conf.paths.src, '/jobkeywords-match.html'),
+          path.join(conf.paths.src, '/how-to-get-paid-internships.html'),
+          path.join(conf.paths.src, '/my-cv-tracker-internships.html'),
+          path.join(conf.paths.src, '/cv-writing-page.html'),
+          path.join(conf.paths.src, '/linkedin-profile-writing.html'),
+          path.join(conf.paths.src, '/cover-letter-page.html'),
+          path.join(conf.paths.src, '/cvhosting.html'),
+          path.join(conf.paths.src, '/cvoffers.html'),
+          path.join(conf.paths.src, '/cv-writing-packages.html'),
+          path.join(conf.paths.src, '/cv-writing-package-2.html'),
+          path.join(conf.paths.src, '/graduate-package-1.html'),
+          path.join(conf.paths.src, '/graduate-package-2.html'),
+          path.join(conf.paths.src, '/cv-writing-package-3.html'),
           path.join(conf.paths.src, '/pdf-viewer.html'), path.join(conf.paths.src, '/network-share.html'),
           path.join(conf.paths.src, '/context-link.html'), path.join(conf.paths.src, '/cv-box.html')]
     })

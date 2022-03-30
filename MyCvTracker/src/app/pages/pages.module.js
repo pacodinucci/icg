@@ -27,7 +27,10 @@
     "MyCvTracker.pages.jobResumePreview",
     "MyCvTracker.pages.resumeListing",
     "MyCvTracker.pages.cvBoxCandidates",
-    "MyCvTracker.pages.skillCategory"
+    "MyCvTracker.pages.skillCategory",
+    "MyCvTracker.pages.jobResumeLink",
+    "MyCvTracker.pages.jobResumeLinkContext",
+    "MyCvTracker.pages.bulkFolderResumes"
   ])
     .run(run);
 
@@ -73,7 +76,8 @@
           "/resumes-list",
           "/terms"
         ];
-        var restrictedPage = publicPages.indexOf($location.path()) === -1;
+        var restrictedPage = publicPages.indexOf($location.path()) === -1 && $location.path()
+          .indexOf("/resumes/") === -1;
         $rootScope.loginModal = false;
         // console.log(event);
         // console.log(next);
@@ -94,18 +98,35 @@
         var selfcomposePage = next.endsWith("/selfcompose.html");
         var termsPage = next.endsWith("/terms.html");
         var cvwritingPage = next.endsWith("/cvwritingpackages.html");
+        var freeCvReviewServicePage = next.endsWith("/cv-writing-page.html");
+        var landingQuickRevampPage = next.endsWith("/linkedin-profile-writing.html");
+        var landingGraduateCvPage = next.endsWith("/cover-letter-page.html");
+        var landingProfessionalCvPage = next.endsWith("/cv-writing-packages.html");
+        var landingCareerShiftingCvPage = next.endsWith("/cv-writing-package-2.html");
+        var landingCoverLetterPage = next.endsWith("/graduate-package-1.html");
+        var landingLinkedInProfileReviewPage = next.endsWith("/graduate-package-2.html");
+        var landingExecutiveCvPage = next.endsWith("/cv-writing-package-3.html");
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
+        var jobkeywordsPage = next.endsWith("/jobkeywords-match.html");
+        var paidInternships = next.endsWith("/how-to-get-paid-internships.html");
+        var selfFundedInternships = next.endsWith("/my-cv-tracker-internships.html");
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
         var networkSharePage = next.endsWith("/network-share.html");
         var contextLinkPage = next.endsWith("/context-link.html");
         var cvBoxFrontPage = next.endsWith("/cv-box.html");
+        var cvHostingPage =  next.endsWith("/cvhosting.html");
+        var cvOffersPage =  next.endsWith("/cvoffers.html");
 
         if (frontPage) {
           window.location.href = Utilities.baseUrl() + "/topcvreviews.html";
         } else if (jobSpecPage) {
           window.location.href = Utilities.baseUrl() + "/job-spec.html";
-        } else if (contextLinkPage) {
+        }
+        else if (jobkeywordsPage) {
+                  window.location.href = Utilities.baseUrl() + "/jobkeywords-match.html";
+        }
+         else if (contextLinkPage) {
           window.location.href = Utilities.baseUrl() + "/context-link.html";
         } else if (pdfViewerPage) {
           window.location.href = Utilities.baseUrl() + "/pdf-viewer.html";
@@ -123,10 +144,35 @@
           window.location.href = Utilities.baseUrl() + "/java_experts.html";
         } else if (termsPage) {
           window.location.href = Utilities.baseUrl() + "/terms.html";
-        } else if (cvwritingPage) {
+        }
+        else if (cvHostingPage) {
+           window.location.href = Utilities.baseUrl() + "/cvhosting.html";
+        }
+        else if (cvOffersPage) {
+             window.location.href = Utilities.baseUrl() + "/cvoffers.html";
+        }
+        else if(paidInternships) {
+             window.location.href = Utilities.baseUrl() + "/how-to-get-paid-internships.html";
+        }
+        else if(selfFundedInternships) {
+             window.location.href = Utilities.baseUrl() + "/my-cv-tracker-internships.html";
+        }
+        else if (cvwritingPage) {
           window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
         } else if (cvMarketingPage) {
           window.location.href = Utilities.baseUrl() + "/cvmarketing.html";
+        } else if (freeCvReviewServicePage) {
+          window.location.href = Utilities.baseUrl() + "/cv-writing-page.html";
+        } else if (landingQuickRevampPage) {
+          window.location.href = Utilities.baseUrl() + "/linkedin-profile-writing.html";
+        } else if (landingGraduateCvPage) {
+          window.location.href = Utilities.baseUrl() + "/cover-letter-page.html";
+        } else if (landingProfessionalCvPage) {
+          window.location.href = Utilities.baseUrl() + "/cv-writing-packages.html";
+        } else if (landingCoverLetterPage) {
+          window.location.href = Utilities.baseUrl() + "/graduate-package-1.html";
+        } else if (landingLinkedInProfileReviewPage) {
+          window.location.href = Utilities.baseUrl() + "/graduate-package-2.html";
         } else if (restrictedPage && !$auth.isAuthenticated()) {
           $location.url("/login");
         } else if (isAuthPages && $auth.isAuthenticated()) {

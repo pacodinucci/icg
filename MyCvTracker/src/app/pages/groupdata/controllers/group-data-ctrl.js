@@ -62,6 +62,34 @@
                     });
                 }
 
+                $scope.bulkUpload = function(bulkData,groupId){
+                var request = new FormData();
+                request.append("file", bulkData);
+                request.append("groupId" , groupId);
+
+                var url = Utilities.getBulkUploadMembersUrl();
+                   $http.put(url, request , {
+                     transformRequest : angular.identity,
+                     headers : { "Content-Type" : undefined }
+                   })
+                     .success(function (
+                       data,
+                       status,
+                       headers,
+                       config
+                     ) {
+                       $scope.formProcessing = false;
+                     })
+                     .error(function (
+                       data,
+                       status,
+                       headers,
+                       config
+                     ) {
+                       $scope.formProcessing = false;
+                     });
+                }
+
                  $scope.editMember = function(memberData,groupId){
 
                  if(groupId != null){
@@ -71,16 +99,15 @@
                  GroupDataSvc.saveMembers(memberData).then(function(selectedMembers){
 
                   $scope.newMemberData = {
-                                         id: '',
-                                         memberFirstName : '',
-                                         memberLastName : '',
-                                         memberEmail : '',
-                                         cvMarketingGroup : {
-                                             id : ''
-                                         }
-                                     };
-                                     $scope.getGroupMembers(memberData.cvMarketingGroup.id);
-
+                 id: '',
+                 memberFirstName : '',
+                 memberLastName : '',
+                 memberEmail : '',
+                 cvMarketingGroup : {
+                     id : ''
+                 }
+                };
+                 $scope.getGroupMembers(memberData.cvMarketingGroup.id);
 
                  }, function(data){
                  });

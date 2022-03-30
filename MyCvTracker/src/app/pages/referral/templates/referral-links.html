@@ -71,6 +71,8 @@
                 </div>
               </div>
 
+              <br/>
+
               <div class="link">
                 <a
                   ng-href="{{ getReferralLink(referral) }}"
@@ -88,6 +90,8 @@
                   <span style="vertical-align: middle">{{ (referral.refPublic || referral.referralType !== REFERRAL_TYPE.JOB_SPEC) ? "Published" : "Not published" }}</span>
                 </div>
               </div>
+
+              <br/>
 
               <div class="ctrls">
                 <div class="ctrls-container d-flex align-items-center">
@@ -138,6 +142,13 @@
                       class="dropdown-item"
                       href="#">
                       Matching resumes
+                    </a>
+                    <a
+                      ng-click="scanResumeFolder(referral.id)"
+                      ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC && scanUserId > 0"
+                      class="dropdown-item"
+                      href="#">
+                      Scanning folder
                     </a>
                     <a
                       ng-click="openUpdateSkillModal(referral.id, referral.referralLink)"

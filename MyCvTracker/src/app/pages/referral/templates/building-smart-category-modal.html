@@ -1,0 +1,56 @@
+<div id="categorizing-job-modal">
+  <div class="modal-header">
+    <h4
+      class="modal-title">Building smart category</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <label class="col-xs-12 col-md-3 col-form-label">
+        Category Name
+      </label>
+      <div class="col-xs-12 col-md-9">
+        <input
+          ng-disabled="buildingSmartForm.building"
+          ng-maxlength="100"
+          ng-model="buildingSmartForm.categoryName"
+          type="text"
+          class="form-control"
+          placeholder="Enter name of category" />
+      </div>
+    </div>
+    <div class="form-group row"  ng-repeat="skill in buildingSmartForm.defaultSkills track by ::skill.id">
+      <label class="col-xs-7">
+        <div class="category-name" ng-bind="::skill.name"></div>
+      </label>
+      <div class="col-xs-3 col-form-label" ng-bind="!!skill.rank ? ('Rank ' + skill.rank) : '.'">
+        .
+      </div>
+      <div class="col-xs-2 icon-col">
+        <div class="form-check">
+          <input
+            ng-click="addToSmartCategory($index)"
+            ng-checked="!!skill.rank"
+            class="form-check-input"
+            type="checkbox">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal-footer clearfix">
+    <button
+      ng-disabled="buildingSmartForm.building"
+      type="submit"
+      ng-click="applySmartCategory()"
+      class="btn btn-primary">
+      Apply
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      ng-click="closeBuildingModal(true)">
+      Cancel
+    </button>
+  </div>
+</div>
+

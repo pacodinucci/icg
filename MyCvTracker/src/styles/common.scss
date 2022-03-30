@@ -99,3 +99,20 @@ a.btn.btn-default {
     padding-bottom: calc(.8rem + 1px);
   }
 }
+
+.page-top {
+  ul.social-list {
+    > li {
+      display: inline-block;
+      margin: 0 2px;
+    }
+
+    i {
+      font-size: 16px;
+    }
+  }
+
+  .user-email {
+    color: #FFF;
+  }
+}

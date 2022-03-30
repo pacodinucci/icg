@@ -1,0 +1,45 @@
+<div id="scanning-folder-modal">
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      ng-click="closeModal()">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h4
+      class="modal-title">Matching Resumes</h4>
+  </div>
+  <div class="modal-body">
+    <div style="margin: 15px 0"
+      ng-repeat="aResume in scanFolderModalForm.resumes track by aResume.name">
+      <div class="matching-resume">
+        <div class="detail">
+          <div class="name">
+            {{ $index + 1 }}. {{ aResume.name }}
+          </div>
+
+          <div class="skills">
+            Found skills: <span ng-repeat="skill in aResume.skills">{{ skill }}{{ !$last ? ", " : "" }}</span>
+          </div>
+        </div>
+        <div class="ctrl">
+          <a ng-href="{{ getScanDownloadLink(aResume.name) }}" target="_blank">
+            <i class="fas fa-cloud-download-alt"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="scanFolderModalForm.loaded && scanFolderModalForm.resumes.length === 0">
+      <br />
+      <br />
+      <div class="text-secondary">
+        No Matching Found
+      </div>
+      <br />
+      <br />
+    </div>
+  </div>
+</div>

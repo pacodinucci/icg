@@ -7,14 +7,11 @@
           <div class="logo col-lg-3 col-md-3 col-6">
             <a ng-href="/"><img src="assets/img/front/logo.png" alt=""></a>
           </div>
-          <div class="col-lg-3 col-md-3 col-6">
-            <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu ng-if="$isAuthenticated"></a>
-          </div>
         </div>
 
         <div class="col-lg-6 col-md-6 col-12 m-align" ng-if="!$isAuthenticated">
             <!-- <div class="col-lg-10 col-md-10 col-20 m-align"> -->
-  					<ul class="upper-nav">
+  					<ul class="upper-nav social-list">
   						<li><a href=""><span><i class="fab fa-facebook-f"></i></span></a></li>
   						<li><a href=""><span><i class="fab fa-twitter"></i></span></a></li>
   						<li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
@@ -28,7 +25,7 @@
 
         <div class="col-lg-6 col-md-6 col-12 m-align" ng-if="$isAuthenticated">
             <div class="col-lg-10 col-md-10 col-20 m-align">
-  					<ul class="upper-nav">
+  					<ul class="upper-nav social-list">
   						<li><a href=""><span><i class="fab fa-facebook-f"></i></span></a></li>
   						<li><a href=""><span><i class="fab fa-twitter"></i></span></a></li>
   						<li><a href=""><span><i class="fab fa-instagram"></i></span></a></li>
@@ -48,7 +45,7 @@
                 <!--<msg-center></msg-center>-->
             </div>
             <div ng-if="$isAuthenticated" ng-controller="AccountCtrl">
-                <h5 class="text-right"><strong ng-bind="user.email">!</strong></h5>
+                <h5 class="text-right user-email"><strong ng-bind="user.email">!</strong></h5>
             </div>
   			</div>
       </div>

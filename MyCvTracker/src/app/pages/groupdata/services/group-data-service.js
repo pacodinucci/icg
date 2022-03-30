@@ -44,6 +44,11 @@ angular.module('MyCvTracker.pages.groupdata')
 
 					},
 
+					bulkUpload: function(file,groupId){
+
+		                return RestConfig.bulkUpload(url,request);
+					},
+
 					addGroups: function (groupData) {
                         var url = Utilities.addGroupsUrl();
                         return  RestConfig.addGroup(url,groupData);

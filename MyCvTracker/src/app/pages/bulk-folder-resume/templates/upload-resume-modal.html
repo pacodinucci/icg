@@ -1,0 +1,50 @@
+<form id="uploading-bulk-resume-modal" name="uploadResumeForm" novalidate ng-submit="uploadResume()">
+  <div class="modal-header">
+    <h4 class="modal-title">Upload Resume</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="control-label">Resume File (Can upload up to 10 files) <span class="file-size">(Max. file size upto 500KB)</span></div>
+      <input type="file" class="form-control" placeholder="Resume File" resume-file-model="uploadForm.resumeFiles"
+             accept=".pdf,.docx" id="fileUpload" multiple />
+      <div class="text-danger" style="margin-top: 10px" ng-if="uploadForm.invalidSize">
+        Invalid file size.
+      </div>
+      <div class="text-danger" style="margin-top: 10px" ng-if="uploadForm.invalidType">
+        Invalid file type.
+      </div>
+    </div>
+
+    <div class="upload-files">
+      <div class="file-process" ng-repeat="aResume in uploadForm.resumeFiles track by aResume.name">
+        <div class="name">
+          {{ $index + 1 }}. {{ aResume.name }}
+        </div>
+        <div class="size">
+          Size: {{ aResume.size }} bytes
+        </div>
+        <div class="text-danger" ng-if="uploadForm.uploaded && !!uploadForm.errorMap[aResume.name]">
+          {{ uploadForm.errorMap[aResume.name] }}
+        </div>
+        <div class="text-primary" ng-if="uploadForm.uploaded && !uploadForm.errorMap[aResume.name]">
+          Uploaded successfully
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer clearfix">
+    <button
+      type="submit" class="btn btn-primary" ng-disabled="resumeForm.$invalid || !!uploading ||
+      uploadForm.resumeFiles.length <= 0 || uploadForm.uploaded">
+      {{  !uploading ? "Upload" : "Uploading..." }}
+    </button>
+    <button
+      ng-disabled="!!uploading"
+      ng-click="closeModal()"
+      type="button" class="btn btn-danger">
+      Cancel
+    </button>
+  </div>
+</form>

@@ -213,7 +213,7 @@ a.social-links {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0, 0, 0, .125);
   border-radius: .25rem;
   text-decoration: none;
   color: #333;
@@ -704,6 +704,75 @@ header {
   border-color: #fff;
 }
 
+#landing-top-header {
+
+  .dropdown {
+    .dropdown-toggle {
+      color: #FFF;
+      font-family: 'museo_slab500';
+      cursor: default;
+      padding-bottom: 5px;
+
+      &:after {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: .255em;
+        vertical-align: middle;
+        content: "";
+        border-top: .3em solid;
+        border-right: .3em solid transparent;
+        border-bottom: 0;
+        border-left: .3em solid transparent;
+      }
+
+      &:hover {
+        color: #3492be;
+        transition: 0.5s linear;
+      }
+    }
+
+    .dropdown-menu {
+      padding: 1rem 0;
+      margin: 0;
+    }
+
+    .dropdown-header {
+      padding: .5rem 1.5rem;
+      font-size: 14px;
+    }
+
+    .dropdown-item {
+      display: block;
+      width: 100%;
+      padding: .5rem 1.5rem;
+      clear: both;
+      font-weight: 400;
+      color: #212529;
+      text-align: inherit;
+      white-space: nowrap;
+      background-color: transparent;
+      border: 0;
+
+      &:hover {
+        color: #489dc4;
+        transition: none;
+      }
+    }
+
+    &.show,
+    &:hover {
+      .dropdown-toggle {
+        color: #489dc4;
+      }
+
+      .dropdown-menu {
+        display: block;
+      }
+    }
+  }
+}
+
 /* footer starts */
 .footer {
   width: 100%;
@@ -1022,6 +1091,7 @@ header {
 
     .job-detail {
       font-family: 'museo_slab500';
+
       a {
         color: #FFF !important;
         text-decoration: underline !important;
@@ -1156,6 +1226,7 @@ header {
     border: none
   }
 }
+
 /* End Job Spec */
 
 #cookie-confirm-popup {

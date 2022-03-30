@@ -469,6 +469,9 @@ angular.module('MyCvTracker.shared')
                 getEditMembersUrl: function () {
                     return Constants.baseUrl + Constants.apis.editMembers.url;
                 },
+                getBulkUploadMembersUrl: function () {
+                    return Constants.baseUrl + Constants.apis.bulkUploadMembers.url;
+                },
                 getDeleteMembersUrl: function () {
                     return Constants.baseUrl + Constants.apis.deleteMembers.url;
                 },
@@ -651,6 +654,10 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + "/match-skills/{matchingId}/list";
                 },
 
+                findMatchingResumesInFolderUrl: function () {
+                    return Constants.baseUrl + "/job/{jobId}/bulk-folder-scan";
+                },
+
                 getCvBoxCandidateListUrl: function () {
                     return Constants.baseUrl + "/cvbox/candidates/list";
                 },
@@ -697,6 +704,12 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + "/social-registration/share-with-parent";
                 },
 
+                getUpdateResumeLinkUrl: function () {
+                    return Constants.baseUrl + "/user/resume/preview/link-id";
+                },
+                getCheckResumeLinkUrl: function () {
+                    return Constants.baseUrl + "/user/resume/preview/link/check";
+                },
 
                 gotoFrontPage: function () {
                     $location.path('base.front');
@@ -801,6 +814,12 @@ angular.module('MyCvTracker.shared')
                 },
                 getUpdatingResumeCategoriesUrl: function () {
                     return Constants.baseUrl + "/tech-skill/categorize/resume";
+                },
+                getBulkFolderListing: function () {
+                    return Constants.baseUrl + "/user/folder-resumes";
+                },
+                uploadFolderResumeUrl: function () {
+                    return Constants.baseUrl + "/user/bulk-folder/resume-upload";
                 },
                 baseUrl: function () {
                     var pathparts = location.pathname.split('/');
