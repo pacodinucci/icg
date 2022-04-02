@@ -1,0 +1,26 @@
+{
+  "compilerOptions" : {
+    "baseUrl": "./src/",
+    // path to output directory
+    "outDir" : "./dist/",
+    // Import non-ES modules as default imports.
+    "esModuleInterop" : true,
+    // Target latest version of ECMAScript.
+    "target" : "es5",
+    // use typescript to transpile jsx to js
+    "jsx" : "react",
+    // Process & infer types from .js files.
+    "allowJs" : true,
+    // Don't emit; allow Babel to transform files.
+    "noEmit" : true,
+    // Search under node_modules for non-relative imports.
+    "moduleResolution" : "node",
+    "importHelpers" : true
+  },
+  "include" : [
+    "./src/"
+  ],
+  "exclude" : [
+    "node_modules"
+  ]
+}

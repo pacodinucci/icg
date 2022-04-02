@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "baseUrl" : ".",
+    "paths" : {
+      "components/*" : [
+        "components/*"
+      ],
+      "containers/*" : [
+        "containers/*"
+      ],
+      "data/*" : [
+        "data/*"
+      ],
+      "hooks/*" : [
+        "hooks/*"
+      ],
+      "styles/*" : [
+        "styles/*"
+      ],
+      "utils/*" : [
+        "utils/*"
+      ],
+      "apis/*" : [
+        "apis/*"
+      ],
+      "services/*" : [
+        "services/*"
+      ],
+      "types/*" : [
+        "types/*"
+      ]
+    },
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true
+  },
+  "include": [".sr"],
+  "exclude": ["node_modules"]
+}
