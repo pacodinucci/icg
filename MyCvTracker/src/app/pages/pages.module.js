@@ -109,7 +109,7 @@
         var cvMarketingPage = next.endsWith("/cvmarketing.html");
         var jobSpecPage = next.endsWith("/job-spec.html");
         var jobkeywordsPage = next.endsWith("/jobkeywords-match.html");
-        var paidInternships = next.endsWith("/how-to-get-paid-internships.html");
+        var paidInternships = next.endsWith("/how-to-get-tech-internships.html");
         var selfFundedInternships = next.endsWith("/my-cv-tracker-internships.html");
         var pdfViewerPage = next.endsWith("/pdf-viewer.html");
         var networkSharePage = next.endsWith("/network-share.html");
