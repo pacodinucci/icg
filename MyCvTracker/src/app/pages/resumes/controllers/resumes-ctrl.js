@@ -1,6 +1,7 @@
 angular.module("MyCvTracker.pages.resumes")
 
   .controller("ResumesCtrl", [
+    "Constants",
     "toastr",
     "$rootScope",
     "$scope",
@@ -8,6 +9,7 @@ angular.module("MyCvTracker.pages.resumes")
     "$http",
 
     function (
+      Constants,
       toastr,
       $rootScope,
       $scope,
@@ -430,7 +432,7 @@ angular.module("MyCvTracker.pages.resumes")
       $scope.downloadMyResume = function (id) {
         ResumesSvc.getResumeToken(id)
           .then(function (data) {
-            var url = "https://mycvtracker.com:8080/user/downloadResume?accessToken=" + data.token;
+            var url = Constants.baseUrl + "/user/downloadResume?accessToken=" + data.token;
 
             const link = document.createElement("a");
             link.href = url;

@@ -658,6 +658,10 @@ angular.module('MyCvTracker.shared')
                     return Constants.baseUrl + "/job/{jobId}/bulk-folder-scan";
                 },
 
+                findMatchingResumesInMultipleFolderUrl: function () {
+                    return Constants.baseUrl + "/job/{jobId}/bulk-folders-scan";
+                },
+
                 getCvBoxCandidateListUrl: function () {
                     return Constants.baseUrl + "/cvbox/candidates/list";
                 },

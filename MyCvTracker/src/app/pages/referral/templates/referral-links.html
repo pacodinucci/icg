@@ -151,6 +151,13 @@
                       Scanning folder
                     </a>
                     <a
+                            ng-click="scanResumeMultipleFolder(referral.id)"
+                            ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC && scanUserId > 0"
+                            class="dropdown-item"
+                            href="#">
+                      Scanning Multiple Bulk folder
+                    </a>
+                    <a
                       ng-click="openUpdateSkillModal(referral.id, referral.referralLink)"
                       ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC"
                       class="dropdown-item"

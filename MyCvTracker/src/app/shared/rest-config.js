@@ -538,6 +538,11 @@ angular.module("MyCvTracker.shared")
           url = url.replace("{jobId}", id);
           return RESTSvc.get(url);
         },
+        scanMatchingResumesInMultipleFolder : function(id) {
+          var url = utilities.findMatchingResumesInMultipleFolderUrl();
+          url = url.replace("{jobId}", id);
+          return RESTSvc.get(url);
+        },
         getResumeTokenToPreview : function (
           url,
           referralLink,

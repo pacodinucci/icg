@@ -82,6 +82,9 @@ angular.module("MyCvTracker.pages.referral")
         findMatchingResumesInFolder : function(id) {
           return RestConfig.scanMatchingResumesInFolder(id);
         },
+        findMatchingResumesInMultipleFolder : function(id) {
+          return RestConfig.scanMatchingResumesInMultipleFolder(id);
+        },
         getUpdatingJobSkillsModal: function (scope, ctrlName) {
           var modalOpts = {
             templateUrl: 'app/pages/referral/templates/categorizing-modal.html',

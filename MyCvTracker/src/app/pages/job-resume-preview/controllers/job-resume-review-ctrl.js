@@ -147,9 +147,9 @@ angular.module("MyCvTracker.pages.jobResumePreview")
 
         var url = "";
         if (fileType !== "application/pdf") {
-          url = "https://view.officeapps.live.com/op/embed.aspx?src=https://mycvtracker.com:8080/user/previewResume?" + param;
+          url = "https://view.officeapps.live.com/op/embed.aspx?src=" + Constants.baseUrl +"/user/previewResume?" + param;
         } else {
-          url = "https://mycvtracker.com/pdf-viewer.html?pdf=https://mycvtracker.com:8080/user/previewResume?" + param;
+          url = Constants.viewUrl +"/pdf-viewer.html?pdf="+ Constants.baseUrl + "/user/previewResume?" + param;
         }
 
         $scope.resumePreview.url = url;

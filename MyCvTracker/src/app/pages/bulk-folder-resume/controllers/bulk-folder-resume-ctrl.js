@@ -1,6 +1,7 @@
 angular.module("MyCvTracker.pages.bulkFolderResumes")
 
   .controller("BulkFolderResumeCtrl", [
+    "Constants",
     "toastr",
     "$rootScope",
     "$scope",
@@ -9,6 +10,7 @@ angular.module("MyCvTracker.pages.bulkFolderResumes")
     "Authorization",
 
     function (
+      Constants,
       toastr,
       $rootScope,
       $scope,
@@ -101,7 +103,7 @@ angular.module("MyCvTracker.pages.bulkFolderResumes")
       }
 
       $scope.getDownloadLink = function(name) {
-        return 'https://mycvtracker.com:8080/user/bulk-folder/download/' + userId + '/' + name;
+        return Constants.baseUrl + '/user/bulk-folder/download/' + userId + '/' + name;
       }
 
       $scope.getFormattedPostDate = function (utc) {

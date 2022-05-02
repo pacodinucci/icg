@@ -101,7 +101,7 @@ angular.module("MyCvTracker.pages.referredResumes")
       $scope.downloadMyResume = function (id) {
         service.getResumeToken(id, referralLink)
           .then(function (data) {
-            var url = "https://mycvtracker.com:8080/user/downloadResume?accessToken=" + data.token;
+            var url = Constants.baseUrl + "/user/downloadResume?accessToken=" + data.token;
 
             const link = document.createElement('a');
             link.href = url;
@@ -118,7 +118,7 @@ angular.module("MyCvTracker.pages.referredResumes")
       $scope.openPreviewResume = function (id, fileType) {
         service.getResumeToken(id, referralLink)
           .then(function (data) {
-            // var url = "https://mycvtracker.com:8080/user/previewResume?accessToken=" + data.token;
+            // var url = "http://localhost:8080/user/previewResume?accessToken=" + data.token;
             // if (fileType !== "application/pdf") {
             //   url = "https://view.officeapps.live.com/op/embed.aspx?src=" + url;
             // }

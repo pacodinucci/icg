@@ -1049,7 +1049,7 @@
                     scoreboardTable.append(scoreboardTableBodyRow) // Append the current row to the scoreboard table body
                   }
                   const getScores = () => {
-                  fetch('http://localhost:3000/scores') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
+                   fetch('http://localhost:3000/scores') // Fetch for all scores. The response is an array of objects that is sorted in decreasing order
                   .then(res => res.json())
                   .then(scores => {
                   createScoreboardTable() // Clears scoreboard div if it has any children nodes, creates & appends the table
