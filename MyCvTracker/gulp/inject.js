@@ -54,6 +54,7 @@ gulp.task('injectFront', ['stylesFront'], function () {
         css: [path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'), path.join(conf.paths.tmp, '/serve/app/front.css')],
         paths: [path.join(conf.paths.src, '/topcvreviews.html'), path.join(conf.paths.src, '/job-spec.html'),
           path.join(conf.paths.src, '/jobkeywords-match.html'),
+          path.join(conf.paths.src, '/eleven_plus_spelling_game.html'),
           path.join(conf.paths.src, '/how-to-get-tech-internships.html'),
           path.join(conf.paths.src, '/my-cv-tracker-internships.html'),
           path.join(conf.paths.src, '/cv-writing-page.html'),
