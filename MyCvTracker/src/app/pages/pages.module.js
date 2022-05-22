@@ -100,6 +100,7 @@
         var cvwritingPage = next.endsWith("/cvwritingpackages.html");
         var freeCvReviewServicePage = next.endsWith("/cv-writing-page.html");
         var eleven_plus_spelling_game = next.endsWith("/eleven_plus_spelling_game.html");
+        var eleven_plus_synonym_game = next.endsWith("/eleven_plus_synonym_game.html");
         var landingQuickRevampPage = next.endsWith("/linkedin-profile-writing.html");
         var landingGraduateCvPage = next.endsWith("/cover-letter-page.html");
         var landingProfessionalCvPage = next.endsWith("/cv-writing-packages.html");
@@ -160,6 +161,9 @@
         }
         else if(eleven_plus_spelling_game) {
              window.location.href = Utilities.baseUrl() + "/eleven_plus_spelling_game.html";
+        }
+        else if(eleven_plus_synonym_game) {
+             window.location.href = Utilities.baseUrl() + "/eleven_plus_synonym_game.html";
         }
         else if (cvwritingPage) {
           window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
