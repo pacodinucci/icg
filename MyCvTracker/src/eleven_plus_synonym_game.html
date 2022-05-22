@@ -11,7 +11,7 @@
 
   gtag('config', 'UA-52786419-3');
 </script>
-    <title>My CV Tracker - Job Spec</title>
+    <title>My CV Tracker - Eleven Plus Synonym Game by Arshvir</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -21,7 +21,7 @@
 
     <meta
       property="og:title"
-      content="My CV Tracker - Eleven Plus Spelling Game by Arshvir " />
+      content="My CV Tracker - Eleven Plus Synonym Game by Arshvir " />
     <meta
       property="og:description"
       content="Eleven Plus Spelling Game" />
@@ -86,7 +86,7 @@
 
         clearQuizData();
         $.ajax({
-            url :  "https://mycvtracker.com:8080/elevenplus/spelling",
+            url :  "http://localhost:8080/elevenplus/synonym",
             type : "GET",
             data : "",
             contentType : "application/json", // tell jQuery not to set contentType
@@ -94,11 +94,13 @@
               document.getElementById("worddata").text = data;
               for (let i =1 ; i <= 10; i++) {
                 puzzleId = "WordPuzzle" + i;
-                document.getElementById(puzzleId).value = data[i-1].maskWord;
+                puzzleIdd = "WordPuzzle" + i + i;
+                document.getElementById(puzzleId).value = data[i-1].word;
+                document.getElementById(puzzleIdd).value = data[i-1].maskWord;
               }
 
               //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
-              utility.clearContactForm();
+              //utility.clearContactForm();
             },
             error : function (err) {
               toastr.error(data.status, "Error");
@@ -121,12 +123,12 @@
          let count = 0;
           for (let i =1 ; i <= 10; i++) {
                 puzzleId = "WordPuzzleAns" + i;
-                if(document.getElementById(puzzleId).value == data[i-1].word){
+                if(document.getElementById(puzzleId).value.toLowerCase() == data[i-1].synonym.toLowerCase()){
                     //alert("Your Answer " + document.getElementById(puzzleId).value + " is correct ");
                     ++count;
                 }
                 else{
-                    alert("Your Answer " + document.getElementById(puzzleId).value + " is incorrect --> Correct Answer is " + data[i-1].word);
+                    alert("Your Answer " + document.getElementById(puzzleId).value + " is incorrect --> Correct Answer is " + data[i-1].synonym);
                 }
           }
 
@@ -210,7 +212,7 @@
     <div class="services">
       <div class="container">
         <div class="title">
-          <h2 class="white-font">Fill up correct spelling and submit to get the results.</h2>
+          <h2 class="white-font">Fill up correct synonym and submit to get the results.</h2>
           <hr>
         </div>
 
@@ -218,25 +220,39 @@
             <form onSubmit={handleSubmit}>
               <input type="hidden" id="worddata" />
 
+              <input type="text" placeholder="Word" readonly />
+              <input type="text" placeholder="Masked Synonym" readonly />
+              <input type="text" placeholder="Synonym" autocomplete="off" /><br>
+
               <input type="text" id="WordPuzzle1" readonly />
+              <input type="text" id="WordPuzzle11" readonly />
               <input type="text" id="WordPuzzleAns1" autocomplete="off" /><br>
               <input type="text" id="WordPuzzle2" readonly />
+              <input type="text" id="WordPuzzle22" readonly />
               <input type="text" id="WordPuzzleAns2" autocomplete="off" /><br>
               <input type="text" id="WordPuzzle3" readonly />
+              <input type="text" id="WordPuzzle33" readonly />
               <input type="text" id="WordPuzzleAns3" autocomplete="off" /><br>
               <input type="text" id="WordPuzzle4" readonly/>
+              <input type="text" id="WordPuzzle44" readonly/>
               <input type="text" id="WordPuzzleAns4"  autocomplete="off" /><br>
               <input type="text" id="WordPuzzle5" readonly/>
+              <input type="text" id="WordPuzzle55" readonly/>
               <input type="text" id="WordPuzzleAns5" autocomplete="off" /><br>
               <input type="text" id="WordPuzzle6" readonly/>
+              <input type="text" id="WordPuzzle66" readonly/>
               <input type="text" id="WordPuzzleAns6" autocomplete="off" /><br>
               <input type="text" id="WordPuzzle7" readonly/>
+              <input type="text" id="WordPuzzle77" readonly/>
               <input type="text" id="WordPuzzleAns7" autocomplete="off" /><br>
               <input type="text" id="WordPuzzle8" readonly/>
+              <input type="text" id="WordPuzzle88" readonly/>
               <input type="text" id="WordPuzzleAns8" autocomplete="off" /><br>
               <input type="text" id="WordPuzzle9" readonly/>
+              <input type="text" id="WordPuzzle99" readonly/>
               <input type="text" id="WordPuzzleAns9" autocomplete="off" /><br>
               <input type="text" id="WordPuzzle10" readonly/>
+              <input type="text" id="WordPuzzle1010" readonly/>
               <input type="text" id="WordPuzzleAns10" autocomplete="off" /><br>
 
             </form>
