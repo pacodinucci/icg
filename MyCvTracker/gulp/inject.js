@@ -57,6 +57,7 @@ gulp.task('injectFront', ['stylesFront'], function () {
           path.join(conf.paths.src, '/eleven_plus_spelling_game.html'),
           path.join(conf.paths.src, '/eleven_plus_synonym_game.html'),
           path.join(conf.paths.src, '/eleven_plus_antonym_game.html'),
+           path.join(conf.paths.src, '/jobInterview.html'),
           path.join(conf.paths.src, '/how-to-get-tech-internships.html'),
           path.join(conf.paths.src, '/my-cv-tracker-internships.html'),
           path.join(conf.paths.src, '/cv-writing-page.html'),
