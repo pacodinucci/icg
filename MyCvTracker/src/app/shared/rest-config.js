@@ -220,6 +220,24 @@ angular.module("MyCvTracker.shared")
         ) {
           return RESTSvc.put(url, data);
         },
+        getQuestionsList : function (
+          url,
+          data
+        ) {
+          return RESTSvc.get(url, data);
+        },
+        editQuestionsList : function (
+          url,
+          data
+        ) {
+          return RESTSvc.put(url, data);
+        },
+         addQuestions : function (
+          url,
+          data
+        ) {
+          return RESTSvc.post(url, data);
+        },
         getMyNotes : function (
           url,
           data

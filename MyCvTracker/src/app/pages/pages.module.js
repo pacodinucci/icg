@@ -20,6 +20,7 @@
     "MyCvTracker.pages.CvMarketing",
     "MyCvTracker.pages.campaignNotifications",
     "MyCvTracker.pages.groupdata",
+    "MyCvTracker.pages.questions",
     "MyCvTracker.pages.jobs",
     "MyCvTracker.pages.jobList",
     "MyCvTracker.pages.targetResumeDetail",

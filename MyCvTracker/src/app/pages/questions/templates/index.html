@@ -1,0 +1,46 @@
+<section
+        id="question-listing-page"
+        ng-controller="QuestionListingCtrl">
+    <div class="body-section">
+        <div class="section-content">
+            <div class="section-title">
+                <h3>Questions</h3>
+            </div>
+
+            <button id="addQuestions" class="btn btn-primary" ng-href="/question-add">Add Questions</button><br><br>
+            <input id="interviewType" ng-model="interviewType"/>
+            <button id="searchQuestions" class="btn btn-primary" data-ng-click="loadQuestions()">SearchQuestions</button>
+
+
+            <div class="questions-list-result">
+                <div class="row">
+                    <div ng-repeat="aQuestion in questions track by aQuestion.id"
+                            class="col-xs-12 col-md-6">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+
+                            <label>question</label>
+                            <textarea rows="3" ng-model="aQuestion.question" class="form-control" id="aQuestion"></textarea>
+
+                            <label>option1</label>
+                            <textarea ng-model="aQuestion.option1" class="form-control" id="option1"></textarea>
+                            <label>option2</label>
+                            <textarea ng-model="aQuestion.option2" class="form-control" id="option2"></textarea>
+                            <label>option3</label>
+                            <textarea ng-model="aQuestion.option3" class="form-control" id="option3"></textarea>
+                            <label>option4</label>
+                            <textarea ng-model="aQuestion.option4" class="form-control" id="option4"></textarea>
+                            <label>correct</label>
+                            <textarea ng-model="aQuestion.correct" class="form-control" id="correct"></textarea>
+                            <label>questionType</label>
+                            <input ng-model="aQuestion.questionType" class="form-control" id="questionType"></input>
+
+                            <button id="editQuestions" class="btn btn-primary" data-ng-click="editQuestions(aQuestion)">Edit Question</button>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,33 @@
+<section
+        id="question-add-page"
+        ng-controller="QuestionListingCtrl">
+    <div class="body-section">
+        <div class="section-content">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+
+                    <label>question</label>
+                    <textarea rows="3" ng-model="aQuestion.question" class="form-control" id="aQuestion"></textarea>
+
+                    <label>option1</label>
+                    <textarea ng-model="aQuestion.option1" class="form-control" id="option1"></textarea>
+                    <label>option2</label>
+                    <textarea ng-model="aQuestion.option2" class="form-control" id="option2"></textarea>
+                    <label>option3</label>
+                    <textarea ng-model="aQuestion.option3" class="form-control" id="option3"></textarea>
+                    <label>option4</label>
+                    <textarea ng-model="aQuestion.option4" class="form-control" id="option4"></textarea>
+                    <label>correct</label>
+                    <textarea ng-model="aQuestion.correct" class="form-control" id="correct"></textarea>
+                    <label>questionType</label>
+                    <input ng-model="aQuestion.questionType" class="form-control" id="questionType"></input>
+
+                    <button id="addNewQuestion" class="btn btn-primary" data-ng-click="addQuestion(aQuestion)">Add Question</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

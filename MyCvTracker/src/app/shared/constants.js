@@ -218,6 +218,15 @@
                 bulkUploadMembers : {
                     url : '/cvmarketdata/addBulkMembers'
                 },
+                questionList : {
+                    url : '/interviews/questionslist'
+                },
+                editQuestionList : {
+                    url : '/interviews/editQuestion'
+                },
+                addQuestionUrl: {
+                    url : '/interviews/addQuestion'
+                },
                 notes: {
                     url: '/user/notesList'
                 },
