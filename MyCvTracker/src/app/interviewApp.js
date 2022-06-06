@@ -180,7 +180,7 @@ function createDownloadLink(blob) {
     fd.append("Candidate",document.getElementById("token").value);
     fd.append("questionId",document.getElementById("currentQuestionId").value)
     fd.append("attemptTime",Seconds_Between_Dates)
-    xhr.open("POST","http://localhost:8080/interviews/answer",true);
+    xhr.open("POST","https://mycvtracker.com:8080/interviews/answer",true);
     xhr.send(fd);
     })
     li.appendChild(document.createTextNode (" "))//add a space in between
