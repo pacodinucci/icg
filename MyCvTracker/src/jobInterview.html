@@ -114,7 +114,7 @@
 
         //clearQuizData();
         $.ajax({
-            url :  "http://localhost:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
+            url :  "https://mycvtracker.com:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
             type : "GET",
             contentType : "false", // tell jQuery not to set contentType
             success : function (data) {
@@ -162,7 +162,7 @@
 
       var fd=new FormData();
       fd.append("token",document.getElementById("token").value);
-      xhr.open("POST","http://localhost:8080/interviews/complete",true);
+      xhr.open("POST","https://mycvtracker.com:8080/interviews/complete",true);
       xhr.send(fd);
 
       alert("Thanks for attempting your Interview. Our team will get in touch soon.");
