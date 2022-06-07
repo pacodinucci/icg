@@ -38,6 +38,7 @@ function startRecording() {
     	Disable the record button until we get a success or fail from getUserMedia()
 	*/
 
+    recordButton.innerHTML = "Recording...";
 	recordButton.disabled = true;
 	stopButton.disabled = false;
 	//pauseButton.disabled = false
@@ -107,6 +108,7 @@ function stopRecording() {
     var stopButton = document.getElementById("stopButton");
     //var pauseButton = document.getElementById("pauseButton");
     document.getElementById("endTime").value = new Date();
+    recordButton.innerHTML = "Record";
 
 
 	//disable the stop button, enable the record too allow for new recordings

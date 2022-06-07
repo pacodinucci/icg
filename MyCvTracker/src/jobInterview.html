@@ -254,7 +254,8 @@
     <div class="services">
       <div class="container">
         <div class="title">
-          <h2 class="white-font">Press Load Question Button and Record your answer and upload to the server.</h2>
+          <h2 class="white-font">Press Load Interview Button to start the Interview. </h2>
+          <h2 class="white-font"> Record your answer and upload to the server.</h2>
           <hr>
         </div>
 
@@ -273,14 +274,14 @@
                   onload="loadInterviewPuzzle()"
                   id="interviewPuzzle"
                   class="form-control"
-                  placeholder="You got 30 seconds to answer each question.Press Load Quiz to start and you need to answer at least ten questions.You need to press Record button to record audio response.Once you stop recording you can upload your answer to Server."></textarea>
+                  placeholder="You got 30 seconds to answer each question.Press Load Interview to start and you need to answer at least ten questions.You need to press Record button to record audio response.Once you stop recording you can upload your answer to Server."></textarea>
 
 
             </form>
           </div>
 
         <div align="center" id="controls">
-          <button id="recordButton" class="btn btn-primary" onclick="startRecording()">Record</button>
+          <button id="recordButton" class="btn btn-danger" onclick="startRecording()">Record</button>
           <button id="stopButton" class="btn btn-primary" onclick="stopRecording()" disabled>Stop</button>
         </div>
        <!-- <h3>Recordings</h3>
@@ -291,8 +292,8 @@
           <br>
           <br>
           <div align="center">
-            <input type="submit" class="btn btn-primary" id="loadQuiz" value="Load Quiz!" onClick="loadInterviewPuzzle()" />
-            <input type="submit" class="btn btn-primary" id="nextQuestion" value="Next Question" onclick="nextQuestion()"/>
+            <input type="submit" class="btn btn-success" id="loadQuiz" value="Start Interview!!" onClick="loadInterviewPuzzle()" />
+            <input type="submit" class="btn btn-warning" id="nextQuestion" value="Next Question" onclick="nextQuestion()"/>
           </div>
 
         </div>
