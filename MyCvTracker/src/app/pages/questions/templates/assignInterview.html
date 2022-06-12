@@ -1,0 +1,31 @@
+<section
+        id="question-add-page"
+        ng-controller="QuestionListingCtrl">
+    <div class="body-section">
+        <div class="section-content">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+
+                    <label>Invite Message</label>
+                    <textarea rows="8" ng-model="interviewRequest.invite" class="form-control" id="invite"></textarea>
+                    <label>Candidate Name</label>
+                    <textarea ng-model="interviewRequest.candidateName" class="form-control" id="candidateName"></textarea>
+                    <label>Interview Owners</label>
+                    <textarea ng-model="interviewRequest.resultOwners" class="form-control" id="resultOwners"></textarea>
+                    <label>Candidate Email</label>
+                    <textarea ng-model="interviewRequest.candidateEmail" class="form-control" id="candidateEmail"></textarea>
+                    <label>Interview Type</label>
+                    <textarea ng-model="interviewRequest.interviewType" class="form-control" id="interviewType"></textarea>
+                    <label>No Of Questions</label>
+                    <textarea ng-model="interviewRequest.noOfQuestions" class="form-control" id="noOfQuestions"></textarea>
+                    <br>
+                    <br>
+                    <button id="assignInterview" class="btn btn-primary" data-ng-click="assignInterview(interviewRequest)">Assign Interview</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

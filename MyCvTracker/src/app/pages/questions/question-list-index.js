@@ -32,6 +32,19 @@
         });
     }
 
+/** @ngInject */
+ function routeConfig($stateProvider) {
+      $stateProvider
+        .state("interviewQuestionsAdd", {
+          url : "/assign-interview",
+          templateUrl : "app/pages/questions/templates/assignInterview.html",
+          title : "Assign Interview Data",
+          sidebarMeta : {
+            icon : "fa fa-book",
+            order : 6,
+          },
+        });
+    }
 })();
 
 

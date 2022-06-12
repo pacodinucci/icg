@@ -61,99 +61,16 @@ angular.module("MyCvTracker.pages.questions")
               $scope.questions = data;
             });
       };
-      $scope.loadReviewByToken = function () {
-        mainSvc.getReview(reviewToken)
-          .then(function (data) {
-            $scope.listReviews.push(data);
-          })
-          .catch(function () {
-            reviewToken = null;
-            $scope.resumePreview.reviewTokenExpired = true;
-          });
+
+      $scope.assignInterview = function(interviewRequest){
+       mainSvc.assignInterview(interviewRequest)
+      .then(function (data) {
+        toastr.success("Your request has been submitted ");
+      })
+      .catch(function () {
+
+      });
       };
-
-      $scope.extendPreview = function () {
-        $scope.extendForm.submitting = true;
-        mainSvc.extendResumePreview(extendToken, extendOriginalToken)
-          .then(function () {
-            $scope.extendForm.submitted = true;
-            $scope.extendForm.failed = false;
-            $scope.extendForm.submitting = false;
-          })
-          .catch(function () {
-            $scope.extendForm.submitted = false;
-            $scope.extendForm.failed = true;
-            $scope.extendForm.submitting = false;
-          });
-      };
-
-      $scope.submitReview = function () {
-        var email = $scope.writingForm.email;
-        var content = $scope.writingForm.content;
-
-        var emailInvalid = !EMAIL_REGEX.test(email);
-        $scope.writingForm.emailInvalid = emailInvalid;
-        var contentInvalid = content.length <= 0;
-        $scope.writingForm.contentInvalid = contentInvalid;
-
-        if (!emailInvalid && !contentInvalid) {
-          $scope.writingForm.submitting = true;
-          mainSvc.submitResumeReview(accessToken, previewToken, originalToken, email, content)
-            .then(function () {
-              $scope.writingForm.submitted = true;
-              $scope.writingForm.submitting = false;
-            })
-            .catch(function () {
-              $scope.writingForm.expired = true;
-              $scope.writingForm.submitting = false;
-            });
-        }
-      };
-
-      $scope.activeReply = function (review) {
-        if (!review["replyActive"]) {
-          review.listReply = [];
-          review["replyActive"] = true;
-
-          var reviewId = review.id;
-
-          // load list comments
-          mainSvc.getReviewComments(reviewId, reviewToken)
-            .then(function (data) {
-              review.listReply = data;
-            });
-        }
-      };
-
-      $scope.writeReviewComment = function (review) {
-        if (!review.inReviewSubmitting) {
-          review.inReviewSubmitting = true;
-          var reviewId = review.id;
-          var content = review.replyContent;
-
-          if (!!content) {
-            review.replyContent = "";
-
-            mainSvc.submitReviewComment(reviewId, content, reviewToken)
-              .then(function (data) {
-                data.userEmail = "You";
-                review.listReply.push(data);
-
-                var noReply = review.noOfReply;
-                if (!noReply) noReply = 0;
-                noReply++;
-                review.noOfReply = noReply;
-
-                review.inReviewSubmitting = false;
-              })
-              .catch(function () {
-                toastr.error("You are not authorized to reply to this thread!");
-                review.inReviewSubmitting = false;
-              });
-          }
-        }
-      };
-
 
       $scope.trustSrc = function (src, cdt) {
         return $sce.trustAsResourceUrl((src + "%26cdt=" + cdt));
@@ -165,7 +82,15 @@ angular.module("MyCvTracker.pages.questions")
 
       $scope.init = function () {
         $scope.loadQuestions();
-      };
+
+        $scope.interviewRequest = {
+             candidateName: "",
+             candidateEmail: "",
+             resultOwners: "",
+             invite:"",
+             interviewType:""
+             };
+        }
 
       $scope.$on("$destroy", function () {
         $rootScope.headerLoginRedirect = "";

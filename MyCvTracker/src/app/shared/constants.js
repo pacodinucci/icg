@@ -227,6 +227,9 @@
                 addQuestionUrl: {
                     url : '/interviews/addQuestion'
                 },
+                assignInterview: {
+                    url : '/interviews/assignInterview'
+                },
                 notes: {
                     url: '/user/notesList'
                 },

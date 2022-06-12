@@ -238,6 +238,9 @@ angular.module("MyCvTracker.shared")
         ) {
           return RESTSvc.post(url, data);
         },
+        assignInterview : function(url,data){
+            return RESTSvc.post(url, data);
+        },
         getMyNotes : function (
           url,
           data

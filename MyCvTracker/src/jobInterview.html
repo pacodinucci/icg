@@ -114,13 +114,14 @@
 
         //clearQuizData();
         $.ajax({
-            url :  "https://mycvtracker.com:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
+            url :  "http://localhost:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
             type : "GET",
             contentType : "false", // tell jQuery not to set contentType
             success : function (data) {
               document.getElementById("quizdata").text = data;
+              document.getElementById("totalQuestion").text = data.length;
               document.getElementById("interviewPuzzle").value = data[0].question;
-              document.getElementById("currentQuestion").value = 0;
+              document.getElementById("currentQuestion").value = 1;
               document.getElementById("currentQuestionId").value = data[0].id;
               var loadQuiz =  document.getElementById("loadQuiz");
               loadQuiz.disabled = true;
@@ -148,7 +149,7 @@
 
       let currentQuestion = document.getElementById("currentQuestion").value;
       document.getElementById("recordingsList").innerHTML = "";
-      if(currentQuestion == 9)
+      if(currentQuestion == document.getElementById("totalQuestion").text)
       {
          var nextQuestion =  document.getElementById("nextQuestion");
          nextQuestion.disabled = true;
@@ -162,16 +163,17 @@
 
       var fd=new FormData();
       fd.append("token",document.getElementById("token").value);
-      xhr.open("POST","https://mycvtracker.com:8080/interviews/complete",true);
+      xhr.open("POST","http://localhost:8080/interviews/complete",true);
       xhr.send(fd);
 
       alert("Thanks for attempting your Interview. Our team will get in touch soon.");
 
       }else {
-          currentQuestion = ++currentQuestion;
+
           var data = document.getElementById("quizdata").text;
           document.getElementById("interviewPuzzle").value = data[currentQuestion].question;
           document.getElementById("currentQuestionId").value = data[currentQuestion].id;
+          currentQuestion = ++currentQuestion;
           document.getElementById("currentQuestion").value = currentQuestion;
 
          // loadInterviewPuzzle();
@@ -263,6 +265,7 @@
             <form onSubmit={handleSubmit}>
               <input type="hidden" id="quizdata" />
               <input type="hidden" id="currentQuestion" />
+              <input type="hidden" id="totalQuestion" />
               <input type="hidden" id="currentQuestionId" />
               <input type="hidden" id="token" />
               <input type="hidden" id="startTime" />
@@ -881,7 +884,7 @@
             "from" : fromName,
             "content" : content
           };
-          utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
+          utility.sendEmail("http://localhost:8080/auth/contact", "POST", data);
 
         });
 
@@ -1042,7 +1045,7 @@
               fd.append("jobDescription", $("#job-spec-box1").val());
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/user/jobsMatch",
+                url : "http://localhost:8080/user/jobsMatch",
                 type : "POST",
                 data : fd,
                 processData : false, // tell jQuery not to process the data
@@ -1169,7 +1172,7 @@
                 .html("Generating...");
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
+                url : "http://localhost:8080/links/shareOutsideReferral",
                 type : "POST",
                 data : JSON.stringify({
                   referralLink : refCode,
@@ -1207,7 +1210,7 @@
         if (!!refCode) {
           // load job spec
           $.ajax({
-            url : "https://mycvtracker.com:8080/links/referralDetails?referralLink=" + refCode,
+            url : "http://localhost:8080/links/referralDetails?referralLink=" + refCode,
             type : "GET",
             dataType : "json",
             contentType : "application/json",
@@ -1232,7 +1235,7 @@
                   //   $("#text-link-preview").html()
                   // }, 200);
                 } else {
-                  var fileLink = "https://mycvtracker.com:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
+                  var fileLink = "http://localhost:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
                   var fileType = data.previewFileType;
                   if (fileType === "application/pdf") {
                     var iframeUrl = "https://mycvtracker.com/pdf-viewer.html?pdf=" + fileLink;

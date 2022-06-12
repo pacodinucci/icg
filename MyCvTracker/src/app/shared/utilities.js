@@ -484,6 +484,9 @@ angular.module('MyCvTracker.shared')
                 addQuestionUrl: function () {
                     return Constants.baseUrl + Constants.apis.addQuestionUrl.url;
                 },
+                assignInterviewUrl: function () {
+                    return Constants.baseUrl + Constants.apis.assignInterview.url;
+                },
                 getEditCampaignNotesUrl: function () {
                     return Constants.baseUrl + Constants.apis.editNotes.url;
                 },

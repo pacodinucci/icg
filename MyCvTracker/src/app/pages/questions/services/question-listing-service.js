@@ -88,18 +88,11 @@ angular.module('MyCvTracker.pages.questions')
                         var url = Utilities.addQuestionUrl();
                         return RestConfig.addQuestions(url,questions);
                     },
-                  	viewMyNotes: function (noteId) {
-						var url = Utilities.viewMyCampaignNotesUrl() +"?id=" + noteId;
-						return  RestConfig.getMyNotes(url);
-					},
-                    bulkUpdateNotes: function (requestOb) {
-                        var url = Utilities.bulkCampaignNotesUrl();
-                        return RestConfig.bulkUpdateNotes(url, requestOb);
-                    },
-					saveMyNotes: function (requestOb) {
-						var url = Utilities.getEditCampaignNotesUrl();
-						return RestConfig.saveNotesRequest(url, requestOb);
-					}
+                    assignInterview: function(interviewRequest) {
+                       var url = Utilities.assignInterviewUrl();
+                       return RestConfig.assignInterview(url,interviewRequest);
+                    }
+
             	};
             }
         ]);
