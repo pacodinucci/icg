@@ -114,7 +114,7 @@
 
         //clearQuizData();
         $.ajax({
-            url :  "http://localhost:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
+            url :  "https://mycvtracker.com:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
             type : "GET",
             contentType : "false", // tell jQuery not to set contentType
             success : function (data) {
@@ -163,7 +163,7 @@
 
       var fd=new FormData();
       fd.append("token",document.getElementById("token").value);
-      xhr.open("POST","http://localhost:8080/interviews/complete",true);
+      xhr.open("POST","https://mycvtracker.com:8080/interviews/complete",true);
       xhr.send(fd);
 
       alert("Thanks for attempting your Interview. Our team will get in touch soon.");
@@ -884,7 +884,7 @@
             "from" : fromName,
             "content" : content
           };
-          utility.sendEmail("http://localhost:8080/auth/contact", "POST", data);
+          utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
 
         });
 
@@ -1045,7 +1045,7 @@
               fd.append("jobDescription", $("#job-spec-box1").val());
 
               $.ajax({
-                url : "http://localhost:8080/user/jobsMatch",
+                url : "https://mycvtracker.com:8080/user/jobsMatch",
                 type : "POST",
                 data : fd,
                 processData : false, // tell jQuery not to process the data
@@ -1172,7 +1172,7 @@
                 .html("Generating...");
 
               $.ajax({
-                url : "http://localhost:8080/links/shareOutsideReferral",
+                url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
                 type : "POST",
                 data : JSON.stringify({
                   referralLink : refCode,
@@ -1210,7 +1210,7 @@
         if (!!refCode) {
           // load job spec
           $.ajax({
-            url : "http://localhost:8080/links/referralDetails?referralLink=" + refCode,
+            url : "https://mycvtracker.com:8080/links/referralDetails?referralLink=" + refCode,
             type : "GET",
             dataType : "json",
             contentType : "application/json",
@@ -1235,7 +1235,7 @@
                   //   $("#text-link-preview").html()
                   // }, 200);
                 } else {
-                  var fileLink = "http://localhost:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
+                  var fileLink = "https://mycvtracker.com:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
                   var fileType = data.previewFileType;
                   if (fileType === "application/pdf") {
                     var iframeUrl = "https://mycvtracker.com/pdf-viewer.html?pdf=" + fileLink;
