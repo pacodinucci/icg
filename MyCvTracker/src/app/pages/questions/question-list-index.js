@@ -16,34 +16,28 @@
           order : 5,
         },
       });
-  }
 
-  /** @ngInject */
- function routeConfig($stateProvider) {
-      $stateProvider
-        .state("interviewQuestionsAdd", {
-          url : "/question-add",
-          templateUrl : "app/pages/questions/templates/addQuestion.html",
-          title : "Add Question Data",
-          sidebarMeta : {
-            icon : "fa fa-book",
-            order : 6,
-          },
-        });
-    }
+    $stateProvider
+      .state("interviewQuestionsAssign", {
+        url : "/assign-interview",
+        templateUrl : "app/pages/questions/templates/assignInterview.html",
+        title : "Assign Interview Data",
+        sidebarMeta : {
+          icon : "fa fa-book",
+          order : 7,
+        },
+      });
 
-/** @ngInject */
- function routeConfig($stateProvider) {
-      $stateProvider
-        .state("interviewQuestionsAdd", {
-          url : "/assign-interview",
-          templateUrl : "app/pages/questions/templates/assignInterview.html",
-          title : "Assign Interview Data",
-          sidebarMeta : {
-            icon : "fa fa-book",
-            order : 6,
-          },
-        });
+    $stateProvider
+          .state("interviewQuestionsAdd", {
+            url : "/question-add",
+            templateUrl : "app/pages/questions/templates/addQuestion.html",
+            title : "Add Question Data",
+            sidebarMeta : {
+              icon : "fa fa-book",
+              order : 6,
+            },
+          });
     }
 })();
 
