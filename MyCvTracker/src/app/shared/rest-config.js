@@ -232,6 +232,12 @@ angular.module("MyCvTracker.shared")
         ) {
           return RESTSvc.put(url, data);
         },
+         deleteQuestionsList : function (
+          url,
+          data
+        ) {
+          return RESTSvc.put(url, data);
+        },
          addQuestions : function (
           url,
           data
@@ -240,6 +246,9 @@ angular.module("MyCvTracker.shared")
         },
         assignInterview : function(url,data){
             return RESTSvc.post(url, data);
+        },
+        getResults : function(url,candidateDetails){
+          return RESTSvc.put(url,candidateDetails);
         },
         getMyNotes : function (
           url,

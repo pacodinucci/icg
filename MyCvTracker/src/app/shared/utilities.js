@@ -481,11 +481,17 @@ angular.module('MyCvTracker.shared')
                 editQuestionsListUrl: function () {
                     return Constants.baseUrl + Constants.apis.editQuestionList.url;
                 },
+                deleteQuestionsListUrl: function () {
+                    return Constants.baseUrl + Constants.apis.deleteQuestionList.url;
+                },
                 addQuestionUrl: function () {
                     return Constants.baseUrl + Constants.apis.addQuestionUrl.url;
                 },
                 assignInterviewUrl: function () {
                     return Constants.baseUrl + Constants.apis.assignInterview.url;
+                },
+                getResultsUrl: function () {
+                    return Constants.baseUrl + Constants.apis.getResults.url;
                 },
                 getEditCampaignNotesUrl: function () {
                     return Constants.baseUrl + Constants.apis.editNotes.url;

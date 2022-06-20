@@ -84,6 +84,10 @@ angular.module('MyCvTracker.pages.questions')
                         var url = Utilities.editQuestionsListUrl();
                         return  RestConfig.editQuestionsList(url,questions);
                     },
+                    deleteQuestions: function(questions) {
+                        var url = Utilities.deleteQuestionsListUrl();
+                        return  RestConfig.deleteQuestionsList(url,questions);
+                    },
                     addQuestions: function(questions) {
                         var url = Utilities.addQuestionUrl();
                         return RestConfig.addQuestions(url,questions);
@@ -91,8 +95,11 @@ angular.module('MyCvTracker.pages.questions')
                     assignInterview: function(interviewRequest) {
                        var url = Utilities.assignInterviewUrl();
                        return RestConfig.assignInterview(url,interviewRequest);
+                    },
+                    getResults: function(candidateDetails){
+                     var url = Utilities.getResultsUrl();
+                      return RestConfig.getResults(url,candidateDetails);
                     }
-
             	};
             }
         ]);

@@ -224,11 +224,17 @@
                 editQuestionList : {
                     url : '/interviews/editQuestion'
                 },
+                deleteQuestionList : {
+                    url : '/interviews/deleteQuestion'
+                },
                 addQuestionUrl: {
                     url : '/interviews/addQuestion'
                 },
                 assignInterview: {
                     url : '/interviews/assignInterview'
+                },
+                getResults: {
+                    url : '/interviews/candidateResults'
                 },
                 notes: {
                     url: '/user/notesList'

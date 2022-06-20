@@ -1,9 +1,24 @@
 <section
         id="question-add-page"
-        ng-controller="QuestionListingCtrl">
+            ng-controller="QuestionListingCtrl">
     <div class="body-section">
         <div class="section-content">
 
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+
+                    <label>Get Interview Results</label><br>
+                    <label>Candidate Email</label>
+                    <textarea rows="8" ng-model="candidateDetails.candidate" class="form-control" id="candidate"></textarea>
+                    <label>Token</label>
+                    <textarea rows="8" ng-model="candidateDetails.token" class="form-control" id="token"></textarea>
+                    <br>
+                    <br>
+                    <button id="getResults" class="btn btn-primary" data-ng-click="getResults(candidateDetails)">Get Results</button>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">

@@ -52,14 +52,35 @@ angular.module("MyCvTracker.pages.questions")
           mainSvc.editQuestions(question)
             .then(function (data) {
               $scope.questions = data;
+              toastr.success("Your question has been edited ");
             });
       };
+
+    $scope.deleteQuestions = function (question) {
+        mainSvc.deleteQuestions(question)
+          .then(function (data) {
+            $scope.questions = data;
+            toastr.success("Your question has been deleted ");
+          });
+    };
 
      $scope.addQuestion = function (question) {
           mainSvc.addQuestions(question)
             .then(function (data) {
               $scope.questions = data;
+              toastr.success("Your question has been submitted ");
             });
+      };
+
+      $scope.getResults = function(candidateDetails){
+
+       mainSvc.getResults(candidateDetails)
+       .then(function (data) {
+        toastr.success("Your request has been submitted ");
+        })
+       .catch(function () {
+
+        });
       };
 
       $scope.assignInterview = function(interviewRequest){
@@ -82,6 +103,14 @@ angular.module("MyCvTracker.pages.questions")
 
       $scope.init = function () {
         $scope.loadQuestions();
+
+        $scope.candidateResultsEmail = "";
+        $scope.token = "";
+
+        $scope.candidateDetails = {
+            candidate: "",
+            token: ""
+        }
 
         $scope.interviewRequest = {
              candidateName: "",
