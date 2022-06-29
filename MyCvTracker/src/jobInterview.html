@@ -281,7 +281,8 @@
               placeholder="You have 30 seconds to answer each question, Please ensure access to your microphone is enabled to confirm that your response will be recorded.
                Press Start Interview when you're ready to proceed with the interview questions, clicking record when you're prepared to answer.
                Use the demo question to practice your response, and get more comfortable with the method of the audio interview.
-               You can playback your recording to determine if you are satisfied with the audio, and then ensure you upload your answer to the server to confirm your answer.
+               You can playback your recording to determine if you are satisfied with the audio, and then ensure you upload your answer to the server to confirm your answer before moving to next Question.
+               Please note you need to record answer and submit answer at each question before moving to next question.
                Continue this process until you’ve answered a minimum of 10 questions!"></textarea>
 
 
@@ -301,7 +302,7 @@
           <br>
           <div align="center">
             <input type="submit" class="btn btn-success" id="loadQuiz" value="Start Interview!!" onClick="loadInterviewPuzzle()" />
-            <input type="submit" class="btn btn-warning" id="nextQuestion" value="Next Question" onclick="nextQuestion()"/>
+            <input type="submit" class="btn btn-warning" id="nextQuestion" value="Next Question" onclick="nextQuestion()" disabled />
           </div>
 
         </div>

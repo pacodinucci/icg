@@ -25,6 +25,7 @@ function startRecording() {
 
 	var recordButton = document.getElementById("recordButton");
     var stopButton = document.getElementById("stopButton");
+    var nextQuestion = document.getElementById("nextQuestion");
    // var pauseButton = document.getElementById("pauseButton");
 
 	/*
@@ -41,6 +42,7 @@ function startRecording() {
     recordButton.innerHTML = "Recording...";
 	recordButton.disabled = true;
 	stopButton.disabled = false;
+	nextQuestion.disabled = true;
 	//pauseButton.disabled = false
 
 	/*
@@ -109,12 +111,13 @@ function stopRecording() {
     //var pauseButton = document.getElementById("pauseButton");
     document.getElementById("endTime").value = new Date();
     recordButton.innerHTML = "Record";
-
+    var nextQuestion = document.getElementById("nextQuestion");
 
 	//disable the stop button, enable the record too allow for new recordings
 	stopButton.disabled = true;
 	recordButton.disabled = false;
 	//pauseButton.disabled = true;
+	nextQuestion.disabled = false;
 
 	//reset button just in case the recording is stopped while paused
 	//pauseButton.innerHTML="Pause";
