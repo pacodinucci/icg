@@ -83,13 +83,20 @@ angular.module("MyCvTracker.pages.questions")
         });
       };
 
-      $scope.assignInterview = function(interviewRequest){
+      $scope.assignInterview = function(myfile,interviewRequest){
+
+        var Reader = new FileReader();
+        Reader.readAsText(myfile, "UTF-8");
+        Reader.onload = function (evt) {
+            $scope.interviewRequest.candidateList = Reader.result;
+        }
+
        mainSvc.assignInterview(interviewRequest)
       .then(function (data) {
         toastr.success("Your request has been submitted ");
       })
       .catch(function () {
-
+        toastr.error("Your request is failed ");
       });
       };
 
@@ -117,7 +124,8 @@ angular.module("MyCvTracker.pages.questions")
              candidateEmail: "",
              resultOwners: "",
              invite:"",
-             interviewType:""
+             interviewType:"",
+             candidateList: ""
              };
         }
 

@@ -37,7 +37,10 @@
                     <textarea ng-model="interviewRequest.noOfQuestions" class="form-control" id="noOfQuestions"></textarea>
                     <br>
                     <br>
-                    <button id="assignInterview" class="btn btn-primary" data-ng-click="assignInterview(interviewRequest)">Assign Interview</button>
+                    <input type="file" class="form-control" placeholder="Candidate Data" file-model="myFile" accept=".text,.csv" id="fileUpload"/>
+                    <br/>
+                    <br/>
+                    <button id="assignInterview" class="btn btn-primary" data-ng-click="assignInterview(myFile,interviewRequest)">Assign Interview</button>
                 </div>
             </div>
         </div>
