@@ -247,6 +247,9 @@ angular.module("MyCvTracker.shared")
         assignInterview : function(url,data){
             return RESTSvc.post(url, data);
         },
+        sendReminders : function(url,data){
+            return RESTSvc.post(url, data);
+        },
         getResults : function(url,candidateDetails){
           return RESTSvc.put(url,candidateDetails);
         },

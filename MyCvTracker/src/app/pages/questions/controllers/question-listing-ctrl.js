@@ -85,10 +85,12 @@ angular.module("MyCvTracker.pages.questions")
 
       $scope.assignInterview = function(myfile,interviewRequest){
 
+        if(myfile != null){
         var Reader = new FileReader();
         Reader.readAsText(myfile, "UTF-8");
         Reader.onload = function (evt) {
             $scope.interviewRequest.candidateList = Reader.result;
+        }
         }
 
        mainSvc.assignInterview(interviewRequest)
@@ -99,6 +101,25 @@ angular.module("MyCvTracker.pages.questions")
         toastr.error("Your request is failed ");
       });
       };
+
+       $scope.sendReminders = function(myfile,interviewRequest){
+
+          if(myfile != null){
+          var Reader = new FileReader();
+          Reader.readAsText(myfile, "UTF-8");
+          Reader.onload = function (evt) {
+              $scope.interviewRequest.candidateList = Reader.result;
+          }
+          }
+
+         mainSvc.sendReminders(interviewRequest)
+        .then(function (data) {
+          toastr.success("Your request has been submitted ");
+        })
+        .catch(function () {
+          toastr.error("Your request is failed ");
+        });
+        };
 
       $scope.trustSrc = function (src, cdt) {
         return $sce.trustAsResourceUrl((src + "%26cdt=" + cdt));

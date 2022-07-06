@@ -490,6 +490,9 @@ angular.module('MyCvTracker.shared')
                 assignInterviewUrl: function () {
                     return Constants.baseUrl + Constants.apis.assignInterview.url;
                 },
+                sendReminderUrl: function () {
+                    return Constants.baseUrl + Constants.apis.sendReminder.url;
+                },
                 getResultsUrl: function () {
                     return Constants.baseUrl + Constants.apis.getResults.url;
                 },
