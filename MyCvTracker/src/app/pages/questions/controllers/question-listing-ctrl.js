@@ -137,7 +137,14 @@ angular.module("MyCvTracker.pages.questions")
 
         $scope.candidateDetails = {
             candidate: "",
-            token: ""
+            token: "",
+            jobLink: "",
+            candidateName: "",
+            candidateEmail: "",
+            resultOwners: "",
+            invite:"",
+            interviewType:"",
+            candidateList: ""
         }
 
         $scope.interviewRequest = {
@@ -146,6 +153,7 @@ angular.module("MyCvTracker.pages.questions")
              resultOwners: "",
              invite:"",
              interviewType:"",
+             jobLink: "",
              candidateList: ""
              };
         }

@@ -98,7 +98,7 @@ angular.module('MyCvTracker.pages.questions')
                     },
                     sendReminders: function(interviewRequest) {
                        var url = Utilities.sendReminderUrl();
-                       return RestConfig.sendReminder(url,interviewRequest);
+                       return RestConfig.sendReminders(url,interviewRequest);
                     },
                     getResults: function(candidateDetails){
                      var url = Utilities.getResultsUrl();

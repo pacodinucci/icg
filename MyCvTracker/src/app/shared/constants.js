@@ -234,7 +234,7 @@
                     url : '/interviews/assignInterview'
                 },
                 sendReminder: {
-                    url : '/interviews//sendReminders'
+                    url : '/interviews/sendReminders'
                 },
                 getResults: {
                     url : '/interviews/candidateResults'
