@@ -206,13 +206,15 @@
         document.getElementById("currentQuestionId").value = data[currentQuestion].id;
 
         document.getElementById("currentQuestion").value = currentQuestion;
-        document.getElementById("option1Data").value = data[currentQuestion].option1;
-        document.getElementById("option2Data").value = data[currentQuestion].option2;
-        document.getElementById("option3Data").value = data[currentQuestion].option3;
-        document.getElementById("option4Data").value = data[currentQuestion].option4;
-        document.getElementById("correctionOption").value = data[currentQuestion].correct;
-        document.getElementById(values).checked = false;
         currentQuestion = ++currentQuestion;
+
+        document.getElementById("option1Data").value = data[currentQuestion-1].option1;
+        document.getElementById("option2Data").value = data[currentQuestion-1].option2;
+        document.getElementById("option3Data").value = data[currentQuestion-1].option3;
+        document.getElementById("option4Data").value = data[currentQuestion-1].option4;
+        document.getElementById("correctionOption").value = data[currentQuestion-1].correct;
+        document.getElementById(values).checked = false;
+
 
 
          // loadInterviewPuzzle();
