@@ -202,11 +202,9 @@
        }
 
         var data = document.getElementById("quizdata").text;
-        document.getElementById("interviewPuzzle").value = data[currentQuestion].question;
-        document.getElementById("currentQuestionId").value = data[currentQuestion].id;
+        document.getElementById("interviewPuzzle").value = data[currentQuestion-1].question;
+        document.getElementById("currentQuestionId").value = data[currentQuestion-1].id;
 
-        document.getElementById("currentQuestion").value = currentQuestion;
-        currentQuestion = ++currentQuestion;
 
         document.getElementById("option1Data").value = data[currentQuestion-1].option1;
         document.getElementById("option2Data").value = data[currentQuestion-1].option2;
@@ -215,7 +213,8 @@
         document.getElementById("correctionOption").value = data[currentQuestion-1].correct;
         document.getElementById(values).checked = false;
 
-
+        document.getElementById("currentQuestion").value = currentQuestion;
+        currentQuestion = ++currentQuestion;
 
          // loadInterviewPuzzle();
       }
