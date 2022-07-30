@@ -204,7 +204,6 @@
         var data = document.getElementById("quizdata").text;
         document.getElementById("interviewPuzzle").value = data[currentQuestion].question;
         document.getElementById("currentQuestionId").value = data[currentQuestion].id;
-        currentQuestion = ++currentQuestion;
 
         document.getElementById("currentQuestion").value = currentQuestion;
         document.getElementById("option1Data").value = data[currentQuestion].option1;
@@ -213,6 +212,7 @@
         document.getElementById("option4Data").value = data[currentQuestion].option4;
         document.getElementById("correctionOption").value = data[currentQuestion].correct;
         document.getElementById(values).checked = false;
+        currentQuestion = ++currentQuestion;
 
 
          // loadInterviewPuzzle();
