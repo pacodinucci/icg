@@ -103,6 +103,7 @@
         var eleven_plus_spelling_game = next.endsWith("/eleven_plus_spelling_game.html");
         var eleven_plus_synonym_game = next.endsWith("/eleven_plus_synonym_game.html");
         var java_interview = next.endsWith("/jobInterview.html");
+        var quiz_page = next.endsWith("/wordquiz.html");
         var eleven_plus_antonym_game = next.endsWith("/eleven_plus_antonym_game.html");
         var landingQuickRevampPage = next.endsWith("/linkedin-profile-writing.html");
         var landingGraduateCvPage = next.endsWith("/cover-letter-page.html");
@@ -174,6 +175,9 @@
         else if(java_interview) {
                  window.location.href = Utilities.baseUrl() + "/jobInterview.html";
          }
+        else if(quiz_page) {
+              window.location.href = Utilities.baseUrl() + "/wordquiz.html";
+        }
         else if (cvwritingPage) {
           window.location.href = Utilities.baseUrl() + "/cvwritingpackages.html";
         } else if (cvMarketingPage) {
