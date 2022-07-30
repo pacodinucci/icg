@@ -11,7 +11,7 @@
 
   gtag('config', 'UA-52786419-3');
 </script>
-    <title>My CV Tracker - Quiz</title>
+    <title>My CV Tracker - Eleven Plus Antonym Game by Arshvir</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -21,10 +21,10 @@
 
     <meta
       property="og:title"
-      content="My CV Tracker - Eleven Plus Quiz " />
+      content="My CV Tracker - Eleven Plus Antonym Game by Arshvir " />
     <meta
       property="og:description"
-      content="Eleven Plus Quiz Game" />
+      content="Eleven Plus Spelling Game" />
     <meta
       property="og:image"
       content="https://mycvtracker.com/assets/img/front/logo.png" />
@@ -80,145 +80,74 @@
       })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
     </script>
 
-  <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
-  <script src="recorder.js"></script>
-  <script src="interviewApp.js"></script>
-
-
   <script type="text/javascript">
 
-    function loadInterviewPuzzle () {
+    function loadWordPuzzle () {
 
-       var tokenRefName = "token";
-       var InterviewType = "quizType";
-        var token = null;
-        var interview = null;
-
-        var urlSearch = window.location.search;
-        var urlParams = urlSearch ? urlSearch.substring(1)
-          .split("&") : [];
-
-         for (var i = 0, len = urlParams.length; i < len; i++) {
-          var paramElement = urlParams[i].split("=");
-
-          if (paramElement[0] === tokenRefName) {
-            token = paramElement[1] === undefined ? true : decodeURIComponent(paramElement[1]);
-          }
-          if (paramElement[0] === InterviewType) {
-            interview = paramElement[1] === undefined ? true : decodeURIComponent(paramElement[1]);
-          }
-        }
-
-        document.getElementById("token").value = token;
-
-
-        //clearQuizData();
+        clearQuizData();
         $.ajax({
-            url :  "https://mycvtracker.com:8080/elevenplus/wordPuzzle?quizType=WORD1",
+            url :  "https://mycvtracker.com:8080/elevenplus/antonym",
             type : "GET",
-            contentType : "false", // tell jQuery not to set contentType
+            data : "",
+            contentType : "application/json", // tell jQuery not to set contentType
             success : function (data) {
-              document.getElementById("quizdata").text = data;
-              document.getElementById("totalQuestion").text = data.length;
-              document.getElementById("interviewPuzzle").value = data[0].question;
-              document.getElementById("correctionOption").value = data[0].correct;
-              document.getElementById("option1Data").value = data[0].option1;
-              document.getElementById("option2Data").value = data[0].option2;
-              document.getElementById("option3Data").value = data[0].option3;
-              document.getElementById("option4Data").value = data[0].option4;
-
-
-              document.getElementById("currentQuestion").value = 1;
-              document.getElementById("currentQuestionId").value = data[0].id;
-              var loadQuiz =  document.getElementById("loadQuiz");
-              loadQuiz.disabled = true;
+              document.getElementById("worddata").text = data;
+              for (let i =1 ; i <= 10; i++) {
+                puzzleId = "WordPuzzle" + i;
+                puzzleIdd = "WordPuzzle" + i + i;
+                document.getElementById(puzzleId).value = data[i-1].word;
+                document.getElementById(puzzleIdd).value = data[i-1].maskWord;
+              }
 
               //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
               //utility.clearContactForm();
             },
             error : function (err) {
               toastr.error(data.status, "Error");
-             // utility.clearContactForm();
+              utility.clearContactForm();
             }
           });
 
+    }
+    function startWordMeaningQuiz() {
+     location.href = "/wordquiz.html";
+    }
+
+    function startAntonymQuiz() {
+       location.href = "/eleven_plus_antonym_game.html";
+    }
+    function startSynonymQuiz() {
+       location.href = "/eleven_plus_synonym_game.html";
+    }
+    function startSpellingQuiz() {
+     location.href = "/eleven_plus_spelling_game.html";
     }
 
     function clearQuizData() {
 
      for (let i =1 ; i <= 10; i++) {
-          quizId = "interviewPuzzleAns" + i;
-          document.getElementById(quizId).value = "";
+          puzzleId = "WordPuzzleAns" + i;
+          document.getElementById(puzzleId).value = "";
      }
 
     }
-    function nextQuestion() {
-
-      let currentQuestion = document.getElementById("currentQuestion").value;
-      //alert("Please make sure you have submitted your answer");
-
-      document.getElementById("recordingsList").innerHTML = "";
-      if(currentQuestion == document.getElementById("totalQuestion").text)
-      {
-         var nextQuestion =  document.getElementById("nextQuestion");
-         nextQuestion.disabled = true;
-
-          var xhr=new XMLHttpRequest();
-          xhr.onload=function(e) {
-          if(this.readyState === 4) {
-              console.log("Server returned: ",e.target.responseText);
+    function matchAnswers() {
+         data = document.getElementById("worddata").text;
+         let count = 0;
+          for (let i =1 ; i <= 10; i++) {
+                puzzleId = "WordPuzzleAns" + i;
+                if(document.getElementById(puzzleId).value.toLowerCase() == data[i-1].antonym.toLowerCase()){
+                    //alert("Your Answer " + document.getElementById(puzzleId).value + " is correct ");
+                    ++count;
+                }
+                else{
+                    alert("Your Answer " + document.getElementById(puzzleId).value + " is incorrect --> Correct Answer is " + data[i-1].antonym);
+                }
           }
-       }
 
-      var fd=new FormData();
-      fd.append("token",document.getElementById("token").value);
-      xhr.open("POST","http://localhost:8080/interviews/complete",true);
-      xhr.send(fd);
-
-      alert("Thanks for attempting the Quiz. Please share it on social ");
-
-      }else {
-
-
-         let checkboxes = document.querySelectorAll('input[name="answerOption"]:checked');
-
-        if(checkboxes.length > 1 || checkboxes.length != 1 ) {
-          alert("please select one option ");
-          return;
-        }
-        let values = [];
-        checkboxes.forEach((checkbox) => {
-          values.push(checkbox.id);
-        });
-
-        //alert(values);
-        //alert(document.getElementById(values + "Data").value);
-        //alert(document.getElementById("correctionOption").value);
-
-       if(document.getElementById("correctionOption").value == document.getElementById(values + "Data").value){
-         //alert("Correct Answer");
-       }else {
-         alert("Correct Answer is \n\n" + document.getElementById("correctionOption").value);
-       }
-
-        var data = document.getElementById("quizdata").text;
-        document.getElementById("interviewPuzzle").value = data[currentQuestion].question;
-        document.getElementById("currentQuestionId").value = data[currentQuestion].id;
-        currentQuestion = ++currentQuestion;
-
-        document.getElementById("currentQuestion").value = currentQuestion;
-        document.getElementById("option1Data").value = data[currentQuestion].option1;
-        document.getElementById("option2Data").value = data[currentQuestion].option2;
-        document.getElementById("option3Data").value = data[currentQuestion].option3;
-        document.getElementById("option4Data").value = data[currentQuestion].option4;
-        document.getElementById("correctionOption").value = data[currentQuestion].correct;
-        document.getElementById(values).checked = false;
-
-
-         // loadInterviewPuzzle();
-      }
-
+          alert("Your Score is "  + count + " out of 10");
     }
+
 
   </script>
 
@@ -296,77 +225,21 @@
     <div class="services">
       <div class="container">
         <div class="title">
-          <h2 class="white-font">Please press the <b>Start Quiz</b> button to begin the quiz.</h2>
-          <br>
-          <h2 class="white-font">Good luck!</h2>
+          <h2 class="white-font">You can try our eleven plus quiz and improve your results.</h2>
           <hr>
         </div>
 
-          <div align="center">
-            <form onSubmit={handleSubmit}>
-              <input type="hidden" id="quizdata" />
-              <input type="hidden" id="currentQuestion" />
-              <input type="hidden" id="totalQuestion" />
-              <input type="hidden" id="currentQuestionId" />
-              <input type="hidden" id="token" />
-              <input type="hidden" id="correctionOption">
-              <input type="hidden" id="startTime" />
-              <input type="hidden" id="endTime" />
 
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="text" size="100" readonly ng-model="interviewPuzzle" name="interviewPuzzle" id="interviewPuzzle" class="custom-checkbox"/>
-                </label>
-              </div>
-              <br>
-
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="option1" name="answerOption" id="option1" class="custom-checkbox"/>
-                  <input type="text" size="100" ng-model="option1Data" name="option1Data" id="option1Data" class="custom-checkbox"/>
-                </label>
-              </div>
-
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="option2" name="answerOption" id="option2" class="custom-checkbox"/>
-                  <input type="text" size="100" ng-model="option2Data" name="option2Data" id="option2Data" class="custom-checkbox"/>
-                </label>
-              </div>
-
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="option3" name="answerOption" id="option3" class="custom-checkbox"/>
-                  <input type="text" size="100" ng-model="option3Data" name="option2Data" id="option3Data" class="custom-checkbox"/>
-                </label>
-              </div>
-
-              <div class="checkbox">
-                <label class="custom-checkbox">
-                  <input type="checkbox" ng-model="option4" name="answerOption" id="option4" class="custom-checkbox"/>
-                  <input type="text" size="100" ng-model="option4Data" name="option2Data" id="option4Data" class="custom-checkbox"/>
-                </label>
-              </div>
-
-            </form>
-          </div>
+          <br>
+          <br>
 
         <div align="center" id="controls">
-        <!--  <button id="recordButton" class="btn btn-danger" onclick="startRecording()">Record</button>
-          <button id="stopButton" class="btn btn-primary" onclick="stopRecording()" disabled>Stop</button>-->
+
+          <button id="wordMeaning" class="btn btn-danger" onclick="startWordMeaningQuiz()">Word Meaning Quiz</button><br><br>
+            <button id="antonymMask" class="btn btn-danger" onclick="startAntonymQuiz()">Antonym Quiz</button><br><br>
+            <button id="synonymMask" class="btn btn-primary" onclick="startSynonymQuiz()">Synonym Quiz</button><br><br>
+            <button id="spellingMask" class="btn btn-primary" onclick="startSpellingQuiz()">Spelling Quiz</button><br><br>
         </div>
-       <!-- <h3>Recordings</h3>
-
-        <div id="formats">Format: start recording to see sample rate</div>-->
-        <ol id="recordingsList"></ol>
-
-          <br>
-          <br>
-
-          <div align="center">
-            <input type="submit" class="btn btn-success" id="loadQuiz" value="Start Quiz!!" onClick="loadInterviewPuzzle()" />
-            <input type="submit" class="btn btn-warning" id="nextQuestion" value="Next Question" onclick="nextQuestion()" />
-          </div>
 
         </div>
 
@@ -953,7 +826,7 @@
             "from" : fromName,
             "content" : content
           };
-          utility.sendEmail("http://localhost:8080/auth/contact", "POST", data);
+          utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
 
         });
 
@@ -1114,7 +987,7 @@
               fd.append("jobDescription", $("#job-spec-box1").val());
 
               $.ajax({
-                url : "http://localhost:8080/user/jobsMatch",
+                url : "https://mycvtracker.com:8080/user/jobsMatch",
                 type : "POST",
                 data : fd,
                 processData : false, // tell jQuery not to process the data
@@ -1241,7 +1114,7 @@
                 .html("Generating...");
 
               $.ajax({
-                url : "http://localhost:8080/links/shareOutsideReferral",
+                url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
                 type : "POST",
                 data : JSON.stringify({
                   referralLink : refCode,
@@ -1279,7 +1152,7 @@
         if (!!refCode) {
           // load job spec
           $.ajax({
-            url : "http://localhost:8080/links/referralDetails?referralLink=" + refCode,
+            url : "https://mycvtracker.com:8080/links/referralDetails?referralLink=" + refCode,
             type : "GET",
             dataType : "json",
             contentType : "application/json",
@@ -1304,7 +1177,7 @@
                   //   $("#text-link-preview").html()
                   // }, 200);
                 } else {
-                  var fileLink = "http://localhost:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
+                  var fileLink = "https://mycvtracker.com:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
                   var fileType = data.previewFileType;
                   if (fileType === "application/pdf") {
                     var iframeUrl = "https://mycvtracker.com/pdf-viewer.html?pdf=" + fileLink;
