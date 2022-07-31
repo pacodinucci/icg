@@ -123,7 +123,7 @@
          let count = 0;
           for (let i =1 ; i <= 10; i++) {
                 puzzleId = "WordPuzzleAns" + i;
-                if(document.getElementById(puzzleId).value == data[i-1].word){
+                if(document.getElementById(puzzleId).value.toLowerCase() == data[i-1].word.toLowerCase()){
                     //alert("Your Answer " + document.getElementById(puzzleId).value + " is correct ");
                     ++count;
                 }
