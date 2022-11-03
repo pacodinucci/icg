@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+<head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52786419-3">
 </script>
@@ -87,8 +88,13 @@
 
   <script type="text/javascript">
 
-    function loadInterviewPuzzle () {
+    function loadInterviewPuzzle (event) {
 
+      // Disable loadQuiz button while fetching data
+      // also changes its value (inner text) to loading Question
+      var loadQuiz =  document.getElementById("loadQuiz");
+      loadQuiz.disabled = true;
+      loadQuiz.value = "Loading Questions"; 
        var tokenRefName = "token";
        var InterviewType = "interviewType";
         var token = null;
@@ -123,14 +129,18 @@
               document.getElementById("interviewPuzzle").value = data[0].question;
               document.getElementById("currentQuestion").value = 1;
               document.getElementById("currentQuestionId").value = data[0].id;
-              var loadQuiz =  document.getElementById("loadQuiz");
-              loadQuiz.disabled = true;
+              var nextQuesBtn = document.getElementById("nextQuestion");
+              var skipQuesBtn = document.getElementById("skipQuestion");
+              nextQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
+              skipQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
+              loadQuiz.classList.add("hidden"); // Hides Start Inerview Button
 
               //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
               //utility.clearContactForm();
             },
             error : function (err) {
               toastr.error(data.status, "Error");
+              loadQuiz.disabled = false;
              // utility.clearContactForm();
             }
           });
@@ -145,43 +155,8 @@
      }
 
     }
-    function nextQuestion() {
-
-      let currentQuestion = document.getElementById("currentQuestion").value;
-      document.getElementById("recordingsList").innerHTML = "";
-      if(currentQuestion == document.getElementById("totalQuestion").text)
-      {
-         var nextQuestion =  document.getElementById("nextQuestion");
-         nextQuestion.disabled = true;
-
-          var xhr=new XMLHttpRequest();
-          xhr.onload=function(e) {
-          if(this.readyState === 4) {
-              console.log("Server returned: ",e.target.responseText);
-          }
-       }
-
-      var fd=new FormData();
-      fd.append("token",document.getElementById("token").value);
-      xhr.open("POST","https://mycvtracker.com:8080/interviews/complete",true);
-      xhr.send(fd);
-
-      alert("Thanks for attempting your Interview. Our team will get in touch soon.");
-
-      }else {
-
-          var data = document.getElementById("quizdata").text;
-          document.getElementById("interviewPuzzle").value = data[currentQuestion].question;
-          document.getElementById("currentQuestionId").value = data[currentQuestion].id;
-          currentQuestion = ++currentQuestion;
-          document.getElementById("currentQuestion").value = currentQuestion;
-
-         // loadInterviewPuzzle();
-      }
-    }
 
   </script>
-
   </head>
 
   <body id="job-spec-page">
@@ -302,7 +277,8 @@
           <br>
           <div align="center">
             <input type="submit" class="btn btn-success" id="loadQuiz" value="Start Interview!!" onClick="loadInterviewPuzzle()" />
-            <input type="submit" class="btn btn-warning" id="nextQuestion" value="Next Question" onclick="nextQuestion()" />
+            <input type="submit" class="btn btn-light hidden" id="nextQuestion" value="Next Question" onclick="nextQuestion()" />
+            <input type="submit" class="btn btn-warning hidden" id="skipQuestion" value="Skip Question" onclick="nextQuestion(true)" />
           </div>
 
         </div>
