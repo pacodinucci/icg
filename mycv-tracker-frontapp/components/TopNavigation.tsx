@@ -1,11 +1,11 @@
-import {
+import React, {
   ReactElement
 } from "react";
 import {
   Container
 } from "reactstrap";
 
-const TopNavigation = () : ReactElement => {
+const TopNavigation = (): ReactElement => {
   return (
     <header>
       <Container>
