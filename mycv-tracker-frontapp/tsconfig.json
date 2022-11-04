@@ -28,7 +28,9 @@
       ],
       "types/*" : [
         "types/*"
-      ]
+      ],
+      "assets/*": [
+      "assets/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -45,6 +47,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": [".sr"],
+  "include": [".sr","*/**.ts","*/**.tsx"],
   "exclude": ["node_modules"]
 }

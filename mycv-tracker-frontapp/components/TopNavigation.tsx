@@ -2,16 +2,24 @@ import React, {
   ReactElement
 } from "react";
 import {
-  Container
+  Button,
+  Container, Navbar, NavbarBrand
 } from "reactstrap";
+import logo from "../assets/logo.png";
+
+import Image from "next/image";
+
 
 const TopNavigation = (): ReactElement => {
   return (
-    <header>
+    <Navbar color="secondary" dark>
       <Container>
-        Top Navigation
+        <NavbarBrand href="/topcvreviews">
+          <Image alt="logo" src={logo} />
+        </NavbarBrand>
+        <Button color="primary">Sign Up</Button>
       </Container>
-    </header>
+    </Navbar>
   );
 };
 
