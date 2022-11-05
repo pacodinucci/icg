@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+<head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52786419-3">
 </script>
@@ -87,8 +88,32 @@
 
   <script type="text/javascript">
 
-    function loadInterviewPuzzle () {
 
+
+    function startInterview(data, answered = -1) {
+            document.getElementById("quizdata").text = data;
+              document.getElementById("totalQuestion").text = data.length;
+              document.getElementById("interviewPuzzle").value = data[answered + 1].question;
+              document.getElementById("currentQuestion").value = answered + 2;
+              document.getElementById("currentQuestionId").value = data[answered + 1].id;
+              var nextQuesBtn = document.getElementById("nextQuestion");
+              var skipQuesBtn = document.getElementById("skipQuestion");
+              var loadQuiz =  document.getElementById("loadQuiz");
+              nextQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
+              skipQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
+              loadQuiz.classList.add("hidden"); // Hides Start Inerview Button
+
+              //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
+              //utility.clearContactForm();
+    }
+
+    function loadInterviewPuzzle (event) {
+
+      // Disable loadQuiz button while fetching data
+      // also changes its value (inner text) to loading Question
+      var loadQuiz =  document.getElementById("loadQuiz");
+      loadQuiz.disabled = true;
+      loadQuiz.value = "Loading Questions"; 
        var tokenRefName = "token";
        var InterviewType = "interviewType";
         var token = null;
@@ -111,31 +136,48 @@
 
         document.getElementById("token").value = token;
 
-
+        
+        // Check in local storage for questions
+        var value = window.localStorage.getItem(`questions_${token}_${interview}`);
+        if (value !== null) {
+          var obj = JSON.parse(value);
+          var curr = new Date().getTime();
+          // console.log(curr - obj.startTime);
+          if ( curr - obj.startTime < 30 * 60 * 1000) {
+            startInterview(obj.questions, obj.answered);
+            window.alert("Your interview was resumed after the last answer you submitted");
+            return;
+          } else { 
+            console.log("Clearing Storage");
+            window.localStorage.removeItem(`questions_${token}_${interview}`);
+          }
+        }
         //clearQuizData();
         $.ajax({
             url :  "https://mycvtracker.com:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
             type : "GET",
             contentType : "false", // tell jQuery not to set contentType
             success : function (data) {
-              document.getElementById("quizdata").text = data;
-              document.getElementById("totalQuestion").text = data.length;
-              document.getElementById("interviewPuzzle").value = data[0].question;
-              document.getElementById("currentQuestion").value = 1;
-              document.getElementById("currentQuestionId").value = data[0].id;
-              var loadQuiz =  document.getElementById("loadQuiz");
-              loadQuiz.disabled = true;
+              // data : array of questions;
+              startInterview(data);
+              var obj = {
+                startTime: new Date().getTime(),
+                questions: data,
+                answered: -1, 
+              }
+              console.log(obj);
+              window.localStorage.setItem(`questions_${token}_${interview}`,JSON.stringify(obj));
 
-              //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
-              //utility.clearContactForm();
             },
             error : function (err) {
               toastr.error(data.status, "Error");
+              loadQuiz.disabled = false;
              // utility.clearContactForm();
             }
           });
 
     }
+
 
     function clearQuizData() {
 
@@ -145,43 +187,8 @@
      }
 
     }
-    function nextQuestion() {
-
-      let currentQuestion = document.getElementById("currentQuestion").value;
-      document.getElementById("recordingsList").innerHTML = "";
-      if(currentQuestion == document.getElementById("totalQuestion").text)
-      {
-         var nextQuestion =  document.getElementById("nextQuestion");
-         nextQuestion.disabled = true;
-
-          var xhr=new XMLHttpRequest();
-          xhr.onload=function(e) {
-          if(this.readyState === 4) {
-              console.log("Server returned: ",e.target.responseText);
-          }
-       }
-
-      var fd=new FormData();
-      fd.append("token",document.getElementById("token").value);
-      xhr.open("POST","https://mycvtracker.com:8080/interviews/complete",true);
-      xhr.send(fd);
-
-      alert("Thanks for attempting your Interview. Our team will get in touch soon.");
-
-      }else {
-
-          var data = document.getElementById("quizdata").text;
-          document.getElementById("interviewPuzzle").value = data[currentQuestion].question;
-          document.getElementById("currentQuestionId").value = data[currentQuestion].id;
-          currentQuestion = ++currentQuestion;
-          document.getElementById("currentQuestion").value = currentQuestion;
-
-         // loadInterviewPuzzle();
-      }
-    }
 
   </script>
-
   </head>
 
   <body id="job-spec-page">
@@ -302,7 +309,8 @@
           <br>
           <div align="center">
             <input type="submit" class="btn btn-success" id="loadQuiz" value="Start Interview!!" onClick="loadInterviewPuzzle()" />
-            <input type="submit" class="btn btn-warning" id="nextQuestion" value="Next Question" onclick="nextQuestion()" />
+            <input type="submit" class="btn btn-light hidden" id="nextQuestion" value="Next Question" onclick="nextQuestion()" />
+            <input type="submit" class="btn btn-warning hidden" id="skipQuestion" value="Skip Question" onclick="nextQuestion(true)" />
           </div>
 
         </div>
