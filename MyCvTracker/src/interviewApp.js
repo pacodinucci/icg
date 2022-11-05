@@ -155,6 +155,24 @@ function stopRecording() {
 }
 
 function nextQuestion(skip) {
+  var tokenRefName = "token";
+  var InterviewType = "interviewType";
+  var token = null;
+  var interview = null;
+
+  var urlSearch = window.location.search;
+  var urlParams = urlSearch ? urlSearch.substring(1).split("&") : [];
+
+  for (var i = 0, len = urlParams.length; i < len; i++) {
+    var paramElement = urlParams[i].split("=");
+
+    if (paramElement[0] === tokenRefName) {
+      token = paramElement[1] === undefined ? true : decodeURIComponent(paramElement[1]);
+    }
+    if (paramElement[0] === InterviewType) {
+      interview = paramElement[1] === undefined ? true : decodeURIComponent(paramElement[1]);
+    }
+  }
   // function nextQuestion(skip = false) gives eslint error, thus the following error
   if (skip === undefined) skip = false;
   if (!skip && recordingSubmitted !== true) return alert("You havn't submitted the recording, please submit");
@@ -185,9 +203,17 @@ function nextQuestion(skip) {
     fd.append("token", document.getElementById("token").value);
     xhr.open("POST", "https://mycvtracker.com:8080/interviews/complete", true);
     xhr.send(fd);
-
+    window.localStorage.clear("questions_" + token + "_" + interview);
     alert("Thanks for attempting your Interview. Our team will get in touch soon.");
   } else {
+    var value = window.localStorage.getItem("questions_" + token + "_" + interview);
+    if (value) {
+      var obj = JSON.parse(value);
+      obj.answered = currentQuestion - 1;
+
+      window.localStorage.setItem("questions_" + token + "_" + interview, JSON.stringify(obj));
+    }
+
     var data = document.getElementById("quizdata").text;
     document.getElementById("interviewPuzzle").value = data[currentQuestion].question;
     document.getElementById("currentQuestionId").value = data[currentQuestion].id;

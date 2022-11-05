@@ -88,6 +88,25 @@
 
   <script type="text/javascript">
 
+
+
+    function startInterview(data, answered = -1) {
+            document.getElementById("quizdata").text = data;
+              document.getElementById("totalQuestion").text = data.length;
+              document.getElementById("interviewPuzzle").value = data[answered + 1].question;
+              document.getElementById("currentQuestion").value = answered + 2;
+              document.getElementById("currentQuestionId").value = data[answered + 1].id;
+              var nextQuesBtn = document.getElementById("nextQuestion");
+              var skipQuesBtn = document.getElementById("skipQuestion");
+              var loadQuiz =  document.getElementById("loadQuiz");
+              nextQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
+              skipQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
+              loadQuiz.classList.add("hidden"); // Hides Start Inerview Button
+
+              //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
+              //utility.clearContactForm();
+    }
+
     function loadInterviewPuzzle (event) {
 
       // Disable loadQuiz button while fetching data
@@ -117,26 +136,38 @@
 
         document.getElementById("token").value = token;
 
-
+        
+        // Check in local storage for questions
+        var value = window.localStorage.getItem(`questions_${token}_${interview}`);
+        if (value !== null) {
+          var obj = JSON.parse(value);
+          var curr = new Date().getTime();
+          // console.log(curr - obj.startTime);
+          if ( curr - obj.startTime < 30 * 60 * 1000) {
+            startInterview(obj.questions, obj.answered);
+            window.alert("Your interview was resumed after the last answer you submitted");
+            return;
+          } else { 
+            console.log("Clearing Storage");
+            window.localStorage.removeItem(`questions_${token}_${interview}`);
+          }
+        }
         //clearQuizData();
         $.ajax({
             url :  "https://mycvtracker.com:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
             type : "GET",
             contentType : "false", // tell jQuery not to set contentType
             success : function (data) {
-              document.getElementById("quizdata").text = data;
-              document.getElementById("totalQuestion").text = data.length;
-              document.getElementById("interviewPuzzle").value = data[0].question;
-              document.getElementById("currentQuestion").value = 1;
-              document.getElementById("currentQuestionId").value = data[0].id;
-              var nextQuesBtn = document.getElementById("nextQuestion");
-              var skipQuesBtn = document.getElementById("skipQuestion");
-              nextQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
-              skipQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
-              loadQuiz.classList.add("hidden"); // Hides Start Inerview Button
+              // data : array of questions;
+              startInterview(data);
+              var obj = {
+                startTime: new Date().getTime(),
+                questions: data,
+                answered: -1, 
+              }
+              console.log(obj);
+              window.localStorage.setItem(`questions_${token}_${interview}`,JSON.stringify(obj));
 
-              //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
-              //utility.clearContactForm();
             },
             error : function (err) {
               toastr.error(data.status, "Error");
@@ -146,6 +177,7 @@
           });
 
     }
+
 
     function clearQuizData() {
 
