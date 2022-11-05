@@ -53,6 +53,9 @@ function startRecording() {
 
   recordingTimerInterval = setInterval(function () {
     recordButton.innerHTML = "Recording... " + ++recordingTimerDuration + " sec";
+    if (recordingTimerDuration >= 60) {
+      stopRecording();
+    }
   }, 1000);
   recordButton.disabled = true;
   stopButton.disabled = false;
