@@ -102,7 +102,7 @@
               nextQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
               skipQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
               loadQuiz.classList.add("hidden"); // Hides Start Inerview Button
-
+              startRecording();    
               //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
               //utility.clearContactForm();
     }
@@ -285,19 +285,17 @@
               onload="loadInterviewPuzzle()"
               id="interviewPuzzle"
               class="form-control"
-              placeholder="You have 30 seconds to answer each question, Please ensure access to your microphone is enabled to confirm that your response will be recorded.
+              placeholder="You have 60 seconds to answer each question, Please ensure access to your microphone is enabled to confirm that your response will be recorded.
                Press Start Interview when you're ready to proceed with the interview questions, clicking record when you're prepared to answer.
                Use the demo question to practice your response, and get more comfortable with the method of the audio interview.
                You can playback your recording to determine if you are satisfied with the audio, and then ensure you upload your answer to the server to confirm your answer before moving to next Question.
                Please note you need to record answer and submit answer at each question before moving to next question.
                Continue this process until you’ve answered a minimum of 10 questions!"></textarea>
-
-
             </form>
           </div>
 
-        <div align="center" id="controls">
-          <button id="recordButton" class="btn btn-danger" onclick="startRecording()">Record</button>
+        <div align="center" id="controls" class="row center-block">
+          <p id="recordingStatus" class="alert alert-info" style="margin-top: 10px">Recording will start automatically</p>
           <button id="stopButton" class="btn btn-primary" onclick="stopRecording()" disabled>Stop</button>
         </div>
        <!-- <h3>Recordings</h3>

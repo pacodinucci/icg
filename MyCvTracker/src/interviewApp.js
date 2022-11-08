@@ -9,7 +9,6 @@ var input; //MediaStreamAudioSourceNode we'll be recording
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext; //audio context to help us record
 
-var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 
 var recordingTimerDuration = 0;
@@ -34,7 +33,7 @@ function startRecording() {
   var skipQuesBtn = document.getElementById("skipQuestion");
   skipQuesBtn.disabled = true;
 
-  var recordButton = document.getElementById("recordButton");
+  var recordingStatus = document.getElementById("recordingStatus");
   var stopButton = document.getElementById("stopButton");
   // var nextQuestion = document.getElementById("nextQuestion");
   // var pauseButton = document.getElementById("pauseButton");
@@ -52,12 +51,11 @@ function startRecording() {
   recordingTimerDuration = -1;
 
   recordingTimerInterval = setInterval(function () {
-    recordButton.innerHTML = "Recording... " + ++recordingTimerDuration + " sec";
-    if (recordingTimerDuration >= 60) {
+    recordingStatus.innerHTML = "Recording started... " + (60 - ++recordingTimerDuration) + " seconds left";
+    if (recordingTimerDuration >= 61) {
       stopRecording();
     }
   }, 1000);
-  recordButton.disabled = true;
   stopButton.disabled = false;
   //nextQuestion.disabled = true;
   //pauseButton.disabled = false
@@ -102,7 +100,6 @@ function startRecording() {
     })
     .catch(function (err) {
       //enable the record button if getUserMedia() fails
-      recordButton.disabled = false;
       stopButton.disabled = true;
       //pauseButton.disabled = true
     });
@@ -131,16 +128,16 @@ function stopRecording() {
   nextQuesBtn.disabled = false;
   skipQuesBtn.disabled = false;
 
-  var recordButton = document.getElementById("recordButton");
+  var recordStatus = document.getElementById("recordingStatus");
   var stopButton = document.getElementById("stopButton");
   //var pauseButton = document.getElementById("pauseButton");
   document.getElementById("endTime").value = new Date();
-  recordButton.innerHTML = "Record";
+  recordStatus.innerHTML = "Recording done. Please submit the audio or skip the question";
   //var nextQuestion = document.getElementById("nextQuestion");
 
   //disable the stop button, enable the record too allow for new recordings
   stopButton.disabled = true;
-  recordButton.disabled = false;
+  // recordButton.disabled = false;
   //pauseButton.disabled = true;
   //nextQuestion.disabled = false;
 
@@ -213,7 +210,6 @@ function nextQuestion(skip) {
     if (value) {
       var obj = JSON.parse(value);
       obj.answered = currentQuestion - 1;
-
       window.localStorage.setItem("questions_" + token + "_" + interview, JSON.stringify(obj));
     }
 
@@ -223,6 +219,7 @@ function nextQuestion(skip) {
     currentQuestion = ++currentQuestion;
     document.getElementById("currentQuestion").value = currentQuestion;
 
+    startRecording();
     // loadInterviewPuzzle();
   }
 }
@@ -277,6 +274,9 @@ function createDownloadLink(blob) {
     xhr.onload = function (e) {
       if (this.readyState === 4) {
         upload.innerHTML = "Successfully Uploaded";
+        upload.classList.remove("btn", "btn-light");
+        upload.classList.add("alert", "alert-success");
+        upload.style.marginBottom = 0;
         upload.disabled = true;
         recordingSubmitted = true;
         nextQuesBtn.disabled = false;
