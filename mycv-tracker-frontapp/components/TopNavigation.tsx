@@ -17,6 +17,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "../styles/TopNavigation.module.css";
+import { useUserState } from "../hooks/useUserState";
 
 const TopNavigation = (): ReactElement => {
   const [jobServiceDropdown, setJobServiceDropdown] = useState(false);
@@ -24,6 +25,8 @@ const TopNavigation = (): ReactElement => {
 
   const toggleJobServiceDropdown = () => setJobServiceDropdown((prevState) => !prevState);
   const toggleCvServiceDropdown = () => setCvServiceDropdown((prevState) => !prevState);
+
+  const { user } = useUserState();
 
   return (
     <Navbar className={styles.navbar}>
@@ -33,8 +36,8 @@ const TopNavigation = (): ReactElement => {
         </NavbarBrand>
         <Row className="align-items-center">
           <Col>
-            <Dropdown isOpen={cvServiceDropdown} toggle={toggleCvServiceDropdown} inNavbar={true}>
-              <DropdownToggle caret className={styles.dropdown}>
+            <Dropdown isOpen={cvServiceDropdown} toggle={toggleCvServiceDropdown}>
+              <DropdownToggle caret={true} className={styles.dropdown}>
                 CV Services
               </DropdownToggle>
               <DropdownMenu>
@@ -47,7 +50,7 @@ const TopNavigation = (): ReactElement => {
           </Col>
           <Col>
             <Dropdown isOpen={jobServiceDropdown} toggle={toggleJobServiceDropdown}>
-              <DropdownToggle caret className={styles.dropdown}>
+              <DropdownToggle caret={true} className={styles.dropdown}>
                 Job Services
               </DropdownToggle>
               <DropdownMenu>
@@ -57,16 +60,26 @@ const TopNavigation = (): ReactElement => {
               </DropdownMenu>
             </Dropdown>
           </Col>
-          <Col>
-            <Link href="/login" className={styles.login}>
-              Login
-            </Link>
-          </Col>
-          <Col>
-            <Link href="/register" className={styles.signupBtn}>
-              Sign&nbsp;Up
-            </Link>
-          </Col>
+          {user === null && (
+            <Col>
+              <Link href="/login" className={styles.login}>
+                Login
+              </Link>
+            </Col>
+          )}
+          {user === null && (
+            <Col>
+              <Link href="/register" className={styles.signupBtn}>
+                Sign&nbsp;Up
+              </Link>
+            </Col>
+          )}
+          {user !== null && (
+            <Col className="d-flex flex-row justify-content-center align-items-center">
+              <Image src="https://mycvtracker.com/assets/img/app/profile/user.png" alt="User" width={50} height={50} />
+              <span className="mx-3">{user.email}</span>
+            </Col>
+          )}
         </Row>
       </Container>
     </Navbar>

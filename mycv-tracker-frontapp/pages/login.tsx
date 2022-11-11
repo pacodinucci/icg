@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { NextPage } from "next";
-import { Col, Row, Container, Card, CardTitle, CardBody, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Col, Container, Card, CardTitle, CardBody, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import Link from "next/link";
 
 import styles from "../styles/Login.module.css";
+import { useRouter } from "next/router";
+import { useUserState } from "../hooks/useUserState";
 
 const Login: NextPage = () => {
+  const router = useRouter();
+  const { user, loginUser } = useUserState();
   const [details, setDetails] = useState({ email: "", password: "" });
+
+  useEffect(() => {
+    if (user !== null) {
+      router.replace("/account");
+    }
+  }, [user, router]);
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetails((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  };
+
+  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    loginUser(details.email, details.password);
   };
 
   return (
@@ -23,7 +38,7 @@ const Login: NextPage = () => {
             <Link href="/register" className="text-decoration-none fs-4">
               New to MyCVTracker? Sign up!
             </Link>
-            <Form className="my-4 text-end">
+            <Form className="my-4 text-end" onSubmit={handleLogin}>
               <FormGroup row>
                 <Label for="email" sm={2}>
                   Email
@@ -65,9 +80,7 @@ const Login: NextPage = () => {
               <FormGroup row>
                 <Col sm={{ offset: 2, size: 10 }} className="justify-content-between d-flex">
                   <Button outline>Sign In</Button>
-                  <Button outline color="link">
-                    Forgot password?
-                  </Button>
+                  <Button color="link">Forgot password?</Button>
                 </Col>
               </FormGroup>
             </Form>
