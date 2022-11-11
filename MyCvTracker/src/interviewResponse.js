@@ -47,7 +47,7 @@ function fetchResponses(token) {
         return;
       }
 
-      displayResponses(JSON.parse(xhr.response));
+      displayResponses(JSON.parse(xhr.response), token);
     }
   };
 
@@ -55,19 +55,19 @@ function fetchResponses(token) {
   xhr.send("");
 }
 
-function displayResponses(responses) {
+function displayResponses(responses, token) {
   var section = document.getElementById("responses");
   var candidate = document.createElement("div");
   candidate.classList.add("row", "alert", "alert-info");
   candidate.innerText = "Candidate Email: " + responses[0].candidate;
   section.appendChild(candidate);
   responses.forEach(function (response, index) {
-    var res = createResponseElement(response, index + 1);
+    var res = createResponseElement(response, index + 1, token);
     section.appendChild(res);
   });
 }
 
-function createResponseElement(response, qNumber) {
+function createResponseElement(response, qNumber, token) {
   // {
   //   id: Number;
   //   candidate: string;
@@ -94,7 +94,7 @@ function createResponseElement(response, qNumber) {
   row2.classList.add("row");
   var audio = document.createElement("audio");
   audio.controls = "controls";
-  audio.src = response.answerLocation;
+  audio.src = "https://mycvtracker.com:8080/interviews/audioData/" + token + "/" + response.questionId;
   audio.style.width = "100%";
   audio.style.borderRadius = "10px";
   audio.type = "audio/wav";
