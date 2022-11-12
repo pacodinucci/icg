@@ -10,7 +10,7 @@ import { useUserState } from "../hooks/useUserState";
 const Login: NextPage = () => {
   const router = useRouter();
   const { user, loginUser } = useUserState();
-  const [details, setDetails] = useState({ email: "", password: "" });
+  const [details, setDetails] = useState({ email: "", password: "", rememberMe: false });
 
   useEffect(() => {
     if (user !== null) {
@@ -21,10 +21,13 @@ const Login: NextPage = () => {
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetails((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
+  const toggleRememberMe = () => {
+    setDetails((prev) => ({ ...prev, rememberMe: !prev.rememberMe }));
+  };
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    loginUser(details.email, details.password);
+    loginUser(details.email, details.password, details.rememberMe);
   };
 
   return (
@@ -71,7 +74,13 @@ const Login: NextPage = () => {
               </FormGroup>
               <FormGroup check row className="my-4">
                 <Col sm={{ offset: 2, size: 10 }}>
-                  <Input type="checkbox" id="rememberMe" name="rememberMe" />
+                  <Input
+                    type="checkbox"
+                    id="rememberMe"
+                    name="rememberMe"
+                    onChange={toggleRememberMe}
+                    checked={details.rememberMe}
+                  />
                   <Label for="rememberMe" className=" float-start" check>
                     Remember Me
                   </Label>

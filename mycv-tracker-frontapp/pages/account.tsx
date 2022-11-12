@@ -32,7 +32,9 @@ const Account = () => {
         </Card>
       </Row>
       <Row>
-        <p className="text-center fs-2 my-3">Welcome {user?.email}</p>
+        <p className="text-center fs-2 my-3">
+          Welcome <strong>{user?.email}</strong>
+        </p>
       </Row>
       <Row className="my-2">
         <Card>

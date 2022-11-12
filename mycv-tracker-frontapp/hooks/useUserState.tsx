@@ -1,11 +1,17 @@
-import { useContext, createContext, useState, useCallback, ReactElement } from "react";
+import { useContext, createContext, useState, useCallback, ReactElement, useEffect } from "react";
 import axios from "axios";
 
 import { LoginResponse, UserObject } from "../types/auth_types";
+import {
+  getUserFromLocalStorage,
+  getUserFromSessionStorage,
+  storeUserInLocalStorage,
+  storeUserInSessionStorage,
+} from "../utils/storage-utils";
 
 type ContextType = {
   user: UserObject | null;
-  loginUser: (email: string, password: string) => void;
+  loginUser: (email: string, password: string, rememberme: boolean) => void;
   signupUser: () => void;
   logoutUser: () => void;
 };
@@ -47,22 +53,42 @@ const temp: LoginResponse = {
 };
 
 export const UserStateProvider = ({ children }: { children: ReactElement }) => {
-  const [user, setUser] = useState<null | UserObject>(temp.user as UserObject);
+  const [user, setUser] = useState<null | UserObject>(null);
   const [token, setToken] = useState("");
 
-  const loginUser = useCallback(async (email: string, password: string) => {
+  useEffect(() => {
+    let response = getUserFromLocalStorage();
+    if (response === null) response = getUserFromSessionStorage();
+    console.log({ response });
+    if (response === null) {
+      setUser(null);
+      setToken("");
+    } else {
+      setToken(response.token);
+      setUser(response.user);
+    }
+  }, []);
+  const loginUser = useCallback(async (email: string, password: string, rememberme: boolean) => {
     const response = await axios<LoginResponse>({
       method: "post",
       url: process.env.NEXT_PUBLIC_MYCVTRACKER_API_HOST + "/auth/login",
       data: {
         email,
         password,
+        rememberme,
       },
     });
 
     if (response.status === 200) {
       setUser(response.data.user);
       setToken(response.data.token);
+      if (rememberme) {
+        storeUserInLocalStorage(response.data.user, response.data.token);
+        // Store in Local storage
+      } else {
+        storeUserInSessionStorage(response.data.user, response.data.token);
+        // Store in session storage
+      }
     }
   }, []);
 

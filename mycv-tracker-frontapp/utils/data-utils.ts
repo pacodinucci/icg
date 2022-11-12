@@ -1,4 +1,4 @@
-const displayPrice = (num : number, fractionDigits? : number) : string => {
+const displayPrice = (num: number, fractionDigits?: number): string => {
   const numStr = !!fractionDigits ? num.toFixed(fractionDigits) : num.toString();
 
   const str = numStr.toString().split(".");
@@ -10,6 +10,4 @@ const displayPrice = (num : number, fractionDigits? : number) : string => {
   return str.join(".");
 };
 
-export {
-  displayPrice
-};
+export { displayPrice };
