@@ -17,6 +17,10 @@ export const getUserFromLocalStorage = () => {
   return null;
 };
 
+export const clearLocalStorage = () => {
+  localStorage.clear();
+};
+
 export const storeUserInSessionStorage = (user: UserObject, token: string) => {
   if (user) {
     sessionStorage.setItem("user", JSON.stringify(user));
@@ -32,4 +36,8 @@ export const getUserFromSessionStorage = () => {
     return { user, token };
   }
   return null;
+};
+
+export const clearSessionStorage = () => {
+  sessionStorage.clear();
 };

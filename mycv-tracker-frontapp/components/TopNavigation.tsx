@@ -11,6 +11,9 @@ import {
   DropdownItem,
   Col,
 } from "reactstrap";
+
+import { FaUserAlt, FaCog, FaPowerOff } from "react-icons/fa";
+
 import logo from "../assets/logo.png";
 
 import Image from "next/image";
@@ -22,11 +25,13 @@ import { useUserState } from "../hooks/useUserState";
 const TopNavigation = (): ReactElement => {
   const [jobServiceDropdown, setJobServiceDropdown] = useState(false);
   const [cvServiceDropdown, setCvServiceDropdown] = useState(false);
+  const [accountDropDown, setAccountDropdown] = useState(false);
 
   const toggleJobServiceDropdown = () => setJobServiceDropdown((prevState) => !prevState);
   const toggleCvServiceDropdown = () => setCvServiceDropdown((prevState) => !prevState);
+  const toggleAccountDropdown = () => setAccountDropdown((prevState) => !prevState);
 
-  const { user } = useUserState();
+  const { user, logoutUser } = useUserState();
 
   return (
     <Navbar className={styles.navbar}>
@@ -41,9 +46,15 @@ const TopNavigation = (): ReactElement => {
                 CV Services
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem>CV Writing Page</DropdownItem>
-                <DropdownItem>Linkedin Profile Writing</DropdownItem>
-                <DropdownItem>Cover Letter Page</DropdownItem>
+                <DropdownItem tag={Link} href="/cv-writing-page">
+                  CV Writing Page
+                </DropdownItem>
+                <DropdownItem tag={Link} href="/linkedin-profile-writing">
+                  Linkedin Profile Writing
+                </DropdownItem>
+                <DropdownItem tag={Link} href="/cover-letter-page">
+                  Cover Letter Page
+                </DropdownItem>
                 <DropdownItem>CV Writing Packages</DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -75,9 +86,31 @@ const TopNavigation = (): ReactElement => {
             </Col>
           )}
           {user !== null && (
-            <Col className="d-flex flex-row justify-content-center align-items-center">
-              <Image src="https://mycvtracker.com/assets/img/app/profile/user.png" alt="User" width={50} height={50} />
-              <span className="mx-3">{user.email}</span>
+            <Col>
+              <Dropdown isOpen={accountDropDown} toggle={toggleAccountDropdown}>
+                <DropdownToggle tag="div" className="d-flex flex-column justify-content-center align-items-center">
+                  <Image
+                    src="https://mycvtracker.com/assets/img/app/profile/user.png"
+                    alt="User"
+                    width={50}
+                    height={50}
+                  />
+                  <span className="mx-3 my-1 text-secondary">{user.email}</span>
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem tag={Link} href="/account">
+                    <FaUserAlt />
+                    Account
+                  </DropdownItem>
+                  <DropdownItem tag={Link} href="/settings">
+                    <FaCog />
+                    Settings
+                  </DropdownItem>
+                  <DropdownItem tag={Button} onClick={logoutUser}>
+                    <FaPowerOff /> Logout
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </Col>
           )}
         </Row>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
-import { Container, List, ListInlineItem, Row } from "reactstrap";
+import { Container, List, ListInlineItem } from "reactstrap";
 import logo from "../assets/logo.png";
 
 import styles from "../styles/BottomFooter.module.css";
