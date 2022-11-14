@@ -24,14 +24,36 @@ var recordingTimerInterval = null;
 // Variable to manage submission of recording for each question
 var recordingSubmitted = false;
 
-function startRecording() {
-  document.getElementById("startTime").value = new Date();
+var recordingDelayInterval = null;
+var recordingDelayTimer = 5;
 
+function startRecordingDelay() {
   var nextQuesBtn = document.getElementById("nextQuestion");
   nextQuesBtn.disabled = true;
 
   var skipQuesBtn = document.getElementById("skipQuestion");
   skipQuesBtn.disabled = true;
+
+  var recordingStatus = document.getElementById("recordingStatus");
+  recordingStatus.classList.remove("alert-danger", "alert-success");
+  recordingStatus.classList.add("alert-info");
+
+  recordingDelayInterval = setInterval(
+    function () {
+      recordingStatus.innerHTML = "Recording starts in " + recordingDelayTimer + " seconds";
+      recordingDelayTimer--;
+      if (recordingDelayTimer < 0) {
+        clearInterval(recordingDelayInterval);
+        startRecording();
+        recordingDelayTimer = 5;
+      }
+    },
+    [1000]
+  );
+}
+
+function startRecording() {
+  document.getElementById("startTime").value = new Date();
 
   var recordingStatus = document.getElementById("recordingStatus");
   var stopButton = document.getElementById("stopButton");
@@ -52,6 +74,8 @@ function startRecording() {
 
   recordingTimerInterval = setInterval(function () {
     recordingStatus.innerHTML = "Recording started... " + (60 - ++recordingTimerDuration) + " seconds left";
+    recordingStatus.classList.remove("alert-info", "alert-success");
+    recordingStatus.classList.add("alert-danger");
     if (recordingTimerDuration >= 61) {
       stopRecording();
     }
@@ -132,7 +156,9 @@ function stopRecording() {
   var stopButton = document.getElementById("stopButton");
   //var pauseButton = document.getElementById("pauseButton");
   document.getElementById("endTime").value = new Date();
-  recordStatus.innerHTML = "Recording done. Please submit the audio or skip the question";
+  recordStatus.innerHTML = "Recording Stopped. Please submit the audio or skip the question";
+  recordingStatus.classList.remove("alert-danger");
+  recordingStatus.classList.add("alert-success");
   //var nextQuestion = document.getElementById("nextQuestion");
 
   //disable the stop button, enable the record too allow for new recordings
@@ -219,7 +245,7 @@ function nextQuestion(skip) {
     currentQuestion = ++currentQuestion;
     document.getElementById("currentQuestion").value = currentQuestion;
 
-    startRecording();
+    startRecordingDelay();
     // loadInterviewPuzzle();
   }
 }
@@ -236,7 +262,8 @@ function createDownloadLink(blob) {
   //add controls to the <audio> element
   au.controls = true;
   au.src = url;
-
+  au.style.marginTop = "20px";
+  au.style.width = "100%";
   //save to disk link
   link.href = url;
   link.download = filename + ".wav"; //download forces the browser to donwload the file using the  filename
@@ -247,6 +274,7 @@ function createDownloadLink(blob) {
   li.style.alignItems = "center";
   li.style.justifyContent = "flex-start";
   li.style.display = "flex";
+  li.style.flexDirection = "column";
 
   //add the filename to the li
   //li.appendChild(document.createTextNode(filename+".wav "))
@@ -257,6 +285,7 @@ function createDownloadLink(blob) {
   //upload link
   var upload = document.createElement("button");
   //   upload.href = "#";
+  upload.style.marginTop = "10px";
   upload.classList.add("btn", "btn-light");
   upload.innerHTML = "Click Here To Submit Your Answer";
   upload.addEventListener("click", function (event) {
