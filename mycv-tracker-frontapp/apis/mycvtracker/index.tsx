@@ -10,4 +10,27 @@ const getVersion = async (): Promise<void> => {
   // make a api call here
 };
 
-export { getVersion };
+const sendForgotPasswordRequest = async (email: string) => {
+  return await apiInstance.post("/auth/forgotPassword", email, {
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  });
+};
+
+const sendUpdateProfileSettings = async (profile: {}, token: string) => {
+  return await apiInstance.post("/auth/saveProfileSettings", profile, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+const sendGetUserProfileSettings = async (token: string) => {
+  return await apiInstance.get("/auth/getUserProfileSettings", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export { getVersion, sendForgotPasswordRequest, sendUpdateProfileSettings, sendGetUserProfileSettings };

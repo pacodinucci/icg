@@ -7,20 +7,23 @@ import BottomFooter from "../components/BottomFooter";
 import styles from "../styles/app.module.css";
 import Head from "next/head";
 import { UserStateProvider } from "../hooks/useUserState";
+import { ToastProvider } from "../hooks/useToast";
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
-    <UserStateProvider>
-      <div className={styles.container}>
-        <Head>
-          <title>Dev My CV Tracker</title>
-        </Head>
-        <TopNavigation />
-        <div className={styles.pageContainer}>
-          <Component {...pageProps} />
+    <ToastProvider>
+      <UserStateProvider>
+        <div className={styles.container}>
+          <Head>
+            <title>Dev My CV Tracker</title>
+          </Head>
+          <TopNavigation />
+          <div className={styles.pageContainer}>
+            <Component {...pageProps} />
+          </div>
+          <BottomFooter />
         </div>
-        <BottomFooter />
-      </div>
-    </UserStateProvider>
+      </UserStateProvider>
+    </ToastProvider>
   );
 }
 

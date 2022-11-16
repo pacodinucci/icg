@@ -10,7 +10,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "mycvtracker.com",
-        port: "",
         pathname: "/assets/img/**",
       },
     ],
