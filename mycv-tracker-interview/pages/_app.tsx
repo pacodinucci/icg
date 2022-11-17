@@ -1,6 +1,30 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "styles/globals.scss";
+import type { AppProps } from "next/app";
+import React, { ReactElement } from "react";
+import TopNavigation from "../components/TopNavigation";
+import BottomFooter from "../components/BottomFooter";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+import styles from "../styles/app.module.css";
+import Head from "next/head";
+import { UserStateProvider } from "../hooks/useUserState";
+import { ToastProvider } from "../hooks/useToast";
+function MyApp({ Component, pageProps }: AppProps): ReactElement {
+  return (
+    <ToastProvider>
+      <UserStateProvider>
+        <div className={styles.container}>
+          <Head>
+            <title>Dev My CV Tracker</title>
+          </Head>
+          <TopNavigation />
+          <div className={styles.pageContainer}>
+            <Component {...pageProps} />
+          </div>
+          <BottomFooter />
+        </div>
+      </UserStateProvider>
+    </ToastProvider>
+  );
 }
+
+export default MyApp;
