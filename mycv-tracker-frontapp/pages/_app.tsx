@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
       <UserStateProvider>
         <div className={styles.container}>
           <Head>
-            <title>Dev My CV Tracker</title>
+            <title>My CV Tracker</title>
           </Head>
           <TopNavigation />
           <div className={styles.pageContainer}>

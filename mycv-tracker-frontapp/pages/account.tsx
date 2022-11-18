@@ -1,18 +1,10 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Row, Card, Breadcrumb, BreadcrumbItem, CardBody } from "reactstrap";
 import { useUserState } from "../hooks/useUserState";
 
 const Account = () => {
-  const router = useRouter();
   const { user } = useUserState();
-
-  useEffect(() => {
-    if (user === null) {
-      router.replace("/login");
-    }
-  }, [user, router]);
 
   return (
     <Container className="fs-4 p-5">

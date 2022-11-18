@@ -1,4 +1,5 @@
 import { default as axios } from "axios";
+import { SignupUserObject } from "../../types/auth_types";
 
 const baseURL = process.env.NEXT_PUBLIC_MYCVTRACKER_API_HOST;
 
@@ -8,6 +9,10 @@ const apiInstance = axios.create({
 
 const getVersion = async (): Promise<void> => {
   // make a api call here
+};
+
+const sendAddUser = async (user: SignupUserObject) => {
+  return await apiInstance.post("/auth/signup", user);
 };
 
 const sendForgotPasswordRequest = async (email: string) => {
@@ -33,4 +38,4 @@ const sendGetUserProfileSettings = async (token: string) => {
   });
 };
 
-export { getVersion, sendForgotPasswordRequest, sendUpdateProfileSettings, sendGetUserProfileSettings };
+export { getVersion, sendAddUser, sendForgotPasswordRequest, sendUpdateProfileSettings, sendGetUserProfileSettings };

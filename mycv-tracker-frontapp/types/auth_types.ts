@@ -25,3 +25,11 @@ export type LoginResponse = {
   token: string;
   user: UserObject;
 };
+
+export type SignupUserObject = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  confirmPassword: string;
+};

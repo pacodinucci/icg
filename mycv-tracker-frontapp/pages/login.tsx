@@ -7,7 +7,6 @@ import styles from "../styles/Login.module.css";
 import { useRouter } from "next/router";
 import { useUserState } from "../hooks/useUserState";
 import ForgotPassword from "../components/ForgotPassword";
-import { useToast } from "../hooks/useToast";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -15,9 +14,6 @@ const Login: NextPage = () => {
   const [details, setDetails] = useState({ email: "", password: "", rememberMe: false });
   const [loading, setLoading] = useState(false);
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
-
-  const { showErrorToast, showSuccessToast } = useToast();
-
   useEffect(() => {
     if (user !== null) {
       router.replace("/account");
@@ -36,8 +32,6 @@ const Login: NextPage = () => {
       setLoading(true);
       event.preventDefault();
       loginUser(details.email, details.password, details.rememberMe);
-    } catch (e: any) {
-      showErrorToast("Error Logging in.");
     } finally {
       setLoading(false);
     }
