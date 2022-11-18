@@ -220,6 +220,39 @@ angular.module("MyCvTracker.shared")
         ) {
           return RESTSvc.put(url, data);
         },
+        getQuestionsList : function (
+          url,
+          data
+        ) {
+          return RESTSvc.get(url, data);
+        },
+        editQuestionsList : function (
+          url,
+          data
+        ) {
+          return RESTSvc.put(url, data);
+        },
+         deleteQuestionsList : function (
+          url,
+          data
+        ) {
+          return RESTSvc.put(url, data);
+        },
+         addQuestions : function (
+          url,
+          data
+        ) {
+          return RESTSvc.post(url, data);
+        },
+        assignInterview : function(url,data){
+            return RESTSvc.post(url, data);
+        },
+        sendReminders : function(url,data){
+            return RESTSvc.put(url, data);
+        },
+        getResults : function(url,candidateDetails){
+          return RESTSvc.put(url,candidateDetails);
+        },
         getMyNotes : function (
           url,
           data
@@ -535,6 +568,11 @@ angular.module("MyCvTracker.shared")
         },
         scanMatchingResumesInFolder : function(id) {
           var url = utilities.findMatchingResumesInFolderUrl();
+          url = url.replace("{jobId}", id);
+          return RESTSvc.get(url);
+        },
+        scanMatchingResumesInMultipleFolder : function(id) {
+          var url = utilities.findMatchingResumesInMultipleFolderUrl();
           url = url.replace("{jobId}", id);
           return RESTSvc.get(url);
         },

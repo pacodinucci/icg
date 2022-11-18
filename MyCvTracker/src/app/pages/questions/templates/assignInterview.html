@@ -1,0 +1,60 @@
+<section
+        id="question-add-page"
+            ng-controller="QuestionListingCtrl">
+    <div class="body-section">
+        <div class="section-content">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+
+                    <label>Get Interview Results</label><br>
+                    <label>Candidate Email</label>
+                    <textarea rows="8" ng-model="candidateDetails.candidate" class="form-control" id="candidate"></textarea>
+                    <label>Token</label>
+                    <textarea rows="8" ng-model="candidateDetails.token" class="form-control" id="token"></textarea>
+                    <label>Candidate Name</label>
+                    <textarea rows="8" ng-model="candidateDetails.candidateName" class="form-control" id="candidateName1"></textarea>
+                    <label>Job Link</label>
+                    <textarea rows="8" ng-model="candidateDetails.jobLink" class="form-control" id="jobLink1"></textarea>
+                    <br>
+                    <br>
+                    <button id="getResults" class="btn btn-primary" data-ng-click="getResults(candidateDetails)">Get Results</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+
+                    <label>Invite Message</label>
+                    <textarea rows="8" ng-model="interviewRequest.invite" class="form-control" id="invite"></textarea>
+                    <label>Candidate Name</label>
+                    <textarea ng-model="interviewRequest.candidateName" class="form-control" id="candidateName"></textarea>
+                    <label>Interview Owners</label>
+                    <textarea ng-model="interviewRequest.resultOwners" class="form-control" id="resultOwners"></textarea>
+                    <label>Candidate Email</label>
+                    <textarea ng-model="interviewRequest.candidateEmail" class="form-control" id="candidateEmail"></textarea>
+                    <label>Interview Type</label>
+                    <textarea ng-model="interviewRequest.interviewType" class="form-control" id="interviewType"></textarea>
+                    <label>No Of Questions</label>
+                    <textarea ng-model="interviewRequest.noOfQuestions" class="form-control" id="noOfQuestions"></textarea>
+                    <label>Job Link</label>
+                    <textarea ng-model="interviewRequest.jobLink" class="form-control" id="jobLink"></textarea>
+                    <br>
+                    <br>
+                    <input type="file" class="form-control" placeholder="Candidate Data" file-model="myFile" accept=".text,.csv" id="fileUpload"/>
+                    <br/>
+                    <br/>
+                    <button id="assignInterview" class="btn btn-primary" data-ng-click="assignInterview(myFile,interviewRequest)">Assign Interview</button>
+
+                    <br/>
+                    <br/>
+                    <button id="sendReminders" class="btn btn-primary" data-ng-click="sendReminders(myFile,interviewRequest)">Send Reminders</button>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

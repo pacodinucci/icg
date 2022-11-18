@@ -13,20 +13,26 @@
   </div>
   <div class="modal-body">
     <div style="margin: 15px 0"
-      ng-repeat="aResume in scanFolderModalForm.resumes track by aResume.name">
+      ng-repeat="aResume in scanFolderModalForm.resumes track by $index">
       <div class="matching-resume">
         <div class="detail">
           <div class="name">
-            {{ $index + 1 }}. {{ aResume.name }}
+            {{ $index + 1 }}. {{ aResume.name }} ({{ aResume.ownerEmail }})
           </div>
 
           <div class="skills">
-            Found skills: <span ng-repeat="skill in aResume.skills">{{ skill }}{{ !$last ? ", " : "" }}</span>
+            Found Skills: <span ng-repeat="skill in aResume.skills">{{ skill }}{{ !$last ? ", " : "" }}</span>
+          </div>
+          <div class="skills">
+            Found Details: {{ aResume.resumeEmail }}. {{ aResume.resumePhoneNumber }}</span>
           </div>
         </div>
         <div class="ctrl">
           <a ng-href="{{ getScanDownloadLink(aResume.name) }}" target="_blank">
             <i class="fas fa-cloud-download-alt"></i>
+          </a>
+          <a ng-href="{{ getScanPreviewLink(aResume.name) }}" target="_blank">
+            <i class="fas fa-search"></i>
           </a>
         </div>
       </div>

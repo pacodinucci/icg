@@ -475,7 +475,27 @@ angular.module('MyCvTracker.shared')
                 getDeleteMembersUrl: function () {
                     return Constants.baseUrl + Constants.apis.deleteMembers.url;
                 },
-
+                getQuestionsListUrl: function () {
+                    return Constants.baseUrl + Constants.apis.questionList.url;
+                },
+                editQuestionsListUrl: function () {
+                    return Constants.baseUrl + Constants.apis.editQuestionList.url;
+                },
+                deleteQuestionsListUrl: function () {
+                    return Constants.baseUrl + Constants.apis.deleteQuestionList.url;
+                },
+                addQuestionUrl: function () {
+                    return Constants.baseUrl + Constants.apis.addQuestionUrl.url;
+                },
+                assignInterviewUrl: function () {
+                    return Constants.baseUrl + Constants.apis.assignInterview.url;
+                },
+                sendReminderUrl: function () {
+                    return Constants.baseUrl + Constants.apis.sendReminder.url;
+                },
+                getResultsUrl: function () {
+                    return Constants.baseUrl + Constants.apis.getResults.url;
+                },
                 getEditCampaignNotesUrl: function () {
                     return Constants.baseUrl + Constants.apis.editNotes.url;
                 },
@@ -656,6 +676,10 @@ angular.module('MyCvTracker.shared')
 
                 findMatchingResumesInFolderUrl: function () {
                     return Constants.baseUrl + "/job/{jobId}/bulk-folder-scan";
+                },
+
+                findMatchingResumesInMultipleFolderUrl: function () {
+                    return Constants.baseUrl + "/job/{jobId}/bulk-folders-scan";
                 },
 
                 getCvBoxCandidateListUrl: function () {

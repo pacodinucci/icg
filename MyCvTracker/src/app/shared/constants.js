@@ -14,8 +14,9 @@
             },
 
             // baseUrl: 'http://ec2-18-221-201-185.us-east-2.compute.amazonaws.com:8080',
-           baseUrl: 'https://mycvtracker.com:8080',
-           //  baseUrl: 'http://localhost:8080',
+           // baseUrl: 'http://localhost:8080',
+            baseUrl: 'https://mycvtracker.com:8080',
+            viewUrl : 'https://mycvtracker.com',
             websocket:{
                 reconnect: 5000,
                 // webSocketUrl: 'http://localhost:20000/messages',
@@ -216,6 +217,27 @@
                 },
                 bulkUploadMembers : {
                     url : '/cvmarketdata/addBulkMembers'
+                },
+                questionList : {
+                    url : '/interviews/questionslist'
+                },
+                editQuestionList : {
+                    url : '/interviews/editQuestion'
+                },
+                deleteQuestionList : {
+                    url : '/interviews/deleteQuestion'
+                },
+                addQuestionUrl: {
+                    url : '/interviews/addQuestion'
+                },
+                assignInterview: {
+                    url : '/interviews/assignInterview'
+                },
+                sendReminder: {
+                    url : '/interviews/sendReminders'
+                },
+                getResults: {
+                    url : '/interviews/candidateResults'
                 },
                 notes: {
                     url: '/user/notesList'

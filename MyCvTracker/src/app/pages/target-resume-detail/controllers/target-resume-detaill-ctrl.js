@@ -68,7 +68,7 @@ angular.module("MyCvTracker.pages.targetResumeDetail")
       }
 
       $scope.openPreviewResume = function () {
-        var url = "https://mycvtracker.com:8080/user/resume/" + resumeId + "/poster-preview?token=" + accesstoken;
+        var url = Constants.baseUrl + "/user/resume/" + resumeId + "/poster-preview?token=" + accesstoken;
         if ($scope.resumeData.detail.fileType !== "application/pdf") {
           url = "https://view.officeapps.live.com/op/embed.aspx?src=" + url;
         }
@@ -82,7 +82,7 @@ angular.module("MyCvTracker.pages.targetResumeDetail")
       };
 
       $scope.downloadResume = function () {
-        var url = "https://mycvtracker.com:8080/user/resume/" + resumeId + "/poster-download?token=" + accesstoken;
+        var url = Constants.baseUrl + "/user/resume/" + resumeId + "/poster-download?token=" + accesstoken;
 
         const link = document.createElement('a');
         link.href = url;

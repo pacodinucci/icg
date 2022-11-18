@@ -629,6 +629,25 @@ angular.module("MyCvTracker.pages.referral")
         }
       };
 
+      $scope.openPreviewResume = function (id, fileType) {
+        service.getResumeToken(id, referralLink)
+            .then(function (data) {
+              // var url = "http://localhost:8080/user/previewResume?accessToken=" + data.token;
+              // if (fileType !== "application/pdf") {
+              //   url = "https://view.officeapps.live.com/op/embed.aspx?src=" + url;
+              // }
+              var url =  "/job-resume-preview?accessToken=" + data.token;
+
+              const link = document.createElement('a');
+              link.href = url;
+              link.target = '_blank';
+              document.body.appendChild(link);
+              link.click();
+              link.remove();
+            }, function () {
+            });
+      };
+
       $scope.shareReferredResumes = function () {
         var shareResume = $scope.referral.shareResume;
         var refCode = shareResume.referral.referralLink;
@@ -697,6 +716,15 @@ angular.module("MyCvTracker.pages.referral")
         });
       }
 
+      $scope.scanResumeMultipleFolder = function(id) {
+        $scope.scanFolderModalForm.loaded = false;
+        $scope.openScanFolderResultModal();
+        ReferralSvc.findMatchingResumesInMultipleFolder(id).then(function(data) {
+          $scope.scanFolderModalForm.resumes = data;
+          $scope.scanFolderModalForm.loaded = true;
+        });
+      }
+
       $scope.openScanFolderResultModal = function() {
         $scope.referralModal = ReferralSvc.getScanFolderResultModal($scope, "ReferalModalCtrl");
       }
@@ -717,16 +745,16 @@ angular.module("MyCvTracker.pages.referral")
         var text = "";
         switch (refType) {
           case $scope.REFERRAL_TYPE.JOB_SPEC:
-            text = "https://mycvtracker.com/job-spec.html?ref=";
+            text = Constants.viewUrl + "/job-spec.html?ref=";
             break;
           case $scope.REFERRAL_TYPE.SOCIAL_SHARE:
-            text = "https://mycvtracker.com/network-share.html?ref=";
+            text = Constants.viewUrl + "/network-share.html?ref=";
             break;
           case $scope.REFERRAL_TYPE.CV_BOX:
-            text = "https://mycvtracker.com/cv-box.html?ref=";
+            text = Constants.viewUrl + "/cv-box.html?ref=";
             break;
           default:
-            text = "https://mycvtracker.com/context-link.html?ref=";
+            text = Constants.viewUrl + "/context-link.html?ref=";
             break;
         }
         if (!subject) subject = "";
@@ -751,8 +779,30 @@ angular.module("MyCvTracker.pages.referral")
       };
 
       $scope.getScanDownloadLink = function(name) {
-        return 'https://mycvtracker.com:8080/user/bulk-folder/download/' + scanUserId + '/' + name;
+        return Constants.baseUrl + '/user/bulk-folder/download/' + scanUserId + '/' + name;
       }
+
+      /*
+      //https://mycvtracker.com/pdf-viewer.html?pdf=http://localhost:8080/user/bulk-folder/download/1/CVAmitDavara%20(1).pdf
+      $scope.getScanPreviewLink = function(name) {
+        console.log(name)
+        return Constants.viewUrl + '/pdf-viewer.html?pdf=' + Constants.baseUrl + '/user/bulk-folder/download/' + scanUserId + '/' + name;
+      }*/
+
+      $scope.getScanPreviewLink = function(name) {
+
+        console.log(userDetail.email)
+
+        if (name.split('.').pop() !== "pdf") {
+          return 'https://view.officeapps.live.com/op/embed.aspx?src=' + Constants.baseUrl +'/user/bulk-folder/download/' + scanUserId + '/' + name;
+        } else {
+          return Constants.viewUrl +'/pdf-viewer.html?pdf='+ Constants.baseUrl + '/user/bulk-folder/download/' + scanUserId + '/' + name;
+        }
+
+        //return Constants.viewUrl + '/pdf-viewer.html?pdf=' + Constants.baseUrl + '/user/bulk-folder/download/' + scanUserId + '/' + name;
+      }
+
+
 
       $scope.init = function () {
         var params = $location.search();
