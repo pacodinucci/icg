@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import NewsLetter from "../components/NewsLetter";
 
 const topcvreviews = () => {
-    return (
-        <div>topcvreviews</div>
-    )
-}
+  return (
+    <div>
+      <NewsLetter />
+    </div>
+  );
+};
 
-export default topcvreviews
+export default topcvreviews;
