@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -21,6 +21,9 @@ import Link from "next/link";
 
 import styles from "../styles/TopNavigation.module.css";
 import { useUserState } from "../hooks/useUserState";
+import { useRouter } from "next/router";
+
+import { authRoutes } from "../data/route";
 
 const TopNavigation = (): ReactElement => {
   const [jobServiceDropdown, setJobServiceDropdown] = useState(false);
@@ -31,7 +34,14 @@ const TopNavigation = (): ReactElement => {
   const toggleCvServiceDropdown = () => setCvServiceDropdown((prevState) => !prevState);
   const toggleAccountDropdown = () => setAccountDropdown((prevState) => !prevState);
 
-  const { user, logoutUser } = useUserState();
+  const { user, isLoading: isLoadingUser, logoutUser } = useUserState();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user === null && !isLoadingUser && authRoutes.includes(router.asPath)) {
+      router.replace("/login");
+    }
+  }, [user, router, isLoadingUser]);
 
   return (
     <Navbar className={styles.navbar}>

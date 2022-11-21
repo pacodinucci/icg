@@ -4,12 +4,26 @@ import { Col, Container, Card, CardTitle, CardBody, Form, FormGroup, Label, Inpu
 import Link from "next/link";
 
 import styles from "../styles/Register.module.css";
+import { SignupUserObject } from "../types/auth_types";
+import { useUserState } from "../hooks/useUserState";
 
 const Register: NextPage = () => {
-  const [details, setDetails] = useState({ email: "", password: "", firstName: "", lastName: "", confirmPassword: "" });
+  const { signupUser } = useUserState();
+
+  const [details, setDetails] = useState<SignupUserObject>({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    confirmPassword: "",
+  });
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetails((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  };
+
+  const handleRegister = () => {
+    signupUser(details);
   };
 
   return (
@@ -103,13 +117,15 @@ const Register: NextPage = () => {
               </FormGroup>
               <FormGroup row>
                 <Col sm={{ offset: 2, size: 10 }} className="justify-content-between d-flex">
-                  <Button outline>Sign Up</Button>
+                  <Button outline onClick={handleRegister}>
+                    Sign Up
+                  </Button>
                 </Col>
               </FormGroup>
               <Row>
                 <Col sm={{ offset: 2, size: 10 }} className="text-start">
                   <p>
-                    By Signing up you agree to our{" "}
+                    By Signing up you agree to our
                     <Link href="/terms" className="text-decoration-none">
                       Terms & Conditions
                     </Link>
