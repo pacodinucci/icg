@@ -124,6 +124,7 @@ function createResponseElement(response, qNumber, token) {
   stopBtn.addEventListener("click", function () {
     startBtn.innerText = "Play";
     sound.stop();
+    playing = false;
   });
   stopBtn.classList.add("btn", "btn-danger", "disabled");
   stopBtn.innerText = "Stop";
@@ -131,8 +132,13 @@ function createResponseElement(response, qNumber, token) {
   row2.appendChild(startBtn);
   row2.appendChild(stopBtn);
 
+  var row3 = document.createElement("div");
+  row3.classList.add("row");
+
+  row3.innerText = "Loading....";
   sound.on("load", function () {
     console.log("loaded");
+    row3.innerHTML = "Duration: " + sound.duration().toFixed(2) + " seconds";
     loadBtn.remove();
     stopBtn.classList.remove("disabled");
     startBtn.classList.remove("disabled");
@@ -149,8 +155,15 @@ function createResponseElement(response, qNumber, token) {
     console.log(e);
   });
 
+  sound.on("end", function () {
+    startBtn.innerText = "Play";
+    sound.stop();
+    playing = false;
+  });
+
   var hr = document.createElement("hr");
 
+  item.appendChild(row3);
   item.appendChild(row2);
   item.appendChild(hr);
   return item;
