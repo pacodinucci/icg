@@ -136,7 +136,10 @@ const Home: NextPage = () => {
 								professional writer. A custom, modern, industry-specific CV that
 								tells your career story. Double the interviews, guaranteed!
 								<br />
-								<a href="#" className={styles.box_service_read_more}>
+								<a
+									href="/cv-writing-packages"
+									className={styles.box_service_read_more}
+								>
 									Read More...
 								</a>
 							</span>
@@ -154,7 +157,7 @@ const Home: NextPage = () => {
 								You can host your CV on our website and share the URL with
 								anyone in secured manner.
 								<br />
-								<a href="#" className={styles.box_service_read_more}>
+								<a href="/cvhosting" className={styles.box_service_read_more}>
 									Read More...
 								</a>
 							</span>
@@ -173,7 +176,7 @@ const Home: NextPage = () => {
 								We connect you to our partner companies those can offer you
 								training to pick up right skills to get the Job.
 								<br />
-								<a href="#" className={styles.box_service_read_more}>
+								<a href="/cvoffers" className={styles.box_service_read_more}>
 									Read More...
 								</a>
 							</span>

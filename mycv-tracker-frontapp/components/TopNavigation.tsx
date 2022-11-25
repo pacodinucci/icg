@@ -53,7 +53,7 @@ const TopNavigation = (): ReactElement => {
 	return (
 		<Navbar className={styles.navbar}>
 			<Container className="d-flex justify-content-between align-items-center flex-grow-1">
-				<NavbarBrand href="/topcvreviews">
+				<NavbarBrand href="/">
 					<Image alt="logo" src={logo} className={styles.logo} />
 				</NavbarBrand>
 				<Row className="align-items-center">
@@ -75,7 +75,9 @@ const TopNavigation = (): ReactElement => {
 								<DropdownItem tag={Link} href="/cover-letter-page">
 									Cover Letter Page
 								</DropdownItem>
-								<DropdownItem>CV Writing Packages</DropdownItem>
+								<DropdownItem tag={Link} href="/cv-writing-packages">
+									CV Writing Packages
+								</DropdownItem>
 							</DropdownMenu>
 						</Dropdown>
 					</Col>
@@ -88,7 +90,9 @@ const TopNavigation = (): ReactElement => {
 								Job Services
 							</DropdownToggle>
 							<DropdownMenu>
-								<DropdownItem>Job Board</DropdownItem>
+								<DropdownItem tag={Link} href="/jobs">
+									Job Board
+								</DropdownItem>
 								<DropdownItem>Get a Tech Internship</DropdownItem>
 								<DropdownItem>Self Funded Internship</DropdownItem>
 							</DropdownMenu>
