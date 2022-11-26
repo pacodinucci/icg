@@ -1,19 +1,11 @@
 import { useContext, createContext, useState, useCallback, ReactElement, useEffect } from "react";
-import axios from "axios";
-
-import { LoginResponse, SignupUserObject, UserObject } from "../types/auth_types";
-import {
-  clearLocalStorage,
-  clearSessionStorage,
-  getUserFromLocalStorage,
-  getUserFromSessionStorage,
-  storeUserInLocalStorage,
-  storeUserInSessionStorage,
-} from "../utils/storage-utils";
+import { SignupUserObject, UserObject } from "../types/auth_types";
+import { clearLocalStorage, clearSessionStorage } from "../utils/storage-utils";
 import { useToast } from "./useToast";
-import { sendAddUser } from "../apis/mycvtracker";
+import { sendAddUser, sendLoginUser } from "../apis/mycvtracker";
 import { alerts } from "../utils/alert-utils";
 import { useRouter } from "next/router";
+import { getUserfromStorage } from "../apis/mycvtracker/auth";
 
 type ContextType = {
   user: UserObject | null;
@@ -43,8 +35,7 @@ export const UserStateProvider = ({ children }: { children: ReactElement }) => {
   const { showErrorToast, showSuccessToast } = useToast();
 
   useEffect(() => {
-    let response = getUserFromLocalStorage();
-    if (response === null) response = getUserFromSessionStorage();
+    const response = getUserfromStorage();
     if (response === null) {
       setUser(null);
       setToken("");
@@ -57,26 +48,10 @@ export const UserStateProvider = ({ children }: { children: ReactElement }) => {
   const loginUser = useCallback(
     async (email: string, password: string, rememberme: boolean) => {
       try {
-        const response = await axios<LoginResponse>({
-          method: "post",
-          url: process.env.NEXT_PUBLIC_MYCVTRACKER_API_HOST + "/auth/login",
-          data: {
-            email,
-            password,
-            rememberme,
-          },
-        });
-
-        if (response.status === 200) {
-          setUser(response.data.user);
-          setToken(response.data.token);
-          if (rememberme) {
-            // Store in Local storage
-            storeUserInLocalStorage(response.data.user, response.data.token);
-          } else {
-            // Store in session storage
-            storeUserInSessionStorage(response.data.user, response.data.token);
-          }
+        const response = await sendLoginUser(email, password, rememberme);
+        if (response) {
+          setUser(response.user);
+          setToken(response.token);
         }
       } catch (e: any) {
         showErrorToast(alerts[e.response.status].message);
