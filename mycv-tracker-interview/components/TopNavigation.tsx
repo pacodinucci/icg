@@ -23,7 +23,7 @@ import styles from "../styles/TopNavigation.module.css";
 import { useUserState } from "../hooks/useUserState";
 import { useRouter } from "next/router";
 
-import { authRoutes } from "../data/route";
+import { adminRoutes, authRoutes } from "../data/route";
 
 const TopNavigation = (): ReactElement => {
   const [jobServiceDropdown, setJobServiceDropdown] = useState(false);
@@ -39,6 +39,8 @@ const TopNavigation = (): ReactElement => {
 
   useEffect(() => {
     if (user === null && !isLoadingUser && authRoutes.includes(router.asPath)) {
+      router.replace("/login");
+    } else if (user !== null && user.userRole !== "ADMIN" && adminRoutes.includes(router.asPath)) {
       router.replace("/login");
     }
   }, [user, router, isLoadingUser]);
