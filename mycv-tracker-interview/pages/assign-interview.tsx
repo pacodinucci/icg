@@ -26,6 +26,7 @@ type InputValues = {
   candidateEmail: string;
   interviewType: string[];
   noOfQuestions: string;
+  candidateList: string;
   jobLink: string;
 };
 
@@ -52,6 +53,7 @@ const AssignInterviewPage = () => {
     interviewType: [],
     noOfQuestions: "10",
     jobLink: "",
+    candidateList: "",
   });
 
   const [errors, setErrors] = useState<InputValuesError>({

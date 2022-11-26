@@ -8,7 +8,7 @@ import {
   sendGetUserProfileSettings,
   sendUpdateProfileSettings,
 } from "./auth";
-import { sendAssignInterview } from "./assign-interview";
+import { sendAssignInterview, sendGetCandidateResult } from "./assign-interview";
 
 const getInterviewResponses = async (token: string) => {
   return await apiInstance.get<AudioResponse[]>(`/interviews/interviewResponse/${token}`, {
@@ -26,4 +26,5 @@ export {
   sendGetUserProfileSettings,
   getInterviewResponses,
   sendAssignInterview,
+  sendGetCandidateResult,
 };

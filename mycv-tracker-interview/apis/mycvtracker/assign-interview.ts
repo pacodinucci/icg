@@ -1,15 +1,19 @@
 import { apiInstance } from "./config";
 
-import { AssignInterviewRequest } from "../../types/assignInterview_types";
+import { AssignInterviewRequest, CandidateResultRequest } from "../../types/assignInterview_types";
 
 export const sendAssignInterview = async (values: AssignInterviewRequest, token: string) => {
-  return apiInstance.post(
-    "interviews/assignInterview",
-    { ...values, candidateList: "" },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  return apiInstance.post("interviews/assignInterview", values, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const sendGetCandidateResult = async (values: CandidateResultRequest, token: string) => {
+  return apiInstance.put("interviews/candidateResults", values, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
