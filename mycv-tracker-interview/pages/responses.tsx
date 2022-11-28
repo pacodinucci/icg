@@ -20,16 +20,18 @@ const Responses = () => {
   }, []);
 
   useEffect(() => {
+    console.log(router);
     if (router.query.token) {
       if (!Array.isArray(router.query.token)) {
         setToken(router.query.token);
         fetchResponse(router.query.token);
+        router.replace(router.asPath, router.route, { shallow: true });
       }
     }
   }, [router, fetchResponse]);
 
   return (
-    <Container>
+    <Container className="py-5">
       <p className="fs-1">Interview Responses</p>
       <Form
         onSubmit={(e) => {

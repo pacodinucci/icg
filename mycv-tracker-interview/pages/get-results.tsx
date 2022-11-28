@@ -152,7 +152,7 @@ const GetResults = () => {
         </FormGroup>
 
         <Button type="submit" color="primary" disabled={isLoading}>
-          Assign Interview
+          Get Interview Results
         </Button>
       </Form>
     </Container>

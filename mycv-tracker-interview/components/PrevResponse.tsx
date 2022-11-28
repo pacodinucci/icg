@@ -1,22 +1,27 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
-import { Button, Row, Col } from "reactstrap";
+import { Button, Row, Col, Alert } from "reactstrap";
 import { AudioResponse } from "../types/audioResponse_types";
 import ReactHowler from "react-howler";
 
-import { FaVolumeOff, FaVolumeMute, FaVolumeUp, FaVolumeDown } from "react-icons/fa";
+import { FaVolumeOff, FaVolumeMute, FaVolumeUp, FaVolumeDown, FaRedo } from "react-icons/fa";
 
 type Props = {
   data: AudioResponse;
 };
 
+interface Howler extends ReactHowler {
+  load: () => void;
+}
+
 const PrevResponse = ({ data }: Props) => {
-  const player = useRef<ReactHowler | null>();
+  const player = useRef<Howler | null>();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [volume, setVolume] = useState(100);
   const [duration, setDuration] = useState(100);
   const [seek, setSeek] = useState(0);
   const [mute, setMute] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChangeVolume = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setMute(false);
@@ -66,6 +71,14 @@ const PrevResponse = ({ data }: Props) => {
     }
   }, [isPlaying, player, getSeek]);
 
+  const handleReload = useCallback(() => {
+    if (player.current) {
+      setIsLoading(true);
+      setError("");
+      player.current.load();
+    }
+  }, [player]);
+
   return (
     <div>
       <Row>
@@ -86,21 +99,35 @@ const PrevResponse = ({ data }: Props) => {
           }}
           volume={volume / 100}
           mute={mute}
-          ref={(ref) => (player.current = ref)}
+          ref={(ref: Howler) => (player.current = ref)}
           onLoad={onLoadComplete}
+          onLoadError={() => setError("Unable to Load Media")}
+          onPlayError={() => setError("Unable to Play Media")}
         />
       </Row>
       <Row>
-        <Col className="d-grid" xs={6} sm={2}>
-          <Button onClick={togglePlaySound} color="success" disabled={isLoading}>
-            {isPlaying ? "Pause" : "Play"}
-          </Button>
-        </Col>
-        <Col className="d-grid" xs={6} sm={2}>
-          <Button onClick={stopSound} color="danger" disabled={isLoading}>
-            Stop
-          </Button>
-        </Col>
+        {error.length === 0 && (
+          <>
+            <Col className="d-grid" xs={6} sm={2}>
+              <Button onClick={togglePlaySound} color="success" disabled={isLoading}>
+                {isPlaying ? "Pause" : "Play"}
+              </Button>
+            </Col>
+            <Col className="d-grid" xs={6} sm={2}>
+              <Button onClick={stopSound} color="danger" disabled={isLoading}>
+                Stop
+              </Button>
+            </Col>
+          </>
+        )}
+        {error.length !== 0 && (
+          <Col xs={12} sm={4}>
+            <Alert color="danger" className="d-flex align-items-center justify-content-between">
+              {error}
+              <FaRedo onClick={handleReload} />
+            </Alert>
+          </Col>
+        )}
         <Col className="align-items-center d-flex" xs={12} sm={8} md={6} lg={4}>
           <div className="fs-2 mx-2" onClick={handleToggleMute}>
             {mute && <FaVolumeMute />}
