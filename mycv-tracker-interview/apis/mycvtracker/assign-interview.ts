@@ -10,6 +10,14 @@ export const sendAssignInterview = async (values: AssignInterviewRequest, token:
   });
 };
 
+export const sendRemiderRequest = async (values: AssignInterviewRequest, token: string) => {
+  return apiInstance.post("interviews/sendReminders", values, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const sendGetCandidateResult = async (values: CandidateResultRequest, token: string) => {
   return apiInstance.put("interviews/candidateResults", values, {
     headers: {

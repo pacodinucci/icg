@@ -13,6 +13,7 @@ import {
   FormFeedback,
 } from "reactstrap";
 import { sendAssignInterview } from "../apis/mycvtracker";
+import { sendRemiderRequest } from "../apis/mycvtracker/assign-interview";
 import Chip from "../components/Chip";
 import { InterviewTopics } from "../data/interview";
 import { useToast } from "../hooks/useToast";
@@ -84,37 +85,41 @@ const AssignInterviewPage = () => {
     return setValues((prev) => ({ ...prev, interviewType: prev.interviewType.filter((t) => t !== value) }));
   }, []);
 
+  const validateValues = useCallback((values: InputValues) => {
+    let hasError = false;
+    if (values.candidateEmail.length <= 5) {
+      setErrors((prev) => ({ ...prev, candidateEmail: "Invalid Candidate Email" }));
+      hasError = true;
+    }
+    if (values.resultOwners.length <= 5) {
+      setErrors((prev) => ({ ...prev, resultOwners: "Invalid Result Owner Email" }));
+      hasError = true;
+    }
+    if (values.candidateName.length <= 0) {
+      setErrors((prev) => ({ ...prev, candidateName: "Candidate Name cannot be empty" }));
+      hasError = true;
+    }
+    if (isNaN(parseFloat(values.noOfQuestions))) {
+      setErrors((prev) => ({ ...prev, noOfQuestions: "Number of Questions should be a number" }));
+      hasError = true;
+    }
+
+    if (values.jobLink.length <= 5) {
+      setErrors((prev) => ({ ...prev, jobLink: "Invalid Job Link" }));
+      hasError = true;
+    }
+    if (values.interviewType.length === 0) {
+      setErrors((prev) => ({ ...prev, interviewType: "Please Select atleast 1 interview topic" }));
+      hasError = true;
+    }
+    return hasError;
+  }, []);
+
   const handleFormSubmit = useCallback(
     async (values: InputValues, e?: React.FormEvent<HTMLFormElement>) => {
       if (e) e.preventDefault();
-      // if ()
-      let hasError = false;
-      if (values.candidateEmail.length <= 5) {
-        setErrors((prev) => ({ ...prev, candidateEmail: "Invalid Candidate Email" }));
-        hasError = true;
-      }
-      if (values.resultOwners.length <= 5) {
-        setErrors((prev) => ({ ...prev, resultOwners: "Invalid Result Owner Email Email" }));
-        hasError = true;
-      }
-      if (values.candidateName.length <= 0) {
-        setErrors((prev) => ({ ...prev, candidateName: "Candidate Name cannot be empty" }));
-        hasError = true;
-      }
-      if (isNaN(parseFloat(values.noOfQuestions))) {
-        setErrors((prev) => ({ ...prev, noOfQuestions: "Number of Questions should be a number" }));
-        hasError = true;
-      }
 
-      if (values.jobLink.length <= 5) {
-        setErrors((prev) => ({ ...prev, jobLink: "Invalid Job Link" }));
-        hasError = true;
-      }
-      if (values.interviewType.length === 0) {
-        setErrors((prev) => ({ ...prev, interviewType: "Please Select atleast 1 interview topic" }));
-        hasError = true;
-      }
-
+      let hasError = validateValues(values);
       if (hasError) return;
       try {
         setIsLoading(true);
@@ -128,7 +133,27 @@ const AssignInterviewPage = () => {
         setIsLoading(false);
       }
     },
-    [token, showErrorToast, showSuccessToast]
+    [token, showErrorToast, showSuccessToast, validateValues]
+  );
+
+  const handleSendReminder = useCallback(
+    async (values: InputValues, e?: React.FormEvent<HTMLFormElement>) => {
+      if (e) e.preventDefault();
+      let hasError = validateValues(values);
+      if (hasError) return;
+      try {
+        setIsLoading(true);
+        await sendRemiderRequest({ ...values, interviewType: values.interviewType.join("_") }, token);
+        showSuccessToast("Your Request has been submitted");
+      } catch (e: any) {
+        console.log(e);
+        if (alerts[e.response.status]) showErrorToast(alerts[e.response.status].message);
+        else showErrorToast("Encountered Some Error");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [token, showErrorToast, showSuccessToast, validateValues]
   );
 
   return (
@@ -251,6 +276,15 @@ const AssignInterviewPage = () => {
 
         <Button type="submit" color="primary" disabled={isLoading}>
           Assign Interview
+        </Button>
+        <Button
+          type="button"
+          color="primary"
+          className="mx-2"
+          onClick={() => handleSendReminder(values)}
+          disabled={isLoading}
+        >
+          Send Reminder Interview
         </Button>
       </Form>
     </Container>

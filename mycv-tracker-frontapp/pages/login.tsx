@@ -28,13 +28,8 @@ const Login: NextPage = () => {
   };
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    try {
-      setLoading(true);
-      event.preventDefault();
-      loginUser(details.email, details.password, details.rememberMe);
-    } finally {
-      setLoading(false);
-    }
+    event.preventDefault();
+    loginUser(details.email, details.password, details.rememberMe);
   };
 
   return (
@@ -48,7 +43,7 @@ const Login: NextPage = () => {
             <Link href="/register" className="text-decoration-none fs-4">
               New to MyCVTracker? Sign up!
             </Link>
-            <Form className="my-4 text-end" onSubmit={handleLogin}>
+            <Form className="my-4 text-end" onSubmit={(e) => e.preventDefault()}>
               <FormGroup row>
                 <Label for="email" sm={2}>
                   Email
@@ -96,9 +91,7 @@ const Login: NextPage = () => {
               <FormGroup row>
                 <Col sm={{ offset: 2, size: 10 }} className="justify-content-between d-flex">
                   <Button outline>Sign In</Button>
-                  <Button color="link" onClick={() => setForgotPasswordModal(true)}>
-                    Forgot password?
-                  </Button>
+                  <Button color="link">Forgot password?</Button>
                 </Col>
               </FormGroup>
             </Form>
