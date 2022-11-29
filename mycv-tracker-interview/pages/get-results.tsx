@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState, useCallback } from "react";
 import {
   Breadcrumb,
@@ -5,12 +6,14 @@ import {
   Container,
   Row,
   Card,
+  CardBody,
   Form,
   FormGroup,
   Label,
   Input,
   Button,
   FormFeedback,
+  Col,
 } from "reactstrap";
 import { sendGetCandidateResult } from "../apis/mycvtracker";
 import { useToast } from "../hooks/useToast";
@@ -88,17 +91,24 @@ const GetResults = () => {
 
   return (
     <Container className="py-5">
-      <Row className="fs-1">
-        <p>Get Interview Results</p>
-      </Row>
       <Row>
-        <Card>
-          <Breadcrumb>
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem active>Get Interview Results</BreadcrumbItem>
-          </Breadcrumb>
-        </Card>
+        <p className="fs-1 my-3">Get Interview Results</p>
       </Row>
+      <Row className="fs-4">
+        <Col>
+          <Card>
+            <CardBody>
+              <Breadcrumb>
+                <BreadcrumbItem>
+                  <Link href="/dashboard">Dashboard</Link>
+                </BreadcrumbItem>
+                <BreadcrumbItem active>Get Results</BreadcrumbItem>
+              </Breadcrumb>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+
       <Form onSubmit={(e) => handleFormSubmit(values, e)}>
         <FormGroup className="my-3">
           <Label for="candidate">Candidate Email</Label>

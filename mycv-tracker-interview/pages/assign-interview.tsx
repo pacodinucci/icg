@@ -3,8 +3,10 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Container,
+  Col,
   Row,
   Card,
+  CardBody,
   Form,
   FormGroup,
   Label,
@@ -12,6 +14,7 @@ import {
   Button,
   FormFeedback,
 } from "reactstrap";
+import Link from "next/link";
 import { sendAssignInterview } from "../apis/mycvtracker";
 import { sendRemiderRequest } from "../apis/mycvtracker/assign-interview";
 import Chip from "../components/Chip";
@@ -158,16 +161,22 @@ const AssignInterviewPage = () => {
 
   return (
     <Container className="py-5">
-      <Row className="fs-1">
-        <p>Assign Interview</p>
-      </Row>
       <Row>
-        <Card>
-          <Breadcrumb>
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem active>Assign Interview</BreadcrumbItem>
-          </Breadcrumb>
-        </Card>
+        <p className="fs-1 my-3">Assign Interview</p>
+      </Row>
+      <Row className="fs-4">
+        <Col>
+          <Card>
+            <CardBody>
+              <Breadcrumb>
+                <BreadcrumbItem>
+                  <Link href="/dashboard">Dashboard</Link>
+                </BreadcrumbItem>
+                <BreadcrumbItem active>Assign Interview</BreadcrumbItem>
+              </Breadcrumb>
+            </CardBody>
+          </Card>
+        </Col>
       </Row>
       <Form onSubmit={(e) => handleFormSubmit(values, e)}>
         <FormGroup className="my-3">

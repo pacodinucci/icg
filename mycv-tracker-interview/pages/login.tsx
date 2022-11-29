@@ -16,7 +16,7 @@ const Login: NextPage = () => {
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
   useEffect(() => {
     if (user !== null) {
-      router.replace("/account");
+      router.replace("/dashboard");
     }
   }, [user, router]);
 
@@ -95,7 +95,9 @@ const Login: NextPage = () => {
               </FormGroup>
               <FormGroup row>
                 <Col sm={{ offset: 2, size: 10 }} className="justify-content-between d-flex">
-                  <Button outline>Sign In</Button>
+                  <Button outline disabled={loading}>
+                    Sign In
+                  </Button>
                   <Button color="link" onClick={() => setForgotPasswordModal(true)}>
                     Forgot password?
                   </Button>

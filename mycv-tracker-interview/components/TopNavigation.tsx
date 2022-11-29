@@ -38,7 +38,7 @@ const TopNavigation = (): ReactElement => {
   const router = useRouter();
 
   useEffect(() => {
-    if (user === null && !isLoadingUser && authRoutes.includes(router.asPath)) {
+    if (user === null && !isLoadingUser && authRoutes.includes(router.route)) {
       router.replace("/login");
     } else if (user !== null && user.userRole !== "ADMIN" && adminRoutes.includes(router.asPath)) {
       router.replace("/login");
