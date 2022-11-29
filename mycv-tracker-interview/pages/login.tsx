@@ -19,7 +19,6 @@ const Login: NextPage = () => {
       router.replace("/dashboard");
     }
   }, [user, router]);
-
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetails((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
@@ -27,11 +26,11 @@ const Login: NextPage = () => {
     setDetails((prev) => ({ ...prev, rememberMe: !prev.rememberMe }));
   };
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       setLoading(true);
       event.preventDefault();
-      loginUser(details.email, details.password, details.rememberMe);
+      await loginUser(details.email, details.password, details.rememberMe);
     } finally {
       setLoading(false);
     }
@@ -95,8 +94,8 @@ const Login: NextPage = () => {
               </FormGroup>
               <FormGroup row>
                 <Col sm={{ offset: 2, size: 10 }} className="justify-content-between d-flex">
-                  <Button outline disabled={loading}>
-                    Sign In
+                  <Button color="primary" disabled={loading}>
+                    {loading ? "Loading..." : "Sign In"}
                   </Button>
                   <Button color="link" onClick={() => setForgotPasswordModal(true)}>
                     Forgot password?

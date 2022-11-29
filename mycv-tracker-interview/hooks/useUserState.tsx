@@ -11,7 +11,7 @@ type ContextType = {
   user: UserObject | null;
   isLoading: boolean;
   token: string;
-  loginUser: (email: string, password: string, rememberme: boolean) => void;
+  loginUser: (email: string, password: string, rememberme: boolean) => Promise<void>;
   signupUser: (user: SignupUserObject) => void;
   logoutUser: () => void;
 };
@@ -20,7 +20,7 @@ const UserContext = createContext<ContextType>({
   user: null,
   isLoading: true,
   token: "",
-  loginUser: () => {},
+  loginUser: () => Promise.resolve(),
   signupUser: () => {},
   logoutUser: () => {},
 });
