@@ -76,7 +76,9 @@ const Settings = () => {
 					<CardBody>
 						<Breadcrumb>
 							<BreadcrumbItem>
-								<Link href="/account">Home</Link>
+								<Link className={styles.link} href="/account">
+									Home
+								</Link>
 							</BreadcrumbItem>
 							<BreadcrumbItem active>Settings</BreadcrumbItem>
 						</Breadcrumb>

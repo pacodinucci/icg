@@ -8,6 +8,7 @@ import {
 	Container,
 	Row,
 } from "reactstrap";
+import styles from "../styles/Account.module.css";
 
 const Resumes = () => {
 	return (
@@ -20,7 +21,9 @@ const Resumes = () => {
 					<CardBody>
 						<Breadcrumb>
 							<BreadcrumbItem>
-								<Link href="/account">Home</Link>
+								<Link className={styles.link} href="/account">
+									Home
+								</Link>
 							</BreadcrumbItem>
 							<BreadcrumbItem active>My Resumes</BreadcrumbItem>
 						</Breadcrumb>

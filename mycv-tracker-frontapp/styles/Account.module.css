@@ -6,3 +6,6 @@
 .btn {
 	flex: 1;
 }
+.link {
+	text-decoration: none;
+}

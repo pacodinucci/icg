@@ -9,6 +9,7 @@ import {
 	Row,
 	Table,
 } from "reactstrap";
+import styles from "../styles/Account.module.css";
 
 const Notifications = () => {
 	return (
@@ -21,7 +22,9 @@ const Notifications = () => {
 					<CardBody>
 						<Breadcrumb>
 							<BreadcrumbItem>
-								<Link href="/account">Home</Link>
+								<Link className={styles.link} href="/account">
+									Home
+								</Link>
 							</BreadcrumbItem>
 							<BreadcrumbItem active>Notifications</BreadcrumbItem>
 						</Breadcrumb>
