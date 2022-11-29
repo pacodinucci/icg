@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { Button, Input, Row, Col, Container } from "reactstrap";
+import styles from "../styles/NewsLetter.module.css";
 
 const NewsLetter = () => {
-  const [email, setEmail] = useState("");
+	const [email, setEmail] = useState("");
 
-  return (
-    <Row className="bg-info bg-gradient p-5">
-      <Col md={8}>
-        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-      </Col>
-      <Col md={2}>
-        <Button color="dark">Submit Query</Button>
-      </Col>
-    </Row>
-  );
+	return (
+		<div className={styles.container}>
+			<span className={styles.heading}>Subscribe our Newsletter</span>
+			<div className={styles.row}>
+				<input
+					className={styles.input}
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					placeholder="Enter your email address here..."
+				/>
+				<button className={styles.btn}>Submit</button>
+			</div>
+		</div>
+	);
 };
 
 export default NewsLetter;

@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	padding: 5rem 0;
+	background-color: #499dc4;
+	width: 100%;
+}
+.heading {
+	font-size: 1rem;
+	color: white;
+	font-weight: bold;
+}
+.row {
+	width: 40%;
+	display: flex;
+}
+.input {
+	flex: 5;
+	padding: 0.4rem 1rem;
+	border: none;
+	border-radius: 0.3rem 0 0 0.3rem;
+	font-size: 0.9rem;
+}
+.input::placeholder {
+	color: #999999;
+}
+.btn {
+	flex: 1;
+	border: none;
+	padding: 0.4rem 1rem;
+	border-radius: 0 0.3rem 0.3rem 0;
+	background-color: black;
+	color: white;
+	font-weight: 700;
+	font-size: 0.9rem;
+}

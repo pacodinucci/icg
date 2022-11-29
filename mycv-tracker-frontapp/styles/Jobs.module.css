@@ -1,0 +1,38 @@
+.job_list_title {
+	font-size: 1.6rem;
+	font-weight: 700;
+	color: #666666;
+}
+.job_list_box {
+	width: 100%;
+	background-color: white;
+	padding: 1.5rem 2rem;
+}
+.job_list_form {
+	display: flex;
+	gap: 1rem;
+}
+.job_list_form_input:first-child {
+	flex: 2;
+}
+.job_list_form_input {
+	flex: 1;
+	padding: 0.4rem 1rem;
+	border: 1px solid #ccc;
+	border-radius: 0.3rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+.job_list_form_btn {
+	flex: 1;
+	background-color: #337ab7;
+	color: #fff;
+	font-size: 0.9rem;
+	font-weight: bold;
+	border-radius: 0.5rem;
+	border: none;
+	padding: 0.4rem 1rem;
+}
+.job_list_form_btn:hover {
+	background-color: #286090;
+}
