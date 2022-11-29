@@ -7,7 +7,7 @@ const Account = () => {
   const { user } = useUserState();
 
   return (
-    <Container className="fs-4 p-5">
+    <Container className="fs-4 py-5">
       <Row>
         <h6 className="fs-1 my-3">Profile</h6>
       </Row>

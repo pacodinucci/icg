@@ -55,8 +55,10 @@ const Settings = () => {
     }
   };
   return (
-    <Container className="py-4">
-      <Row className="fs-2">Settings</Row>
+    <Container className="py-5">
+      <Row>
+        <h6 className="fs-1 my-3">Settings</h6>
+      </Row>
       <Row>
         <Card className="fs-4">
           <CardBody>

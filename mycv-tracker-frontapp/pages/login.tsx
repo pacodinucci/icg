@@ -19,7 +19,6 @@ const Login: NextPage = () => {
       router.replace("/account");
     }
   }, [user, router]);
-
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetails((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
@@ -27,9 +26,14 @@ const Login: NextPage = () => {
     setDetails((prev) => ({ ...prev, rememberMe: !prev.rememberMe }));
   };
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    loginUser(details.email, details.password, details.rememberMe);
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      setLoading(true);
+      event.preventDefault();
+      await loginUser(details.email, details.password, details.rememberMe);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -43,7 +47,7 @@ const Login: NextPage = () => {
             <Link href="/register" className="text-decoration-none fs-4">
               New to MyCVTracker? Sign up!
             </Link>
-            <Form className="my-4 text-end" onSubmit={(e) => e.preventDefault()}>
+            <Form className="my-4 text-end" onSubmit={handleLogin}>
               <FormGroup row>
                 <Label for="email" sm={2}>
                   Email
@@ -90,8 +94,12 @@ const Login: NextPage = () => {
               </FormGroup>
               <FormGroup row>
                 <Col sm={{ offset: 2, size: 10 }} className="justify-content-between d-flex">
-                  <Button outline>Sign In</Button>
-                  <Button color="link">Forgot password?</Button>
+                  <Button color="primary" disabled={loading}>
+                    {loading ? "Loading..." : "Sign In"}
+                  </Button>
+                  <Button color="link" onClick={() => setForgotPasswordModal(true)}>
+                    Forgot password?
+                  </Button>
                 </Col>
               </FormGroup>
             </Form>
