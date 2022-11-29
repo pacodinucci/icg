@@ -276,12 +276,12 @@ angular.module('MyCvTracker.shared')
                     type: 'success',
                     message: 'You have sucessfully rejected this job.'
                 },
-                newReferralLinkSuccessMsg : "New referral link has been generated",
-                editReferralLinkSuccessMsg : "The referral link has been updated successfully",
-                referralLinkCopySuccessMsg : "Copied",
-                deleteReferralLinkSuccessMsg : "Referral link has been deleted successfully.",
-                extendResumeSuccessMessage : "Resume preview has been extended successfully.",
-                extendResumeSuccessFail : "Extending resume has failed!",
+                newReferralLinkSuccessMsg: "New referral link has been generated",
+                editReferralLinkSuccessMsg: "The referral link has been updated successfully",
+                referralLinkCopySuccessMsg: "Copied",
+                deleteReferralLinkSuccessMsg: "Referral link has been deleted successfully.",
+                extendResumeSuccessMessage: "Resume preview has been extended successfully.",
+                extendResumeSuccessFail: "Extending resume has failed!",
             };
 
             var Utilities = {
@@ -761,20 +761,20 @@ angular.module('MyCvTracker.shared')
 
                 gotoLoginPage: function () {
                     //$location.path('base.auth', {reload: true});
-                    $location.path('auth', {}, {reload: true});
+                    $location.path('auth', {}, { reload: true });
                 },
 
                 gotoRegisterPage: function () {
                     //$location.path('base.auth', {reload: true});
-                    $location.path('register', {}, {reload: true});
+                    $location.path('register', {}, { reload: true });
                 },
 
                 gotoFrontPageWithReload: function () {
-                    $location.path('front', {reload: true});
+                    $location.path('front', { reload: true });
                 },
 
                 gotoHomePageWithReload: function () {
-                    $location.path('home', {reload: true});
+                    $location.path('home', { reload: true });
                 },
 
                 gotoTrackResumePage: function () {
@@ -793,7 +793,7 @@ angular.module('MyCvTracker.shared')
                     $location.path('CvMarketing');
                 },
                 gotoNotesPage: function () {
-                    $location.path('notes', {}, {reload: true});
+                    $location.path('notes', {}, { reload: true });
                 },
                 gotoCampaignNotesPage: function () {
                     $location.path('CampaignNotes');
@@ -809,10 +809,10 @@ angular.module('MyCvTracker.shared')
                 collectCV: function () {
                     $location.path('collectCV');
                 },
-                getAddingSkillUrl : function() {
+                getAddingSkillUrl: function () {
                     return Constants.baseUrl + "/tech-skill/new";
                 },
-                getAddingCategorySkillUrl : function() {
+                getAddingCategorySkillUrl: function () {
                     return Constants.baseUrl + "/skill-category/new";
                 },
                 getListingSkillCategoriesUrl: function () {
