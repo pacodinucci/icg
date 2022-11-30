@@ -1,134 +1,77 @@
 import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	Button,
-	Card,
-	CardBody,
-	Col,
-	Container,
-	FormGroup,
-	Input,
-	Label,
-	Row,
-} from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, Container, Row } from "reactstrap";
 import { getNotes } from "../apis/mycvtracker/notes";
 import { useToast } from "../hooks/useToast";
 import styles from "../styles/Account.module.css";
 import { alerts } from "../utils/alert-utils";
 
+import { Note, NotesResponse } from "../types/note_types";
+import NoteCard from "../components/NoteCard";
+import Pager from "../components/Pager";
+
 const Notes = () => {
-	const { showErrorToast, showSuccessToast } = useToast();
+  const { showErrorToast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [notes, setNotes] = useState<Note[]>([]);
 
-	const [notes, setNotes] = useState([]);
+  const [pagination, setPagination] = useState({
+    totalpages: 0,
+    currentPage: 0,
+  });
 
-	const getNotesList = useCallback(
-		async (pageNumber: number, pageSize: number) => {
-			try {
-				const response = await getNotes(pageNumber, pageSize);
-				if (response) {
-					setNotes(response);
-				}
-			} catch (e: any) {
-				console.log(e);
-				showErrorToast(alerts[e.response.status].message);
-			}
-		},
-		[showErrorToast]
-	);
-	useEffect(() => {
-		getNotesList(3, 10);
-	}, []);
+  const getNotesList = useCallback(
+    async (pageNumber: number, pageSize = 10) => {
+      console.log("Fetching");
+      setIsLoading(true);
+      try {
+        const response = (await getNotes(pageNumber, pageSize)) as NotesResponse;
+        setPagination({ totalpages: response.totalPages, currentPage: pageNumber });
+        if (!response.empty) {
+          setNotes(response.content);
+        } else {
+          setPagination((prev) => ({ ...prev, loading: false, moreAvalible: false }));
+        }
+      } catch (e: any) {
+        console.log(e);
+        showErrorToast(alerts[e?.response.status].message);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [showErrorToast]
+  );
+  useEffect(() => {
+    getNotesList(1, 10);
+  }, [getNotesList]);
 
-	const createNoteCard = () => {
-		return notes.map((note, idx) => {
-			const {
-				agency,
-				createdDate,
-				recruiter,
-				toRecruiter,
-				notes,
-				targetList,
-				referContent,
-			} = note;
-			return (
-				<Card key={idx} className={` mt-4 mb-4 px-5 py-2`}>
-					<CardBody className={styles.noteCard}>
-						<Row>
-							<Col>
-								<span className="fs-4 ">{agency}</span>
-							</Col>
-							<Col>
-								<span className="fs-6">Last Updated On: {createdDate}</span>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<Label>Recruiter Name</Label>
-								<Input placeholder={recruiter} />
-							</Col>
-							<Col>
-								<Label>Recruiter Email</Label>
-								<Input placeholder={toRecruiter} />
-							</Col>
-						</Row>
-						<Row>
-							<Label>Notes</Label>
-							<Input placeholder="Notes" />
-						</Row>
-						<Row>
-							<Col>
-								<Button color="danger">Delete</Button>
-							</Col>
-							<Col>
-								<Button color="primary">Update</Button>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<textarea placeholder="referGroup" />
-							</Col>
-							<Col>
-								<textarea placeholder="referContent" />
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<Button color="danger">Refer Candidates</Button>
-							</Col>
-							<Col>
-								<Button color="primary">Campaign Candidates</Button>
-							</Col>
-						</Row>
-					</CardBody>
-				</Card>
-			);
-		});
-	};
-
-	return (
-		<Container className="fs-4 py-5">
-			<Row>
-				<h6 className="fs-1 my-3">Notes</h6>
-			</Row>
-			<Row>
-				<Card>
-					<CardBody>
-						<Breadcrumb>
-							<BreadcrumbItem>
-								<Link className={styles.link} href="/account">
-									Home
-								</Link>
-							</BreadcrumbItem>
-							<BreadcrumbItem active>Notes</BreadcrumbItem>
-						</Breadcrumb>
-					</CardBody>
-				</Card>
-			</Row>
-			<Row>{createNoteCard()}</Row>
-		</Container>
-	);
+  return (
+    <Container className="fs-4 py-5">
+      <Row>
+        <h6 className="fs-1 my-3">Notes</h6>
+      </Row>
+      <Row>
+        <Card>
+          <CardBody>
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link className={styles.link} href="/account">
+                  Home
+                </Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>Notes</BreadcrumbItem>
+            </Breadcrumb>
+          </CardBody>
+        </Card>
+      </Row>
+      <Row>
+        {notes.map((note, index) => (
+          <NoteCard note={note} key={index} />
+        ))}
+      </Row>
+      <Pager onClickItem={getNotesList} current={pagination.currentPage} total={pagination.totalpages} />
+    </Container>
+  );
 };
 
 export default Notes;

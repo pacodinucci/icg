@@ -3,6 +3,6 @@ enum RouteId {
   JobListPage = "joblist-page",
 }
 // List of routes which requre auth
-const authRoutes = ["/account", "/settings", "/notifications", "/resumes"];
+const authRoutes = ["/account", "/settings", "/notifications", "/resumes", "/notes"];
 
 export { RouteId, authRoutes };
