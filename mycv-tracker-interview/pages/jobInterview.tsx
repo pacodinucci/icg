@@ -1,12 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NewsLetter from "../components/NewsLetter";
 import styles from "../styles/jobInterview.module.css";
 import {
 	ShowRecord, //component used to show audio result
 	ProcessRecord, //component contains state to deal with logic when recording
 } from "react-nextjs-record";
+import { useToast } from "../hooks/useToast";
+import { alerts } from "../utils/alert-utils";
+import { getMyQuestions } from "../apis/mycvtracker/questions";
+import { Question } from "../types/question_types";
 
 const JobInterview = () => {
+	const { showErrorToast, showSuccessToast } = useToast();
+
+	const [questions, setQuestions] = useState([]);
+	const [currentQuestionNo, setCurrentQuestionNo] = useState(-1);
+	const [currentQuestion, setCurrentQuestion] = useState<Question>();
+	const [questionsListLength, setQuestionsListLength] = useState(0);
+
+	const getMyQuestionsList = useCallback(
+		async (token: string, interviewType: string) => {
+			try {
+				const response = await getMyQuestions(token, interviewType);
+				if (response) {
+					setQuestions(response);
+					setQuestionsListLength(response.length);
+				}
+			} catch (e: any) {
+				console.log(e);
+				showErrorToast(alerts[e.response.status].message);
+			}
+		},
+		[showErrorToast]
+	);
+	useEffect(() => {
+		// Temporarily Hardcoding
+		getMyQuestionsList(
+			"7a4574987a02434ea6006818f4be5112",
+			"nodejs01_rnative01"
+		);
+	}, []);
+
 	const Permissions = () => {
 		navigator.mediaDevices
 			.getUserMedia({ audio: true })
@@ -33,10 +67,6 @@ const JobInterview = () => {
 		stopRecording,
 	} = ProcessRecord();
 
-	// useEffect(() => {
-	// 	if (completeRecording && blobURL) setBLOB(blobURL);
-	// }, [completeRecording, blobURL]);
-
 	const SwitchView = () => {
 		setMessage("Loading Questions");
 		setTimeout(() => {
@@ -44,6 +74,9 @@ const JobInterview = () => {
 			setMessage("");
 			timer(startTimer);
 			Permissions();
+			if (currentQuestionNo === questionsListLength) return;
+			setCurrentQuestionNo(currentQuestionNo + 1);
+			setCurrentQuestion(questions[currentQuestionNo + 1]);
 		}, 3000);
 	};
 	const timer = (_startTimer: number) => {
@@ -55,7 +88,6 @@ const JobInterview = () => {
 		if (startTimer === 0) {
 			setStopped(false);
 			StartRecording();
-			// ansTimer(remainingTime);
 		}
 	}, [startTimer]);
 	useEffect(() => {
@@ -80,6 +112,12 @@ const JobInterview = () => {
 	};
 	const SkipQuestion = () => {
 		if (window.confirm("Skip Question?")) {
+			if (currentQuestionNo === questionsListLength) {
+				window.alert(
+					"Thanks for attempting your Interview. Our team will get in touch soon."
+				);
+				return;
+			}
 			setStartTimer(6);
 			setRemainingTime(60);
 			setStopped(true);
@@ -87,7 +125,8 @@ const JobInterview = () => {
 			timer(6);
 			reStartRecording();
 			setCompleteRecording(false);
-			// setBLOB("");
+			setCurrentQuestionNo(currentQuestionNo + 1);
+			setCurrentQuestion(questions[currentQuestionNo + 1]);
 		}
 	};
 	const NextQuestion = (type: number) => {
@@ -95,6 +134,12 @@ const JobInterview = () => {
 			window.alert("Please Submit your answer");
 			return;
 		} else {
+			if (currentQuestionNo === questionsListLength) {
+				window.alert(
+					"Thanks for attempting your Interview. Our team will get in touch soon."
+				);
+				return;
+			}
 			setStartTimer(6);
 			setRemainingTime(60);
 			setStopped(true);
@@ -103,7 +148,9 @@ const JobInterview = () => {
 			reStartRecording();
 			setCompleteRecording(false);
 			setSubmittedBlob(false);
-			// setBLOB("");
+			if (currentQuestionNo === questionsListLength) return;
+			setCurrentQuestionNo(currentQuestionNo + 1);
+			setCurrentQuestion(questions[currentQuestionNo + 1]);
 		}
 	};
 	const SubmitQuestion = () => {
@@ -163,21 +210,21 @@ const JobInterview = () => {
 					</>
 				) : startTimer !== 0 ? (
 					<>
-						<p className={styles.instruction}>This is demo</p>
+						<p className={styles.instruction}>{currentQuestion?.question}</p>
 						<p className={styles.message_2}>
 							Recording starts in {startTimer} seconds!
 						</p>
 					</>
 				) : !stopped ? (
 					<>
-						<p className={styles.instruction}>This is demo</p>
+						<p className={styles.instruction}>{currentQuestion?.question}</p>
 						<p className={styles.message_3}>
 							Recording started... {remainingTime} seconds left!
 						</p>
 					</>
 				) : (
 					<>
-						<p className={styles.instruction}>This is demo</p>
+						<p className={styles.instruction}>{currentQuestion?.question}</p>
 						<p className={styles.message_4}>
 							Recording Stopped. Please submit the audio or skip the question
 						</p>
