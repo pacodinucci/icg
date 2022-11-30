@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -9,9 +9,32 @@ import {
 	Row,
 	Table,
 } from "reactstrap";
+import { getMyNotifications } from "../apis/mycvtracker/notifications";
+import NotificationsTable from "../components/NotificationTable";
+import { useToast } from "../hooks/useToast";
 import styles from "../styles/Account.module.css";
+import { alerts } from "../utils/alert-utils";
 
 const Notifications = () => {
+	const { showErrorToast, showSuccessToast } = useToast();
+
+	const [notifications, setNotifications] = useState([]);
+
+	const getNotificationsList = useCallback(async () => {
+		try {
+			const response = await getMyNotifications();
+			if (response) {
+				console.log(response);
+				setNotifications(response);
+			}
+		} catch (e: any) {
+			console.log(e);
+			showErrorToast(alerts[e.response.status].message);
+		}
+	}, [showErrorToast]);
+	useEffect(() => {
+		getNotificationsList();
+	}, []);
 	return (
 		<Container className="fs-4 py-5">
 			<Row>
@@ -34,26 +57,7 @@ const Notifications = () => {
 			<Row>
 				<h6 className="fs-3 my-3">List of Notifications</h6>
 			</Row>
-			<Row>
-				<Card>
-					<CardBody>
-						<Table>
-							<thead>
-								<tr>
-									<th className="fs-5">Reference</th>
-									<th className="fs-5">Name</th>
-									<th className="fs-5">Event Type</th>
-									<th className="fs-5">Notifications Count</th>
-									<th className="fs-5">Last Tracked Time</th>
-									<th className="fs-5">Context</th>
-									<th className="fs-5">Actions</th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</Table>
-					</CardBody>
-				</Card>
-			</Row>
+			<Row>{<NotificationsTable notifications={notifications} />}</Row>
 		</Container>
 	);
 };
