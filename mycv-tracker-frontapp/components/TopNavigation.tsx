@@ -18,6 +18,7 @@ import logo from "../assets/logo.png";
 
 import Image from "next/image";
 import Link from "next/link";
+import UserImage from "../assets/account/user.png";
 
 import styles from "../styles/TopNavigation.module.css";
 import { useUserState } from "../hooks/useUserState";
@@ -119,12 +120,7 @@ const TopNavigation = (): ReactElement => {
 									tag="div"
 									className="d-flex flex-column justify-content-center align-items-center"
 								>
-									<Image
-										src="https://mycvtracker.com/assets/img/app/profile/user.png"
-										alt="User"
-										width={50}
-										height={50}
-									/>
+									<Image src={UserImage} alt="User" width={50} height={50} />
 									<span className="mx-3 my-1 text-secondary">{user.email}</span>
 								</DropdownToggle>
 								<DropdownMenu>
