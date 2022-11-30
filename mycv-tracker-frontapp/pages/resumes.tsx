@@ -12,6 +12,7 @@ import {
 	Row,
 } from "reactstrap";
 import { getMyResumes } from "../apis/mycvtracker/resume";
+import ResumeCard from "../components/ResumeCard";
 import { useToast } from "../hooks/useToast";
 import styles from "../styles/Account.module.css";
 import { alerts } from "../utils/alert-utils";
@@ -126,7 +127,9 @@ const Resumes = () => {
 				<Button color="primary">Resume Look Up</Button>
 			</Row>
 			<Container fluid className={styles.resumeContainer}>
-				{createResumeCard()}
+				{resumes.map((resume, idx) => {
+					return <ResumeCard resume={resume} key={idx} />;
+				})}
 			</Container>
 		</Container>
 	);

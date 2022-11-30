@@ -15,8 +15,7 @@ import { getAuthUsers } from "../apis/mycvtracker/userManagement";
 import { useToast } from "../hooks/useToast";
 import styles from "../styles/Account.module.css";
 import { alerts } from "../utils/alert-utils";
-import UserImg from "../assets/account/user.png";
-import Image from "next/image";
+import UserCard from "../components/UserCard";
 
 const UserManagement = () => {
 	const { showErrorToast, showSuccessToast } = useToast();
@@ -38,59 +37,6 @@ const UserManagement = () => {
 	useEffect(() => {
 		getAuthUsersList();
 	}, []);
-
-	const createUserCard = () => {
-		return users.map((user, idx) => {
-			const { id, email, firstName, lastName, signUpDate, roleId } = user;
-			return (
-				<Card key={idx} className={` mt-4 mb-4 px-5 py-2`}>
-					<CardBody className={styles.resumeCard}>
-						<Row>
-							<Col>
-								<Image
-									src={UserImg}
-									height={100}
-									width={100}
-									alt="user Image"
-								/>
-							</Col>
-							<Col>
-								<Row>#{id}</Row>
-								<Row>{email}</Row>
-							</Col>
-						</Row>
-						<hr />
-						<Row>
-							<Col>
-								<Row>Name</Row>
-								<Row>
-									{firstName} {lastName}
-								</Row>
-							</Col>
-							<Col>
-								<Row>Referral Link</Row>
-								<Row>
-									<Link
-										href={`https://mycvtracker.com/referral?userId=${id}&emailDm=gmail.com&emailName=manish9617026809`}
-									>
-										Links
-									</Link>
-								</Row>
-							</Col>
-							<Col>
-								<Row>Created Date</Row>
-								<Row>{signUpDate}</Row>
-							</Col>
-							<Col>
-								<Row>Role</Row>
-								<Row>{roleId !== 2 ? "User" : "Admin"}</Row>
-							</Col>
-						</Row>
-					</CardBody>
-				</Card>
-			);
-		});
-	};
 
 	return (
 		<Container className="fs-4 py-5">
@@ -115,7 +61,9 @@ const UserManagement = () => {
 				<h6 className="fs-4 my-3">Search for user</h6>
 				<Input type="email" placeholder="Enter Email to Search" />
 			</Row>
-			{createUserCard()}
+			{users.map((user, idx) => {
+				return <UserCard user={user} key={idx} />;
+			})}
 		</Container>
 	);
 };

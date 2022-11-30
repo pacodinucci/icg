@@ -1,0 +1,22 @@
+export type User = {
+    id: number,
+        email: string,
+        firstName: string,
+        lastName: string,
+        password: string ,
+        activationKey: string,
+        isActivated: boolean,
+        cvMarketingUserAccount: string,
+        cvMarketingUserPassword: string,
+        roleId: number,
+        session?: null,
+        userAddress: string,
+        activationDate?: null,
+        signUpDate?: null,
+        userReminderCount: number,
+        trackingMode: number,
+        currentResumePreviewId: number,
+        disabled: boolean,
+        userRole?: null,
+        activated: boolean
+}

@@ -1,0 +1,20 @@
+export type Referral = {
+    id: number,
+        userId: number,
+        referralDetails: string,
+        referralLink: string,
+        referralType: string,
+        referralTargetEmail: string,
+        referralTargetSubject: string,
+        parentReferralId?: null,
+        publishedDate: string,
+        jobLocation: string,
+        jobType: string,
+        jobCompany?: null,
+        previewType: string,
+        previewLink?: null,
+        previewFileType?: null,
+        previewFileName?: null,
+        refPublic: boolean,
+        bountyEnable: boolean
+}

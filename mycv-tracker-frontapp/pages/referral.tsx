@@ -14,6 +14,7 @@ import { getMyReferrals } from "../apis/mycvtracker/referrals";
 import { useToast } from "../hooks/useToast";
 import styles from "../styles/Account.module.css";
 import { alerts } from "../utils/alert-utils";
+import ReferralCard from "../components/ReferralCard";
 
 const Referral = () => {
 	const { showErrorToast, showSuccessToast } = useToast();
@@ -38,45 +39,6 @@ const Referral = () => {
 	useEffect(() => {
 		getMyReferralsList(1, 10);
 	}, []);
-
-	const createReferralCard = () => {
-		return referrals.map((referral, idx) => {
-			const {
-				referralTargetSubject,
-				referralType,
-				referralLink,
-				refPublic,
-				bountyEnable,
-			} = referral;
-			return (
-				<Card key={idx} className={` mt-4 mb-4 px-5 py-2`}>
-					<CardBody className={styles.resumeCard}>
-						<Row>
-							<span className="fs-4 ">{referralTargetSubject}</span>
-							<span className="fs-4 ">{referralType}</span>
-						</Row>
-						<Row>
-							<Link
-								href={`https://mycvtracker.com/job-spec.html?ref=${referralLink}&&title=${referralTargetSubject}`}
-							>
-								{`https://mycvtracker.com/job-spec.html?ref=${referralLink}&&title=${referralTargetSubject}`}
-							</Link>
-						</Row>
-						<Row>
-							<Col>
-								<span>Bounty Disabled</span>
-								<span>{bountyEnable}</span>
-							</Col>
-							<Col>
-								<span>Link Published</span>
-								<span>{refPublic}</span>
-							</Col>
-						</Row>
-					</CardBody>
-				</Card>
-			);
-		});
-	};
 
 	return (
 		<Container className="fs-4 py-5">
@@ -116,7 +78,9 @@ const Referral = () => {
 				</CardBody>
 			</Card>
 			<Container fluid className={styles.resumeContainer}>
-				{createReferralCard()}
+				{referrals.map((referral, idx) => {
+					return <ReferralCard referral={referral} key={idx} />;
+				})}
 			</Container>
 		</Container>
 	);
