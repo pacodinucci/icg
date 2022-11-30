@@ -68,7 +68,7 @@ const Account = () => {
           <Row className="my-2">
             <Card>
               <CardBody>
-                <Link className={styles.link} href="/resumes">
+                <Link className={styles.link} href="/resumes-list">
                   Resume List
                 </Link>
               </CardBody>
@@ -77,7 +77,7 @@ const Account = () => {
           <Row className="my-2">
             <Card>
               <CardBody>
-                <Link className={styles.link} href="/resumes">
+                <Link className={styles.link} href="/bulk-folder-resume">
                   Resume Folder
                 </Link>
               </CardBody>
@@ -86,7 +86,7 @@ const Account = () => {
           <Row className="my-2">
             <Card>
               <CardBody>
-                <Link className={styles.link} href="/resumes">
+                <Link className={styles.link} href="/groupData">
                   Group Data
                 </Link>
               </CardBody>
@@ -95,7 +95,7 @@ const Account = () => {
           <Row className="my-2">
             <Card>
               <CardBody>
-                <Link className={styles.link} href="/resumes">
+                <Link className={styles.link} href="/user-management">
                   User Management
                 </Link>
               </CardBody>
@@ -104,7 +104,7 @@ const Account = () => {
           <Row className="my-2">
             <Card>
               <CardBody>
-                <Link className={styles.link} href="/resumes">
+                <Link className={styles.link} href="/CampaignNotes">
                   CV Marketing Notes
                 </Link>
               </CardBody>
@@ -113,7 +113,7 @@ const Account = () => {
           <Row className="my-2">
             <Card>
               <CardBody>
-                <Link className={styles.link} href="/resumes">
+                <Link className={styles.link} href="/CvMarketing">
                   CV Marketing
                 </Link>
               </CardBody>
@@ -122,7 +122,7 @@ const Account = () => {
           <Row className="my-2">
             <Card>
               <CardBody>
-                <Link className={styles.link} href="/resumes">
+                <Link className={styles.link} href="/CampaignNotifications">
                   CV Marketing Notifications
                 </Link>
               </CardBody>
@@ -131,7 +131,7 @@ const Account = () => {
           <Row className="my-2">
             <Card>
               <CardBody>
-                <Link className={styles.link} href="/resumes">
+                <Link className={styles.link} href="/skill-category-list">
                   Categories & skills
                 </Link>
               </CardBody>

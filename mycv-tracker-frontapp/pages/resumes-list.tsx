@@ -8,6 +8,7 @@ import {
 	CardBody,
 	Col,
 	Container,
+	FormGroup,
 	Input,
 	Row,
 } from "reactstrap";
@@ -16,7 +17,7 @@ import { useToast } from "../hooks/useToast";
 import styles from "../styles/Account.module.css";
 import { alerts } from "../utils/alert-utils";
 
-const Resumes = () => {
+const ResumesList = () => {
 	const { showErrorToast, showSuccessToast } = useToast();
 
 	const [resumes, setResumes] = useState([]);
@@ -100,7 +101,7 @@ const Resumes = () => {
 	return (
 		<Container className="fs-4 py-5">
 			<Row>
-				<h6 className="fs-1 my-3">Resumes</h6>
+				<h6 className="fs-1 my-3">Resumes List</h6>
 			</Row>
 			<Row>
 				<Card>
@@ -111,19 +112,13 @@ const Resumes = () => {
 									Home
 								</Link>
 							</BreadcrumbItem>
-							<BreadcrumbItem active>My Resumes</BreadcrumbItem>
+							<BreadcrumbItem active>Resumes List</BreadcrumbItem>
 						</Breadcrumb>
 					</CardBody>
 				</Card>
 			</Row>
-			<Row className="my-3">
-				<Col>
-					<Button color="primary">+ Add</Button>
-				</Col>
-			</Row>
-			<Row className="my-3">
-				<Input type="text" placeholder="resume look up" />
-				<Button color="primary">Resume Look Up</Button>
+			<Row>
+				<h6 className="fs-3 my-3">Resumes</h6>
 			</Row>
 			<Container fluid className={styles.resumeContainer}>
 				{createResumeCard()}
@@ -132,4 +127,4 @@ const Resumes = () => {
 	);
 };
 
-export default Resumes;
+export default ResumesList;
