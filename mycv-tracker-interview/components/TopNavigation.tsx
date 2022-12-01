@@ -24,11 +24,11 @@ const TopNavigation = () => {
     }
   }, [user, router, isLoadingUser]);
 
-  if (router.route === "/login") return <div />;
+  if (router.route === "/login") return null;
 
   return (
     <Box pb={70}>
-      <Header height={70} px="md" fixed={true} style={{ backgroundColor: "#1e222c" }}>
+      <Header height={70} px="md" fixed={true} style={{ backgroundColor: "#1e222c", zIndex: 10 }}>
         <Group position="apart" sx={{ height: "100%" }}>
           <Link href="/">
             <Image alt="logo" src={logo} height={50} width={150} />

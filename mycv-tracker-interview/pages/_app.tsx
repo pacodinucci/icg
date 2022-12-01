@@ -10,6 +10,7 @@ import { UserStateProvider } from "../hooks/useUserState";
 import { ToastProvider } from "../hooks/useToast";
 
 import { MantineProvider } from "@mantine/core";
+import Sidebar from "../components/Sidebar";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
@@ -23,9 +24,14 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
             </Head>
             <TopNavigation />
             <div className={styles.pageContainer}>
-              <Component {...pageProps} />
+              <Sidebar />
+              <div className={styles.componentContainer}>
+                <div className={styles.component}>
+                  <Component {...pageProps} />
+                </div>
+                <BottomFooter />
+              </div>
             </div>
-            <BottomFooter />
           </div>
         </UserStateProvider>
       </ToastProvider>

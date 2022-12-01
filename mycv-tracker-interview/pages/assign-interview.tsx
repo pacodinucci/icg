@@ -1,129 +1,43 @@
 import React, { useState, useCallback } from "react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Container,
-  Col,
-  Row,
-  Card,
-  CardBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button,
-  FormFeedback,
-} from "reactstrap";
-import Link from "next/link";
+
+import { Container, Button, TextInput, NumberInput, MultiSelect, Title } from "@mantine/core";
 import { sendAssignInterview } from "../apis/mycvtracker";
 import { sendRemiderRequest } from "../apis/mycvtracker/assign-interview";
-import Chip from "../components/Chip";
 import { InterviewTopics } from "../data/interview";
 import { useToast } from "../hooks/useToast";
 import { useUserState } from "../hooks/useUserState";
 import { alerts } from "../utils/alert-utils";
-
-type InputValues = {
-  candidateName: string;
-  invite: string;
-  resultOwners: string;
-  candidateEmail: string;
-  interviewType: string[];
-  noOfQuestions: string;
-  candidateList: string;
-  jobLink: string;
-};
-
-type InputValuesError = {
-  candidateName: string;
-  invite: string;
-  resultOwners: string;
-  candidateEmail: string;
-  interviewType: string;
-  noOfQuestions: string;
-  jobLink: string;
-};
+import { useForm } from "@mantine/form";
 
 const AssignInterviewPage = () => {
   const { token } = useUserState();
   const { showErrorToast, showSuccessToast } = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [values, setValues] = useState<InputValues>({
-    candidateName: "",
-    invite: "",
-    resultOwners: "",
-    candidateEmail: "",
-    interviewType: [],
-    noOfQuestions: "10",
-    jobLink: "",
-    candidateList: "",
+
+  const details = useForm({
+    initialValues: {
+      candidateName: "",
+      invite: "",
+      resultOwners: "",
+      candidateEmail: "",
+      interviewType: [],
+      noOfQuestions: "",
+      jobLink: "",
+      candidateList: "",
+    },
+    validate: {
+      candidateEmail: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid Candidate Email"),
+      resultOwners: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid Owner Email"),
+      candidateName: (value) => (value.length <= 1 ? "Candidate name cannot be empty" : null),
+      jobLink: (value) => (value.length < 4 ? "Invalid Job Link" : null),
+      interviewType: (value) => (value.length < 1 ? "Select atleast 1 topic" : null),
+    },
   });
 
-  const [errors, setErrors] = useState<InputValuesError>({
-    candidateName: "",
-    invite: "",
-    resultOwners: "",
-    candidateEmail: "",
-    interviewType: "",
-    noOfQuestions: "",
-    jobLink: "",
-  });
-
-  const handleChangeInput = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  }, []);
-
-  const handleMultiSelect = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((prev) => {
-      if (prev.interviewType.includes(event.target.value)) {
-        return { ...prev, interviewType: prev.interviewType.filter((t) => t !== event.target.value) };
-      } else {
-        return { ...prev, interviewType: [...prev.interviewType, event.target.value] };
-      }
-    });
-  }, []);
-
-  const removeTypeFromMultiSelect = useCallback((value: string) => {
-    return setValues((prev) => ({ ...prev, interviewType: prev.interviewType.filter((t) => t !== value) }));
-  }, []);
-
-  const validateValues = useCallback((values: InputValues) => {
-    let hasError = false;
-    if (values.candidateEmail.length <= 5) {
-      setErrors((prev) => ({ ...prev, candidateEmail: "Invalid Candidate Email" }));
-      hasError = true;
-    }
-    if (values.resultOwners.length <= 5) {
-      setErrors((prev) => ({ ...prev, resultOwners: "Invalid Result Owner Email" }));
-      hasError = true;
-    }
-    if (values.candidateName.length <= 0) {
-      setErrors((prev) => ({ ...prev, candidateName: "Candidate Name cannot be empty" }));
-      hasError = true;
-    }
-    if (isNaN(parseFloat(values.noOfQuestions))) {
-      setErrors((prev) => ({ ...prev, noOfQuestions: "Number of Questions should be a number" }));
-      hasError = true;
-    }
-
-    if (values.jobLink.length <= 5) {
-      setErrors((prev) => ({ ...prev, jobLink: "Invalid Job Link" }));
-      hasError = true;
-    }
-    if (values.interviewType.length === 0) {
-      setErrors((prev) => ({ ...prev, interviewType: "Please Select atleast 1 interview topic" }));
-      hasError = true;
-    }
-    return hasError;
-  }, []);
-
+  type FormType = typeof details.values;
   const handleFormSubmit = useCallback(
-    async (values: InputValues, e?: React.FormEvent<HTMLFormElement>) => {
-      if (e) e.preventDefault();
-
-      let hasError = validateValues(values);
-      if (hasError) return;
+    async (values: FormType) => {
       try {
         setIsLoading(true);
         await sendAssignInterview({ ...values, interviewType: values.interviewType.join("_") }, token);
@@ -136,14 +50,11 @@ const AssignInterviewPage = () => {
         setIsLoading(false);
       }
     },
-    [token, showErrorToast, showSuccessToast, validateValues]
+    [token, showErrorToast, showSuccessToast]
   );
 
   const handleSendReminder = useCallback(
-    async (values: InputValues, e?: React.FormEvent<HTMLFormElement>) => {
-      if (e) e.preventDefault();
-      let hasError = validateValues(values);
-      if (hasError) return;
+    async (values: FormType) => {
       try {
         setIsLoading(true);
         await sendRemiderRequest({ ...values, interviewType: values.interviewType.join("_") }, token);
@@ -156,146 +67,62 @@ const AssignInterviewPage = () => {
         setIsLoading(false);
       }
     },
-    [token, showErrorToast, showSuccessToast, validateValues]
+    [token, showErrorToast, showSuccessToast]
   );
 
   return (
-    <Container className="py-5">
-      <Row>
-        <p className="fs-1 my-3">Assign Interview</p>
-      </Row>
-      <Row className="fs-4">
-        <Col>
-          <Card>
-            <CardBody>
-              <Breadcrumb>
-                <BreadcrumbItem>
-                  <Link href="/dashboard">Dashboard</Link>
-                </BreadcrumbItem>
-                <BreadcrumbItem active>Assign Interview</BreadcrumbItem>
-              </Breadcrumb>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-      <Form onSubmit={(e) => handleFormSubmit(values, e)}>
-        <FormGroup className="my-3">
-          <Label for="invite">Invite Message</Label>
-          <Input
-            name="invite"
-            id="invite"
-            type="textarea"
-            onChange={handleChangeInput}
-            value={values.invite}
-            invalid={errors.invite.length > 2}
-          />
-          <FormFeedback>{errors.invite}</FormFeedback>
-        </FormGroup>
-        <FormGroup className="my-3">
-          <Label for="candidateName">Candidate Name</Label>
-          <Input
-            name="candidateName"
-            id="candidateName"
-            type="text"
-            onChange={handleChangeInput}
-            value={values.candidateName}
-            invalid={errors.candidateName.length > 2}
-          />
-          <FormFeedback>{errors.candidateName}</FormFeedback>
-        </FormGroup>
-        <FormGroup className="my-3">
-          <Label for="resultOwners">Result Owners</Label>
-          <Input
-            name="resultOwners"
-            id="resultOwners"
-            type="email"
-            onChange={handleChangeInput}
-            value={values.resultOwners}
-            invalid={errors.resultOwners.length > 2}
-          />
-          <FormFeedback>{errors.resultOwners}</FormFeedback>
-        </FormGroup>
+    <Container>
+      <Title order={1}>Assign Interview</Title>
+      <form onSubmit={details.onSubmit(handleFormSubmit)}>
+        <TextInput
+          placeholder="Candidate Name"
+          label="Candidate Name"
+          withAsterisk
+          {...details.getInputProps("candidateName")}
+        />
+        <TextInput
+          placeholder="Result Owners"
+          label="Result Owners"
+          withAsterisk
+          {...details.getInputProps("resultOwners")}
+        />
+        <TextInput
+          placeholder="Candidate Email"
+          label="Candidate Email"
+          withAsterisk
+          {...details.getInputProps("candidateEmail")}
+        />
 
-        <FormGroup className="my-3">
-          <Label for="candidateEmail">Candidate Email</Label>
-          <Input
-            name="candidateEmail"
-            id="candidateEmail"
-            type="email"
-            onChange={handleChangeInput}
-            value={values.candidateEmail}
-            invalid={errors.candidateEmail.length > 2}
-          />
-          <FormFeedback>{errors.candidateEmail}</FormFeedback>
-        </FormGroup>
-        <FormGroup className="my-3">
-          <Label for="interviewType">Interview Topics</Label>
-          <Input
-            name="interviewType"
-            id="interviewType"
-            type="select"
-            onChange={handleMultiSelect}
-            invalid={errors.interviewType.length > 2}
-          >
-            {[{ label: "Select A Topic", value: "select" }, ...InterviewTopics]
-              .filter((t) => !values.interviewType.includes(t.value))
-              .map((topic) => (
-                <option value={topic.value} key={topic.value}>
-                  {topic.label}
-                </option>
-              ))}
-          </Input>
-          <FormFeedback>{errors.interviewType}</FormFeedback>
-          <div className="d-flex flex-row py-2">
-            {values.interviewType.map((val) => (
-              <Chip
-                key={val}
-                label={InterviewTopics.find((t) => t.value === val)?.label}
-                onDismiss={() => removeTypeFromMultiSelect(val)}
-              />
-            ))}
-          </div>
-        </FormGroup>
+        <MultiSelect
+          data={InterviewTopics}
+          label="Interview Topics"
+          placeholder="Select atleast 1 topic"
+          withAsterisk
+          {...details.getInputProps("interviewType")}
+        />
 
-        <FormGroup className="my-3">
-          <Label for="noOfQuestions">Number of Questions</Label>
-          <Input
-            invalid={errors.noOfQuestions.length > 2}
-            name="noOfQuestions"
-            id="noOfQuestions"
-            type="number"
-            min="1"
-            onChange={handleChangeInput}
-            value={values.noOfQuestions}
-          />
-          <FormFeedback>{errors.noOfQuestions}</FormFeedback>
-        </FormGroup>
-        <FormGroup className="my-3">
-          <Label for="jobLink">job Link</Label>
-          <Input
-            name="jobLink"
-            id="jobLink"
-            type="text"
-            onChange={handleChangeInput}
-            value={values.jobLink}
-            invalid={errors.jobLink.length > 2}
-          />
-          <FormFeedback>{errors.jobLink}</FormFeedback>
-        </FormGroup>
+        <NumberInput
+          defaultValue={10}
+          label="Number of Question"
+          withAsterisk
+          {...details.getInputProps("noOfQuestions")}
+        />
+        <TextInput placeholder="Job Link" label="Job Link" withAsterisk {...details.getInputProps("jobLink")} />
 
-        <Button type="submit" color="primary" disabled={isLoading}>
+        <Button type="submit" variant="filled" my="xs" disabled={isLoading} loading={isLoading}>
           Assign Interview
         </Button>
         <Button
           type="button"
-          color="primary"
-          className="mx-2"
-          onClick={() => handleSendReminder(values)}
+          variant="light"
+          m="xs"
+          onClick={() => details.onSubmit(handleSendReminder)()}
           disabled={isLoading}
+          loading={isLoading}
         >
           Send Reminder Interview
         </Button>
-      </Form>
+      </form>
     </Container>
   );
 };

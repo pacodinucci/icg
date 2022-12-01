@@ -66,7 +66,7 @@ const Login = () => {
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
   useEffect(() => {
     if (user !== null) {
-      router.replace("/dashboard");
+      router.replace("/assign-interview");
     }
   }, [user, router]);
 
