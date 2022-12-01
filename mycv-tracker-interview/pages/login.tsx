@@ -1,17 +1,67 @@
 import React, { useEffect, useState } from "react";
-import type { NextPage } from "next";
-import { Col, Container, Card, CardTitle, CardBody, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import Link from "next/link";
+import {
+  Paper,
+  createStyles,
+  TextInput,
+  PasswordInput,
+  Checkbox,
+  Button,
+  Title,
+  Text,
+  Anchor,
+  Loader,
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
 
-import styles from "../styles/Login.module.css";
 import { useRouter } from "next/router";
 import { useUserState } from "../hooks/useUserState";
-import ForgotPassword from "../components/ForgotPassword";
 
-const Login: NextPage = () => {
+const useStyles = createStyles((theme) => ({
+  wrapper: {
+    minHeight: 900,
+    backgroundSize: "cover",
+    backgroundImage:
+      "url(https://images.unsplash.com/photo-1602407294553-6ac9170b3ed0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80)",
+  },
+
+  form: {
+    borderRight: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]}`,
+    minHeight: 900,
+    maxWidth: 450,
+    paddingTop: 80,
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      maxWidth: "100%",
+    },
+  },
+
+  title: {
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+  },
+
+  logo: {
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    width: 120,
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+}));
+
+const Login = () => {
+  const { classes } = useStyles();
   const router = useRouter();
+
   const { user, loginUser } = useUserState();
-  const [details, setDetails] = useState({ email: "", password: "", rememberMe: false });
+  const details = useForm({
+    initialValues: { email: "", password: "", rememberMe: false },
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      password: (value) => (value.length < 4 ? "Password should be have atleast 4 letters" : null),
+    },
+  });
   const [loading, setLoading] = useState(false);
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
   useEffect(() => {
@@ -19,95 +69,50 @@ const Login: NextPage = () => {
       router.replace("/dashboard");
     }
   }, [user, router]);
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDetails((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  };
-  const toggleRememberMe = () => {
-    setDetails((prev) => ({ ...prev, rememberMe: !prev.rememberMe }));
-  };
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async ({ email, password, rememberMe }: typeof details.values) => {
     try {
       setLoading(true);
-      event.preventDefault();
-      await loginUser(details.email, details.password, details.rememberMe);
+      await loginUser(email, password, rememberMe);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Container className="p-5">
-      <Col md={7} className="my-5">
-        <Card body className={`text-center ${styles.box} fs-6`}>
-          <CardTitle tag="h2" className="fs-1">
-            Sign In to MyCVTracker
-          </CardTitle>
-          <CardBody>
-            <Link href="/register" className="text-decoration-none fs-4">
-              New to MyCVTracker? Sign up!
-            </Link>
-            <Form className="my-4 text-end" onSubmit={handleLogin}>
-              <FormGroup row>
-                <Label for="email" sm={2}>
-                  Email
-                </Label>
-                <Col sm={10}>
-                  <Input
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    type="email"
-                    value={details.email}
-                    onChange={handleChangeInput}
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label for="password" sm={2}>
-                  Password
-                </Label>
-                <Col sm={10}>
-                  <Input
-                    id="password"
-                    name="password"
-                    placeholder="Password"
-                    type="password"
-                    value={details.password}
-                    onChange={handleChangeInput}
-                  />
-                </Col>
-              </FormGroup>
-              <FormGroup check row className="my-4">
-                <Col sm={{ offset: 2, size: 10 }}>
-                  <Input
-                    type="checkbox"
-                    id="rememberMe"
-                    name="rememberMe"
-                    onChange={toggleRememberMe}
-                    checked={details.rememberMe}
-                  />
-                  <Label for="rememberMe" className=" float-start" check>
-                    Remember Me
-                  </Label>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Col sm={{ offset: 2, size: 10 }} className="justify-content-between d-flex">
-                  <Button color="primary" disabled={loading}>
-                    {loading ? "Loading..." : "Sign In"}
-                  </Button>
-                  <Button color="link" onClick={() => setForgotPasswordModal(true)}>
-                    Forgot password?
-                  </Button>
-                </Col>
-              </FormGroup>
-            </Form>
-          </CardBody>
-        </Card>
-      </Col>
-      <ForgotPassword isOpen={forgotPasswordModal} onDismiss={() => setForgotPasswordModal(false)} />
-    </Container>
+    <div className={classes.wrapper}>
+      <Paper className={classes.form} radius={0} p={30}>
+        <Title order={2} className={classes.title} align="center" mt="md" mb={50}>
+          Welcome to My CV Tracker
+        </Title>
+        <form onSubmit={details.onSubmit(handleLogin)}>
+          <TextInput
+            label="Email address"
+            placeholder="hello@gmail.com"
+            size="md"
+            {...details.getInputProps("email")}
+          />
+          <PasswordInput
+            label="Password"
+            placeholder="Your password"
+            mt="md"
+            size="md"
+            {...details.getInputProps("password")}
+          />
+          <Checkbox label="Keep me logged in" mt="xl" size="md" {...details.getInputProps("rememberMe")} />
+          <Button fullWidth mt="xl" size="md" type="submit" disabled={loading}>
+            {loading ? <Loader color="white" /> : "Login"}
+          </Button>
+        </form>
+
+        <Text align="center" mt="md">
+          Don&apos;t have an account?{" "}
+          <Anchor component={Link} href="/register" weight={700}>
+            Sign up
+          </Anchor>
+        </Text>
+      </Paper>
+    </div>
   );
 };
 
