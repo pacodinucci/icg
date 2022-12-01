@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -7,6 +8,10 @@ import {
 	CardBody,
 	Col,
 	Container,
+	Dropdown,
+	DropdownItem,
+	DropdownMenu,
+	DropdownToggle,
 	FormGroup,
 	Input,
 	Row,
@@ -14,6 +19,7 @@ import {
 import styles from "../styles/Account.module.css";
 
 const CampaignNotes = () => {
+	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<Container className="fs-4 py-5">
 			<Row>
@@ -32,6 +38,18 @@ const CampaignNotes = () => {
 						</Breadcrumb>
 					</CardBody>
 				</Card>
+			</Row>
+			<Row className="my-3">
+				<Dropdown isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
+					<DropdownToggle caret>Select Campaigns</DropdownToggle>
+					<DropdownMenu>
+						<DropdownItem header>Header</DropdownItem>
+						<DropdownItem disabled>Action</DropdownItem>
+						<DropdownItem>Another Action</DropdownItem>
+						<DropdownItem divider />
+						<DropdownItem>Another Action</DropdownItem>
+					</DropdownMenu>
+				</Dropdown>
 			</Row>
 		</Container>
 	);

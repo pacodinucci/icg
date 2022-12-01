@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -11,9 +12,32 @@ import {
 	Input,
 	Row,
 } from "reactstrap";
+import { getMySkills } from "../apis/mycvtracker/skills";
+import { useToast } from "../hooks/useToast";
 import styles from "../styles/Account.module.css";
+import { alerts } from "../utils/alert-utils";
+import SkillCard from "../components/SkillCard";
 
 const SkillCategories = () => {
+	const { showErrorToast, showSuccessToast } = useToast();
+
+	const [skills, setSkills] = useState([]);
+
+	const getSkillsList = useCallback(async () => {
+		try {
+			const response = await getMySkills();
+			if (response) {
+				console.log(response);
+				setSkills(response);
+			}
+		} catch (e: any) {
+			console.log(e);
+			showErrorToast(alerts[e.response.status].message);
+		}
+	}, [showErrorToast]);
+	useEffect(() => {
+		getSkillsList();
+	}, []);
 	return (
 		<Container className="fs-4 py-5">
 			<Row>
@@ -47,6 +71,11 @@ const SkillCategories = () => {
 					</Row>
 				</CardBody>
 			</Card>
+			<Container className={styles.resumeContainer}>
+				{skills.map((skill, idx) => {
+					return <SkillCard skill={skill} key={idx} />;
+				})}
+			</Container>
 		</Container>
 	);
 };
