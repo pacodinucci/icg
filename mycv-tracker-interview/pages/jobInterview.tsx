@@ -5,6 +5,14 @@ import { useToast } from "../hooks/useToast";
 import { alerts } from "../utils/alert-utils";
 import { getMyQuestions } from "../apis/mycvtracker/questions";
 import { Question } from "../types/question_types";
+import {
+	submitAnswer,
+	completeInterview,
+} from "../apis/mycvtracker/submit_interview";
+
+// Temporarily
+const TOKEN = "7a4574987a02434ea6006818f4be5112";
+const INTERVIEW_TYPE = "nodejs01_rnative01";
 
 const JobInterview = () => {
 	const { showErrorToast, showSuccessToast } = useToast();
@@ -26,6 +34,8 @@ const JobInterview = () => {
 	const [recorder, setRecorder] = useState<MediaRecorder>();
 	const [audioBlob, setAudioBlob] = useState<Blob>();
 	const [audioURL, setAudioURL] = useState("");
+	const [ansStartTime, setAnsStartTime] = useState<Date>(new Date());
+	const [ansStopTime, setAnsStopTime] = useState<Date>(new Date());
 
 	const getMyQuestionsList = useCallback(
 		async (token: string, interviewType: string) => {
@@ -45,10 +55,7 @@ const JobInterview = () => {
 
 	useEffect(() => {
 		// Temporarily Hardcoding
-		getMyQuestionsList(
-			"7a4574987a02434ea6006818f4be5112",
-			"nodejs01_rnative01"
-		);
+		getMyQuestionsList(TOKEN, INTERVIEW_TYPE);
 	}, []);
 
 	const Permissions = async () => {
@@ -125,11 +132,15 @@ const JobInterview = () => {
 
 	const StartRecording = () => {
 		if (isBlocked) return;
+		let t1 = new Date();
+		setAnsStartTime(t1);
 		recorder?.start();
 	};
 
 	const StopRecording = () => {
 		recorder?.stop();
+		let t2 = new Date();
+		setAnsStopTime(t2);
 		setStopped(true);
 		setCompleteRecording(true);
 		setResetClicked(true);
@@ -141,6 +152,7 @@ const JobInterview = () => {
 				window.alert(
 					"Thanks for attempting your Interview. Our team will get in touch soon."
 				);
+				FinishInterview();
 				return;
 			}
 			setStartTimer(6);
@@ -164,6 +176,7 @@ const JobInterview = () => {
 				window.alert(
 					"Thanks for attempting your Interview. Our team will get in touch soon."
 				);
+				FinishInterview();
 				return;
 			}
 			setStartTimer(6);
@@ -173,16 +186,44 @@ const JobInterview = () => {
 			timer(6);
 			setCompleteRecording(false);
 			setSubmittedBlob(false);
-			if (currentQuestionNo === questionsListLength) return;
 			setCurrentQuestionNo(currentQuestionNo + 1);
 			setCurrentQuestion(questions[currentQuestionNo + 1]);
 			setAudioURL("");
 		}
 	};
 
+	const SendAudioResponse = () => {
+		let attempt_time = String(
+			(ansStopTime?.getTime() - ansStartTime?.getTime()) / 2
+		);
+		let question_id = String(currentQuestion?.id);
+		let filename = new Date().toISOString();
+		let fd = new FormData();
+		if (
+			audioBlob !== undefined &&
+			filename !== undefined &&
+			TOKEN !== undefined &&
+			question_id !== undefined &&
+			attempt_time !== undefined
+		) {
+			fd.append("file", audioBlob, filename);
+			fd.set("Candidate", TOKEN);
+			fd.set("questionId", question_id);
+			fd.set("attemptTime", attempt_time);
+			submitAnswer(fd);
+		}
+	};
+
 	const SubmitQuestion = () => {
 		setSubmittedBlob(true);
+		SendAudioResponse();
 		NextQuestion(1);
+	};
+
+	const FinishInterview = () => {
+		let fd = new FormData();
+		fd.append("token", TOKEN);
+		completeInterview(fd);
 	};
 
 	return (
