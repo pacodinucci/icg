@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 
-import { Container, Button, TextInput, NumberInput, MultiSelect, Title } from "@mantine/core";
+import { Container, Button, TextInput, NumberInput, MultiSelect, Title, Paper } from "@mantine/core";
 import { sendAssignInterview } from "../apis/mycvtracker";
 import { sendRemiderRequest } from "../apis/mycvtracker/assign-interview";
 import { InterviewTopics } from "../data/interview";
@@ -73,56 +73,58 @@ const AssignInterviewPage = () => {
   return (
     <Container>
       <Title order={1}>Assign Interview</Title>
-      <form onSubmit={details.onSubmit(handleFormSubmit)}>
-        <TextInput
-          placeholder="Candidate Name"
-          label="Candidate Name"
-          withAsterisk
-          {...details.getInputProps("candidateName")}
-        />
-        <TextInput
-          placeholder="Result Owners"
-          label="Result Owners"
-          withAsterisk
-          {...details.getInputProps("resultOwners")}
-        />
-        <TextInput
-          placeholder="Candidate Email"
-          label="Candidate Email"
-          withAsterisk
-          {...details.getInputProps("candidateEmail")}
-        />
+      <Paper p="md" my="md">
+        <form onSubmit={details.onSubmit(handleFormSubmit)}>
+          <TextInput
+            placeholder="Candidate Name"
+            label="Candidate Name"
+            withAsterisk
+            {...details.getInputProps("candidateName")}
+          />
+          <TextInput
+            placeholder="Result Owners"
+            label="Result Owners"
+            withAsterisk
+            {...details.getInputProps("resultOwners")}
+          />
+          <TextInput
+            placeholder="Candidate Email"
+            label="Candidate Email"
+            withAsterisk
+            {...details.getInputProps("candidateEmail")}
+          />
 
-        <MultiSelect
-          data={InterviewTopics}
-          label="Interview Topics"
-          placeholder="Select atleast 1 topic"
-          withAsterisk
-          {...details.getInputProps("interviewType")}
-        />
+          <MultiSelect
+            data={InterviewTopics}
+            label="Interview Topics"
+            placeholder="Select atleast 1 topic"
+            withAsterisk
+            {...details.getInputProps("interviewType")}
+          />
 
-        <NumberInput
-          defaultValue={10}
-          label="Number of Question"
-          withAsterisk
-          {...details.getInputProps("noOfQuestions")}
-        />
-        <TextInput placeholder="Job Link" label="Job Link" withAsterisk {...details.getInputProps("jobLink")} />
+          <NumberInput
+            defaultValue={10}
+            label="Number of Question"
+            withAsterisk
+            {...details.getInputProps("noOfQuestions")}
+          />
+          <TextInput placeholder="Job Link" label="Job Link" withAsterisk {...details.getInputProps("jobLink")} />
 
-        <Button type="submit" variant="filled" my="xs" disabled={isLoading} loading={isLoading}>
-          Assign Interview
-        </Button>
-        <Button
-          type="button"
-          variant="light"
-          m="xs"
-          onClick={() => details.onSubmit(handleSendReminder)()}
-          disabled={isLoading}
-          loading={isLoading}
-        >
-          Send Reminder Interview
-        </Button>
-      </form>
+          <Button type="submit" variant="filled" my="sm" disabled={isLoading} loading={isLoading}>
+            Assign Interview
+          </Button>
+          <Button
+            type="button"
+            variant="light"
+            m="sm"
+            onClick={() => details.onSubmit(handleSendReminder)()}
+            disabled={isLoading}
+            loading={isLoading}
+          >
+            Send Reminder Interview
+          </Button>
+        </form>
+      </Paper>
     </Container>
   );
 };

@@ -1,92 +1,69 @@
-import Link from "next/link";
+import { TextInput, Container, Alert, ActionIcon, useMantineTheme, Loader, Title } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  Container,
-  Input,
-  Button,
-  Row,
-  Col,
-  Alert,
-  Form,
-  FormGroup,
-  Card,
-  CardBody,
-  Breadcrumb,
-  BreadcrumbItem,
-} from "reactstrap";
 import { getInterviewResponses } from "../apis/mycvtracker";
 import PrevResponse from "../components/PrevResponse";
 import { AudioResponse } from "../types/audioResponse_types";
 
+import { FaSearch, FaArrowRight } from "react-icons/fa";
+
 const Responses = () => {
   const router = useRouter();
+  const theme = useMantineTheme();
   const [responses, setResponses] = useState<{ data: AudioResponse[]; loading: boolean }>({ data: [], loading: false });
 
-  const [token, setToken] = useState("");
+  const details = useForm({
+    initialValues: {
+      token: "",
+    },
+    validate: {
+      token: (value) => (value.length < 5 ? "Please enter a valid token" : null),
+    },
+  });
 
-  const fetchResponse = useCallback(async (_token: string) => {
+  type DetailsType = typeof details.values;
+
+  const fetchResponse = useCallback(async ({ token }: DetailsType) => {
     try {
       setResponses((prev) => ({ ...prev, loading: true }));
-      const response = await getInterviewResponses(_token);
+      const response = await getInterviewResponses(token);
       setResponses({ data: response.data, loading: false });
     } catch (e) {}
   }, []);
 
   useEffect(() => {
-    console.log(router);
     if (router.query.token) {
       if (!Array.isArray(router.query.token)) {
-        setToken(router.query.token);
-        fetchResponse(router.query.token);
+        fetchResponse({ token: router.query.token });
         router.replace(router.asPath, router.route, { shallow: true });
       }
     }
   }, [router, fetchResponse]);
 
   return (
-    <Container className="py-5">
-      <p className="fs-1 my-3">Interview Responses</p>
-      <Row className="fs-4">
-        <Col>
-          <Card>
-            <CardBody>
-              <Breadcrumb>
-                <BreadcrumbItem>
-                  <Link href="/dashboard">Dashboard</Link>
-                </BreadcrumbItem>
-                <BreadcrumbItem active>Interview Responses</BreadcrumbItem>
-              </Breadcrumb>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-      <Form
-        className="my-3"
-        onSubmit={(e) => {
-          e.preventDefault();
-          fetchResponse(token);
-        }}
-      >
-        <FormGroup row>
-          <Col sm={10}>
-            <Input value={token} onChange={(e) => setToken(e.target.value)} disabled={responses.loading} />
-          </Col>
-          <Col className="d-grid">
-            <Button color="primary" type="submit" disabled={responses.loading} onClick={() => fetchResponse(token)}>
-              Search
-            </Button>
-          </Col>
-        </FormGroup>
-      </Form>
+    <Container>
+      <Title order={1}>Responses</Title>
+      <form onSubmit={details.onSubmit(fetchResponse)}>
+        <TextInput
+          disabled={responses.loading}
+          radius="xl"
+          size="md"
+          {...details.getInputProps("token")}
+          icon={<FaSearch size={18} />}
+          rightSection={
+            responses.loading ? (
+              <Loader />
+            ) : (
+              <ActionIcon size={32} radius="xl" color={theme.primaryColor} variant="filled" type="submit">
+                <FaArrowRight />
+              </ActionIcon>
+            )
+          }
+        />
+      </form>
       {responses.loading && <p>Loading</p>}
-      {!responses.loading && responses.data.length === 0 && (
-        <Row className="my-3">
-          <Col>
-            <Alert color="warning">Wrong token or no response</Alert>
-          </Col>
-        </Row>
-      )}
+      {!responses.loading && responses.data.length === 0 && <Alert mt="md">Wrong token or no response</Alert>}
       {!responses.loading &&
         responses.data.length > 0 &&
         responses.data.map((response) => <PrevResponse data={response} key={response.questionId} />)}

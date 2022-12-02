@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
-import { Button, Row, Col, Alert } from "reactstrap";
+import { Button, Flex, Group, Paper, SimpleGrid, Slider, Stack, Text, Title } from "@mantine/core";
+import { Row, Col, Alert } from "reactstrap";
 import { AudioResponse } from "../types/audioResponse_types";
 import ReactHowler from "react-howler";
 
-import { FaVolumeOff, FaVolumeMute, FaVolumeUp, FaVolumeDown, FaRedo } from "react-icons/fa";
+import { FaPlay, FaPause, FaStop, FaVolumeOff, FaVolumeMute, FaVolumeUp, FaVolumeDown, FaRedo } from "react-icons/fa";
 
 type Props = {
   data: AudioResponse;
@@ -23,9 +24,9 @@ const PrevResponse = ({ data }: Props) => {
   const [mute, setMute] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChangeVolume = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeVolume = useCallback((value: number) => {
     setMute(false);
-    setVolume(parseInt(e.target.value));
+    setVolume(value);
   }, []);
   const togglePlaySound = useCallback(() => {
     setIsPlaying((prev) => !prev);
@@ -42,18 +43,20 @@ const PrevResponse = ({ data }: Props) => {
   const getSeek = useCallback(() => {
     if (player.current) {
       const val = player.current.seek();
-      const dur = player.current.duration();
-      setSeek((val / dur) * 100);
+      setSeek(val);
     }
   }, [player]);
 
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (player.current) {
-      const val = (duration * parseFloat(e.target.value)) / 100;
-      player.current.seek(val);
-      setSeek(parseFloat(e.target.value));
-    }
-  };
+  const handleSeek = useCallback(
+    (value: number) => {
+      console.log(value);
+      if (player.current) {
+        player.current.seek(value);
+      }
+      setSeek(value);
+    },
+    [player]
+  );
 
   const onLoadComplete = useCallback(() => {
     setIsLoading(false);
@@ -80,15 +83,18 @@ const PrevResponse = ({ data }: Props) => {
   }, [player]);
 
   return (
-    <div>
-      <Row>
-        <p className="fs-4">{data.question}</p>
-      </Row>
-      <Row>
-        <Col>
-          {isLoading ? "Loading..." : `Duration: ${((duration * seek) / 100).toFixed(2)}/${duration.toFixed(2)}`}
-          <input className="w-100" type="range" onChange={handleSeek} value={seek} disabled={isLoading} />
-        </Col>
+    <Paper p="md" m="md">
+      <Title order={6}>{data.question}</Title>
+      <Text fz="sm">
+        {isLoading ? "Loading..." : `Duration: ${seek.toFixed(2)}/${duration.toFixed(2)}`}
+        <Slider
+          onChange={handleSeek}
+          label={(value) => value.toFixed(1)}
+          step={0.1}
+          max={duration}
+          value={seek}
+          disabled={isLoading}
+        />
         <ReactHowler
           src={`https://mycvtracker.com:8080/interviews/audioData/${data.token}/${data.questionId}`}
           format={["wav"]}
@@ -104,20 +110,24 @@ const PrevResponse = ({ data }: Props) => {
           onLoadError={() => setError("Unable to Load Media")}
           onPlayError={() => setError("Unable to Play Media")}
         />
-      </Row>
-      <Row>
+      </Text>
+      <SimpleGrid
+        mt="md"
+        cols={6}
+        breakpoints={[
+          { maxWidth: 1200, cols: 4, spacing: "md" },
+          { maxWidth: 900, cols: 2, spacing: "md" },
+          { maxWidth: 400, cols: 1, spacing: "md" },
+        ]}
+      >
         {error.length === 0 && (
           <>
-            <Col className="d-grid" xs={6} sm={2}>
-              <Button onClick={togglePlaySound} color="success" disabled={isLoading}>
-                {isPlaying ? "Pause" : "Play"}
-              </Button>
-            </Col>
-            <Col className="d-grid" xs={6} sm={2}>
-              <Button onClick={stopSound} color="danger" disabled={isLoading}>
-                Stop
-              </Button>
-            </Col>
+            <Button onClick={togglePlaySound} disabled={isLoading} leftIcon={isPlaying ? <FaPause /> : <FaPlay />}>
+              {isPlaying ? "Pause" : "Play"}
+            </Button>
+            <Button onClick={stopSound} disabled={isLoading} leftIcon={<FaStop />} color="red">
+              Stop
+            </Button>
           </>
         )}
         {error.length !== 0 && (
@@ -128,23 +138,15 @@ const PrevResponse = ({ data }: Props) => {
             </Alert>
           </Col>
         )}
-        <Col className="align-items-center d-flex" xs={12} sm={8} md={6} lg={4}>
-          <div className="fs-2 mx-2" onClick={handleToggleMute}>
+        <Flex align="center" gap="sm" justify="flex-start">
+          <div onClick={handleToggleMute}>
             {mute && <FaVolumeMute />}
             {!mute && (volume > 60 ? <FaVolumeUp /> : volume < 10 ? <FaVolumeOff /> : <FaVolumeDown />)}
           </div>
-          <input
-            type="range"
-            className="w-100"
-            min="0"
-            id="volume"
-            onChange={handleChangeVolume}
-            value={mute ? 0 : volume}
-          />
-        </Col>
-      </Row>
-      <hr />
-    </div>
+          <Slider style={{ width: "100%" }} id="volume" onChange={handleChangeVolume} value={mute ? 0 : volume} />
+        </Flex>
+      </SimpleGrid>
+    </Paper>
   );
 };
 
