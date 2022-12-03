@@ -9,10 +9,12 @@ import { alerts } from "../utils/alert-utils";
 import { Note, NotesResponse } from "../types/note_types";
 import NoteCard from "../components/NoteCard";
 import Pager from "../components/Pager";
+import { useUserState } from "../hooks/useUserState";
 
 const Notes = () => {
   const { showErrorToast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const { token } = useUserState();
   const [notes, setNotes] = useState<Note[]>([]);
 
   const [pagination, setPagination] = useState({
@@ -22,10 +24,10 @@ const Notes = () => {
 
   const getNotesList = useCallback(
     async (pageNumber: number, pageSize = 10) => {
-      console.log("Fetching");
+      if (!token) return;
       setIsLoading(true);
       try {
-        const response = (await getNotes(pageNumber, pageSize)) as NotesResponse;
+        const response = (await getNotes(pageNumber, pageSize, token)) as NotesResponse;
         setPagination({ totalpages: response.totalPages, currentPage: pageNumber });
         if (!response.empty) {
           setNotes(response.content);
@@ -34,12 +36,13 @@ const Notes = () => {
         }
       } catch (e: any) {
         console.log(e);
-        showErrorToast(alerts[e?.response.status].message);
+        if (e.response?.status) showErrorToast(alerts[e?.response.status].message);
+        else showErrorToast("Encounted an error, please try again later");
       } finally {
         setIsLoading(false);
       }
     },
-    [showErrorToast]
+    [showErrorToast, token]
   );
   useEffect(() => {
     getNotesList(1, 10);
