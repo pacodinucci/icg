@@ -1,22 +1,41 @@
 import React, { useCallback, useEffect, useState } from "react";
 import NewsLetter from "../components/NewsLetter";
 import styles from "../styles/jobInterview.module.css";
-import {
-	ShowRecord, //component used to show audio result
-	ProcessRecord, //component contains state to deal with logic when recording
-} from "react-nextjs-record";
 import { useToast } from "../hooks/useToast";
 import { alerts } from "../utils/alert-utils";
 import { getMyQuestions } from "../apis/mycvtracker/questions";
 import { Question } from "../types/question_types";
+import {
+	submitAnswer,
+	completeInterview,
+} from "../apis/mycvtracker/submit_interview";
+
+// Temporarily
+const TOKEN = "7a4574987a02434ea6006818f4be5112";
+const INTERVIEW_TYPE = "nodejs01_rnative01";
 
 const JobInterview = () => {
 	const { showErrorToast, showSuccessToast } = useToast();
-
 	const [questions, setQuestions] = useState([]);
 	const [currentQuestionNo, setCurrentQuestionNo] = useState(-1);
 	const [currentQuestion, setCurrentQuestion] = useState<Question>();
 	const [questionsListLength, setQuestionsListLength] = useState(0);
+	const [type, setType] = useState(0);
+	const [message, setMessage] = useState("Start Interview!!");
+	const [startTimer, setStartTimer] = useState(6);
+	const [remainingTime, setRemainingTime] = useState(60);
+	const [stopped, setStopped] = useState(true);
+	const [resetClicked, setResetClicked] = useState(false);
+	const [submittedBlob, setSubmittedBlob] = useState(false);
+
+	// Audio Record
+	const [isBlocked, setIsBlocked] = useState(false);
+	const [CompleteRecording, setCompleteRecording] = useState(false);
+	const [recorder, setRecorder] = useState<MediaRecorder>();
+	const [audioBlob, setAudioBlob] = useState<Blob>();
+	const [audioURL, setAudioURL] = useState("");
+	const [ansStartTime, setAnsStartTime] = useState<Date>(new Date());
+	const [ansStopTime, setAnsStopTime] = useState<Date>(new Date());
 
 	const getMyQuestionsList = useCallback(
 		async (token: string, interviewType: string) => {
@@ -33,39 +52,20 @@ const JobInterview = () => {
 		},
 		[showErrorToast]
 	);
+
 	useEffect(() => {
 		// Temporarily Hardcoding
-		getMyQuestionsList(
-			"7a4574987a02434ea6006818f4be5112",
-			"nodejs01_rnative01"
-		);
+		getMyQuestionsList(TOKEN, INTERVIEW_TYPE);
 	}, []);
 
-	const Permissions = () => {
+	const Permissions = async () => {
 		navigator.mediaDevices
 			.getUserMedia({ audio: true })
 			.then(() => setIsBlocked(false))
 			.catch(() => setIsBlocked(true));
+		const rec = await RecordAudio();
+		setRecorder(rec);
 	};
-
-	const [type, setType] = useState(0);
-	const [message, setMessage] = useState("Start Interview!!");
-	const [startTimer, setStartTimer] = useState(6);
-	const [remainingTime, setRemainingTime] = useState(60);
-	const [stopped, setStopped] = useState(true);
-	const [resetClicked, setResetClicked] = useState(false);
-	const [submittedBlob, setSubmittedBlob] = useState(false);
-
-	// Audio Record
-	const [isBlocked, setIsBlocked] = useState(false);
-	const [CompleteRecording, setCompleteRecording] = useState(false);
-	let {
-		blobURL,
-		completeRecording,
-		reStartRecording,
-		startRecording,
-		stopRecording,
-	} = ProcessRecord();
 
 	const SwitchView = () => {
 		setMessage("Loading Questions");
@@ -79,17 +79,20 @@ const JobInterview = () => {
 			setCurrentQuestion(questions[currentQuestionNo + 1]);
 		}, 3000);
 	};
+
 	const timer = (_startTimer: number) => {
 		if (_startTimer === 0) return;
 		setStartTimer(_startTimer - 1);
 		setTimeout(() => timer(_startTimer - 1), 1000);
 	};
+
 	useEffect(() => {
 		if (startTimer === 0) {
 			setStopped(false);
 			StartRecording();
 		}
 	}, [startTimer]);
+
 	useEffect(() => {
 		if (remainingTime === 0 || resetClicked) {
 			setStopped(true);
@@ -100,22 +103,56 @@ const JobInterview = () => {
 		}
 	}, [remainingTime, startTimer, resetClicked]);
 
+	const RecordAudio = (): Promise<any> =>
+		new Promise(async (resolve) => {
+			const stream = await navigator.mediaDevices.getUserMedia({
+				audio: true,
+			});
+			const mediaRecorder = new MediaRecorder(stream);
+			let audioChunks: Array<Blob> = [];
+
+			mediaRecorder.addEventListener("dataavailable", (event) => {
+				audioChunks.push(event.data);
+			});
+			const start = () => mediaRecorder.start(1000);
+			const stop = () => {
+				mediaRecorder.addEventListener("stop", () => {
+					const blob = new Blob(audioChunks);
+					const url = URL.createObjectURL(blob);
+					setAudioBlob(blob);
+					setAudioURL(url);
+				});
+				if (mediaRecorder.state === "recording") {
+					mediaRecorder.stop();
+					setTimeout(() => (audioChunks = []), 2000);
+				}
+			};
+			resolve({ start, stop });
+		});
+
 	const StartRecording = () => {
 		if (isBlocked) return;
-		startRecording();
+		let t1 = new Date();
+		setAnsStartTime(t1);
+		recorder?.start();
 	};
+
 	const StopRecording = () => {
-		stopRecording();
+		recorder?.stop();
+		let t2 = new Date();
+		setAnsStopTime(t2);
 		setStopped(true);
 		setCompleteRecording(true);
 		setResetClicked(true);
 	};
+
 	const SkipQuestion = () => {
 		if (window.confirm("Skip Question?")) {
 			if (currentQuestionNo === questionsListLength) {
 				window.alert(
 					"Thanks for attempting your Interview. Our team will get in touch soon."
 				);
+				FinishInterview();
 				return;
 			}
 			setStartTimer(6);
@@ -123,12 +160,13 @@ const JobInterview = () => {
 			setStopped(true);
 			setResetClicked(false);
 			timer(6);
-			reStartRecording();
 			setCompleteRecording(false);
 			setCurrentQuestionNo(currentQuestionNo + 1);
 			setCurrentQuestion(questions[currentQuestionNo + 1]);
+			setAudioURL("");
 		}
 	};
+
 	const NextQuestion = (type: number) => {
 		if (!submittedBlob && type === 0) {
 			window.alert("Please Submit your answer");
@@ -138,6 +176,7 @@ const JobInterview = () => {
 				window.alert(
 					"Thanks for attempting your Interview. Our team will get in touch soon."
 				);
+				FinishInterview();
 				return;
 			}
 			setStartTimer(6);
@@ -145,17 +184,46 @@ const JobInterview = () => {
 			setStopped(true);
 			setResetClicked(false);
 			timer(6);
-			reStartRecording();
 			setCompleteRecording(false);
 			setSubmittedBlob(false);
-			if (currentQuestionNo === questionsListLength) return;
 			setCurrentQuestionNo(currentQuestionNo + 1);
 			setCurrentQuestion(questions[currentQuestionNo + 1]);
+			setAudioURL("");
 		}
 	};
+
+	const SendAudioResponse = () => {
+		let attempt_time = String(
+			(ansStopTime?.getTime() - ansStartTime?.getTime()) / 2
+		);
+		let question_id = String(currentQuestion?.id);
+		let filename = new Date().toISOString();
+		let fd = new FormData();
+		if (
+			audioBlob !== undefined &&
+			filename !== undefined &&
+			TOKEN !== undefined &&
+			question_id !== undefined &&
+			attempt_time !== undefined
+		) {
+			fd.append("file", audioBlob, filename);
+			fd.set("Candidate", TOKEN);
+			fd.set("questionId", question_id);
+			fd.set("attemptTime", attempt_time);
+			submitAnswer(fd);
+		}
+	};
+
 	const SubmitQuestion = () => {
 		setSubmittedBlob(true);
+		SendAudioResponse();
 		NextQuestion(1);
+	};
+
+	const FinishInterview = () => {
+		let fd = new FormData();
+		fd.append("token", TOKEN);
+		completeInterview(fd);
 	};
 
 	return (
@@ -276,7 +344,7 @@ const JobInterview = () => {
 						)}
 					</div>
 				)}
-				<ShowRecord />
+				{audioURL !== "" ? <audio src={audioURL} controls /> : null}
 				<div className={styles.submit_btn}>
 					{CompleteRecording && (
 						<button
