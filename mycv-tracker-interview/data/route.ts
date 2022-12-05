@@ -1,9 +1,40 @@
+import { FaFileAudio, FaUserPlus, FaFileMedical, FaVolumeUp } from "react-icons/fa";
+
 enum RouteId {
   HomePage = "homepage",
   JobListPage = "joblist-page",
 }
 // List of routes which requre auth
-const adminRoutes = ["/assign-interview", "/dashboard", "/get-results", "/responses", "/settings"];
+
+export const NavLinkRoutes = [
+  {
+    path: "/assign-interview",
+    icon: FaUserPlus,
+    label: "Assign Interview",
+  },
+  {
+    path: "/get-results",
+    icon: FaFileAudio,
+    label: "Get Results",
+  },
+  {
+    path: "/responses",
+    icon: FaVolumeUp,
+    label: "Responses",
+  },
+  {
+    path: "/question-add",
+    icon: FaUserPlus,
+    label: "Add Question",
+  },
+  {
+    path: "/question-data",
+    icon: FaUserPlus,
+    label: "Question Data",
+  },
+];
+
+export const adminRoutes = ["/dashboard", "/settings", ...NavLinkRoutes.map((route) => route.path)];
 const authRoutes = [...adminRoutes];
 
 const CVServices = [
@@ -19,4 +50,4 @@ const JobServices = [
   { link: "https://mycvtracker.com/cover-letter-page.html", label: "Self Funded Internship" },
 ];
 
-export { RouteId, authRoutes, adminRoutes, CVServices, JobServices };
+export { RouteId, authRoutes, CVServices, JobServices };

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Drawer, Button, Accordion, NavLink, Stack } from "@mantine/core";
-import { CVServices, JobServices } from "../data/route";
+import { CVServices, JobServices, NavLinkRoutes } from "../data/route";
 import Link from "next/link";
 import { useUserState } from "../hooks/useUserState";
 import { FaCog, FaUserAlt, FaFileAudio, FaUserPlus, FaFileMedical, FaVolumeUp } from "react-icons/fa";
@@ -45,34 +45,17 @@ const NavigationDrawer = ({ opened, onClose }: { opened: boolean; onClose: () =>
         <Stack>
           <NavLink icon={<FaUserAlt />} component={Link} href="/dashboard" label="Dashboard" />
           <NavLink icon={<FaCog />} component={Link} href="/settings" label="Settings" />
-          <NavLink
-            icon={<FaUserPlus />}
-            label="Assign Interview"
-            component={Link}
-            href="/assign-interview"
-            active={router.asPath === "/assign-interview"}
-          />
-          <NavLink
-            icon={<FaFileAudio />}
-            label="Get Results"
-            component={Link}
-            href="/get-results"
-            active={router.asPath === "/get-results"}
-          />
-          <NavLink
-            icon={<FaVolumeUp />}
-            label="Responses"
-            component={Link}
-            href="/responses"
-            active={router.asPath === "/responses"}
-          />
-          <NavLink
-            icon={<FaFileMedical />}
-            label="Add Question"
-            component={Link}
-            href="/question-add"
-            active={router.asPath === "/question-add"}
-          />
+          {NavLinkRoutes.map((route) => (
+            <NavLink
+              key={route.path}
+              icon={<route.icon />}
+              label={route.label}
+              component={Link}
+              href={route.path}
+              active={router.asPath === route.path}
+            />
+          ))}
+
           <Button variant="default" m="sm" onClick={logoutUser}>
             Logout
           </Button>

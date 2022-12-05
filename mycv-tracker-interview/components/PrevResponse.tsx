@@ -83,34 +83,34 @@ const PrevResponse = ({ data }: Props) => {
   }, [player]);
 
   return (
-    <Paper p="md" m="md">
-      <Title order={6}>{data.question}</Title>
+    <Paper p="md" my="md">
       <Text fz="sm">
+        <Title order={6}>{data.question}</Title>
         {isLoading ? "Loading..." : `Duration: ${seek.toFixed(2)}/${duration.toFixed(2)}`}
-        <Slider
-          onChange={handleSeek}
-          label={(value) => value.toFixed(1)}
-          step={0.1}
-          max={duration}
-          value={seek}
-          disabled={isLoading}
-        />
-        <ReactHowler
-          src={`https://mycvtracker.com:8080/interviews/audioData/${data.token}/${data.questionId}`}
-          format={["wav"]}
-          playing={isPlaying}
-          onEnd={() => {
-            setIsPlaying(false);
-            setSeek(0);
-          }}
-          volume={volume / 100}
-          mute={mute}
-          ref={(ref: Howler) => (player.current = ref)}
-          onLoad={onLoadComplete}
-          onLoadError={() => setError("Unable to Load Media")}
-          onPlayError={() => setError("Unable to Play Media")}
-        />
       </Text>
+      <Slider
+        onChange={handleSeek}
+        label={(value) => value.toFixed(1)}
+        step={0.1}
+        max={duration}
+        value={seek}
+        disabled={isLoading}
+      />
+      <ReactHowler
+        src={`https://mycvtracker.com:8080/interviews/audioData/${data.token}/${data.questionId}`}
+        format={["wav"]}
+        playing={isPlaying}
+        onEnd={() => {
+          setIsPlaying(false);
+          setSeek(0);
+        }}
+        volume={volume / 100}
+        mute={mute}
+        ref={(ref: Howler) => (player.current = ref)}
+        onLoad={onLoadComplete}
+        onLoadError={() => setError("Unable to Load Media")}
+        onPlayError={() => setError("Unable to Play Media")}
+      />
       <SimpleGrid
         mt="md"
         cols={6}

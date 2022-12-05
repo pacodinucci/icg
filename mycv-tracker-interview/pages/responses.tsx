@@ -49,6 +49,7 @@ const Responses = () => {
           disabled={responses.loading}
           radius="xl"
           size="md"
+          my="md"
           {...details.getInputProps("token")}
           icon={<FaSearch size={18} />}
           rightSection={
