@@ -1,20 +1,42 @@
-import { Header, Group, Button, UnstyledButton, Text, Box, Loader, Avatar, Menu } from "@mantine/core";
+import {
+  Header,
+  Group,
+  Button,
+  UnstyledButton,
+  Text,
+  Box,
+  Loader,
+  Avatar,
+  Menu,
+  createStyles,
+  MediaQuery,
+  ActionIcon,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useUserState } from "../hooks/useUserState";
 
 import logo from "../assets/logo.png";
-import { FaAngleDown, FaUserAlt, FaCog, FaPowerOff } from "react-icons/fa";
+import { FaAngleDown, FaUserAlt, FaCog, FaPowerOff, FaEquals } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { adminRoutes, authRoutes } from "../data/route";
+import { adminRoutes, authRoutes, CVServices, JobServices } from "../data/route";
+import NavigationDrawer from "./NavigationDrawer";
+
+const useStyles = createStyles((theme) => ({
+  hoverBtn: {
+    color: "#ffffff",
+  },
+}));
 
 const TopNavigation = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
 
   const { user, isLoading: isLoadingUser, logoutUser } = useUserState();
   const router = useRouter();
+
+  const { classes } = useStyles();
 
   useEffect(() => {
     if (user === null && !isLoadingUser && authRoutes.includes(router.route)) {
@@ -28,93 +50,98 @@ const TopNavigation = () => {
 
   return (
     <Box pb={70}>
+      <NavigationDrawer opened={drawerOpened} onClose={closeDrawer} />
       <Header height={70} px="md" fixed={true} style={{ backgroundColor: "#1e222c", zIndex: 10 }}>
         <Group position="apart" sx={{ height: "100%" }}>
           <Link href="/">
             <Image alt="logo" src={logo} height={50} width={150} />
           </Link>
 
-          <Group>
-            <Menu trigger="hover" openDelay={100} closeDelay={400}>
-              <Menu.Target>
-                <UnstyledButton>
-                  CV Services <FaAngleDown />
-                </UnstyledButton>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item component={Link} href="/cv-writing-page">
-                  CV Writing Page
-                </Menu.Item>
-                <Menu.Item component={Link} href="/linkedin-profile-writing">
-                  Linkedin Profile Writing
-                </Menu.Item>
-                <Menu.Item component={Link} href="/cover-letter-page">
-                  Cover Letter Page
-                </Menu.Item>
-                <Menu.Item>CV Writing Packages</Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-            <Menu trigger="hover" openDelay={100} closeDelay={400}>
-              <Menu.Target>
-                <UnstyledButton>
-                  Job Services <FaAngleDown />
-                </UnstyledButton>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item>Job Board</Menu.Item>
-                <Menu.Item>Get a Tech Internship</Menu.Item>
-                <Menu.Item>Self Funded Internship</Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-          </Group>
+          <MediaQuery query="(min-width: 700px)" styles={{ display: "none" }}>
+            <ActionIcon onClick={toggleDrawer}>
+              <FaEquals />
+            </ActionIcon>
+          </MediaQuery>
+          <MediaQuery query="(max-width: 700px)" styles={{ display: "none" }}>
+            <Group>
+              <Menu trigger="hover" openDelay={100} closeDelay={400}>
+                <Menu.Target>
+                  <UnstyledButton className={classes.hoverBtn}>
+                    CV Services <FaAngleDown />
+                  </UnstyledButton>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  {CVServices.map((service) => (
+                    <Menu.Item component={Link} key={service.label} href={service.link} target="_blank">
+                      {service.label}
+                    </Menu.Item>
+                  ))}
+                </Menu.Dropdown>
+              </Menu>
+              <Menu trigger="hover" openDelay={100} closeDelay={400}>
+                <Menu.Target>
+                  <UnstyledButton className={classes.hoverBtn}>
+                    Job Services <FaAngleDown />
+                  </UnstyledButton>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  {JobServices.map((service) => (
+                    <Menu.Item component={Link} key={service.label} href={service.link} target="_blank">
+                      {service.label}
+                    </Menu.Item>
+                  ))}
+                </Menu.Dropdown>
+              </Menu>
 
-          {isLoadingUser && (
-            <Group>
-              <Loader />
-            </Group>
-          )}
-          {!isLoadingUser && !user && (
-            <Group>
-              <Button variant="default" component={Link} href="/login">
-                Log in
-              </Button>
-              <Button component={Link} href="/register">
-                Sign up
-              </Button>
-            </Group>
-          )}
-          {!isLoadingUser && user && (
-            <Menu width={200}>
-              <Menu.Target>
+              {isLoadingUser && (
                 <Group>
-                  <Avatar src="https://mycvtracker.com/assets/img/app/profile/user.png" radius="xl" />
-                  <div style={{ flex: 1 }}>
-                    <Text size="md" weight={600} color="white">
-                      {`${user.firstName} ${user.lastName}`}
-                    </Text>
-                    <Text color="dimmed" size="xs">
-                      {user.email}
-                    </Text>
-                  </div>
-                  <FaAngleDown />
+                  <Loader />
                 </Group>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Label>Application</Menu.Label>
-                <Menu.Item icon={<FaUserAlt size={14} />} component={Link} href="/dashboard">
-                  Dashboard
-                </Menu.Item>
-                <Menu.Item icon={<FaCog size={14} />} component={Link} href="/settings">
-                  Settings
-                </Menu.Item>
-                <Menu.Divider />
-                <Menu.Label>User</Menu.Label>
-                <Menu.Item icon={<FaPowerOff size={14} />} onClick={logoutUser}>
-                  Logout
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-          )}
+              )}
+              {!isLoadingUser && !user && (
+                <Group>
+                  <Button variant="default" component={Link} href="/login">
+                    Log in
+                  </Button>
+                  <Button component={Link} href="/register">
+                    Sign up
+                  </Button>
+                </Group>
+              )}
+              {!isLoadingUser && user && (
+                <Menu width={200}>
+                  <Menu.Target>
+                    <Group>
+                      <Avatar src="https://mycvtracker.com/assets/img/app/profile/user.png" radius="xl" />
+                      <div style={{ flex: 1 }}>
+                        <Text size="md" weight={600} color="white">
+                          {`${user.firstName} ${user.lastName}`}
+                        </Text>
+                        <Text color="dimmed" size="xs">
+                          {user.email}
+                        </Text>
+                      </div>
+                      <FaAngleDown color="#ffffff" />
+                    </Group>
+                  </Menu.Target>
+                  <Menu.Dropdown>
+                    <Menu.Label>Application</Menu.Label>
+                    <Menu.Item icon={<FaUserAlt size={14} />} component={Link} href="/dashboard">
+                      Dashboard
+                    </Menu.Item>
+                    <Menu.Item icon={<FaCog size={14} />} component={Link} href="/settings">
+                      Settings
+                    </Menu.Item>
+                    <Menu.Divider />
+                    <Menu.Label>User</Menu.Label>
+                    <Menu.Item icon={<FaPowerOff size={14} />} onClick={logoutUser}>
+                      Logout
+                    </Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
+              )}
+            </Group>
+          </MediaQuery>
         </Group>
       </Header>
     </Box>
