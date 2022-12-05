@@ -1,10 +1,10 @@
 import React from "react";
 
-import { Drawer, Button, Group, Accordion, NavLink, Box, Stack } from "@mantine/core";
+import { Drawer, Button, Accordion, NavLink, Stack } from "@mantine/core";
 import { CVServices, JobServices } from "../data/route";
 import Link from "next/link";
 import { useUserState } from "../hooks/useUserState";
-import { FaCog, FaUserAlt } from "react-icons/fa";
+import { FaCog, FaUserAlt, FaFileAudio, FaUserPlus, FaFileMedical, FaVolumeUp } from "react-icons/fa";
 import { useRouter } from "next/router";
 
 const NavigationDrawer = ({ opened, onClose }: { opened: boolean; onClose: () => void }) => {
@@ -45,14 +45,29 @@ const NavigationDrawer = ({ opened, onClose }: { opened: boolean; onClose: () =>
         <Stack>
           <NavLink icon={<FaUserAlt />} component={Link} href="/dashboard" label="Dashboard" />
           <NavLink icon={<FaCog />} component={Link} href="/settings" label="Settings" />
-          <NavLink label="Get Results" component={Link} href="/get-results" active={router.asPath === "/get-results"} />
           <NavLink
+            icon={<FaUserPlus />}
             label="Assign Interview"
             component={Link}
             href="/assign-interview"
             active={router.asPath === "/assign-interview"}
           />
           <NavLink
+            icon={<FaFileAudio />}
+            label="Get Results"
+            component={Link}
+            href="/get-results"
+            active={router.asPath === "/get-results"}
+          />
+          <NavLink
+            icon={<FaVolumeUp />}
+            label="Responses"
+            component={Link}
+            href="/responses"
+            active={router.asPath === "/responses"}
+          />
+          <NavLink
+            icon={<FaFileMedical />}
             label="Add Question"
             component={Link}
             href="/question-add"

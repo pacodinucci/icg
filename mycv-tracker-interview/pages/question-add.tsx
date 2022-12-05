@@ -1,94 +1,54 @@
-import React, { useState } from "react";
-import { Container, Row } from "reactstrap";
-import styles from "../styles/questionAdd.module.css";
+import React, { useCallback } from "react";
+import { Container, Button, Title, Paper, Textarea } from "@mantine/core";
 
-const Question_add = () => {
-	const [question, setQuestion] = useState("");
-	const [option1, setOption1] = useState("");
-	const [option2, setOption2] = useState("");
-	const [option3, setOption3] = useState("");
-	const [option4, setOption4] = useState("");
-	const [correct, setCorrect] = useState("");
-	const [questionType, setQuestionType] = useState("");
+import { useForm } from "@mantine/form";
+import { useUserState } from "../hooks/useUserState";
 
-	const handleAddQuestion = (e: any) => {
-		e.preventDefault();
-		if (question === "" || correct === "" || questionType === "") {
-			return;
-		}
-		console.log(
-			question,
-			option1,
-			option2,
-			option3,
-			option4,
-			correct,
-			questionType
-		);
-	};
+const QuestionAdd = () => {
+  const { token } = useUserState();
+  const details = useForm({
+    initialValues: {
+      question: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      correct: "",
+      questionType: "",
+    },
+    validate: {
+      question: (value) => (value.length < 1 ? "Qustion cannot be empty" : null),
+      // correct: (value) => value.length < 1 ? "Qustion cannot be empty" : null,
+      questionType: (value) => (value.length < 1 ? "Qustion Type cannot be empty" : null),
+    },
+  });
+  type FormType = typeof details.values;
+  const handleAddQuestion = useCallback((values: FormType) => {}, [token]);
 
-	return (
-		<Container className={styles.container}>
-			<span className={styles.heading}>Add Question Data</span>
-			<span className={styles.route}>
-				Home <span className={styles.subRoute}> / Add Question Data</span>{" "}
-			</span>
-			<form className={styles.form} onSubmit={(e) => handleAddQuestion(e)}>
-				<Row tag="section" className={styles.section}>
-					<label>Question</label>
-					<textarea
-						value={question}
-						onChange={(e) => setQuestion(e.target.value)}
-					></textarea>
-				</Row>
-				<Row tag="section" className={styles.section}>
-					<label>Option 1</label>
-					<textarea
-						value={option1}
-						onChange={(e) => setOption1(e.target.value)}
-					></textarea>
-				</Row>
-				<Row tag="section" className={styles.section}>
-					<label>Option 2</label>
-					<textarea
-						value={option2}
-						onChange={(e) => setOption2(e.target.value)}
-					></textarea>
-				</Row>
-				<Row tag="section" className={styles.section}>
-					<label>Option 3</label>
-					<textarea
-						value={option3}
-						onChange={(e) => setOption3(e.target.value)}
-					></textarea>
-				</Row>
-				<Row tag="section" className={styles.section}>
-					<label>Option 4</label>
-					<textarea
-						value={option4}
-						onChange={(e) => setOption4(e.target.value)}
-					></textarea>
-				</Row>
-				<Row tag="section" className={styles.section}>
-					<label>Correct</label>
-					<textarea
-						value={correct}
-						onChange={(e) => setCorrect(e.target.value)}
-					></textarea>
-				</Row>
-				<Row tag="section" className={styles.section}>
-					<label>Question Type</label>
-					<textarea
-						value={questionType}
-						onChange={(e) => setQuestionType(e.target.value)}
-					></textarea>
-				</Row>
-				<Row tag="section" className={styles.section}>
-					<input type="submit" value="Add Question" />
-				</Row>
-			</form>
-		</Container>
-	);
+  return (
+    <Container>
+      <Title order={1}>Assign Interview</Title>
+      <Paper p="md" my="md">
+        <form onSubmit={details.onSubmit(handleAddQuestion)}>
+          <Textarea placeholder="Question" label="Question" withAsterisk {...details.getInputProps("question")} />
+          <Textarea placeholder="Option 1" label="Option 1" withAsterisk {...details.getInputProps("option1")} />
+          <Textarea placeholder="Option 2" label="Option 2" withAsterisk {...details.getInputProps("option2")} />
+          <Textarea placeholder="Option 3" label="Option 3" withAsterisk {...details.getInputProps("option3")} />
+          <Textarea placeholder="Option 4" label="Option 4" withAsterisk {...details.getInputProps("option4")} />
+          <Textarea placeholder="Correct" label="Correct" withAsterisk {...details.getInputProps("correct")} />
+          <Textarea
+            placeholder="Question Type"
+            label="Question Type"
+            withAsterisk
+            {...details.getInputProps("questionType")}
+          />
+          <Button type="submit" my="md">
+            Add Question
+          </Button>
+        </form>
+      </Paper>
+    </Container>
+  );
 };
 
-export default Question_add;
+export default QuestionAdd;
