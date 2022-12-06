@@ -1,4 +1,4 @@
-import { ActionIcon, Autocomplete, Container, Loader, TextInput, Title, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Alert, Autocomplete, Container, Loader, Radio, Title, useMantineTheme } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React, { useCallback, useState } from "react";
 import { FaArrowRight, FaSearch } from "react-icons/fa";
@@ -14,22 +14,26 @@ const QuestionData = () => {
   const { showErrorToast } = useToast();
   const theme = useMantineTheme();
   const { token } = useUserState();
-  const [responses, setResponses] = useState({ loading: false, questions: [] as Question[] });
+  const [responses, setResponses] = useState({ loading: false, questions: null as Question[] | null });
   const details = useForm({
     initialValues: {
       type: "",
+      difficulty: "1",
     },
     validate: {
       type: (value) => (value.length < 1 ? "Please enter a valid type" : null),
     },
   });
+
+  type FormType = typeof details.values;
+
   const fetchQuestion = useCallback(
-    async ({ type }: { type: string }) => {
+    async ({ type, difficulty }: FormType) => {
       const existing = InterviewTopics.find((t) => t.label.toLowerCase() === type.toLowerCase());
       try {
-        if (existing) type = existing.value.split("0").join("");
+        if (existing) type = existing.value;
         setResponses((prev) => ({ ...prev, loading: true }));
-        const questions = await GetQuestionsList(token, type);
+        const questions = await GetQuestionsList(token, `${type}${difficulty}`);
         setResponses({ questions, loading: false });
       } catch (e: any) {
         if (alerts[e.response.status]) showErrorToast(alerts[e.response.status].message);
@@ -41,7 +45,9 @@ const QuestionData = () => {
   );
 
   const deleteQuestion = useCallback((id: number) => {
-    setResponses((prev) => ({ ...prev, questions: prev.questions.filter((q) => q.id !== id) }));
+    setResponses((prev) => {
+      return prev.questions !== null ? { ...prev, questions: prev.questions.filter((q) => q.id !== id) } : prev;
+    });
   }, []);
 
   return (
@@ -66,10 +72,20 @@ const QuestionData = () => {
             )
           }
         />
+        <Radio.Group label="Difficulty Level" {...details.getInputProps("difficulty")}>
+          <Radio value="1" label="1" />
+          <Radio value="2" label="2" />
+          <Radio value="3" label="3" />
+          <Radio value="4" label="4" />
+          <Radio value="5" label="5" />
+        </Radio.Group>
       </form>
-      {responses.questions.map((question) => (
-        <QuestionCard question={question} key={question.id} onDelete={deleteQuestion} />
-      ))}
+      {responses.questions !== null && responses.questions.length === 0 && <Alert my="md">No Questions found</Alert>}
+      {responses.questions !== null &&
+        responses.questions.length > 0 &&
+        responses.questions.map((question) => (
+          <QuestionCard question={question} key={question.id} onDelete={deleteQuestion} />
+        ))}
     </Container>
   );
 };

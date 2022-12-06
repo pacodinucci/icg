@@ -1,8 +1,8 @@
 export const InterviewTopics = [
-  { label: "Typescript", value: "typescript01" },
-  { label: "Nodejs", value: "nodejs01" },
-  { label: "Javascript", value: "javascript01" },
-  { label: "React Native", value: "rnative01" },
-  { label: "AWS", value: "AWS01" },
-  { label: "Azure", value: "AZURE01" },
+  { label: "Typescript", value: "typescript", levels: 5 },
+  { label: "Nodejs", value: "nodejs", levels: 5 },
+  { label: "Javascript", value: "javascript", levels: 5 },
+  { label: "React Native", value: "rnative", levels: 5 },
+  { label: "AWS", value: "AWS", levels: 5 },
+  { label: "Azure", value: "AZURE", levels: 5 },
 ];
