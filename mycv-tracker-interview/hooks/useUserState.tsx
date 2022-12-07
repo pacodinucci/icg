@@ -54,7 +54,7 @@ export const UserStateProvider = ({ children }: { children: ReactElement }) => {
           setToken(response.token);
         }
       } catch (e: any) {
-        showErrorToast(alerts[e.response.status].message);
+        showErrorToast(alerts[e?.response.status || "undefined"].message);
       }
     },
     [showErrorToast]

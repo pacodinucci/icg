@@ -1,6 +1,10 @@
 import { AlertsType } from "../types/alert_types";
 
 export const alerts: AlertsType = {
+  undefined: {
+    type: "danger",
+    message: "Uncontered an Error, please try again.",
+  },
   401: {
     type: "danger",
     message: "Unauthorized Access!",

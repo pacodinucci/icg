@@ -4,7 +4,6 @@ import {
   Button,
   UnstyledButton,
   Text,
-  Box,
   Loader,
   Avatar,
   Menu,
@@ -49,7 +48,7 @@ const TopNavigation = () => {
   if (router.route === "/login") return null;
 
   return (
-    <Box pb={70}>
+    <>
       <NavigationDrawer opened={drawerOpened} onClose={closeDrawer} />
       <Header height={70} px="md" fixed={true} style={{ backgroundColor: "#1e222c", zIndex: 10 }}>
         <Group position="apart" sx={{ height: "100%" }}>
@@ -57,12 +56,12 @@ const TopNavigation = () => {
             <Image alt="logo" src={logo} height={50} width={150} />
           </Link>
 
-          <MediaQuery query="(min-width: 700px)" styles={{ display: "none" }}>
+          <MediaQuery query="(min-width: 767px)" styles={{ display: "none" }}>
             <ActionIcon onClick={toggleDrawer}>
               <FaEquals />
             </ActionIcon>
           </MediaQuery>
-          <MediaQuery query="(max-width: 700px)" styles={{ display: "none" }}>
+          <MediaQuery query="(max-width: 767px)" styles={{ display: "none" }}>
             <Group>
               <Menu trigger="hover" openDelay={100} closeDelay={400}>
                 <Menu.Target>
@@ -144,7 +143,7 @@ const TopNavigation = () => {
           </MediaQuery>
         </Group>
       </Header>
-    </Box>
+    </>
   );
 };
 
