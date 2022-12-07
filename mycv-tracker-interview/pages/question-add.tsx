@@ -17,6 +17,7 @@ const QuestionAdd = () => {
       option3: "",
       option4: "",
       correct: "option1",
+      difficulty: "1",
       questionType: "",
     },
     validate: {
@@ -24,14 +25,21 @@ const QuestionAdd = () => {
       // correct: (value) => value.length < 1 ? "Qustion cannot be empty" : null,
       questionType: (value) => (value.length < 1 ? "Qustion Type cannot be empty" : null),
     },
+    transformValues: (values) => ({
+      questionType: values.questionType + values.difficulty,
+      question: values.question,
+      option1: values.option1,
+      option2: values.option2,
+      option3: values.option3,
+      option4: values.option4,
+      correct: values[values.correct as keyof Pick<Question, "option1" | "option2" | "option3" | "option4">],
+    }),
   });
 
   const handleAddQuestion = useCallback(
     (values: Omit<Question, "id">) => {
-      sendAddQuestion(token, {
-        ...values,
-        correct: values[values.correct as keyof Pick<Question, "option1" | "option2" | "option3" | "option4">],
-      });
+      // return console.log(values);
+      sendAddQuestion(token, values);
     },
     [token]
   );
@@ -58,6 +66,13 @@ const QuestionAdd = () => {
             withAsterisk
             {...details.getInputProps("questionType")}
           />
+          <Radio.Group label="Difficulty Level" {...details.getInputProps("difficulty")}>
+            <Radio value="1" label="1" />
+            <Radio value="2" label="2" />
+            <Radio value="3" label="3" />
+            <Radio value="4" label="4" />
+            <Radio value="5" label="5" />
+          </Radio.Group>
           <Button type="submit" my="md">
             Add Question
           </Button>

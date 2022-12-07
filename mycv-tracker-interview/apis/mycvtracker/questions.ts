@@ -12,7 +12,13 @@ export const getMyQuestions = async (token: string, interviewType: string) => {
   }
 };
 
-export const sendAddQuestion = async (token: string, question: Omit<Question, "id">) => {};
+export const sendAddQuestion = async (token: string, question: Omit<Question, "id">) => {
+  return await apiInstance.post("/interviews/addQuestion", question, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const GetQuestionsList = async (token: string, type: string) => {
   try {
