@@ -32,7 +32,9 @@ const AudioController = ({
   if (operation === "startInterview") {
     return (
       <Flex align="center" justify="center" style={{ height: 85 }}>
-        <Button onClick={startInterview}>Start Insterview</Button>
+        <Button onClick={startInterview} color="green">
+          Start Insterview
+        </Button>
       </Flex>
     );
   }
@@ -103,10 +105,10 @@ const AudioController = ({
           Recording Started
         </Alert>
         <Flex direction={"row"} gap={media ? "sm" : "md"}>
-          <Button onClick={skipQuestion} compact={media}>
+          <Button onClick={skipQuestion} compact={media} color="yellow">
             Skip Question
           </Button>
-          <Button onClick={stopRecording} compact={media}>
+          <Button onClick={stopRecording} compact={media} color="red">
             Stop Recording
           </Button>
         </Flex>
