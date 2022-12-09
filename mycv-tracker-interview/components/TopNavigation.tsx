@@ -1,5 +1,4 @@
 import {
-  Header,
   Group,
   Button,
   UnstyledButton,
@@ -50,99 +49,96 @@ const TopNavigation = () => {
   return (
     <>
       <NavigationDrawer opened={drawerOpened} onClose={closeDrawer} />
-      <Header height={70} px="md" fixed={true} style={{ backgroundColor: "#1e222c", zIndex: 10 }}>
-        <Group position="apart" sx={{ height: "100%" }}>
-          <Link href="/">
-            <Image alt="logo" src={logo} height={50} width={150} />
-          </Link>
+      <Group position="apart" sx={{ height: "100%" }}>
+        <Link href="/">
+          <Image alt="logo" src={logo} height={50} width={150} />
+        </Link>
+        <MediaQuery query="(min-width: 767px)" styles={{ display: "none" }}>
+          <ActionIcon onClick={toggleDrawer}>
+            <FaEquals />
+          </ActionIcon>
+        </MediaQuery>
+        <MediaQuery query="(max-width: 767px)" styles={{ display: "none" }}>
+          <Group>
+            <Menu trigger="hover" openDelay={100} closeDelay={400}>
+              <Menu.Target>
+                <UnstyledButton className={classes.hoverBtn}>
+                  CV Services <FaAngleDown />
+                </UnstyledButton>
+              </Menu.Target>
+              <Menu.Dropdown>
+                {CVServices.map((service) => (
+                  <Menu.Item component={Link} key={service.label} href={service.link} target="_blank">
+                    {service.label}
+                  </Menu.Item>
+                ))}
+              </Menu.Dropdown>
+            </Menu>
+            <Menu trigger="hover" openDelay={100} closeDelay={400}>
+              <Menu.Target>
+                <UnstyledButton className={classes.hoverBtn}>
+                  Job Services <FaAngleDown />
+                </UnstyledButton>
+              </Menu.Target>
+              <Menu.Dropdown>
+                {JobServices.map((service) => (
+                  <Menu.Item component={Link} key={service.label} href={service.link} target="_blank">
+                    {service.label}
+                  </Menu.Item>
+                ))}
+              </Menu.Dropdown>
+            </Menu>
 
-          <MediaQuery query="(min-width: 767px)" styles={{ display: "none" }}>
-            <ActionIcon onClick={toggleDrawer}>
-              <FaEquals />
-            </ActionIcon>
-          </MediaQuery>
-          <MediaQuery query="(max-width: 767px)" styles={{ display: "none" }}>
-            <Group>
-              <Menu trigger="hover" openDelay={100} closeDelay={400}>
+            {isLoadingUser && (
+              <Group>
+                <Loader />
+              </Group>
+            )}
+            {!isLoadingUser && !user && (
+              <Group>
+                <Button variant="default" component={Link} href="/login">
+                  Log in
+                </Button>
+                <Button component={Link} href="/register">
+                  Sign up
+                </Button>
+              </Group>
+            )}
+            {!isLoadingUser && user && (
+              <Menu width={200}>
                 <Menu.Target>
-                  <UnstyledButton className={classes.hoverBtn}>
-                    CV Services <FaAngleDown />
-                  </UnstyledButton>
+                  <Group>
+                    <Avatar src="https://mycvtracker.com/assets/img/app/profile/user.png" radius="xl" />
+                    <div style={{ flex: 1 }}>
+                      <Text size="md" weight={600} color="white">
+                        {`${user.firstName} ${user.lastName}`}
+                      </Text>
+                      <Text color="dimmed" size="xs">
+                        {user.email}
+                      </Text>
+                    </div>
+                    <FaAngleDown color="#ffffff" />
+                  </Group>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  {CVServices.map((service) => (
-                    <Menu.Item component={Link} key={service.label} href={service.link} target="_blank">
-                      {service.label}
-                    </Menu.Item>
-                  ))}
+                  <Menu.Label>Application</Menu.Label>
+                  <Menu.Item icon={<FaUserAlt size={14} />} component={Link} href="/dashboard">
+                    Dashboard
+                  </Menu.Item>
+                  <Menu.Item icon={<FaCog size={14} />} component={Link} href="/settings">
+                    Settings
+                  </Menu.Item>
+                  <Menu.Divider />
+                  <Menu.Label>User</Menu.Label>
+                  <Menu.Item icon={<FaPowerOff size={14} />} onClick={logoutUser}>
+                    Logout
+                  </Menu.Item>
                 </Menu.Dropdown>
               </Menu>
-              <Menu trigger="hover" openDelay={100} closeDelay={400}>
-                <Menu.Target>
-                  <UnstyledButton className={classes.hoverBtn}>
-                    Job Services <FaAngleDown />
-                  </UnstyledButton>
-                </Menu.Target>
-                <Menu.Dropdown>
-                  {JobServices.map((service) => (
-                    <Menu.Item component={Link} key={service.label} href={service.link} target="_blank">
-                      {service.label}
-                    </Menu.Item>
-                  ))}
-                </Menu.Dropdown>
-              </Menu>
-
-              {isLoadingUser && (
-                <Group>
-                  <Loader />
-                </Group>
-              )}
-              {!isLoadingUser && !user && (
-                <Group>
-                  <Button variant="default" component={Link} href="/login">
-                    Log in
-                  </Button>
-                  <Button component={Link} href="/register">
-                    Sign up
-                  </Button>
-                </Group>
-              )}
-              {!isLoadingUser && user && (
-                <Menu width={200}>
-                  <Menu.Target>
-                    <Group>
-                      <Avatar src="https://mycvtracker.com/assets/img/app/profile/user.png" radius="xl" />
-                      <div style={{ flex: 1 }}>
-                        <Text size="md" weight={600} color="white">
-                          {`${user.firstName} ${user.lastName}`}
-                        </Text>
-                        <Text color="dimmed" size="xs">
-                          {user.email}
-                        </Text>
-                      </div>
-                      <FaAngleDown color="#ffffff" />
-                    </Group>
-                  </Menu.Target>
-                  <Menu.Dropdown>
-                    <Menu.Label>Application</Menu.Label>
-                    <Menu.Item icon={<FaUserAlt size={14} />} component={Link} href="/dashboard">
-                      Dashboard
-                    </Menu.Item>
-                    <Menu.Item icon={<FaCog size={14} />} component={Link} href="/settings">
-                      Settings
-                    </Menu.Item>
-                    <Menu.Divider />
-                    <Menu.Label>User</Menu.Label>
-                    <Menu.Item icon={<FaPowerOff size={14} />} onClick={logoutUser}>
-                      Logout
-                    </Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
-              )}
-            </Group>
-          </MediaQuery>
-        </Group>
-      </Header>
+            )}
+          </Group>
+        </MediaQuery>
+      </Group>
     </>
   );
 };

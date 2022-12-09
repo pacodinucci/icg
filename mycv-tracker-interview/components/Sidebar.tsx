@@ -2,8 +2,6 @@ import React from "react";
 import { MediaQuery, Navbar, NavLink } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
-import { FaFileAudio, FaUserPlus, FaFileMedical, FaVolumeUp } from "react-icons/fa";
 import { authRoutes, NavLinkRoutes } from "../data/route";
 
 const Sidebar = () => {
