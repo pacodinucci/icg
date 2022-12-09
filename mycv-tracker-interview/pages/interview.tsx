@@ -47,7 +47,7 @@ const Interview = () => {
       if (!Array.isArray(router.query.token)) {
         setToken(router.query.token);
         // TODO: Enable before deployment
-        // router.replace(router.asPath, router.route, { shallow: true });
+        router.replace(router.asPath, router.route, { shallow: true });
       }
     }
     if (router.query.interviewType) {

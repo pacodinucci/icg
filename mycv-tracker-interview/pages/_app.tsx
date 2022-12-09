@@ -16,7 +16,7 @@ import { NotificationsProvider } from "@mantine/notifications";
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <NotificationsProvider>
+      <NotificationsProvider position="top-right" zIndex={2077}>
         <ToastProvider>
           <UserStateProvider>
             <>
