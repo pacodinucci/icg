@@ -9,7 +9,7 @@ import Head from "next/head";
 import { UserStateProvider } from "../hooks/useUserState";
 import { ToastProvider } from "../hooks/useToast";
 
-import { AppShell, Header, MantineProvider } from "@mantine/core";
+import { AppShell, Header, MantineProvider, ScrollArea } from "@mantine/core";
 import Sidebar from "../components/Sidebar";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
@@ -32,12 +32,14 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
                 </Header>
               }
             >
-              <div className={styles.componentContainer}>
-                <div className={styles.component}>
-                  <Component {...pageProps} />
+              <ScrollArea>
+                <div className={styles.componentContainer}>
+                  <div className={styles.component}>
+                    <Component {...pageProps} />
+                  </div>
+                  <BottomFooter />
                 </div>
-                <BottomFooter />
-              </div>
+              </ScrollArea>
             </AppShell>
           </>
         </UserStateProvider>
