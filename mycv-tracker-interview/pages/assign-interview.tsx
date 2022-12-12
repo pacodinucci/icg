@@ -40,7 +40,7 @@ const AssignInterviewPage = () => {
       resultOwners: "",
       candidateEmail: "",
       interviewType: [] as InterviewType[],
-      noOfQuestions: "",
+      noOfQuestions: "10",
       jobLink: "",
       candidateList: "",
     },
@@ -175,12 +175,7 @@ const AssignInterviewPage = () => {
                 ))}
               </Stack>
             </Box>
-            <NumberInput
-              defaultValue={10}
-              label="Number of Question"
-              withAsterisk
-              {...details.getInputProps("noOfQuestions")}
-            />
+            <NumberInput label="Number of Question" withAsterisk {...details.getInputProps("noOfQuestions")} />
             <TextInput placeholder="Job Link" label="Job Link" withAsterisk {...details.getInputProps("jobLink")} />
             <Button type="submit" variant="filled" my="sm" disabled={isLoading} loading={isLoading}>
               Assign Interview
