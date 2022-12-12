@@ -16,7 +16,7 @@ const BottomFooter = () => {
           <Link href="/terms" className="text-decoration-none">
             <Text align="center">Terms & Conditions</Text>
           </Link>
-          <p className={`${styles.location} my-1 fs-5`}>London, United Kingdom</p>
+          <p className={`${styles.location}`}>London, United Kingdom</p>
           <p className={styles.copyright}>Copyright My CV Tracker</p>
           <Flex align="center" direction="row" gap="lg" justify="center">
             <Link target="_blank" href="https://www.facebook.com/My-CV-Tracker-494026290989681/" rel="noreferrer">

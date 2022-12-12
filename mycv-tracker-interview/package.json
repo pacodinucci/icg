@@ -26,7 +26,6 @@
     "react-dom": "18.2.0",
     "react-howler": "^5.2.0",
     "react-icons": "^4.6.0",
-    "reactstrap": "^9.1.5",
     "sass": "^1.56.1"
   },
   "devDependencies": {
