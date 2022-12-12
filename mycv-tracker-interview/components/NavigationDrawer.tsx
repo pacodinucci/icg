@@ -4,7 +4,7 @@ import { Drawer, Button, Accordion, NavLink, Stack } from "@mantine/core";
 import { CVServices, JobServices, NavLinkRoutes } from "../data/route";
 import Link from "next/link";
 import { useUserState } from "../hooks/useUserState";
-import { FaCog, FaUserAlt, FaFileAudio, FaUserPlus, FaFileMedical, FaVolumeUp } from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
 import { useRouter } from "next/router";
 
 const NavigationDrawer = ({ opened, onClose }: { opened: boolean; onClose: () => void }) => {
@@ -41,7 +41,6 @@ const NavigationDrawer = ({ opened, onClose }: { opened: boolean; onClose: () =>
       {!isLoadingUser && user && (
         <Stack>
           <NavLink icon={<FaUserAlt />} component={Link} href="/dashboard" label="Dashboard" />
-          <NavLink icon={<FaCog />} component={Link} href="/settings" label="Settings" />
           {NavLinkRoutes.map((route) => (
             <NavLink
               key={route.path}

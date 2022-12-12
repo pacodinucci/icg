@@ -16,6 +16,7 @@ import { useForm } from "@mantine/form";
 
 import { useRouter } from "next/router";
 import { useUserState } from "../hooks/useUserState";
+import ForgotPassword from "../components/ForgotPassword";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -81,6 +82,7 @@ const Login = () => {
 
   return (
     <div className={classes.wrapper}>
+      <ForgotPassword isOpen={forgotPasswordModal} onDismiss={() => setForgotPasswordModal(false)} />
       <Paper className={classes.form} radius={0} p={30}>
         <Title order={2} className={classes.title} align="center" mt="md" mb={50}>
           Welcome to My CV Tracker
@@ -104,6 +106,10 @@ const Login = () => {
             {loading ? <Loader color="white" /> : "Login"}
           </Button>
         </form>
+
+        <Button mt="md" variant="subtle" onClick={() => setForgotPasswordModal(true)}>
+          Forgot Password ?
+        </Button>
       </Paper>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-import { Modal, ModalBody, ModalHeader, ModalFooter, Button, Input, Label } from "reactstrap";
+import { Modal, TextInput, Button } from "@mantine/core";
 import { sendForgotPasswordRequest } from "../apis/mycvtracker";
 import { useToast } from "../hooks/useToast";
 
@@ -36,17 +36,18 @@ const ForgotPassword = ({ isOpen, onDismiss }: Props) => {
   };
 
   return (
-    <Modal isOpen={isOpen} toggle={onDismiss}>
-      <ModalHeader toggle={onDismiss}>Forgot Password</ModalHeader>
-      <ModalBody>
-        <Label for="forgotEmail">Email</Label>
-        <Input name="forgotEmail" type="email" id="forgotEmail" value={email} onChange={handleChangeInput} />
-      </ModalBody>
-      <ModalFooter>
-        <Button disabled={loading} color="primary" onClick={() => handleClick(email)}>
-          Reset Password
-        </Button>
-      </ModalFooter>
+    <Modal opened={isOpen} onClose={onDismiss} title="Forgot Password">
+      <TextInput
+        name="forgotEmail"
+        label="Email"
+        type="email"
+        id="forgotEmail"
+        value={email}
+        onChange={handleChangeInput}
+      />
+      <Button disabled={loading} onClick={() => handleClick(email)} mt="md">
+        Reset Password
+      </Button>
     </Modal>
   );
 };
