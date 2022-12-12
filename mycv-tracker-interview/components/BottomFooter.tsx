@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
-import { List, ListInlineItem } from "reactstrap";
 import logo from "../assets/logo.png";
 import { Container, Flex, Stack, Text } from "@mantine/core";
 

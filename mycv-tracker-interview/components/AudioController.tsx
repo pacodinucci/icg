@@ -33,7 +33,7 @@ const AudioController = ({
     return (
       <Flex align="center" justify="center" style={{ height: 85 }}>
         <Button onClick={startInterview} color="green">
-          Start Insterview
+          Start Interview
         </Button>
       </Flex>
     );

@@ -4,7 +4,7 @@ import React from "react";
 const Instructions = () => {
   return (
     <Box p="sm">
-      <Title>Instuctions</Title>
+      <Title>Instructions</Title>
       <Stack spacing="md">
         <Highlight highlight={"60 seconds"}>
           You have 60 seconds to answer each question, Please ensure access to your microphone is enabled to confirm

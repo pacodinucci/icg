@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
-import { ActionIcon, Button, Flex, Group, Paper, SimpleGrid, Slider, Stack, Text, Title } from "@mantine/core";
-import { Row, Col, Alert } from "reactstrap";
+import { ActionIcon, Button, Flex, Paper, SimpleGrid, Slider, Text, Title, Alert } from "@mantine/core";
 import { AudioResponse } from "../types/audioResponse_types";
 import ReactHowler from "react-howler";
 
@@ -130,9 +129,9 @@ const PrevResponse = ({ data, source, compact, style }: Props) => {
       {!compact && (
         <SimpleGrid
           mt="md"
-          cols={6}
+          cols={error.length > 0 ? 3 : 6}
           breakpoints={[
-            { maxWidth: 1200, cols: 4, spacing: "md" },
+            { maxWidth: 1200, cols: 3, spacing: "md" },
             { maxWidth: 900, cols: 2, spacing: "md" },
             { maxWidth: 400, cols: 1, spacing: "md" },
           ]}
@@ -148,12 +147,14 @@ const PrevResponse = ({ data, source, compact, style }: Props) => {
             </>
           )}
           {error.length !== 0 && (
-            <Col xs={12} sm={4}>
-              <Alert color="danger" className="d-flex align-items-center justify-content-between">
+            <Alert color="red" title="Error loading Media">
+              <Flex align="center" justify="space-between">
                 {error}
-                <FaRedo onClick={handleReload} />
-              </Alert>
-            </Col>
+                <ActionIcon onClick={handleReload}>
+                  <FaRedo />
+                </ActionIcon>
+              </Flex>
+            </Alert>
           )}
           <Flex align="center" gap="sm" justify="flex-start">
             <div onClick={handleToggleMute}>
