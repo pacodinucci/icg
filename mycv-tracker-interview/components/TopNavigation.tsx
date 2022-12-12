@@ -9,6 +9,7 @@ import {
   createStyles,
   MediaQuery,
   ActionIcon,
+  Header,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useUserState } from "../hooks/useUserState";
@@ -47,7 +48,7 @@ const TopNavigation = () => {
   if (router.route === "/login") return null;
 
   return (
-    <>
+    <Header height={70} px="md" fixed={true} style={{ backgroundColor: "#1e222c", zIndex: 11 }}>
       <NavigationDrawer opened={drawerOpened} onClose={closeDrawer} />
       <Group position="apart" sx={{ height: "100%" }}>
         <Link href="/">
@@ -99,9 +100,6 @@ const TopNavigation = () => {
                 <Button variant="default" component={Link} href="/login">
                   Log in
                 </Button>
-                <Button component={Link} href="/register">
-                  Sign up
-                </Button>
               </Group>
             )}
             {!isLoadingUser && user && (
@@ -139,7 +137,7 @@ const TopNavigation = () => {
           </Group>
         </MediaQuery>
       </Group>
-    </>
+    </Header>
   );
 };
 

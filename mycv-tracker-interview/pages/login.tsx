@@ -104,13 +104,6 @@ const Login = () => {
             {loading ? <Loader color="white" /> : "Login"}
           </Button>
         </form>
-
-        <Text align="center" mt="md">
-          Don&apos;t have an account?{" "}
-          <Anchor component={Link} href="/register" weight={700}>
-            Sign up
-          </Anchor>
-        </Text>
       </Paper>
     </div>
   );

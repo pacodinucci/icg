@@ -36,9 +36,6 @@ const NavigationDrawer = ({ opened, onClose }: { opened: boolean; onClose: () =>
           <Button variant="default" component={Link} href="/login">
             Log in
           </Button>
-          <Button component={Link} href="/register">
-            Sign up
-          </Button>
         </Stack>
       )}
       {!isLoadingUser && user && (
