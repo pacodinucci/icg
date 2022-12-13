@@ -6,8 +6,10 @@ import { useUserState } from "../hooks/useUserState";
 import { sendAddQuestion } from "../apis/mycvtracker/questions";
 
 import { Question } from "../types/question_types";
+import { useToast } from "../hooks/useToast";
 
 const QuestionAdd = () => {
+  const { showSuccessToast, showErrorToast } = useToast();
   const { token } = useUserState();
   const details = useForm({
     initialValues: {
@@ -37,16 +39,21 @@ const QuestionAdd = () => {
   });
 
   const handleAddQuestion = useCallback(
-    (values: Omit<Question, "id">) => {
+    async (values: Omit<Question, "id">) => {
       // return console.log(values);
-      sendAddQuestion(token, values);
+      try {
+        await sendAddQuestion(token, values);
+        showSuccessToast("Request submitted successfully");
+      } catch (e) {
+        showErrorToast("Encounted an Error");
+      }
     },
-    [token]
+    [token, showSuccessToast, showErrorToast]
   );
 
   return (
     <Container>
-      <Title order={1}>Assign Interview</Title>
+      <Title order={1}>Add Question</Title>
       <Paper p="md" my="md">
         <form onSubmit={details.onSubmit(handleAddQuestion)}>
           <Textarea placeholder="Question" label="Question" withAsterisk {...details.getInputProps("question")} />
