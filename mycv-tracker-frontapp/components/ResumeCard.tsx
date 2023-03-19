@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, Card, CardBody, Col, Input, Label, Row } from "reactstrap";
+import { Button, ButtonGroup, Card, CardBody, Col, DropdownItem, DropdownMenu, DropdownToggle, Input, Label, Row, UncontrolledDropdown } from "reactstrap";
 import styles from "../styles/Account.module.css";
 import { Resume } from "../types/resume_types";
+import { BsList } from "react-icons/bs";
 
 const ResumeCard = ({
 	resume: {
@@ -14,11 +15,13 @@ const ResumeCard = ({
 		uploadedAt,
 		listingActive,
 	},
+  toggleSharingResumeModal
 }: {
 	resume: Resume;
+  toggleSharingResumeModal: (referal : number) => void
 }) => {
 	return (
-		<Card className={` mt-4 mb-4 px-5 py-2`}>
+		<Card className={` mt-4 mb-4 px-5 py-2 mx-2`}>
 			<CardBody className={styles.resumeCard}>
 				<Row>
 					<Col>
@@ -61,6 +64,20 @@ const ResumeCard = ({
 					</Col>
 				</Row>
 			</CardBody>
+      <ButtonGroup className={`my-2 ${styles.cardMenuCtrl}`}>
+        <UncontrolledDropdown>
+          <DropdownToggle>
+            <BsList size={20} />
+          </DropdownToggle>
+          <DropdownMenu end className="fs-5">
+            <DropdownItem>Extend masked preview</DropdownItem>
+            <DropdownItem>Extend original preview</DropdownItem>
+            <DropdownItem onClick={() =>toggleSharingResumeModal(id)}>View Party Sharings</DropdownItem>
+            <DropdownItem>Add to Cv Box</DropdownItem>
+            <DropdownItem>Categorize Skill</DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </ButtonGroup>
 		</Card>
 	);
 };

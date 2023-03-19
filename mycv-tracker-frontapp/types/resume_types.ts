@@ -24,5 +24,9 @@ export type Resume = {
         noOfReviews: number,
         noOfSkills: number,
         downloadFile?: null,
-        ownerEmail: string
+        ownerEmail: string,
+        name: string,
+        skills: string[],
+        resumeEmail: string,
+        resumePhoneNumber?: string
 }

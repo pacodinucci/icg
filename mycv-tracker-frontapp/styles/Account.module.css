@@ -30,3 +30,9 @@
 .skillCard {
 	width: 30%;
 }
+
+.cardMenuCtrl {
+  position: absolute;
+  top: 1.25rem;
+  right: 2.25rem;
+}

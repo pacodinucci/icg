@@ -44,7 +44,7 @@ export const ToastProvider = ({ children }: { children: ReactElement }) => {
     <ToastContext.Provider value={{ showSuccessToast, showErrorToast }}>
       <>
         {children}
-        <Toast isOpen={toast.visible} className="position-fixed top-0 end-0 m-3">
+        <Toast isOpen={toast.visible} className="position-fixed top-0 end-0 m-3" style={{zIndex: 99999}}>
           <ToastHeader
             toggle={hideToast}
             className={`${toast.type === "error" ? "bg-danger" : "bg-success"} text-bg-success`}
