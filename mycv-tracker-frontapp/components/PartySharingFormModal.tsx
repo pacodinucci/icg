@@ -39,6 +39,7 @@ const PartySharingFormModal = ({ onDismiss, isOpen, selectedId, updatePartyShari
   const { showErrorToast, showSuccessToast } = useToast();
 
   const [form, setForm] = useState<ShareResumePayload>(DEFAULT_FORM_VALUE);
+  const [inSubmitting, setInSubmitting] = useState<boolean>(false);
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -47,6 +48,7 @@ const PartySharingFormModal = ({ onDismiss, isOpen, selectedId, updatePartyShari
 
   const handleShareResume = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
+      setInSubmitting(true);
 
       event.preventDefault();
       await shareResume(selectedId, form,token);
@@ -54,14 +56,14 @@ const PartySharingFormModal = ({ onDismiss, isOpen, selectedId, updatePartyShari
       await updatePartySharingList()
       setForm(DEFAULT_FORM_VALUE)
       onDismiss();
-
-
     } catch (e: any) {
       console.log(e);
       if (e.response?.status)
         showErrorToast(alerts[e?.response.status].message);
       else showErrorToast("Encounted an error, please try again later");
     }
+
+    setInSubmitting(false);
   };
 
   return (
@@ -108,7 +110,7 @@ const PartySharingFormModal = ({ onDismiss, isOpen, selectedId, updatePartyShari
           </FormGroup>
 
           <Row className="mx-1">
-            <Button color="primary">Share</Button>
+            <Button color="primary" disabled={ inSubmitting }>{ !inSubmitting ? "Share" : "Sharing..." }</Button>
           </Row>
         </Form>
       </ModalBody>
