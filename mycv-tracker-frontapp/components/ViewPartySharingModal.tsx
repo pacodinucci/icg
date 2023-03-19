@@ -13,22 +13,22 @@ import { alerts } from "../utils/alert-utils";
 import { BsShare } from "react-icons/bs";
 import PartySharingFormModal from "./PartySharingFormModal";
 import { getPartySharings } from "../apis/mycvtracker/partySharing";
-import { PartySharing, Status } from "../types/partySharing_types";
+import { PartySharing, Status, StatusEnumKeys } from '../types/partySharing_types';
 import PagerWithoutNumber from "./PagerWithoutNumber";
 
 
 
 
-const badgeClass = (status: string) => {
+const badgeClass = (status: StatusEnumKeys ) => {
   const baseClassName = "badge ";
-  if (status === Status.CANDIDATE_REVIEW) {
+  if (status === 'CANDIDATE_REVIEW') {
     return `${baseClassName} bg-secondary`;
   }
-  if (status === Status.CANDIDATE_PASSED) {
+  if (status === 'CANDIDATE_PASSED') {
     return `${baseClassName} bg-success`;
   }
 
-  if (status === Status.CANDIDATE_INTERVIEW_BOOKED) {
+  if (status === 'CANDIDATE_INTERVIEW_BOOKED') {
     return `${baseClassName} bg-warning`;
   }
 };
@@ -136,9 +136,7 @@ const ViewPartySharingModal = ({ onDismiss, isOpen, selectedId }: Props) => {
                       <td>{item.partyName}</td>
                       <td>
                         <span className={badgeClass(item.status)}>
-                          {item.status
-                            .split("_")
-                            .join(" ")}
+                          {Status[item.status]}
                         </span>
                       </td>
                       <td>

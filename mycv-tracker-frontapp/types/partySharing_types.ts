@@ -1,10 +1,10 @@
 export enum Status {
-  CANDIDATE_REVIEW = "CANDIDATE_REVIEW",
-  CANDIDATE_INTERVIEW_BOOKED = "CANDIDATE_INTERVIEW_BOOKED",
-  CANDIDATE_PASSED = "CANDIDATE_PASSED",
+  CANDIDATE_REVIEW = "In Progress",
+  CANDIDATE_INTERVIEW_BOOKED = " In Interview",
+  CANDIDATE_PASSED = "Passed",
 }
 
-type StatusEnumKeys = keyof typeof Status;
+export type StatusEnumKeys = keyof typeof Status;
 
 export type PartySharing = {
   id: number,
