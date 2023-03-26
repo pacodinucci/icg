@@ -17,7 +17,7 @@ const Resumes = () => {
 
   const getResumeList = useCallback(async () => {
     try {
-      const response = await getMyResumes(token);
+      const response = await getMyResumes(1, 24, token);
       if (response) {
         console.log(response);
         setResumes(response);
@@ -61,7 +61,7 @@ const Resumes = () => {
       </Row>
       <Container fluid className={styles.resumeContainer}>
         {resumes.map((resume, idx) => {
-          return <ResumeCard resume={resume} key={idx} />;
+          return null;
         })}
       </Container>
     </Container>
