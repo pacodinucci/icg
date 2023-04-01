@@ -73,7 +73,41 @@ angular.module("MyCvTracker.pages.resumeListing")
           return RestConfig.listCategoriesOfResume(resumeId);
         }, categorizeResumeSkills : function(resumeId, categoryIds) {
           return RestConfig.updateResumeSkillCategories(resumeId, categoryIds);
-        }
+        },
+        getNewResumeModal : function (
+          scope,
+          ctrlName
+        ) {
+
+          var modalOpts = {
+            templateUrl : "app/pages/list-resumes/templates/new_resume.html",
+            controller : ctrlName,
+            scope : scope
+          };
+
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        },
+        getEditPreviewLinkModal : function (
+          scope,
+          ctrlName
+        ) {
+
+          var modalOpts = {
+            templateUrl : "app/pages/list-resumes/templates/edit-link.html",
+            controller : ctrlName,
+            scope : scope
+          };
+
+          return $injector.get("$uibModal")
+            .open(modalOpts);
+        },
+        checkResumePreviewLink : function (id) {
+          return RestConfig.checkUniquePreviewLink(id);
+        },
+        updateResumeLink : function (resumeId, linkId, type) {
+          return RestConfig.updateResumePreviewLink(resumeId, linkId, type);
+        },
       };
     }
   ]);

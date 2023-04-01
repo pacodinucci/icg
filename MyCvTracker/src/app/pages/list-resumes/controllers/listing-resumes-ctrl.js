@@ -18,7 +18,7 @@ angular.module("MyCvTracker.pages.resumeListing")
       Authorization,
       $location
     ) {
-      var NO_RECORDS = 24;
+      var NO_RECORDS = 12;
       var Utilities = $injector.get("Utilities");
       var mainSvc = $injector.get("ResumesListingService");
 
@@ -26,7 +26,8 @@ angular.module("MyCvTracker.pages.resumeListing")
       var role = !!userDetail ? Authorization.getUserRole() : "";
       var isAdmin =  role=== "ADMIN";
       var isReviewer =  role=== "REVIEWER";
-      var isManagement = isAdmin || isReviewer;
+      var isRecruiter =  role=== "RECRUITER";
+      var isManagement = isAdmin || isReviewer || isRecruiter;
 
       $scope.listResumes = [];
       $scope.loadInfo = {
@@ -35,6 +36,7 @@ angular.module("MyCvTracker.pages.resumeListing")
         loading : false,
         isAdmin : isAdmin,
         isReviewer : isReviewer,
+        isRecruiter : isRecruiter,
         isManagement : isManagement
       };
       $scope.extendModal = null;
@@ -319,6 +321,166 @@ angular.module("MyCvTracker.pages.resumeListing")
         });
       }
 
+      $scope.addNewResumeModel = function () {
+
+        $scope.resumeModal = mainSvc.getNewResumeModal($scope, "ResumeCtrl");
+        $scope.myFile = null;
+        $scope.id = null;
+        $scope.resumeTitle = null;
+        $scope.resumeType = null;
+      };
+
+      $scope.closeNewResumeModal = function() {
+        $scope.resumeModal.dismiss();
+        $scope.myFile = null;
+        $scope.id = null;
+        $scope.resumeTitle = null;
+        $scope.resumeType = null;
+      };
+
+      //Save Resume Function, Used for both new and edit resume
+      $scope.saveMyResume = function (
+        file,
+        resumeTitle,
+        resumeType
+      ) {
+        if ($scope.formProcessing) {
+          return;
+        }
+        $scope.formProcessing = true;
+
+        var fd = new FormData();
+        const userEmail = userDetail.email;
+        fd.append("userEmail", userEmail);
+        fd.append("file", file);
+        fd.append("resumeReference", resumeTitle);
+        fd.append("resumeType", resumeType);
+        fd.append("resumeReviewer", "randeep");
+
+        //ResumesSvc.saveMyResume(fd).
+        //This must be changed to call the service layer
+        var url = Utilities.getSaveResumesUrl();
+        console.log("url", url);
+        $http.post(url, fd, {
+          transformRequest : angular.identity,
+          headers : { "Content-Type" : undefined }
+        })
+          .success(function (
+            data,
+            status,
+            headers,
+            config
+          ) {
+            console.log("success");
+            $scope.closeNewResumeModal();
+            // $rootScope.$broadcast("quickCV");
+            toastr.success(Utilities.getAlerts("resumeAddedSuccess").message);
+
+            $scope.listResumes.unshift(data);
+            $scope.formProcessing = false;
+          })
+          .error(function (
+            data,
+            status,
+            headers,
+            config
+          ) {
+            console.log("error");
+            $scope.formProcessing = false;
+            $scope.closeNewResumeModal();
+
+            if (data.message == "resumeSaveTitleDuplicatedError") {
+              toastr.error(Utilities.getAlerts("resumeSaveTitleDuplicatedError").message);
+            } else if (data.message == "resumeSaveTypeDuplicatedError") {
+              toastr.error(Utilities.getAlerts("resumeSaveTypeDuplicatedError").message);
+            } else if (data.message == "resumeSaveLimitError") {
+              toastr.error(Utilities.getAlerts("resumeSaveLimitError").message);
+            } else if (data.message == "resumeSaveNameDuplicatedError") {
+              toastr.error(Utilities.getAlerts("resumeSaveNameDuplicatedError").message);
+            } else {
+              toastr.error(Utilities.getAlerts("defaultError"));
+            }
+          });
+      };
+
+      $scope.editLinkForm = {
+        selectedResume : null,
+        linkId : "",
+        type : null,
+        inUse : false,
+        editing : false
+      };
+      $scope.closeEditPreviewLinkModal = function() {
+        $scope.resumeModal.dismiss();
+        $scope.editLinkForm.selectedResume = null;
+        $scope.editLinkForm.linkId = "";
+        $scope.editLinkForm.type = null;
+        $scope.editLinkForm.editing = false;
+        $scope.editLinkForm.inUse = false;
+      }
+
+      $scope.openEditPreviewLink = function (
+        resume,
+        type
+      ) {
+        $scope.editLinkForm.selectedResume = resume;
+        var linkId = "";
+        if (type === "MASKED") {
+          linkId = !!resume.maskedLinkId ? resume.maskedLinkId : "";
+        } else {
+          linkId = !!resume.originalLinkId ? resume.originalLinkId : "";
+        }
+        $scope.editLinkForm.linkId = linkId;
+        $scope.editLinkForm.type = type;
+
+        $scope.resumeModal = mainSvc.getEditPreviewLinkModal($scope, "ResumeCtrl");
+      };
+
+      $scope.editResumeLink = function () {
+        var linkId = $scope.editLinkForm.linkId;
+        var resumeId = $scope.editLinkForm.selectedResume.id;
+        var type = $scope.editLinkForm.type;
+
+        mainSvc.updateResumeLink(resumeId, linkId, type)
+          .then(function () {
+            if (type === "MASKED") {
+              $scope.editLinkForm.selectedResume.maskedLinkId = linkId;
+            } else if (type === "ORIGINAL") {
+              $scope.editLinkForm.selectedResume.originalLinkId = linkId;
+            }
+
+            toastr.success("Preview link has been updated successfully.");
+            $scope.closeEditPreviewLinkModal();
+          })
+          .catch(function () {
+            toastr.error("Updating preview link has failed!", "Error");
+            $scope.closeEditPreviewLinkModal();
+          });
+      };
+
+      $scope.checkPreviewId = function () {
+        if ($scope.editLinkForm.editing) return;
+        $scope.editLinkForm.editing = true;
+
+        var linkId = $scope.editLinkForm.linkId;
+        if (!linkId) {
+          $scope.editLinkForm.editing = false;
+          return;
+        }
+
+        var resumeId = $scope.editLinkForm.selectedResume.id;
+        var type = $scope.editLinkForm.type;
+
+        mainSvc.checkResumePreviewLink(linkId)
+          .then(function () {
+            $scope.editResumeLink();
+          })
+          .catch(function () {
+            $scope.editLinkForm.inUse = true;
+            $scope.editLinkForm.editing = false;
+          });
+      };
+
       $scope.init = function () {
         $scope.getResume();
 
@@ -342,5 +504,34 @@ angular.module("MyCvTracker.pages.resumeListing")
     ) {
       var utilities = $injector.get("Utilities");
 
+    }
+  ]);
+
+angular.module("MyCvTracker.pages.resumeListing")
+  .controller("ResumeCtrl", [
+    "$scope",
+    "$injector",
+    function (
+      $scope,
+      $injector
+    ) {
+      var Utilities = $injector.get("Utilities");
+
+      $scope.saveResume = function () {
+        var file = $scope.myFile;
+        var resumeTitle = $scope.resumeTitle;
+        var resumeType = $scope.resumeType;
+        if (file != null && file.size >= 5000000) {
+          $scope.addAlert(Utilities.getAlerts("InputFileInputSizeValidation"));
+          $scope.myFile = null;
+          return false;
+        }
+        if (file != null) {
+          $scope.saveMyResume(file, resumeTitle, resumeType);
+        } else {
+          $scope.addAlert(Utilities.getAlerts("InputFileInputRequiredValidation"));
+        }
+
+      };
     }
   ]);

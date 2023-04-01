@@ -20,6 +20,7 @@ angular.module("MyCvTracker.pages.account")
     ) {
       var isAdmin = Authorization.getUserRole() === "ADMIN";
       var isReviewer = Authorization.getUserRole() === "REVIEWER";
+      var isRecruiter = Authorization.getUserRole() === "RECRUITER";
 
       var pieColor = baUtil.hexToRGB(baConfig.colors.defaultText, 0.2);
       $scope.charts = [
@@ -42,7 +43,7 @@ angular.module("MyCvTracker.pages.account")
           description : "Resume List",
           link : "resumes-list",
           icon : "resume",
-          showMenu : isReviewer || isAdmin
+          showMenu : isReviewer || isAdmin || isRecruiter
         },
         {
           color : pieColor,

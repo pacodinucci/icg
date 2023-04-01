@@ -3,9 +3,21 @@
   ng-controller="ResumesListingCtrl">
   <div class="body-section">
     <div class="section-content">
-      <div class="section-title">
-        <h3>Resumes</h3>
+      <div class="d-flex">
+        <div class="section-title">
+          <h3>Resumes</h3>
+        </div>
+
+        <div class="flex-fill text-right">
+          <button
+            class="btn btn-primary"
+            ng-click="addNewResumeModel()">
+            <i class="fa fa-plus"></i>
+            <span>Add</span>
+          </button>
+        </div>
       </div>
+
 
       <div class="resumes-list-result">
         <div class="row">
@@ -106,7 +118,7 @@
                     <div class="detail-info listing-ctrl">
                       <div
                         class="listing-status"
-                        ng-if="!!loadInfo.isAdmin || !!loadInfo.isReviewer">
+                        ng-if="loadInfo.isAdmin" >
                         <label
                           ng-class="['switch',(aResume.listingActive ? 'active': '')]"
                           ng-click="toggleListingActive(aResume)">
@@ -145,6 +157,16 @@
                       ng-if="!!aResume.originalPreviewExpiresAt">Extend original preview
                     </a>
                     <a
+                      ng-click="openEditPreviewLink(aResume, 'MASKED')"
+                      class="dropdown-item"
+                      href="#">Edit masked link
+                    </a>
+                    <a
+                      ng-click="openEditPreviewLink(aResume, 'ORIGINAL')"
+                      class="dropdown-item"
+                      href="#">Edit original link
+                    </a>
+                    <a
                       ng-click="openAddToCvBoxModal(aResume)"
                       class="dropdown-item"
                       href="#">Add to Cv Box
@@ -162,7 +184,7 @@
           <div
             ng-if="!loadInfo.isManagement"
             ng-repeat="aResume in listResumes track by aResume.id"
-            class="col-xs-12 col-md-3">
+            class="col-xs-12 col-md-6">
             <div
               ba-panel
               ba-panel-class="xsmall-panel light-text resume-panel">
