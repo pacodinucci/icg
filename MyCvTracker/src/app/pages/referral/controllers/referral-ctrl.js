@@ -44,7 +44,8 @@ angular.module("MyCvTracker.pages.referral")
       var role = !!userDetail ? Authorization.getUserRole() : "";
       var isAdmin = role === "ADMIN";
       var isReviewer = role === "REVIEWER";
-      var isManagement = isAdmin || isReviewer;
+      var isRecruiter = role === "RECRUITER";
+      var isManagement = isAdmin || isRecruiter;
 
       var scanUserId = 0;
       if (isAdmin || isReviewer) {
@@ -57,6 +58,9 @@ angular.module("MyCvTracker.pages.referral")
 
       $scope.referral = {
         isManagement : isManagement,
+        isRecruiter : isRecruiter,
+        isAdmin : isAdmin,
+        isReviewer : isReviewer,
         links : [],
         modal : null,
         selectedDescription : "",

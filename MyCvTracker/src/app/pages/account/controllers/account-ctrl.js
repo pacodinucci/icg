@@ -57,7 +57,7 @@ angular.module("MyCvTracker.pages.account")
           description : "Resume Management",
           link : "resumes",
           icon : "resume",
-          showMenu : !isReviewer
+          showMenu : false
         },
         {
           color : pieColor,
