@@ -93,9 +93,9 @@
           <div
             class="review-form"
             ng-if="!writingForm.submitted && !writingForm.expired">
-            <div class="form-row">
+            <div class="form-row" ng-if="writingForm.inAuth">
               <input
-                ng-disabled="writingForm.submitting || writingForm.inAuth"
+                ng-disabled="writingForm.submitting"
                 ng-model="writingForm.email"
                 class="form-control"
                 type="text"

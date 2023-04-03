@@ -50,7 +50,7 @@ angular.module("MyCvTracker.pages.account")
           description : "Resume Folder",
           link : "bulk-folder-resumes",
           icon : "resume",
-          showMenu : isReviewer || isAdmin
+          showMenu : isReviewer || isAdmin || isRecruiter
         },
         {
           color : pieColor,

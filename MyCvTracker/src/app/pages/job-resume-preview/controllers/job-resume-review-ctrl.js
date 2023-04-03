@@ -193,8 +193,9 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         var email = $scope.writingForm.email;
         var content = $scope.writingForm.content;
 
-        var emailInvalid = !EMAIL_REGEX.test(email);
-        $scope.writingForm.emailInvalid = emailInvalid;
+        var emailInvalid = false;
+        // var emailInvalid = !EMAIL_REGEX.test(email);
+        // $scope.writingForm.emailInvalid = emailInvalid;
         var contentInvalid = content.length <= 0;
         $scope.writingForm.contentInvalid = contentInvalid;
 

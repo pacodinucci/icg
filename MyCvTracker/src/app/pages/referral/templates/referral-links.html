@@ -133,7 +133,8 @@
                     <a
                       ng-href="{{getResumesLink(referral.referralType, referral.referralLink, referral.parentReferralId)}}"
                       class="dropdown-item"
-                      href="#">
+                      href="#"
+                      ng-if="referral.isAdmin || referral.isReviewer">
                       {{ referral.referralType !== REFERRAL_TYPE.SOCIAL_SHARE ? "Referred resumes" : "Applications" }}
                     </a>
                     <a
@@ -152,7 +153,7 @@
                     </a>
                     <a
                             ng-click="scanResumeMultipleFolder(referral.id)"
-                            ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC && scanUserId > 0"
+                            ng-if="referral.referralType === REFERRAL_TYPE.JOB_SPEC && scanUserId > 0 && !isRecruiter"
                             class="dropdown-item"
                             href="#">
                       Scanning Multiple Bulk folder
