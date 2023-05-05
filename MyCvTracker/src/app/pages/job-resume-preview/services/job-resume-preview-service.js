@@ -29,10 +29,10 @@ angular.module("MyCvTracker.pages.jobResumePreview")
           var url = Constants.baseUrl + "/user/resume/preview/extend";
           return RestConfig.extendResumePreviewFromToken(url, token, originalToken);
         },
-        submitResumeReview: function(accessToken, previewToken, originalToken, email, review) {
+        submitResumeReview: function(accessToken, previewToken, originalToken, email, review, name) {
           var url = Constants.baseUrl + "/user/resume/review/new";
-
-          return RestConfig.leaveResumeReview(url, accessToken, previewToken, originalToken, email, review);
+          console.log("name", name);
+          return RestConfig.leaveResumeReview(url, accessToken, previewToken, originalToken, email, review, name);
         },
         submitReviewComment : function(reviewId, content, reviewToken) {
           var url = Constants.baseUrl + "/user/resume/review/reply";

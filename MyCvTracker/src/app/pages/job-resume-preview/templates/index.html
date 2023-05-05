@@ -95,11 +95,18 @@
             ng-if="!writingForm.submitted && !writingForm.expired">
             <div class="form-row" ng-if="writingForm.inAuth">
               <input
-                ng-disabled="writingForm.submitting"
+                ng-disabled="writingForm.submitting || writingForm.inAuth"
                 ng-model="writingForm.email"
                 class="form-control"
                 type="text"
                 placeholder="Enter your email" />
+            </div>
+            <div class="form-row" ng-if="!writingForm.inAuth">
+              <input
+                ng-model="writingForm.firstName"
+                class="form-control"
+                type="text"
+                placeholder="Enter your name" />
             </div>
             <div class="form-row">
               <textarea
@@ -195,7 +202,7 @@
                     <div class="reviewer">
                       <div
                         class="email"
-                        ng-bind="aReview.feedbackUserEmail">
+                        ng-bind="aReview.feedbackUserId ? aReview.feedbackUserEmail : aReview.reviewerName">
                       </div>
                       <div
                         class="datetime"

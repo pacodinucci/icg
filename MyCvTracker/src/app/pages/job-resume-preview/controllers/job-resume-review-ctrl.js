@@ -72,7 +72,8 @@ angular.module("MyCvTracker.pages.jobResumePreview")
         expired : false,
         emailInvalid : false,
         contentInvalid : false,
-        inAuth : !!userEmail
+        inAuth : !!userEmail,
+        firstName : ""
       };
 
       $scope.extendForm = {
@@ -192,6 +193,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
       $scope.submitReview = function () {
         var email = $scope.writingForm.email;
         var content = $scope.writingForm.content;
+        var name = $scope.writingForm.firstName;
 
         var emailInvalid = false;
         // var emailInvalid = !EMAIL_REGEX.test(email);
@@ -201,7 +203,7 @@ angular.module("MyCvTracker.pages.jobResumePreview")
 
         if (!emailInvalid && !contentInvalid) {
           $scope.writingForm.submitting = true;
-          mainSvc.submitResumeReview(accessToken, previewToken, originalToken, email, content)
+          mainSvc.submitResumeReview(accessToken, previewToken, originalToken, email, content, name)
             .then(function () {
               $scope.writingForm.submitted = true;
               $scope.writingForm.submitting = false;

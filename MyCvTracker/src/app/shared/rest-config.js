@@ -747,14 +747,15 @@ angular.module("MyCvTracker.shared")
           previewToken,
           originalToken,
           email,
-          review
+          review,
+          name
         ) {
           return RESTSvc.post(url, {
             resumeAccessToken : !!resumeAccessToken ? resumeAccessToken : null,
             previewToken : !!previewToken ? previewToken : null,
             originalToken : !!originalToken ? originalToken : null,
             email : email,
-            fistName : "",
+            firstName : name ? name : "",
             lastName : "",
             review : review
           });
