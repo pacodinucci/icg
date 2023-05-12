@@ -133,8 +133,7 @@
                     <a
                       ng-href="{{getResumesLink(referral.referralType, referral.referralLink, referral.parentReferralId)}}"
                       class="dropdown-item"
-                      href="#"
-                      ng-if="referral.isAdmin || referral.isReviewer">
+                      href="#">
                       {{ referral.referralType !== REFERRAL_TYPE.SOCIAL_SHARE ? "Referred resumes" : "Applications" }}
                     </a>
                     <a
