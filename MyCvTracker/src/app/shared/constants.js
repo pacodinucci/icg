@@ -15,12 +15,12 @@
 
             // baseUrl: 'http://ec2-18-221-201-185.us-east-2.compute.amazonaws.com:8080',
            // baseUrl: 'http://localhost:8080',
-            baseUrl: 'https://mycvtracker.com:8080',
+            baseUrl: 'https://mycvtracker.com/apis',
             viewUrl : 'https://mycvtracker.com',
             websocket:{
                 reconnect: 5000,
                 // webSocketUrl: 'http://localhost:20000/messages',
-                webSocketUrl: 'https://mycvtracker.com:8080/messages',
+                webSocketUrl: 'https://mycvtracker.com/messages',
                 notificationsDestination: '/topic/notifications',
                 sendUrl: '/app/messages'
             },
