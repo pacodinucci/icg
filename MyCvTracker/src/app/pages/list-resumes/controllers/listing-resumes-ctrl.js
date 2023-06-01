@@ -140,7 +140,7 @@ angular.module("MyCvTracker.pages.resumeListing")
 
           var date = dateObj.getDate();
           date = date < 10 ? ("0" + date) : ("" + date);
-          var month = dateObj.getMonth();
+          var month = dateObj.getMonth() + 1;
           month = month < 10 ? ("0" + month) : ("" + month);
           var hour = dateObj.getHours();
           hour = hour < 10 ? ("0" + hour) : ("" + hour);
