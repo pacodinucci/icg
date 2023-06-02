@@ -832,7 +832,7 @@
             "from" : fromName,
             "content" : content
           };
-          utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
+          utility.sendEmail("https://mycvtracker.com/apis/auth/contact", "POST", data);
 
         });
 
@@ -1120,7 +1120,7 @@
                 .html("Generating...");
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
+                url : "https://mycvtracker.com/apis/links/shareOutsideReferral",
                 type : "POST",
                 data : JSON.stringify({
                   referralLink : refCode,
@@ -1158,7 +1158,7 @@
         if (!!refCode) {
           // load job spec
           $.ajax({
-            url : "https://mycvtracker.com:8080/links/referralDetails?referralLink=" + refCode,
+            url : "https://mycvtracker.com/apis/links/referralDetails?referralLink=" + refCode,
             type : "GET",
             dataType : "json",
             contentType : "application/json",
@@ -1183,7 +1183,7 @@
                   //   $("#text-link-preview").html()
                   // }, 200);
                 } else {
-                  var fileLink = "https://mycvtracker.com:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
+                  var fileLink = "https://mycvtracker.com/apis/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
                   var fileType = data.previewFileType;
                   if (fileType === "application/pdf") {
                     var iframeUrl = "https://mycvtracker.com/pdf-viewer.html?pdf=" + fileLink;

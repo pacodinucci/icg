@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
 });
 
 function fetchResponses(token) {
-  var url = "https://mycvtracker.com:8080/interviews/interviewResponse/" + token;
+  var url = "https://mycvtracker.com/apis/interviews/interviewResponse/" + token;
   var xhr = new XMLHttpRequest();
 
   xhr.onreadystatechange = function () {
@@ -77,7 +77,7 @@ function createResponseElement(response, qNumber, token) {
   // }
 
   var sound = new Howl({
-    src: ["https://mycvtracker.com:8080/interviews/audioData/" + token + "/" + response.questionId],
+    src: ["https://mycvtracker.com/apis/interviews/audioData/" + token + "/" + response.questionId],
     // html5: true,
     format: ["wav"],
   });

@@ -102,7 +102,7 @@
               nextQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
               skipQuesBtn.classList.remove("hidden"); // NextQuestion Button hidden by default, get enable after the quiz is loaded
               loadQuiz.classList.add("hidden"); // Hides Start Inerview Button
-              startRecordingDelay();    
+              startRecordingDelay();
               //toastr.success(alerts["sendEmailForGetInTouchForm"].message, "");
               //utility.clearContactForm();
     }
@@ -113,7 +113,7 @@
       // also changes its value (inner text) to loading Question
       var loadQuiz =  document.getElementById("loadQuiz");
       loadQuiz.disabled = true;
-      loadQuiz.value = "Loading Questions"; 
+      loadQuiz.value = "Loading Questions";
        var tokenRefName = "token";
        var InterviewType = "interviewType";
         var token = null;
@@ -136,7 +136,7 @@
 
         document.getElementById("token").value = token;
 
-        
+
         // Check in local storage for questions
         var value = window.localStorage.getItem(`questions_${token}_${interview}`);
         if (value !== null) {
@@ -147,14 +147,14 @@
             startInterview(obj.questions, obj.answered);
             window.alert("Your interview was resumed after the last answer you submitted");
             return;
-          } else { 
+          } else {
             console.log("Clearing Storage");
             window.localStorage.removeItem(`questions_${token}_${interview}`);
           }
         }
         //clearQuizData();
         $.ajax({
-            url :  "https://mycvtracker.com:8080/interviews/questions?token=" + token + "&interviewType=" + interview,
+            url :  "https://mycvtracker.com/apis/interviews/questions?token=" + token + "&interviewType=" + interview,
             type : "GET",
             contentType : "false", // tell jQuery not to set contentType
             success : function (data) {
@@ -163,7 +163,7 @@
               var obj = {
                 startTime: new Date().getTime(),
                 questions: data,
-                answered: -1, 
+                answered: -1,
               }
               console.log(obj);
               window.localStorage.setItem(`questions_${token}_${interview}`,JSON.stringify(obj));
@@ -896,7 +896,7 @@
             "from" : fromName,
             "content" : content
           };
-          utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
+          utility.sendEmail("https://mycvtracker.com/apis/auth/contact", "POST", data);
 
         });
 
@@ -1057,7 +1057,7 @@
               fd.append("jobDescription", $("#job-spec-box1").val());
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/user/jobsMatch",
+                url : "https://mycvtracker.com/apis/user/jobsMatch",
                 type : "POST",
                 data : fd,
                 processData : false, // tell jQuery not to process the data
@@ -1184,7 +1184,7 @@
                 .html("Generating...");
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/links/shareOutsideReferral",
+                url : "https://mycvtracker.com/apis/links/shareOutsideReferral",
                 type : "POST",
                 data : JSON.stringify({
                   referralLink : refCode,
@@ -1222,7 +1222,7 @@
         if (!!refCode) {
           // load job spec
           $.ajax({
-            url : "https://mycvtracker.com:8080/links/referralDetails?referralLink=" + refCode,
+            url : "https://mycvtracker.com/apis/links/referralDetails?referralLink=" + refCode,
             type : "GET",
             dataType : "json",
             contentType : "application/json",
@@ -1247,7 +1247,7 @@
                   //   $("#text-link-preview").html()
                   // }, 200);
                 } else {
-                  var fileLink = "https://mycvtracker.com:8080/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
+                  var fileLink = "https://mycvtracker.com/apis/links/ref-profile-preview/" + data.previewFileName + "?referralLink=" + refCode;
                   var fileType = data.previewFileType;
                   if (fileType === "application/pdf") {
                     var iframeUrl = "https://mycvtracker.com/pdf-viewer.html?pdf=" + fileLink;

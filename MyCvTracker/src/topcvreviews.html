@@ -972,7 +972,7 @@
             "from" : fromName,
             "content" : content
           };
-          utility.sendEmail("https://mycvtracker.com:8080/auth/contact", "POST", data);
+          utility.sendEmail("https://mycvtracker.com/apis/auth/contact", "POST", data);
 
         });
 
@@ -1148,7 +1148,7 @@
               }
 
               $.ajax({
-                url : "https://mycvtracker.com:8080/user/uploadQuickResume",
+                url : "https://mycvtracker.com/apis/user/uploadQuickResume",
                 type : "POST",
                 data : fd,
                 processData : false, // tell jQuery not to process the data

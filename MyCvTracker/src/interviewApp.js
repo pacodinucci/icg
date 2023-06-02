@@ -227,7 +227,7 @@ function nextQuestion(skip) {
 
     var fd = new FormData();
     fd.append("token", document.getElementById("token").value);
-    xhr.open("POST", "https://mycvtracker.com:8080/interviews/complete", true);
+    xhr.open("POST", "https://mycvtracker.com/apis/interviews/complete", true);
     xhr.send(fd);
     window.localStorage.clear("questions_" + token + "_" + interview);
     alert("Thanks for attempting your Interview. Our team will get in touch soon.");
@@ -325,7 +325,7 @@ function createDownloadLink(blob) {
     fd.append("Candidate", document.getElementById("token").value);
     fd.append("questionId", document.getElementById("currentQuestionId").value);
     fd.append("attemptTime", Seconds_Between_Dates);
-    xhr.open("POST", "https://mycvtracker.com:8080/interviews/answer", true);
+    xhr.open("POST", "https://mycvtracker.com/apis/interviews/answer", true);
     xhr.send(fd);
   });
   li.appendChild(document.createTextNode(" ")); //add a space in between
