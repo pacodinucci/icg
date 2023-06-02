@@ -14,6 +14,7 @@ const nextConfig = {
       },
     ],
   },
+  basePath : "/new-app"
 };
 
 module.exports = nextConfig;
