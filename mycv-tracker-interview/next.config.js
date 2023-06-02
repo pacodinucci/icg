@@ -14,6 +14,7 @@ const nextConfig = {
       },
     ],
   },
+  basePath : "/interview-app"
 };
 
 module.exports = nextConfig;
