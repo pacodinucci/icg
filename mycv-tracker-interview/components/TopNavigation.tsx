@@ -11,6 +11,7 @@ import {
   ActionIcon,
   Header,
 } from "@mantine/core";
+import {NavbarBrand} from "reactstrap";
 import { useDisclosure } from "@mantine/hooks";
 import { useUserState } from "../hooks/useUserState";
 
@@ -22,6 +23,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { adminRoutes, authRoutes, CVServices, JobServices } from "../data/route";
 import NavigationDrawer from "./NavigationDrawer";
+import styles from "../styles/TopNavigation.module.css";
 
 const useStyles = createStyles((theme) => ({
   hoverBtn: {
@@ -51,9 +53,12 @@ const TopNavigation = () => {
     <Header height={70} px="md" fixed={true} style={{ backgroundColor: "#1e222c", zIndex: 11 }}>
       <NavigationDrawer opened={drawerOpened} onClose={closeDrawer} />
       <Group position="apart" sx={{ height: "100%" }}>
-        <Link href="/">
+        {/* <Link href="/">
           <Image alt="logo" src={logo} height={50} width={150} />
-        </Link>
+        </Link> */}
+        <NavbarBrand href="/">
+					<Image alt="logo" src={logo} height={50} width={150} />
+				</NavbarBrand>
         <MediaQuery query="(min-width: 767px)" styles={{ display: "none" }}>
           <ActionIcon onClick={toggleDrawer}>
             <FaEquals />
