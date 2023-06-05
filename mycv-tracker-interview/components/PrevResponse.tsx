@@ -108,7 +108,7 @@ const PrevResponse = ({ data, source, compact, style }: Props) => {
       <ReactHowler
         src={
           data
-            ? `https://mycvtracker.com:8080/interviews/audioData/${data.token}/${data.questionId}`
+            ? `https://mycvtracker.com/new-apis/interviews/audioData/${data.token}/${data.questionId}`
             : source
             ? source
             : ""
