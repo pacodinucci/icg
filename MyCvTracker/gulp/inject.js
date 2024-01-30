@@ -88,6 +88,7 @@ gulp.task("injectFront", ["stylesFront"], function () {
       path.join(conf.paths.src, "/cv-writing-page.html"),
       path.join(conf.paths.src, "/linkedin-profile-writing.html"),
       path.join(conf.paths.src, "/cover-letter-page.html"),
+      path.join(conf.paths.src, "/high-speed-hiring.html"),
       path.join(conf.paths.src, "/cvhosting.html"),
       path.join(conf.paths.src, "/cvoffers.html"),
       path.join(conf.paths.src, "/cv-writing-packages.html"),

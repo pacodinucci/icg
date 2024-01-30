@@ -91,6 +91,7 @@
       var eleven_plus_antonym_game = next.endsWith("/eleven_plus_antonym_game.html");
       var landingQuickRevampPage = next.endsWith("/linkedin-profile-writing.html");
       var landingGraduateCvPage = next.endsWith("/cover-letter-page.html");
+      var landingHighSpeedHiringPage = next.endsWith("/high-speed-hiring.html");
       var landingProfessionalCvPage = next.endsWith("/cv-writing-packages.html");
       var landingCareerShiftingCvPage = next.endsWith("/cv-writing-package-2.html");
       var landingCoverLetterPage = next.endsWith("/graduate-package-1.html");
@@ -164,7 +165,10 @@
         window.location.href = Utilities.baseUrl() + "/linkedin-profile-writing.html";
       } else if (landingGraduateCvPage) {
         window.location.href = Utilities.baseUrl() + "/cover-letter-page.html";
-      } else if (landingProfessionalCvPage) {
+      }else if (landingHighSpeedHiringPage) {
+        window.location.href = Utilities.baseUrl() + "/high-speed-hiring.html";
+      }
+       else if (landingProfessionalCvPage) {
         window.location.href = Utilities.baseUrl() + "/cv-writing-packages.html";
       } else if (landingCoverLetterPage) {
         window.location.href = Utilities.baseUrl() + "/graduate-package-1.html";
