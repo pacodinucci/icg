@@ -1,0 +1,20 @@
+image: node:12
+pipelines:
+  branches:
+    feature/ci_cd:
+      - step:
+          caches:
+            - node
+          name: Install Dependencies
+          deployment: test
+          script:
+            - cd MyCvTracker
+            - npm run preinstall
+            - npm install
+            - npm run postinstall
+      - step:
+          caches:
+            - node
+          name: Build Project
+          script:
+            - gulp build
